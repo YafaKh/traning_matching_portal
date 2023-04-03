@@ -1,0 +1,9 @@
+body {
+  font-family: 'Verdana', sans-serif;
+}
+.navbar-nav li {
+  margin-right: 5%;
+}
+.navbar-brand {
+  color:#2E2E2E;
+}

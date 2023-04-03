@@ -5,14 +5,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Training Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+    <link href="{{asset('css/style.css')}}" rel="stylesheet" type="text/css">
 
 </head>
 <body> 
     <!--navbar-->
     <nav class="navbar navbar-expand-sm bg-body-tertiary">
-    <div class="container-fluid w-75 d-flex justify-content-center">
-        <a class="navbar-brand" href="#">
+    <div class="container-fluid ms-5">
+        <a class="navbar-brand" href="#" >
         <img src="{{asset('images/logo.png')}}" alt="Logo" width="40" height="30" class="d-inline-block align-text-top">
         EmployeeName*
         </a>
@@ -20,8 +23,8 @@
         <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item dropdown">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-auto">
+            <li class="nav-item dropdown ">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Students
             </a>
