@@ -16,7 +16,7 @@
     <nav class="navbar navbar-expand-sm bg-body-tertiary">
     <div class="container-fluid ms-5">
         <a class="navbar-brand" href="#" >
-        <img src="{{asset('images/logo.png')}}" alt="Logo" width="40" height="30" class="d-inline-block align-text-top">
+        <img src="{{asset('images/logo.png')}}" alt="Logo">
         EmployeeName*
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
