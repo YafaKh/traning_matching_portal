@@ -6,5 +6,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/coordinator', function () {
-    return view('/coordinator/layout/navbar');
+    return view('/coordinator/students/list_students');
 });

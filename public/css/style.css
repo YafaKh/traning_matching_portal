@@ -1,8 +1,41 @@
+:root {
+  --dark-blue: #0A66C2;
+  --blue: #288DF2;
+  --light-Sand: #F5F5F5;
+  --sand: #E6E6E6;
+  --dark-sand: #737373;
+}
+.bg-dark-blue {
+  background-color:var(--dark-blue);
+}
+.bg-blue {
+  background-color:var(--blue);
+}
+.bg-light-sand {
+  background-color:var(--light-sand);
+}
+.bg-sand {
+  background-color:var(--sand);
+}
+.bg-dark-sand {
+  background-color:var(--dark-sand);
+}
+.txt-dark-sand {
+  color: var(--dark-sand);
+}
+
+.btn-hover:hover {
+  background-color: var(--dark-blue);
+}
+
+.txt-sm {
+  font-size: 0.8em;
+}
 body {
   font-family: 'Verdana', sans-serif;
 }
 .navbar-nav li {
-  margin-right: 5%;
+  margin-right: 0.5em;
 }
 .navbar-brand {
   color:#2E2E2E;
@@ -14,4 +47,7 @@ body {
   vertical-align: top;
   margin-right: 0.25rem;
   margin-top: 4px;
+}
+.nowrap {
+  white-space: nowrap;
 }

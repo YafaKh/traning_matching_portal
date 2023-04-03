@@ -1,0 +1,9 @@
+@extends('coordinator.layout.navbar')
+@section('activity1')
+    active
+@endsection
+@section('student_navbar')
+    @include('coordinator.students.student_navbar')
+@section('content')
+    hello
+@endsection
