@@ -28,10 +28,6 @@
   color: var(--dark-sand);
 }
 
-.btn-hover:hover {
-  background-color: var(--dark-blue);
-}
-
 .txt-sm {
   font-size: 0.8rem;
 }
@@ -56,7 +52,5 @@ body {
   margin-right: 0.25rem;
   margin-top: 4px;
 }
-.nowrap {
-  white-space: nowrap;
-}
+
 

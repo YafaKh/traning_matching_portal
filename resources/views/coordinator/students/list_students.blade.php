@@ -8,45 +8,43 @@
 @section('content')
 <div class="px-5">
     {{--filters--}}
-    <div  class= " rounded-top-4">
-        <div class= "d-flex flex-sm-row flex-column mt-5 p-4 pb-3">
-            <select class="form-select flex-grow-1 me-2 mb-2 txt-sm" aria-label="Registration_state">
-                <option selected>Registration state</option>
-                <option value="1">registered</option>
-                <option value="0">not-registered</option>
-            </select>
+    <div class= "d-flex flex-sm-row flex-column mt-5 pb-3">
+        <select class="form-select flex-grow-1 me-2 mb-2 txt-sm" aria-label="Registration_state">
+            <option selected>Registration state</option>
+            <option value="1">registered</option>
+            <option value="0">not-registered</option>
+        </select>
 
-            <select class="form-select flex-grow-1 me-2 mb-2 txt-sm" aria-label="Specialization">
-                <option selected>Specialization*</option>
-                <option value="CS">CS</option>
-                <option value="MMT">MMT/option>
-                <option value="GIS">GIS</option>
-                <option value="CSE">CSE</option>
-            </select>
+        <select class="form-select flex-grow-1 me-2 mb-2 txt-sm" aria-label="Specialization">
+            <option selected>Specialization*</option>
+            <option value="CS">CS</option>
+            <option value="MMT">MMT/option>
+            <option value="GIS">GIS</option>
+            <option value="CSE">CSE</option>
+        </select>
 
-            <select class="form-select flex-grow-1 me-2 mb-2 txt-sm" aria-label="Company">
-                <option selected>Company*</option>
-                <option value="CS">CS</option>
-            </select>
+        <select class="form-select flex-grow-1 me-2 mb-2 txt-sm" aria-label="Company">
+            <option selected>Company*</option>
+            <option value="CS">CS</option>
+        </select>
 
-            <select class="form-select flex-grow-1 me-2 mb-2 txt-sm" aria-label="Branch">
-                <option selected>Branch*</option>
-                <option value="CS">CS</option>
-            </select>
-            
-            <select class="form-select flex-grow-1 me-2 mb-2 txt-sm " aria-label="Supervisor">
-                <option selected>Supervisor*</option>
-                <option value="CS">CS</option>
-            </select>
-        </div>
-        <label class="txt-xsm ms-4 text-light pb-1">Note: students whose names are highlighted in red are not registered for the internship on the portal.</label>
+        <select class="form-select flex-grow-1 me-2 mb-2 txt-sm" aria-label="Branch">
+            <option selected>Branch*</option>
+            <option value="CS">CS</option>
+        </select>
+        
+        <select class="form-select flex-grow-1 me-2 mb-2 txt-sm " aria-label="Supervisor">
+            <option selected>Supervisor*</option>
+            <option value="CS">CS</option>
+        </select>
     </div>
+    <label class="txt-xsm pb-1">Note: students whose names are highlighted in red are not registered for the internship on the portal.</label>
     {{-- students table --}}
     <div class="table-responsive ">
-        <table class="table txt-sm table-sm border">
+        <table class="table txt-sm table-sm border table-hover">
         <thead class="bg-mid-sand">
             <tr >
-            <th scope="col" class="ps-4">Name</th>
+            <th scope="col" class="ps-3">Name</th>
             <th scope="col">ID</th>
             <th scope="col">Specialization</th>
             <th scope="col">Company</th>
@@ -57,7 +55,7 @@
         </thead>
         <tbody class="bg-light">
             <tr>
-            <td class="ps-4">****</td>
+            <td class="ps-3">****</td>
             <td>Otto</td>
             <td>@mdo</td>
             <td>Mark</td>
@@ -71,7 +69,7 @@
                 <option value="Assessment">Assessment</option>
             </select>
             </td>
-            <td><i class="bi bi-trash3 ps-3 fs-6"></i></td>
+            <td><i class="bi bi-trash3 ps-3 fs-6 text-danger"></i></td>
             </tr>
             <tr>
             <td>****</td>

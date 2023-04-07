@@ -18,11 +18,12 @@
           <a class="nav-link text-light @yield('activity4')" aria-current="page" href="#">Assign supervisors</a>
         </li>
       </ul>
-      <form class="d-flex input-group w-auto" role="search">
-        <input class="form-control txt-sm " type="search" placeholder="Search" aria-label="Search">
-            <button class="btn bg-light btn-sm btn-hover" type="submit">
-            <i class="bi bi-searchs text-secondary"></i>
-            </button>
+
+      <form class="input-group w-auto h-50" role="searprimarych">
+        <input class="form-control txt-sm h-50 border border-secondary" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-sm bg-sand btn-outline-secondary py-0" type="submit">
+        <i class="bi bi-search txt-xsm"></i>
+        </button>
       </form>
     </div>
   </div>
