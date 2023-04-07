@@ -3,6 +3,7 @@
   --blue: #288DF2;
   --light-Sand: #F5F5F5;
   --sand: #E6E6E6;
+  --mid-sand:#F0F0F0;
   --dark-sand: #737373;
 }
 .bg-dark-blue {
@@ -17,6 +18,9 @@
 .bg-sand {
   background-color:var(--sand);
 }
+.bg-mid-sand {
+  background-color:var(--mid-sand);
+}
 .bg-dark-sand {
   background-color:var(--dark-sand);
 }
@@ -29,10 +33,14 @@
 }
 
 .txt-sm {
-  font-size: 0.8em;
+  font-size: 0.8rem;
+}
+.txt-xsm {
+  font-size: 0.7rem;
 }
 body {
-  font-family: 'Verdana', sans-serif;
+  font-family: 'Montserrat', sans-serif;
+
 }
 .navbar-nav li {
   margin-right: 0.5em;
@@ -51,3 +59,4 @@ body {
 .nowrap {
   white-space: nowrap;
 }
+

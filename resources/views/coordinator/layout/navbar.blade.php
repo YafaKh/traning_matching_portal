@@ -5,16 +5,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Training Portal</title>
-    
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+
+    {{-- Bootstrap JS CDN --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+    {{-- Bootstrap ICONS CDN --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    {{-- our custom style sheet --}}
     <link href="{{asset('css/style.css')}}" rel="stylesheet" type="text/css">
 
 </head>
 <body class="bg-sand"> 
-    <!--navbar-->
-    <nav class="navbar navbar-expand-sm">
+    {{--navbar--}}
+    <nav class="navbar navbar-expand-sm border-buttom">
     <div class="container-fluid ms-5">
         <a class="navbar-brand" href="#" >
         <img src="{{asset('images/logo.png')}}" alt="Logo">
@@ -51,6 +54,8 @@
     </nav>
     @yield('student_navbar')
     @yield('content')
+
+{{-- Bootstrap CSS CDN --}}
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
 </body>
 </html>
