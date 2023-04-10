@@ -14,8 +14,8 @@
   <!-- css page -->
   <link rel="stylesheet" href="{{asset('css/style.css')}}">
 </head>
-<body class="body">
 
+<body class="body">
   <div class="bigDiv">
     <div class="headingDiv">
       <h1 class="heading">Welcome to Matching Portal</h1>

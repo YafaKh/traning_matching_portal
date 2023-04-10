@@ -21,6 +21,7 @@
     <div class="headingDiv">
       <h1 class="heading">Welcome to Matching Portal</h1>
       <img src="{{asset('images/logo_title.png')}}" alt="logo" class="logo">
+
       <img src="{{asset('images/loginImg.png')}}" alt="login Image" class="imgElement">
     </div>
     <div class="loginForm">
