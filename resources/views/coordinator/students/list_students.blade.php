@@ -1,4 +1,7 @@
 @extends('coordinator.layout.navbar')
+@section('students_activity')
+    active
+@endsection
 @section('activity1')
     active
 @endsection
@@ -37,14 +40,34 @@
             <option selected>Supervisor*</option>
             <option value="CS">CS</option>
         </select>
+        {{--*submit/butoon--}}
+        <button type="button" class="btn bg-mid-sand border mb-2 me-2"
+        data-bs-toggle="tooltip" data-bs-placement="top"
+        data-bs-title="delete selected"><i class="bi bi-trash3 py-0 fs-6 text-danger"></i></button>
+        <button type="button" class="btn h-50 btn-primary bg-dark-blue text-light opacity-75 px-3">Report</button>
     </div>
-    <label class="txt-xsm pb-1">Note: students whose names are highlighted in red are not registered for the internship on the portal.</label>
+    {{--Upload registered students list--}}
+    <div class="d-flex flex-sm-row flex-column justify-content-between mb-2">
+        <label class="txt-xsm pb-1 h-50 mt-auto">Note: students whose names are highlighted in red are not registered for the internship on the portal.</label>
+        <div class="mb-1">
+            <label for="formFileSm" class="form-label txt-sm">Upload registered students list (.xlsx)</label>
+            <div class="d-flex flex-row">
+                <input class="form-control form-control-sm w-auto me-2" id="formFileSm" type="file">
+                <button type="button" class="btn btn-primary bg-dark-blue btn-sm text-light opacity-75 h-50 px-3"
+                    data-bs-toggle="tooltip" data-bs-placement="top"
+                    data-bs-title="Update registration state">Update
+                </button>
+            </div>
+        </div>
+    </div>
+        
     {{-- students table --}}
     <div class="table-responsive ">
         <table class="table txt-sm table-sm border table-hover">
         <thead class="bg-mid-sand">
             <tr >
-            <th scope="col" class="ps-3">Name</th>
+            <th scope="col" class="ps-3"><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></th>
+            <th scope="col" >Name</th>
             <th scope="col">ID</th>
             <th scope="col">Specialization</th>
             <th scope="col">Company</th>
@@ -55,23 +78,7 @@
         </thead>
         <tbody class="bg-light">
             <tr>
-            <td class="ps-3">****</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>
-            <select class="form-select txt-sm w-auto" aria-label="Go_to">
-                <option value="Progress" selected>Progress</option>
-                <option value="Visit_forms">Visit forms</option>
-                <option value="Evaluation">Evaluation</option>
-                <option value="Assessment">Company evaluation</option>
-                <option value="Assessment">Assessment</option>
-            </select>
-            </td>
-            <td><i class="bi bi-trash3 ps-3 fs-6 text-danger"></i></td>
-            </tr>
-            <tr>
+            <td class="ps-3"><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></td>                
             <td>****</td>
             <td>Otto</td>
             <td>@mdo</td>
@@ -86,9 +93,10 @@
                 <option value="Assessment">Assessment</option>
             </select>
             </td>
-            <td><i class="bi bi-trash3 ps-3 fs-6"></i></td>
+            <td><button type="button" class="btn"><i class="bi bi-trash3 fs-6 text-danger"></i></button></td>
             </tr>
             <tr>
+            <td class="ps-3"><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></td>                
             <td>****</td>
             <td>Otto</td>
             <td>@mdo</td>
@@ -103,11 +111,45 @@
                 <option value="Assessment">Assessment</option>
             </select>
             </td>
-            <td><i class="bi bi-trash3 ps-3 fs-6"></i></td>
+            <td><button type="button" class="btn"><i class="bi bi-trash3 fs-6 text-danger"></i></button></td>
+            </tr>
+            <tr>
+            <td class="ps-3"><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></td>                
+            <td>****</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>
+            <select class="form-select txt-sm w-auto" aria-label="Go_to">
+                <option value="Progress" selected>Progress</option>
+                <option value="Visit_forms">Visit forms</option>
+                <option value="Evaluation">Evaluation</option>
+                <option value="Assessment">Company evaluation</option>
+                <option value="Assessment">Assessment</option>
+            </select>
+            </td>
+            <td><button type="button" class="btn"><i class="bi bi-trash3 fs-6 text-danger"></i></button></td>
             </tr>
         </tbody>
         </table>
     </div>
-    <button type="button" class="btn bg-dark-blue text-light opacity-75 shadow fw-medium bold px-5 mt-5 position-absolute start-50 translate-middle ">Report</button>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination pagination-sm">
+            <li class="page-item">
+            <a class="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+            <a class="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+            </li>
+        </ul>
+    </nav>
 </div>
 @endsection

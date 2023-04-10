@@ -9,13 +9,10 @@
           <a class="nav-link text-light @yield('activity1')" aria-current="page" href="#">List students</a>
         </li>
         <li class="nav-item ">
-          <a class="nav-link text-light @yield('activity2')" aria-current="page" href="#">Students' accounts approval</a>
+          <a class="nav-link text-light @yield('activity2')" aria-current="page" href="#">Student-Company approval</a>
         </li>
         <li class="nav-item ">
-          <a class="nav-link text-light @yield('activity3')" aria-current="page" href="#">Student-Company approval</a>
-        </li>
-        <li class="nav-item ">
-          <a class="nav-link text-light @yield('activity4')" aria-current="page" href="#">Assign supervisors</a>
+          <a class="nav-link text-light @yield('activity3')" aria-current="page" href="#">Assign supervisors</a>
         </li>
       </ul>
 
