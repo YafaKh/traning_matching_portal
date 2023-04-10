@@ -1,3 +1,238 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+ /* ---------------User type page--------------------- */
+
+ .body .bigDiv .loginForm .userTypeCard{
+  width: 75%;
+  margin: 1% 2%;
+  padding-bottom: 2rem;
+  background-color: #f5f5f5;
+  border-color: #f5f5f5;
+  box-shadow: 2px 2px 20px #c0bdbd;
+  border-radius: 2%;
+}
+.body .bigDiv .loginForm .userTypeCard .userType {
+  height: 60%;
+  margin-top: 3rem;
+  background-color: #0a66c2;
+}
+
+.body .bigDiv .loginForm .userTypeCard .userType:hover {
+  background-color: #054e97;
+}
+.body .bigDiv .headingDiv .UserPagelogo {
+ display: none;
+}
+.body .bigDiv .loginForm .userTypeCard .userType h1 {
+  color: #fff;
+  padding-top: 1rem;
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1px;
+}
+@media screen and (max-width:992px){
+  .body .bigDiv .loginForm .userTypeCard{
+    width: 150%;
+    margin: 1% 75%;
+
+  }
+  .body .bigDiv .headingDiv .UserPagelogo {
+    margin: -4% -8%;
+    width: 49%;
+    height: 100%;
+    display: block;
+
+  }
+} 
+  @media screen and (max-width:576px){
+    .body .bigDiv .loginForm .userTypeCard{
+      width: 163%;
+      margin:-11rem 0rem 0rem 5rem ;
+  
+    } 
+    .body .bigDiv .headingDiv .UserPagelogo {
+      margin: -25% 16%;
+      width: 35%;
+      height: 100%;
+      display: block;
+
+    }
+}
+/* -------------------login page------------------- */
+.body {
+  background: #d1cccc;
+  width:auto;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+.body .bigDiv {
+  width: 90%;
+  margin: 2rem;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  align-items: center;
+  background: #fff;
+ 
+}
+.body .bigDiv .headingDiv {
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  height: 70vh;
+  width: 33%;
+ 
+}
+.body .bigDiv .headingDiv .heading {
+  color: #0a66c2;
+  margin: -2rem 2rem 3rem;
+  width: 100%;
+  display: block;
+}
+.body .bigDiv .headingDiv .logo {
+  display: none;
+  
+}
+.body .bigDiv .headingDiv .imgElement {
+  display: inline;
+}
+/* login form */
+.body .bigDiv .loginForm {
+  width: 40%;
+  margin-top: 5rem;
+  height: 100vh;
+  
+}
+body .bigDiv .loginForm .loginCard {
+  width:95%;
+  padding-bottom: 1rem;
+  background-color: #f5f5f5;
+  border-color: #f5f5f5;
+  box-shadow: 2px 2px 20px #c0bdbd;
+border-radius: 3%;
+/* i am here */
+}
+
+body .bigDiv .loginForm .loginCard .loginInput {
+  margin: 1.5rem 1.5rem 0.5rem;
+  width: 90%;
+
+}
+body .bigDiv .loginForm .loginCard .forgotPassLink {
+  text-decoration: none;
+  font-size: 0.8rem;
+  margin: 1rem 1.7rem;
+}
+body .bigDiv .loginForm .loginCard .loginBtn {
+  display: block;
+  margin: 4.2rem 1.5rem 1.4rem;
+  width: 90%;
+  font-size: 1.1rem;
+  font-weight: 500;
+  background: #0a66c2;
+  color: #fff;
+}
+body .bigDiv .loginForm .loginCard .loginBtn:hover {
+  background: #05407a;
+  color: #fff;
+}
+
+body .bigDiv .loginForm .loginCard .creatAccountLink {
+  text-decoration: none;
+  font-size: 1rem;
+  color: #7e7f80;
+  display: flex;
+  justify-content: center;
+}
+body .bigDiv .loginForm .loginCard .creatAccountLink:hover {
+  color: #2a2a2b;
+}
+/* media query - login */
+@media screen and (max-width: 992px) {
+ 
+  .body .bigDiv {
+    flex-direction: column;
+    width: 81%;
+    margin-top: 0rem;
+    background-color:#d1cccc;
+}
+  .body .bigDiv .headingDiv .heading {
+    display: none;
+  }
+  .body .bigDiv .headingDiv {
+    margin: 9rem -9rem -3rem 6rem;
+    height: 10vh;
+    width: 60%;      
+    
+
+  }
+  .body .bigDiv .headingDiv .imgElement {
+    display: none;
+  }
+  /* login form */
+  .body .bigDiv .loginForm {
+    width: 54%;
+  }
+  .body .bigDiv .headingDiv .logo {
+    display: block;
+    margin-top: 5rem;
+    width: 38%;
+    height: 86%;
+
+  }
+  .body .bigDiv .loginForm .loginCard {
+      width: 153%;
+      margin: 4rem 3rem 4rem;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .body .bigDiv {
+    margin: 1.2rem 2.3rem 0rem 1rem;
+    height: 82vh;
+    background-color: transparent;
+    display: flex;
+    width: 96%;
+    justify-content: space-between;
+  }
+  .body .bigDiv .headingDiv {
+    margin: 6rem -6rem 1rem 2rem;
+    width: 95%;
+  }
+  .body .bigDiv .headingDiv .logo {
+      margin:-12% 16%;
+      width: 35%;
+      height: 100%;
+  }
+  /* login form */
+  .body .bigDiv .loginForm {
+    margin: 0rem 6rem -24rem 2.2rem;
+  }
+  .body .bigDiv .loginForm .loginCard {
+      width: 190%;
+      margin: -6rem -6rem 0rem -1rem;
+      line-height: 0%;
+      padding-left: 0%;
+  }
+}
+/* -------------------Reset Password page------------------- */
+.body .bigDiv .loginForm .loginCard .resetbtn{
+  display: inline;
+  font-size: 1.1rem;
+  font-weight: 500;
+  background: #0A66C2;
+  color: #fff;
+  width: 31%;
+  margin: 2rem -2rem 0.4rem 4.7rem;
+}
+/* ---------------------- */
 :root {
   --dark-blue: #0A66C2;
   --blue: #288DF2;
