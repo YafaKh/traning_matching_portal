@@ -108,5 +108,6 @@
         </tbody>
         </table>
     </div>
+    <button type="button" class="btn bg-dark-blue text-light opacity-75 shadow fw-medium bold px-5 mt-5 position-absolute start-50 translate-middle ">Report</button>
 </div>
 @endsection
