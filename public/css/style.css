@@ -322,3 +322,7 @@ body {
 .tooltip:hover .tooltiptext {
   visibility: visible;
 }
+.px-6{
+  padding-left: 8%;
+  padding-right: 8%;
+}
