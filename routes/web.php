@@ -20,3 +20,20 @@ Route::get('/coordinator/students/assign_supervisors', function () {
 //     return view('login');
 // });
 
+
+Route::prefix('/coordinator')->group(function(){
+    Route::get('/register', function () {
+        return view('/coordinator/register'); });
+    Route::prefix('/students')->group(function(){
+        Route::get('/list_students', function () {
+            return view('/coordinator/students/list_students'); });
+        Route::get('/student_company_approval', function () {
+            return view('/coordinator/students/student_company_approval'); });
+        Route::get('/assign_supervisors', function () {
+            return view('/coordinator/students/assign_supervisors'); });
+    });
+    Route::get('/supervisors', function () {
+        return view('/coordinator/supervisors'); });
+    Route::get('/companies', function () {
+        return view('/coordinator/companies'); });
+});

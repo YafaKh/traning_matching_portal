@@ -1,4 +1,7 @@
-@extends('coordinator.layout.navbar')
+@extends('coordinator.layout.master')
+@section('navbar')
+    @include('coordinator.layout.navbar')
+@endsection
 @section('students_activity')
     active
 @endsection
@@ -67,8 +70,8 @@
         <thead class="bg-mid-sand">
             <tr >
             <th scope="col" class="ps-3"><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></th>
-            <th scope="col" >Name</th>
             <th scope="col">ID</th>
+            <th scope="col" >Name</th>
             <th scope="col">Specialization</th>
             <th scope="col">Company</th>
             <th scope="col">Branch</th>

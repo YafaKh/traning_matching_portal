@@ -1,8 +1,11 @@
-@extends('coordinator.layout.navbar')
+@extends('coordinator.layout.master')
+@section('navbar')
+    @include('coordinator.layout.navbar')
+@endsection
 @section('students_activity')
     active
 @endsection
-@section('activity2')
+@section('activity3')
     active
 @endsection
 @section('student_navbar')
@@ -30,19 +33,25 @@
     </div>
         
     {{-- supervisor students table--}}
-    <div class="table-responsive col-lg-10">
-        <label class="form-label txt-sm mt-2">supervisor name students*</label>
-        <table class="table txt-sm table-sm border table-hover">
+    <div class="table-responsive col-lg-10 mt-3">
+        <table class="table txt-sm border table-hover">
         <thead class="bg-mid-sand">
+            <tr class="rounded-top">
+                <td colspan="4"><label class="form-label mt-2 ms-3 fs-6">
+                    supervisor name students*</label>
+                </td>
+                <td><button type="button" class="btn" 
+                    data-bs-toggle="tooltip" data-bs-placement="top"
+                    data-bs-title="delete selected"><i class="bi bi-trash3 fs-6 text-danger"></i>
+                    </button>
+                </td>
+            </tr>
             <tr >
-            <th scope="col" class="ps-3"><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></th>
+            <th scope="col" class="ps-3"><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></td>
             <th scope="col" >Name</th>
             <th scope="col">Company</th>
             <th scope="col">Branch</th>
-            <th scope="col">Delete</th>
-            <th scope="col" class="col-1 border ps-3 rounded-end"><button type="button" class="btn" 
-            data-bs-toggle="tooltip" data-bs-placement="top"
-            data-bs-title="delete selected"><i class="bi bi-trash3 fs-6 text-danger"></i></button></th> 
+            <th scope="col">Delete</th> 
             </tr>
         </thead>
         <tbody class="bg-light">
@@ -64,19 +73,24 @@
         </table>
     </div>
     {{--other students table--}}
-    <div class="table-responsive col-lg-10">
-        <label class="form-label txt-sm mt-2">other students:</label>
+    <div class="table-responsive col-lg-10 mt-3">
         <table class="table txt-sm table-sm border table-hover">
         <thead class="bg-mid-sand">
+        <tr class="rounded-top">
+                <td colspan="4"><label class="form-label mt-2 ms-3 fs-6">
+                    other students:</label>
+                </td>
+                <td><button type="button" class="btn" 
+                    data-bs-toggle="tooltip" data-bs-placement="top"
+                    data-bs-title="add selected"><i class="bi bi-plus-square fs-6"></i></button>                    </button>
+                </td>
+            </tr>
             <tr >
             <th scope="col" class="ps-3"><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></th>
             <th scope="col" >Name</th>
             <th scope="col">Company</th>
             <th scope="col">Branch</th>
             <th scope="col">Add</th>
-            <th scope="col" class="col-1 border ps-3 rounded-end"><button type="button" class="btn"
-            data-bs-toggle="tooltip" data-bs-placement="top"
-            data-bs-title="add selected"><i class="bi bi-plus-square fs-6"></i></button></th> 
             </tr>
         </thead>
         <tbody class="bg-light">

@@ -259,6 +259,11 @@ body .bigDiv .loginForm .loginCard .creatAccountLink:hover {
 .bg-dark-sand {
   background-color:var(--dark-sand);
 }
+.border-gray {
+  border-width: 0.5px;
+  border-style:solid;
+  border-color: #999;
+}
 .txt-dark-sand {
   color: var(--dark-sand);
 }
