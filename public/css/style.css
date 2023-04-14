@@ -232,6 +232,95 @@ body .bigDiv .loginForm .loginCard .creatAccountLink:hover {
   width: 31%;
   margin: 2rem -2rem 0.4rem 4.7rem;
 }
+/* ----------student profile------------ */
+.nav-items{
+  display: flex;
+  justify-content: flex-end;
+  }
+  .logo{
+    width: 4%;
+    height: 45%;
+    margin-right: 0.5rem;
+  }
+  .studentHeader{
+    background-color: #0A66C2;
+    color: #fff;
+    height: 30vh;
+    position: relative;
+    /* border-radius: 1%; */
+  }
+  .studentHeader h1{
+    padding: 6rem 2rem;
+    font-size: 1.5rem;
+  }
+  .studentHeader img{
+    position: absolute;
+    width: 17%;
+    height: 97%;
+    right: 9%;
+    top: 47%;
+    border-radius: 49%;
+    border: #fff solid;
+  }
+  .studentInfos{
+    position: relative;
+  }
+  .studentInfo{
+    display: flex;
+    align-items: center;
+    margin: 2.6rem 1rem -1.9rem 14rem;
+  }
+  .icon{
+    margin-right: 1rem;
+    width:2%;
+  }
+  .editBtn {
+    position: absolute;
+    background-color: #0A66C2;
+    color: #fff;
+    right: 12%;
+    top: 29%;
+    width: 11%;
+    border-radius: 1rem;
+    padding: inherit;
+  }
+  .editBtn:hover {
+    background-color: #054e97;
+    color: #fff;
+  
+  }
+  .profileSection {
+    height: 70vh;
+    border-radius: 0.5rem;
+    background-color: #fff;
+    margin: -0.2rem 9rem 0.5rem;
+  }
+  .nav{
+    margin: -0.2rem 9rem -0.5rem;
+  }
+  .workExperience h1{
+    padding: 6rem 2rem;
+    font-size: 1.5rem;
+  }
+  .anWorkExperience{
+    display: flex;
+    margin-top: 1rem;
+    flex-wrap: nowrap;/*?*/
+  }
+  .goldenDiv{
+    background-color: goldenrod;
+    width: 9%;
+    height: 8vh;
+    border-radius: 2rem;
+    margin: -3rem 6rem;
+  }
+  .blueDiv{
+    background-color:#0A66C2;
+    width: 9%;
+    height: 8vh;
+    border-radius: 2rem;
+    margin: -3rem 6rem;
+  }
 /* ---------------------- */
 :root {
   --dark-blue: #0A66C2;
