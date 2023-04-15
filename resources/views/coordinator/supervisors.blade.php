@@ -71,11 +71,11 @@
                         <button class="accordion-button collapsed txt-sm p-1" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">Students</button>
                         </h6>
                         <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                            <div class="accordion-body" style="max-height: 100px; overflow-y: auto;"><ul><li>h</li><li>h</li><li>h</li><li>h</li></ul></div>
+                            <div class="accordion-body" style="max-height: 100px; overflow-y: auto;"><ul><li>hhhhhhhhhh</li><li>h</li><li>h</li><li>h</li></ul></div>
                         </div>
                     </div>
                 </div>
-                <button type="button" class="btn bg-sand p-1 h-auto"><i class="bi bi-box-arrow-up-right fs-6"></i></button>
+                <button type="button" class="btn p-1 ms-1 h-auto"><i class="bi bi-box-arrow-up-right fs-6"></i></button>
             </div>
             </td>
             <td><button type="button" class="btn"><i class="bi bi-trash3 fs-6 text-danger"></i></button></td>
