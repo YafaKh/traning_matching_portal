@@ -33,7 +33,7 @@
         <table class="table txt-sm table-hover">
         <thead class="bg-mid-sand">
             <tr class="rounded-top">
-                <td colspan="7"><label class="form-label mt-2 ms-3 fs-6">
+                <td colspan="8"><label class="form-label mt-2 ms-3 fs-6">
                     Supervisors</label>
                 </td>
                 <td><button type="button" class="btn" 
@@ -50,6 +50,7 @@
             <th scope="col">Department</th>
             <th scope="col">Email</th>
             <th scope="col">Phone</th>
+            <th scope="col">Students</th>
             <th scope="col">Delete</th> 
             </tr>
         </thead>
@@ -61,7 +62,22 @@
             <td>@mdo</td>
             <td>****</td>
             <td>Otto</td>
-            <td>@mdo</td>
+            <td>@mdohhhhh</td>
+            <td>
+            <div class="d-flex">
+                <div class="accordion" id="accordionExample">
+                    <div class="accordion-item">
+                        <h6 class="accordion-header">
+                        <button class="accordion-button collapsed txt-sm p-1" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">Students</button>
+                        </h6>
+                        <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body" style="max-height: 100px; overflow-y: auto;"><ul><li>h</li><li>h</li><li>h</li><li>h</li></ul></div>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="btn bg-sand p-1 h-auto"><i class="bi bi-box-arrow-up-right fs-6"></i></button>
+            </div>
+            </td>
             <td><button type="button" class="btn"><i class="bi bi-trash3 fs-6 text-danger"></i></button></td>
             </tr>
         </tbody>

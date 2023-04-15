@@ -31,9 +31,12 @@ Route::prefix('/coordinator')->group(function(){
             return view('/coordinator/students/student_company_approval'); });
         Route::get('/assign_supervisors', function () {
             return view('/coordinator/students/assign_supervisors'); });
+            //add id
+        Route::get('/assessment', function () {
+            return view('/coordinator/students/assessment'); });    
     });
     Route::get('/supervisors', function () {
         return view('/coordinator/supervisors'); });
     Route::get('/companies', function () {
-        return view('/coordinator/companies'); });
+        return view('/coordinator/companies'); });   
 });
