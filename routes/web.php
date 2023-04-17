@@ -40,3 +40,7 @@ Route::prefix('/coordinator')->group(function(){
     Route::get('/companies', function () {
         return view('/coordinator/companies'); });   
 });
+
+Route::prefix('/hr')->group(function(){
+    Route::get('/', function () {
+        return view('/hr/company_profile'); });});
