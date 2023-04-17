@@ -21,7 +21,7 @@
 
   <nav class="navbar navbar-expand-lg bg-light nav p-3">
 
-    <a class="navbar-brand" href="#"><img src="img/logo.png" alt="logo" class="logo"></a>
+    <a class="navbar-brand" href="#"><img src="../img/logo.png" alt="logo" class="logo"></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
       aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -54,39 +54,23 @@
       <img src="../img/userImg.png" alt="student Image">
     </div>
       
-      <section class="profileSection studentGeneralInfo profileSection studentGeneralInfo ms-1 mt-5">
-        <h2 class="GeneralInfoHeader">Additional information</h2>
-        <div class="info">
-          <h3 >Am I in contact with a specific company:</h3>
-        <p> no</p>
-        </div>
-        <div class="info">
-          <h3>Company information:</h3>
-        <p> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatum, tenetur!</p>
-        </div>
-        <div class="info">
-          <h3>Preferred city for training:</h3>
-        <p> Nablus ,Jenin</p>
+    <section class="profileSection studentGeneralInfo profileSection studentGeneralInfo ms-1 mt-5">
+      <!-- start of diff part (header) -->
+            <h2 class="GeneralInfoHeader">Spoken language</h2>  
+            <div class="skill">
+              <p>Arabic</p>
+              <input type="range" min="1" max="100" value="50" class="w-25">
+            </div>
+            <div class="skill">
+              <p>English</p>
+              <input type="range" min="1" max="100" value="50" class="w-25">
+            </div>
+              <!-- end of diff part (header) -->
 
-        </div>
-        <div class="info">
-          <h3>Preferred companies:</h3>
-        <p> Asal , exalt</p>
-       
-        </div>
-        <div class="info">
-          <h3>preferred training field:</h3>
-        <p> mobile appkication</p>
-       
-        </div>
-        <div class="info">
-          <h3>when available:</h3>
-        <p> Dec-2023</p>
-       
-        </div>
-        <a class="btn btn-outline-primary m-5" href="#" role="button"><i class="fa-solid fa-circle-arrow-left"></i><span class="ms-2">Back</span></i></a>
+   
+      <a class="btn btn-outline-primary m-5" href="#" role="button"><i class="fa-solid fa-circle-arrow-left"></i><span class="ms-2">Back</span></i></a>
 
-      </section>
+       </section>
 
 
   <!-- bootstrap 5.2 -->
