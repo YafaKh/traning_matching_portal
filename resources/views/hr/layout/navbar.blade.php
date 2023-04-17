@@ -1,4 +1,4 @@
-    {{--navbar--}}
+{{--navbar--}}
     <nav class="navbar navbar-expand-sm shadow-sm">
     <div class="container-fluid ms-5">
         <a class="navbar-brand" href="#" >
@@ -10,21 +10,17 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-auto">
-            <li class="nav-item dropdown ">
-            <a class="nav-link dropdown-toggle @yield('students_activity')" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Students
-            </a>
-            <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">List students</a></li>
-                <li><a class="dropdown-item" href="#">Student-Company approval</a></li>
-                <li><a class="dropdown-item" href="#">Assign supervisors</a></li>
-            </ul>
+            <li class="nav-item">
+            <a class="nav-link @yield('Profile_activity')" href="#">Profile</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link @yield('supervisors_activity')" href="#">Supervisors</a>
+            <a class="nav-link @yield('Trainees_activity')" href="#">Trainees</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link @yield('companies_activity')" href="#">Companies</a>
+            <a class="nav-link @yield('Employees_activity')" href="#">Employees</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link @yield('Messaging_activity')" href="#">Messaging</a>
             </li>
             <li class="nav-item">
             <a class="nav-link" href="#">Logout</a>
@@ -32,4 +28,4 @@
         </ul>
         </div>
     </div>
-    </nav>
+</nav>
