@@ -48,30 +48,7 @@
 
   </nav>
 
-  <section class="profileSection">
-    <div class="studentHeader">
-      <h1>studentName*</h1>
-      <img src="../img/userImg.png" alt="student Image">
-    </div>
-      
-    <section class="profileSection studentGeneralInfo profileSection studentGeneralInfo ms-1 mt-5">
-      <h2 class="GeneralInfoHeader">Skills</h2>
-      <div class="skill">
-        <p>Lorem, ipsum:</p>
-        <input type="range" min="1" max="100" value="50" class="w-25">
-      </div>
-      <div class="skill">
-        <p>Lorem, ipsum:</p>
-        <input type="range" min="1" max="100" value="50" class="w-25">
-      </div>
-      <div class="skill">
-        <p>Lorem, ipsum:</p>
-        <input type="range" min="1" max="100" value="50" class="w-25">
-      </div>
-      <a class="btn btn-outline-primary m-5" href="#" role="button"><i class="fa-solid fa-circle-arrow-left"></i><span class="ms-2">Back</span></i></a>
-
   
-    </section>
 
 
   <!-- bootstrap 5.2 -->
