@@ -291,7 +291,7 @@ body .bigDiv .loginForm .loginCard .creatAccountLink:hover {
   }
   .profileSection {
     height: 70vh;
-    border-radius: 0.5rem;
+    border-radius: 1rem;
     background-color: #fff;
     margin: -0.2rem 9rem 0.5rem;
   }

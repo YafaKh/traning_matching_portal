@@ -3,17 +3,8 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('login');
+    return view('/all_users/login');
 });
-Route::get('/coordinator', function () {
-    return view('/coordinator/students/list_students');
-});
-
-Route::get('/coordinator/students/assign_supervisors', function () {
-    return view('/coordinator/students/assign_supervisors');
-});
-
-
 
 
 // Route::get('/login', function () {
@@ -44,3 +35,7 @@ Route::prefix('/coordinator')->group(function(){
 Route::prefix('/hr')->group(function(){
     Route::get('/', function () {
         return view('/hr/company_profile'); });});
+
+Route::prefix('/student')->group(function() {
+    Route::get('/profile',function(){
+        return view('/student/profile'); });});
