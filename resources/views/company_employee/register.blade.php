@@ -1,4 +1,4 @@
-@extends('coordinator.layout.master')
+@extends('company_employee.master')
 @section('content')
 <div class="pt-3 d-flex flex-column">
     <img src="{{asset('images/logo_title.png')}}" alt="Logo" class="col-md-4 col-7 mx-auto">
@@ -22,14 +22,18 @@
             <input type="text" class="form-control me-3 ps-4" id="thname_en" placeholder="Third">
             <input type="text" class="form-control ps-4" id="lname_en" placeholder="Last">
         </div>
-        <input type="text" class="form-control mb-4 ps-4" id="id" placeholder="Emploee ID">
         <input type="text" class="form-control mb-4 ps-4" id="phone" placeholder="Phone Number">
-        <input type="text" class="form-control mb-4 ps-4" id="phone" placeholder="University Email">
+        <input type="text" class="form-control mb-4 ps-4" id="phone" placeholder="Email">
+        <input type="text" class="form-control mb-4 ps-4" id="department" placeholder="Department">
+        <input type="text" class="form-control mb-4 ps-4" id="branches" placeholder="Branches">
+        <select id="role" class="form-select">
+        <option>Disabled select</option>
+        </select>
         <div class="d-flex flex-sm-row flex-column">
             <input type="password" class="form-control me-3 mb-4 ps-4" id="pass" placeholder="Password">
             <input type="password" class="form-control mb-4 ps-4" id="confirm_pass" placeholder="Confirm Password">
         </div>
-
+        <button type="submit" class="btn w-50 mx-auto btn-primary bg-dark-blue text-light">Submit</button>      
     </div>
 </div>
 @endsection

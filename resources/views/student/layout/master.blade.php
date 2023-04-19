@@ -6,6 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MP : Matching Portal</title>
+  {{--body font--}}
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
   <!-- website icon -->
   <link rel="icon" href="../img/logo.png">
   <!-- bootstrap 5.2 -->

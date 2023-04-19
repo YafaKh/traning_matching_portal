@@ -233,10 +233,6 @@ body .bigDiv .loginForm .loginCard .creatAccountLink:hover {
   margin: 2rem -2rem 0.4rem 4.7rem;
 }
 /* ----------student profile------------ */
-.nav-items{
-  display: flex;
-  justify-content: flex-end;
-  }
   .logo{
     width: 4%;
     height: 45%;
@@ -295,9 +291,6 @@ body .bigDiv .loginForm .loginCard .creatAccountLink:hover {
     background-color: #fff;
     margin: -0.2rem 9rem 0.5rem;
   }
-  .nav{
-    margin: -0.2rem 9rem -0.5rem;
-  }
   .workExperience h1{
     padding: 6rem 2rem;
     font-size: 1.5rem;
@@ -322,28 +315,15 @@ body .bigDiv .loginForm .loginCard .creatAccountLink:hover {
     margin: -3rem 6rem;
   }
   /* -------------Student Profile-------------- */
-.nav {
-  margin: -0.2rem 9rem -0.5rem;
-}
-.nav-items {
-  display: flex;
-  justify-content: flex-end;
-}
-.nav .logo {
-  width: 15%;
-  height: 45%;
-  margin-right: 0.5rem;
-}
 .profileSection {
   min-height: 30vh;
   border-radius: 0.5rem;
   background-color: #fff;
-  margin: -0.2rem 9rem 0.5rem;
+  margin: -0.2rem 9rem 1rem;
 }
 .profileSection .studentHeader {
   background-color: #0a66c2;
   color: #fff;
-  height: 30vh;
   position: relative;
 }
 .profileSection .studentHeader h1 {
@@ -461,15 +441,6 @@ body .bigDiv .loginForm .loginCard .creatAccountLink:hover {
 }
 /* media query - student profile */
 @media screen and (max-width: 992px) {
-  .nav {
-    margin: -0.2rem 6rem -0.5rem;
-  }
-  .nav-items {
-    justify-content: flex-start;
-  }
-  .nav .logo {
-    width: 20%;
-  }
   .profileSection {
     min-height: 23vh;
     margin: -0.2rem 6rem 1rem;
@@ -528,15 +499,6 @@ body .bigDiv .loginForm .loginCard .creatAccountLink:hover {
   }
 }
 @media screen and (max-width: 576px) {
-  .nav {
-    margin: -0.2rem 2rem -0.5rem;
-  }
-
-  .nav .logo {
-    width: 19%;
-
-    margin-right: -4.5rem;
-  }
   .profileSection {
     margin: -0.2rem 2rem 0.5rem;
   }
@@ -623,6 +585,7 @@ body .bigDiv .loginForm .loginCard .creatAccountLink:hover {
 }
 
 /* ---------------------- */
+/* color palate*/
 :root {
   --dark-blue: #0A66C2;
   --blue: #288DF2;
@@ -672,7 +635,7 @@ body {
   margin-right: 0.5em;
 }
 .navbar-brand {
-  color:#2E2E2E;
+  color:#202020;
 }
 .navbar-brand img {
   width: 2.5em;
@@ -715,4 +678,14 @@ body {
 .px-6{
   padding-left: 8%;
   padding-right: 8%;
+}
+.profile_img {
+  width: 10rem;
+  height: 10rem;
+}
+@media screen and (max-width: 768px) {
+  .profile_img {
+    width: 7rem;
+   height: 7rem;
+  }
 }
