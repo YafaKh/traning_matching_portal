@@ -1,6 +1,5 @@
-@extends('coordinator.layout.master')
+@extends('university_employee.master')
 @section('navbar')
-    @include('coordinator.layout.navbar')
 @endsection
 @section('students_activity')
     active

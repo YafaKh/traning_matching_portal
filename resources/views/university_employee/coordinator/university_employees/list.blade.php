@@ -1,6 +1,6 @@
-@extends('coordinator.layout.master')
+@extends('university_employee.master')
 @section('navbar')
-    @include('coordinator.layout.navbar')
+    @include('university_employee.coordinator.navbar')
 @endsection
 @section('supervisors_activity')
     active

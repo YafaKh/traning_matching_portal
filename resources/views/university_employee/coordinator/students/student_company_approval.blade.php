@@ -1,6 +1,6 @@
-@extends('coordinator.layout.master')
+@extends('university_employee.master')
 @section('navbar')
-    @include('coordinator.layout.navbar')
+    @include('university_employee.coordinator.navbar')
 @endsection
 @section('students_activity')
     active
@@ -9,7 +9,7 @@
     active
 @endsection
 @section('student_navbar')
-    @include('coordinator.students.student_navbar')
+    @include('university_employee.coordinator.students.student_navbar')
 @endsection
 @section('content')
 <div class="px-5">
