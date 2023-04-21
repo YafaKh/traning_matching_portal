@@ -12,6 +12,7 @@
     @include('university_employee.coordinator.students.student_navbar')
 @endsection
 @section('content')
+@include('all_users.delete_modal')
 <div class="px-5">
     {{--filters--}}
     <div class= "d-flex flex-sm-row flex-column mt-5 pb-3">
@@ -45,8 +46,9 @@
         </select>
         {{--*submit/butoon--}}
         <button type="button" class="btn bg-mid-sand border mb-2 me-2"
-        data-bs-toggle="tooltip" data-bs-placement="top"
-        data-bs-title="delete selected"><i class="bi bi-trash3 py-0 fs-6 text-danger"></i></button>
+        data-bs-toggle="modal" data-bs-target="#deleteModal"
+        data-bs-title="delete selected"><i class="bi bi-trash3 py-0 fs-6 text-danger"></i>
+        </button>
         <button type="button" class="btn h-50 btn-primary bg-dark-blue text-light opacity-75 px-3">Report</button>
     </div>
     {{--Upload registered students list--}}
@@ -96,43 +98,10 @@
                 <option value="Assessment">Assessment</option>
             </select>
             </td>
-            <td><button type="button" class="btn"><i class="bi bi-trash3 fs-6 text-danger"></i></button></td>
-            </tr>
-            <tr>
-            <td class="ps-3"><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></td>                
-            <td>****</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>
-            <select class="form-select txt-sm w-auto" aria-label="Go_to">
-                <option value="Progress" selected>Progress</option>
-                <option value="Visit_forms">Visit forms</option>
-                <option value="Evaluation">Evaluation</option>
-                <option value="Assessment">Company evaluation</option>
-                <option value="Assessment">Assessment</option>
-            </select>
-            </td>
-            <td><button type="button" class="btn"><i class="bi bi-trash3 fs-6 text-danger"></i></button></td>
-            </tr>
-            <tr>
-            <td class="ps-3"><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></td>                
-            <td>****</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>
-            <select class="form-select txt-sm w-auto" aria-label="Go_to">
-                <option value="Progress" selected>Progress</option>
-                <option value="Visit_forms">Visit forms</option>
-                <option value="Evaluation">Evaluation</option>
-                <option value="Assessment">Company evaluation</option>
-                <option value="Assessment">Assessment</option>
-            </select>
-            </td>
-            <td><button type="button" class="btn"><i class="bi bi-trash3 fs-6 text-danger"></i></button></td>
+            <td><button type="button" class="btn"
+            data-bs-toggle="modal" data-bs-target="#deleteModal">
+            <i class="bi bi-trash3 fs-6 text-danger"></i>
+            </button></td>
             </tr>
         </tbody>
         </table>

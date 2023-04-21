@@ -4,15 +4,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('/all_users/login');
-});
+});  
 // university employees' routes
 Route::get('university_employee/register', function () {
     return view('/university_employee/register'); })->name('university_employee_register');
 
 Route::prefix('/coordinator')->group(function(){
     Route::prefix('/students')->group(function(){
-        Route::get('/list_students', function () {
-            return view('university_employee/coordinator/students/list_students'); })->name('coordinator_list_students');
+        Route::get('/list', function () {
+            return view('university_employee/coordinator/students/list'); })->name('coordinator_list_students');
         Route::get('/student_company_approval', function () {
             return view('university_employee/coordinator/students/student_company_approval'); })->name('coordinator_student_company_approval');
         Route::get('/assign_supervisors', function () {
@@ -33,14 +33,39 @@ Route::prefix('/coordinator')->group(function(){
         return view('university_employee/coordinator/companies'); })->name('coordinator_list_companies');   
 });
 
+Route::prefix('/supervisor')->group(function(){
+    Route::get('/students', function () {
+        return view('university_employee/supervisor/students/list'); })->name('supervisor_list_students');   
+});
+
 // company employees' routes
 Route::get('company_employee/register', function () {
     return view('/company_employee/register'); })->name('company_employee_register');
  
 Route::prefix('/hr')->group(function(){
     Route::get('/company_profile', function () {
-        return view('/hr/company_profile'); })->name('hr_company_profile');
+        return view('/company_employee/hr/company_profile'); })->name('hr_company_profile');
+    Route::get('/edit_company_profile', function () {
+        return view('/company_employee/hr/edit_company_profile'); })->name('hr_edit_company_profile');
+    Route::get('/messaging', function () {
+        return view('/company_employee/hr/messaging'); })->name('hr_messaging');
+
+    Route::prefix('/trainees')->group(function(){
+        Route::get('/list', function () {
+            return view('company_employee/hr/trainees/list'); })->name('hr_list_trainees');
+        Route::get('/university_students', function () {
+            return view('company_employee/hr/trainees/university_students'); })->name('hr_university_students');
+        Route::get('/assign_trainees', function () {
+            return view('company_employee/hr/trainees/assign_trainers'); })->name('hr_assign_trainees');
     });
+
+    Route::prefix('/company_employees')->group(function(){
+        Route::get('/', function () {
+            return view('company_employee/hr/company_employees/list'); })->name('hr_list_Employees');
+        Route::get('/add', function () {
+        return view('company_employee/hr/company_employees/add'); })->name('hr_add_Employee');
+    });
+});
 
 // students' routes
 Route::prefix('/student')->group(function() {

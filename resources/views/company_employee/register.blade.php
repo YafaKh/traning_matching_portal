@@ -27,9 +27,9 @@
         <input type="text" class="form-control mb-4 ps-4" id="department" placeholder="Department">
         <input type="text" class="form-control mb-4 ps-4" id="branches" placeholder="Branches">
         <select id="role" class="form-select">
-        <option selected>Role</option>
-        <option>HR</option>
-        <option>Trainer</option>
+            <option selected>Role</option>
+            <option value="HR">HR</option>
+            <option value="Trainer">Trainer</option>
         </select>
         <div class="d-flex flex-sm-row flex-column">
             <input type="password" class="form-control me-3 mb-4 ps-4" id="pass" placeholder="Password">

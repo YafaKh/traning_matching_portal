@@ -4,30 +4,32 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class Student extends Controller
+class TraineesController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        /*select id name beanch depart trainer progress evaluation approved or not
+        if app to first table else sev*/
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Display a listing of university students 
      */
-    public function create()
+    public function list_university_students()
     {
-        //
+        //select id name specilz gpa load aval
     }
+
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        //
+        //store to training table
     }
 
     /**
@@ -35,16 +37,9 @@ class Student extends Controller
      */
     public function show(string $id)
     {
-        //
+        //profile
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -53,6 +48,12 @@ class Student extends Controller
     {
         //
     }
+    public function assgin_trainers(Request $request, string $id)
+    {
+        $student=Student::where('id',$id)->first();
+        //update on training table
+    }
+
 
     /**
      * Remove the specified resource from storage.
