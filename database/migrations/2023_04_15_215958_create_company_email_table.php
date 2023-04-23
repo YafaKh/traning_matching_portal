@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('company_email', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('email_address', 45)->nullable();
+            $table->string('email_address', 45)->nullable(false);
 
             $table->unsignedBigInteger('company_id');
             $table->foreign('company_id')->references('id')->on('company');

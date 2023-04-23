@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('company_role', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->binary('hr')->nullable()->default(0);
-            $table->binary('trainer')->nullable()->default(0);
+            $table->binary('hr')->nullable(false)->default(0);
+            $table->binary('trainer')->nullable(false)->default(0);
         });
     }
 

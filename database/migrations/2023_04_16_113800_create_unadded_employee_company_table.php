@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('unadded_employee_company', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('email', 45)->nullable();
-            $table->string('password', 45)->nullable();
-            $table->string('first_name', 45)->nullable();
-            $table->string('second_name', 45)->nullable();
-            $table->string('third_name', 45)->nullable();
-            $table->string('last_name', 45)->nullable();
+            $table->string('email', 45)->nullable(false);
+            $table->string('password', 45)->nullable(false);
+            $table->string('first_name', 45)->nullable(false);
+            $table->string('second_name', 45)->nullable(false);
+            $table->string('third_name', 45)->nullable(false);
+            $table->string('last_name', 45)->nullable(false);
         });
     }
 

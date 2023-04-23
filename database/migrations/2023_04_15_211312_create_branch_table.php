@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('branch', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('address', 45)->nullable();
+            $table->string('address', 45)->nullable(false);
             
             $table->unsignedBigInteger('company_id');
-            $table->foreign('company_id', 'fk_branch_company1')
+            $table->foreign('company_id')
                 ->references('id')->on('company');
         });
     }
