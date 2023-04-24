@@ -35,8 +35,9 @@ Route::prefix('/coordinator')->group(function(){
 
 Route::prefix('/supervisor')->group(function(){
     Route::get('/students', function () {
-        return view('university_employee/supervisor/students/list'); })->name('supervisor_list_students');   
-});
+        return view('/list'); })->name('supervisor_list_students');   
+    Route::get('/visit_form', function () {
+        return view('university_employee/supervisor/students/visit_form'); })->name('visit_form');});
 
 // company employees' routes
 Route::get('company_employee/register', function () {

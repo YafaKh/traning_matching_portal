@@ -13,7 +13,7 @@
         <select class="form-select w-auto me-2 mb-2 txt-sm" aria-label="Specialization">
             <option selected>Specialization</option>
             <option value="CS">CS</option>
-            <option value="MMT">MMT/option>
+            <option value="MMT">MMT</option>
             <option value="GIS">GIS</option>
             <option value="CSE">CSE</option>
         </select>
