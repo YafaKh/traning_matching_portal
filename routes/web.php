@@ -6,7 +6,13 @@ use App\Http\Controllers\Coordinator\StudentController;
 
 Route::get('/', function () {
     return view('/all_users/login');
-});  
+}); 
+Route::get('/resetPassword', function () {
+    return view('/all_users/resetPassword');
+}); 
+Route::get('/userType', function () {
+    return view('/all_users/userType');
+}); 
 // university employees' routes
 Route::get('university_employee/register', function () {
     return view('/university_employee/register'); })->name('university_employee_register');
@@ -73,3 +79,4 @@ Route::prefix('/hr')->group(function(){
 Route::prefix('/student')->group(function() {
     Route::get('/profile',function(){
         return view('/student/profile'); });});
+        
