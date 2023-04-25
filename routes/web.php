@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\Coordinator\StudentController;
 
 Route::get('/', function () {
     return view('/all_users/login');
@@ -11,8 +13,7 @@ Route::get('university_employee/register', function () {
 
 Route::prefix('/coordinator')->group(function(){
     Route::prefix('/students')->group(function(){
-        Route::get('/list', function () {
-            return view('university_employee/coordinator/students/list'); })->name('coordinator_list_students');
+        Route::get('/list', [StudentController::class,'index'])->name('coordinator_list_students');
         Route::get('/student_company_approval', function () {
             return view('university_employee/coordinator/students/student_company_approval'); })->name('coordinator_student_company_approval');
         Route::get('/assign_supervisors', function () {

@@ -1,0 +1,9 @@
+diff a/composer.json b/composer.json	(rejected hunks)
+@@ -13,6 +13,7 @@
+     },
+     "require-dev": {
+         "fakerphp/faker": "^1.9.1",
++        "kitloong/laravel-migrations-generator": "^6.10",
+         "laravel/pint": "^1.0",
+         "laravel/sail": "^1.18",
+         "mockery/mockery": "^1.4.4",

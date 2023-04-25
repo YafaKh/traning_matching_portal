@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Coordinator;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
 use App\Models\Student;
-
 
 class StudentController extends Controller
 {
@@ -15,9 +14,9 @@ class StudentController extends Controller
     {
         //select from student id, student_id, name, specialization, company, branch, supervisor, regestrtion_state, progress, visit_form, evaluation, company_evaluation, assessment
         $studentsData= 
-        Student::select(['id', 'student_num', ''])
+        Student::select(['id', 'student_num'])
         ->get();
-        return view('university_employee.coordinator.students.list',['student'=>$studentsData]);
+        return view('university_employee.coordinator.students.list',['students'=>$studentsData]);
     }
 
     /**

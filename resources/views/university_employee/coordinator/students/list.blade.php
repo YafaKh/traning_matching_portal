@@ -82,12 +82,13 @@
             </tr>
         </thead>
         <tbody class="bg-light">
+            @foreach($students as $student)
             <tr>
             <td class="ps-3"><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></td>                
-            <td>****</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td>Mark</td>
+            <td>{{$student['student_num']}}</td>
+            <td>{{$student['first_name_en']}}</td>
+            <td>{{$student['specialization']}}</td>
+            <td>{{$student['id']}}</td>
             <td>Otto</td>
             <td>
             <select class="form-select txt-sm w-auto" aria-label="Go_to">
@@ -103,6 +104,7 @@
             <i class="bi bi-trash3 fs-6 text-danger"></i>
             </button></td>
             </tr>
+            @endforeach
         </tbody>
         </table>
     </div>
