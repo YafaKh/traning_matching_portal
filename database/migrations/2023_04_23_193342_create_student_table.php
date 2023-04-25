@@ -15,14 +15,14 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('student_id', 12)->unique();
-            $table->binary('gender')->nullable(false);
+            $table->boolean('gender')->nullable(false);
             $table->integer('passed_hours')->nullable(false);
             $table->float('gpa')->nullable(false);
             $table->string('address', 45)->nullable(false);
             $table->string('email', 45)->unique()->nullable(false);
             $table->string('password', 45)->nullable(false);
             $table->date('availability_date')->nullable(false);
-            $table->binary('connected_with_a_company')->nullable(false);
+            $table->boolean('connected_with_a_company')->nullable(false);
             $table->string('connected_company_info', 100)->nullable();
             $table->string('first_arabic_name', 45)->nullable(false);
             $table->string('first_english_name', 45)->nullable(false);
@@ -35,7 +35,7 @@ return new class extends Migration
             $table->string('country_code', 15)->nullable(false);
             $table->string('area_code', 15)->nullable(false);
             $table->string('phone_no', 15)->nullable(false);
-            $table->binary('registered')->nullable(false)->default(0);
+            $table->boolean('registered')->nullable(false)->default(0);
             $table->string('image', 45)->nullable(false);
 
             $table->unsignedBigInteger('company_id');
