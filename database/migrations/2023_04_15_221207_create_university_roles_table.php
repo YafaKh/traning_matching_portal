@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('university_roles', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->binary('coordinator')->nullable(false)->default(0);
-            $table->binary('supervisor')->nullable(false)->default(0);
+            $table->boolean('coordinator')->nullable(false)->default(0);
+            $table->boolean('supervisor')->nullable(false)->default(0);
         });
     }
 

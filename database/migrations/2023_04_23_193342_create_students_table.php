@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('student_num', 12)->unique();
-            $table->boolean('gender');
+            $table->boolean('gender')->nullable(false);
             $table->integer('passed_hours')->nullable(false);
             $table->float('gpa')->nullable(false);
             $table->string('address', 45)->nullable(false);
