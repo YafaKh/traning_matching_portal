@@ -3,10 +3,10 @@
   @include('student.layout.navbar')
 @endsection
 @section('content')
- <section class="profileSection">
+<section class="profileSection">
     <div class="studentHeader">
       <h1>studentName*</h1>
-      <img src="{{asset('images/userImg.png')}}" alt="student Image">
+      <img src="../img/userImg.png" alt="student Image">
     </div>
     <div class="studentInfos">
       <p class="studentInfo"><i class="fa-solid fa-laptop icon"></i>specialization</p>
@@ -47,15 +47,15 @@
       </div>
     </div>
   </section>
-  <section class="profileSection studentGeneralInfo">
+  <section class="profileSection studentSkills overflow-auto">
     <h2 class="GeneralInfoHeader">General information</h2>
-    <p>Female</p><!--Gender-->
-    <p>4.00</p><!--GPA-->
-    <p>115</p><!--# of passed hours-->
+    <p>Gender: Female</p><!--Gender-->
+    <p>GPA : 4.00</p><!--GPA-->
+    <p>number of passed hours : 115</p><!--# of passed hours-->
 
 
   </section>
-  <section class="profileSection studentGeneralInfo">
+  <section class="profileSection studentSkills overflow-auto">
     <h2 class="GeneralInfoHeader">Skills</h2>
     <div class="skill">
       <p>Lorem, ipsum:</p>
@@ -69,12 +69,35 @@
       <p>Lorem, ipsum:</p>
       <input type="range" min="1" max="100" value="50" class="w-25">
     </div>
-    <a class="btn btn-outline-primary showAllBtn" href="#" role="button">show all skills<span class="ps-2"><i
-          class="fa-solid fa-circle-right"></span></i></a>
+    <div class="skill">
+      <p>Lorem, ipsum:</p>
+      <input type="range" min="1" max="100" value="50" class="w-25">
+    </div>
+    <div class="skill">
+      <p>Lorem, ipsum:</p>
+      <input type="range" min="1" max="100" value="50" class="w-25">
+    </div>
+    <div class="skill">
+      <p>Lorem, ipsum:</p>
+      <input type="range" min="1" max="100" value="50" class="w-25">
+    </div>
+    <div class="skill">
+      <p>Lorem, ipsum:</p>
+      <input type="range" min="1" max="100" value="50" class="w-25">
+    </div>
+    <div class="skill">
+      <p>Lorem, ipsum:</p>
+      <input type="range" min="1" max="100" value="50" class="w-25">
+    </div>
+    <div class="skill">
+      <p>Lorem, ipsum:</p>
+      <input type="range" min="1" max="100" value="50" class="w-25">
+    </div>
+
 
 
   </section>
-  <section class="profileSection studentGeneralInfo">
+  <section class="profileSection studentSkills overflow-auto">
     <h2 class="GeneralInfoHeader">Spoken language</h2>
     <div class="skill">
       <p>Arabic</p>
@@ -84,13 +107,11 @@
       <p>English</p>
       <input type="range" min="1" max="100" value="50" class="w-25">
     </div>
-    <a class="btn btn-outline-primary showAllBtn" href="#" role="button">show all languages<span class="ps-2"><i
-          class="fa-solid fa-circle-right"></i></span></a>
-
+    
   </section>
   <!-- if there is no athor skills or languages the button will disabled  -->
 
-  <section class="profileSection studentGeneralInfo">
+  <section class="profileSection studentSkills overflow-auto">
     <h2 class="GeneralInfoHeader">Additional information</h2>
     <div class="info"><!--there is another potintioal ansowers-->
       <h3>Am I in contact with a specific company:</h3>
@@ -107,8 +128,6 @@
     </div>
 
 
-    <a class="btn btn-outline-primary showAllBtn" href="#" role="button">show all information<span class="ps-2"><i
-          class="fa-solid fa-circle-right"></i></span></a>
-
   </section>
+
 @endsection

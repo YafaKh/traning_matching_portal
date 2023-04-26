@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->text('student_weaknesses')->nullable(false);
-            $table->binary('willing_to_hire')->default(0);
+            $table->boolean('willing_to_hire')->default(0);
             $table->text('willing_to_hire_reason')->nullable(false);
             $table->string('comments', 200)->nullable(false);
             $table->tinyInteger('fulfillin_ required_tasks')->nullable(false);
