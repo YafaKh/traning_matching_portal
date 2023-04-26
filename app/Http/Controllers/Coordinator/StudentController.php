@@ -14,7 +14,7 @@ class StudentController extends Controller
     {
         //select from student id, student_id, name, specialization, company, branch, supervisor, regestrtion_state, progress, visit_form, evaluation, company_evaluation, assessment
         $studentsData= 
-        Student::select(['id', 'student_num'])
+        Student::select(['id','student_num','student_name_id','specialization','company_id',''])
         ->get();
         return view('university_employee.coordinator.students.list',['students'=>$studentsData]);
     }

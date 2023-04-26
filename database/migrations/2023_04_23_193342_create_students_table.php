@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->timestamps(); 
             $table->string('student_num', 12)->unique();
             $table->boolean('gender');
             $table->integer('passed_hours')->nullable(false);
@@ -24,24 +24,19 @@ return new class extends Migration
             $table->date('availability_date')->nullable(false);
             $table->boolean('connected_with_a_company')->nullable(false);
             $table->string('connected_company_info', 100)->nullable();
-            $table->string('first_arabic_name', 45)->nullable(false);
-            $table->string('first_english_name', 45)->nullable(false);
-            $table->string('second_arabic_name', 45)->nullable(false);
-            $table->string('second_english_name', 45)->nullable(false);
-            $table->string('third_arabic_name', 45)->nullable(false);
-            $table->string('third_english_name', 45)->nullable(false);
-            $table->string('last_arabic_name', 45)->nullable(false);
-            $table->string('last_english_name', 45)->nullable(false);
             $table->string('country_code', 15)->nullable(false);
             $table->string('area_code', 15)->nullable(false);
             $table->string('phone_no', 15)->nullable(false);
             $table->boolean('registered')->nullable(false)->default(0);
             $table->string('image', 45)->nullable(false);
 
-            /*$table->unsignedBigInteger('company_id');
+            /*$table->unsignedBigInteger('student_name_id');
+            $table->unsignedBigInteger('company_id');
             $table->unsignedBigInteger('university_id');
             $table->unsignedBigInteger('specialization_id');
             $table->unsignedBigInteger('branch_id');
+            $table->foreign('student_name_id')
+            ->references('id')->on('student_name');
             $table->foreign('company_id')
             ->references('id')->on('companies');
             $table->foreign('university_id')
