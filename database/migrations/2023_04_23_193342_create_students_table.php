@@ -30,7 +30,7 @@ return new class extends Migration
             $table->boolean('registered')->nullable(false)->default(0);
             $table->string('image', 45)->nullable(false);
 
-            /*$table->unsignedBigInteger('student_name_id');
+            $table->unsignedBigInteger('student_name_id');
             $table->unsignedBigInteger('company_id');
             $table->unsignedBigInteger('university_id');
             $table->unsignedBigInteger('specialization_id');
@@ -44,7 +44,7 @@ return new class extends Migration
             $table->foreign('specialization_id')
             ->references('id')->on('specializations');
             $table->foreign('branch_id')
-            ->references('id')->on('branchs');*/
+            ->references('id')->on('branchs');
         });
     }
 
