@@ -74,12 +74,3 @@ Route::prefix('/hr')->group(function(){
         return view('company_employee/hr/company_employees/add'); })->name('hr_add_Employee');
     });
 });
-
-// students' routes
-Route::prefix('/student')->group(function() {
-    Route::get('/profile',function(){
-        return view('/student/profile');});
-    Route::get('/edit_profile',function(){
-        return view('/student/edit_profile');});
-});
-        
