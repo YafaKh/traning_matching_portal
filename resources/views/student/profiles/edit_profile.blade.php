@@ -7,12 +7,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MP : Matching Portal</title>
   <!-- website icon -->
-  <link rel="icon" href="../img/logo.png">
+  <link rel="icon" href="{{asset('images/logo.png')}}">
   <!-- bootstrap 5.2 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
   <!--fontawesome-->
-  <link rel="stylesheet" href="../vendor/css/all.min.css">
+  <link rel="stylesheet" href="{{asset('vendor/css/all.min.css')}}">">
 
   <!-- date picker -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
@@ -24,46 +24,20 @@
   <!-- end date picker -->
 
   <!-- css page -->
-  <link rel="stylesheet" href="../style2.css">
+  <link rel="stylesheet" href="{{asset('css/style.css')}}">
 </head>
 
-<body>
-
-  <nav class="navbar navbar-expand-lg bg-light nav p-3">
-
-    <a class="navbar-brand" href="#"><img src="../img/logo.png" alt="logo" class="logo"></a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse nav-items" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Profile</a><!-- active -->
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Messaging</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">My progress</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link">My company</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link">Logout</a>
-        </li>
-      </ul>
-    </div>
-
-  </nav>
+<body class="bg-sand">
+@section('navbar')
+  @include('student.layout.navbar')
+@endsection
 
   <section class="profileSection">
     <div class="studentHeader">
       <h1><input class="form-control form-control w-25" type="text" placeholder="Student Name"
           aria-label=".form-control-lg example">
       </h1>
-      <img src="../img/userImg.png" alt="student Image">
+      <img src="{{asset('images/userImg2.png')}}" alt="student Image">
 
       <div class="uploadImge">
         <input type="file" name="changeImage" id="" class="changeImage">
@@ -72,7 +46,8 @@
       </div>
     </div>
     <div class="studentInfos">
-      <input class="form-control form-control w-25 studentInfo" type="text" placeholder="specialization"
+      <!-- in placeholder inputs the info will appears to make the user able to change them -->
+      <input class="form-control form-control w-25 studentInfo" type="text" placeholder="specialization : CS"
         aria-label=".form-control-lg example">
       <div class="input-group w-25 studentInfo">
         <select class="form-select  text-secondary" id="inputGroupSelect01">
@@ -188,18 +163,25 @@
     <h2 class="GeneralInfoHeader">Skills</h2>
     <div class="skill">
       <p>Lorem, ipsum:</p>
+      <i class="bi bi-trash3 fs-6 text-danger float-start"></i>
+      <input type="range" min="1" max="100" value="75" class="w-25">
+    </div>
+   
+    <div class="skill">
+      <p>Lorem, ipsum:</p>
+      <i class="bi bi-trash3 fs-6 text-danger float-start"></i>
+
       <input type="range" min="1" max="100" value="50" class="w-25">
     </div>
     <div class="skill">
-      <p>Lorem, ipsum:</p>
-      <input type="range" min="1" max="100" value="50" class="w-25">
-    </div>
-    <div class="skill">
-      <p>Lorem, ipsum:</p>
-      <input type="range" min="1" max="100" value="50" class="w-25">
+    <div class="input-group ms-5 mt-4 w-25">
+      <span class="input-group-text"><i class="bi bi-plus-square fs-6"></i></span>
+      <input type="text" class="form-control ps-4" id="new_address" placeholder="New address">
+      <input type="range" min="1" max="100" value="50" class="w-75 ms-5">
+
     </div>
 
-
+</div>
 
   </section>
   <section class="profileSection studentSkills overflow-auto">

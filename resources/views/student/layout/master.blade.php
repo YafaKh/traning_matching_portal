@@ -9,12 +9,12 @@
   {{--body font--}}
   <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
   <!-- website icon -->
-  <link rel="icon" href="../img/logo.png">
+  <link rel="icon" href="{{asset('images/logo.png')}}">
   <!-- bootstrap 5.2 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
   <!--fontawesome-->
-  <link rel="stylesheet" href="../vendor/css/all.min.css">
+  <link rel="stylesheet" href="{{asset('vendor/css/all.min.css')}}">
   <!-- css page -->
   {{-- our custom style sheet --}}
     <link href="{{asset('css/style.css')}}" rel="stylesheet" type="text/css">

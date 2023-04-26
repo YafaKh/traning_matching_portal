@@ -79,4 +79,10 @@ Route::prefix('/hr')->group(function(){
 Route::prefix('/student')->group(function() {
     Route::get('/profile',function(){
         return view('/student/profile'); });});
-        
+
+Route::get('/studentProfile', function () {
+    return view('/student/profile');
+}); 
+
+Route::get('/edit_student_profile', function () {
+    return view('/student/profiles/edit_profile'); });

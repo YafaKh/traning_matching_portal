@@ -6,7 +6,7 @@
 <section class="profileSection">
     <div class="studentHeader">
       <h1>studentName*</h1>
-      <img src="../img/userImg.png" alt="student Image">
+      <img src="{{asset('images/userImg2.png')}}" alt="student Image">
     </div>
     <div class="studentInfos">
       <p class="studentInfo"><i class="fa-solid fa-laptop icon"></i>specialization</p>
@@ -49,9 +49,10 @@
   </section>
   <section class="profileSection studentSkills overflow-auto">
     <h2 class="GeneralInfoHeader">General information</h2>
-    <p>Gender: Female</p><!--Gender-->
-    <p>GPA : 4.00</p><!--GPA-->
-    <p>number of passed hours : 115</p><!--# of passed hours-->
+    <p>Gender: Female</p>
+    <p>GPA : 4.00</p>
+    <p>number of passed hours : 115</p>
+    
 
 
   </section>
@@ -59,39 +60,39 @@
     <h2 class="GeneralInfoHeader">Skills</h2>
     <div class="skill">
       <p>Lorem, ipsum:</p>
-      <input type="range" min="1" max="100" value="50" class="w-25">
+      <input type="range" min="1" max="100" value="70" class="w-25" disabled>
     </div>
     <div class="skill">
       <p>Lorem, ipsum:</p>
-      <input type="range" min="1" max="100" value="50" class="w-25">
+      <input type="range" min="1" max="100" value="50" class="w-25" disabled>
     </div>
     <div class="skill">
       <p>Lorem, ipsum:</p>
-      <input type="range" min="1" max="100" value="50" class="w-25">
+      <input type="range" min="1" max="100" value="90" class="w-25" disabled>
     </div>
     <div class="skill">
       <p>Lorem, ipsum:</p>
-      <input type="range" min="1" max="100" value="50" class="w-25">
+      <input type="range" min="1" max="100" value="30" class="w-25"disabled>
     </div>
     <div class="skill">
       <p>Lorem, ipsum:</p>
-      <input type="range" min="1" max="100" value="50" class="w-25">
+      <input type="range" min="1" max="100" value="50" class="w-25" disabled>
+    </div>
+    <div class="skill" >
+      <p>Lorem, ipsum:</p>
+      <input type="range" min="1" max="100" value="90" class="w-25" disabled>
     </div>
     <div class="skill">
       <p>Lorem, ipsum:</p>
-      <input type="range" min="1" max="100" value="50" class="w-25">
+      <input type="range" min="1" max="100" value="30" class="w-25" disabled>
     </div>
     <div class="skill">
       <p>Lorem, ipsum:</p>
-      <input type="range" min="1" max="100" value="50" class="w-25">
+      <input type="range" min="1" max="100" value="50" class="w-25" disabled>
     </div>
     <div class="skill">
       <p>Lorem, ipsum:</p>
-      <input type="range" min="1" max="100" value="50" class="w-25">
-    </div>
-    <div class="skill">
-      <p>Lorem, ipsum:</p>
-      <input type="range" min="1" max="100" value="50" class="w-25">
+      <input type="range" min="1" max="100" value="50" class="w-25" disabled>
     </div>
 
 
@@ -126,7 +127,21 @@
       <p> Nablus ,Jenin</p>
 
     </div>
-
+    <div class="info">
+      <h3>Preferred companies:</h3>
+    <p> Asal , exalt</p>
+   
+    </div>
+    <div class="info">
+      <h3>preferred training field:</h3>
+    <p> mobile appkication</p>
+   
+    </div>
+    <div class="info">
+      <h3>when available:</h3>
+    <p> Dec-2023</p>
+   
+    </div>
 
   </section>
 
