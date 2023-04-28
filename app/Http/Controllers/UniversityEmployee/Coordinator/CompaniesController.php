@@ -4,25 +4,18 @@ namespace App\Http\Controllers\Coordinator;
 
 use Illuminate\Http\Request;
 
-class CompanyController extends Controller
+class CompaniesController extends Controller
 {
+    //fillter 
+    
     /**
-     * Display a listing of the resource.
+     * Display a listing of the companies.
      */
     public function index()
     {
         //select from company id,  name, email, phone, branchs
-        $companiesData= Company::all();
+        $companiesData= Company::select(['id','name'])
+        ->get();
         return view('university_employee.coordinator.companies',['company'=>$companiesData]);
     }
-
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //profile
-    }
-
 }

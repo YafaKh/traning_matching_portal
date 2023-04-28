@@ -29,8 +29,10 @@
             <tr>
             <td class="ps-3">****</td>
             <td>@mdo</td>
-            <td><button type="button" class="btn"><i class="bi bi-box-arrow-up-right"></i></button></td>
-            <td><button type="button" class="btn"><i class="bi bi-box-arrow-up-right"></i></button></td>
+            <td><a type="button" class="btn" href="{{route('fill_traniee_progress')}}">
+            <i class="bi bi-box-arrow-up-right"></i></a></td>
+            <td><a type="button" class="btn">
+            <i class="bi bi-box-arrow-up-right"></i></a></td>
             </tr>
         </tbody>
         </table>
