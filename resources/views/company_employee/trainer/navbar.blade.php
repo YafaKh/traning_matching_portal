@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md shadow-sm">
 <div class="container-fluid ms-5">
-    <a class="navbar-brand" href="{{route('supervisor_list_students')}}" >
+    <a class="navbar-brand" href="{{route('trainer_list_traniees')}}" >
     <img src="{{asset('images/logo.png')}}" alt="Logo">
     EmployeeName*
     </a>
@@ -10,7 +10,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mb-2 mb-lg-0 ms-auto me-5">
         <li class="nav-item">
-        <a class="nav-link @yield('students_activity')" href="{{route('supervisor_list_students')}}">My Traniees</a>
+        <a class="nav-link" href="{{route('trainer_list_traniees')}}">My Traniees</a>
         </li>
         <li class="nav-item">
         <a class="nav-link" href="#">Logout</a>

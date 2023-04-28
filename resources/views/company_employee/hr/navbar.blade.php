@@ -14,7 +14,7 @@
             <a class="nav-link @yield('Profile_activity')"  href="{{route('hr_company_profile')}}">Profile</a>
             </li>
             <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle @yield('students_activity')" href="{{route('hr_list_trainees')}}" 
+            <a class="nav-link dropdown-toggle @yield('trainees_activity')" 
             role="button" data-bs-toggle="dropdown" aria-expanded="false">Trainees</a>
             <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="{{route('hr_list_trainees')}}">List trainees</a></li>

@@ -29,7 +29,6 @@
             <option selected>Branch*</option>
             <option value="CS">CS</option>
         </select>  
-        <button type="button" class="btn h-50 btn-sm btn-primary bg-dark-blue text-light opacity-75">Confirm</button>      
     </div>
         
     {{-- supervisor students table--}}
