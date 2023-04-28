@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Coordinator;
 use Illuminate\Http\Request;
 
 use App\Models\UniversityEmployee;
@@ -33,23 +33,7 @@ class UniversityEmployeeController extends Controller
         $request->validate();
         $universityEmployee= UniversityEmployee::create();
     }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //to delete
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //to delete
-    }
-
+    
     /**
      * Update the specified resource in storage.
      * In practice, the coordinator is only allowed to update the employee's role
