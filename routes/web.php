@@ -80,8 +80,12 @@ Route::prefix('/hr')->group(function(){
 });
 
 Route::prefix('/trainer')->group(function(){
-    Route::get('/traniees', function () {
-        return view('company_employee/trainer/traniees/list'); })->name('trainer_list_traniees');   
+    Route::prefix('/trainees')->group(function(){
+        Route::get('/', function () {
+            return view('company_employee/trainer/trainees/list'); })->name('trainer_list_traniees');   
+        Route::get('/progress', function () {
+            return view('company_employee/trainer/trainees/progress'); })->name('fill_traniee_progress'); 
+    });
 });
 
 //students' routes

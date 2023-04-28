@@ -16,8 +16,8 @@
         </button>
     </form></div>
     {{-- students table --}}
-    <div class="table-responsive col-lg-9 mx-auto shadow">
-        <table class="table txt-sm table-sm border table-hover">
+    <div class="table-responsive col-lg-9 mx-auto">
+        <table class="table txt-sm table-sm border table-hover shadow">
         <thead class="bg-mid-sand">
             <tr >
             <th scope="col"  class="ps-3"><a>Date</a></th>

@@ -40,7 +40,7 @@
 </div>
 <p>Report : </p>
 <textarea class="col-10" style="height: 200px;"></textarea>
-</section>
+
 </div>
 </section>
 <div class="text-center">
