@@ -20,35 +20,13 @@ class StudentController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //to delete
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //to delete
-    }
-
-    /**
      * Display the specified resource.
      */
     public function show(string $id)
     {
-        //profile
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //to delete
+        //view student profile
+        $studentsData= Student::all();
+        return view('all_users.profile',['students'=>$studentsData]);
     }
 
     /**

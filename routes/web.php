@@ -42,9 +42,13 @@ Route::prefix('/coordinator')->group(function(){
 
 Route::prefix('/supervisor')->group(function(){
     Route::get('/students', function () {
-        return view('/list'); })->name('supervisor_list_students');   
+        return view('university_employee/supervisor/students/list'); })->name('supervisor_list_students');   
     Route::get('/visit_form', function () {
-        return view('university_employee/supervisor/students/visit_form'); })->name('visit_form');});
+        return view('university_employee/supervisor/students/visit_form'); })->name('fill_visit_form');
+    Route::get('/visit_forms', function () {
+        return view('university_employee/supervisor/visit_forms'); })->name('list_visit_forms');
+    });
+    
 
 // company employees' routes
 Route::get('company_employee/register', function () {
@@ -73,6 +77,11 @@ Route::prefix('/hr')->group(function(){
         Route::get('/add', function () {
         return view('company_employee/hr/company_employees/add'); })->name('hr_add_Employee');
     });
+});
+
+Route::prefix('/trainer')->group(function(){
+    Route::get('/traniees', function () {
+        return view('company_employee/trainer/traniees/list'); })->name('trainer_list_traniees');   
 });
 
 // students' routes

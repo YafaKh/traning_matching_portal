@@ -42,4 +42,8 @@
 <textarea class="col-10" style="height: 200px;"></textarea>
 </section>
 </div>
+</section>
+<div class="text-center">
+  <button class="btn btn-primary bg-dark-blue text-light px-5 my-3 mx-auto" type="submit">Submit</button>
+</div>
 @endsection
