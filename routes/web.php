@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Coordinator\StudentController;
+use App\Http\Controllers\Student\StudentProfileController;
+use App\Http\Controllers\Student\EditStudentProfileController;
+
 
 Route::get('/', function () {
     return view('/all_users/login');
@@ -83,6 +86,11 @@ Route::prefix('/hr')->group(function(){
     });
 });
 
+//students' routes
+
+Route::get('student_profile',[StudentProfileController::class,'show']);
+Route::get('edit_student_profile',[EditStudentProfileController::class,'show']);
+
 Route::prefix('/trainer')->group(function(){
     Route::prefix('/trainees')->group(function(){
         Route::get('/', function () {
@@ -93,9 +101,9 @@ Route::prefix('/trainer')->group(function(){
 });
 
 //students' routes
-Route::prefix('/student')->group(function() {
-    Route::get('/profile',function(){
-        return view('/student/profile');});
-    Route::get('/edit_profile',function(){
-        return view('/student/edit_profile');});
-});
+// Route::prefix('/student')->group(function() {
+//     Route::get('/profile',function(){
+//         return view('/student/profile');});
+//     Route::get('/edit_profile',function(){
+//         return view('/student/edit_profile');});
+// });
