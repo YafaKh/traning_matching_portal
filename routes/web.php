@@ -45,9 +45,13 @@ Route::prefix('/coordinator')->group(function(){
 
 Route::prefix('/supervisor')->group(function(){
     Route::get('/students', function () {
-        return view('/list'); })->name('supervisor_list_students');   
+        return view('university_employee/supervisor/students/list'); })->name('supervisor_list_students');   
     Route::get('/visit_form', function () {
-        return view('university_employee/supervisor/students/visit_form'); })->name('visit_form');});
+        return view('university_employee/supervisor/students/visit_form'); })->name('fill_visit_form');
+    Route::get('/visit_forms', function () {
+        return view('university_employee/supervisor/visit_forms'); })->name('list_visit_forms');
+    });
+    
 
 // company employees' routes
 Route::get('company_employee/register', function () {
@@ -78,5 +82,24 @@ Route::prefix('/hr')->group(function(){
     });
 });
 
+//students' routes
+
 Route::get('student_profile',[StudentProfileController::class,'show']);
 Route::get('edit_student_profile',[EditStudentProfileController::class,'show']);
+
+Route::prefix('/trainer')->group(function(){
+    Route::prefix('/trainees')->group(function(){
+        Route::get('/', function () {
+            return view('company_employee/trainer/trainees/list'); })->name('trainer_list_traniees');   
+        Route::get('/progress', function () {
+            return view('company_employee/trainer/trainees/progress'); })->name('fill_traniee_progress'); 
+    });
+});
+
+//students' routes
+// Route::prefix('/student')->group(function() {
+//     Route::get('/profile',function(){
+//         return view('/student/profile');});
+//     Route::get('/edit_profile',function(){
+//         return view('/student/edit_profile');});
+// });

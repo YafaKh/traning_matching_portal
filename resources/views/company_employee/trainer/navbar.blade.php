@@ -10,10 +10,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mb-2 mb-lg-0 ms-auto me-5">
         <li class="nav-item">
-        <a class="nav-link @yield('students_activity')" href="{{route('supervisor_list_students')}}">My Students</a>
-        </li>
-        <li class="nav-item">
-        <a class="nav-link @yield('visits_activity')" href="{{route('list_visit_forms')}}">Visit Forms</a>
+        <a class="nav-link @yield('students_activity')" href="{{route('supervisor_list_students')}}">My Traniees</a>
         </li>
         <li class="nav-item">
         <a class="nav-link" href="#">Logout</a>
