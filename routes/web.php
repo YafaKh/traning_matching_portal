@@ -16,6 +16,8 @@ Route::get('/resetPassword', function () {
 Route::get('/userType', function () {
     return view('/all_users/userType');
 }); 
+
+
 // university employees' routes
 Route::get('university_employee/register', function () {
     return view('/university_employee/register'); })->name('university_employee_register');

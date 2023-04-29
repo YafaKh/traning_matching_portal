@@ -358,11 +358,7 @@ body .bigDiv .loginForm .loginCard .creatAccountLink:hover {
   padding-bottom: 0.1rem;
   max-height: 42vh;
 }
-.studentGeneralInfo .aGeneralInfo{
-  margin:1rem 4rem ;
- width:39%;
- flex-wrap: nowrap;
-}
+
 .GeneralInfoHeader {
   font-size: 1.7rem;
   padding: 2rem 4rem 1rem;
@@ -723,11 +719,21 @@ body {
   
 }
 
-
-.aGeneralInfo .gender{
-  padding-left: 1rem;
-  border-bottom-right-radius: 6%;
-  border-top-right-radius: 6%;
+textarea{
+  border: 1.5px solid #ced4da;
+  border-radius: 0.3rem;
+}
+.selected-box{
+  min-width: 7%;
+  max-width: fit-content;
+  height: fit-content;
+  display: flex;
+  padding: 0.5rem;
   border: 1px solid #ced4da;
-  width: 25%;
+  color: #737373;
+  font-weight: 200;
+  border-radius: 0.3rem;
+  margin-top: 0.8rem;
+  margin-inline: 1rem -0.5rem;
+  justify-content: center;
 }
