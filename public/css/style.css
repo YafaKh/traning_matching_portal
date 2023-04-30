@@ -688,14 +688,14 @@ body {
   margin-right: 7.5rem;
 }
 
-.uploadImge {
+.uploadImage {
   position: relative;
   height: 89%;
   overflow: hidden;
   margin-top: -2rem;
 }
 
-.uploadImge .changeImage {
+.uploadImage .changeImage {
   position: absolute;
   right: -12%;
   top: 11%;
@@ -705,7 +705,7 @@ body {
   cursor: pointer;
 }
 
-.uploadImge i {
+.uploadImage i {
   position: absolute;
     background-color: #288df2;
     right: 10%;
@@ -736,4 +736,33 @@ textarea{
   margin-top: 0.8rem;
   margin-inline: 1rem -0.5rem;
   justify-content: center;
+}
+/* ----Register student ---- */
+
+.uploadImage input[type="text"] {
+  height: 9vh;
+  margin: 2rem 0rem 3rem
+}
+
+.uploadImage .imgicon {
+  position: absolute;
+  left: 1%;
+  top: 34%;
+  background: transparent;
+  color: gray;
+
+}
+
+.uploadImage .SetImage {
+  position: absolute;
+  right: 0%;
+  height: 9vh;
+  top: 26%;
+  opacity: 0;
+}
+@media screen and (max-width:992px) {
+  .uploadImage .imgicon {
+    left: 6%;
+  
+  }  
 }

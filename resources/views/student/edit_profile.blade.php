@@ -13,7 +13,7 @@
       </h1>
       <img src="{{asset('images/userImg2.png')}}" alt="student Image">
 
-      <div class="uploadImge">
+      <div class="uploadImage">
         <input type="file" name="changeImage" id="" class="changeImage">
         <i class="fa-solid fa-camera fa-xl"></i>
 

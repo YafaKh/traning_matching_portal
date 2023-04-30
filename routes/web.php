@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\Coordinator\StudentController;
 use App\Http\Controllers\Student\StudentProfileController;
 use App\Http\Controllers\Student\EditStudentProfileController;
+use App\Http\Controllers\Student\StudentRegisterController;
 
 
 Route::get('/', function () {
@@ -92,6 +93,7 @@ Route::prefix('/hr')->group(function(){
 
 Route::get('student_profile',[StudentProfileController::class,'show']);
 Route::get('edit_student_profile',[EditStudentProfileController::class,'show']);
+Route::get('student_registeration',[StudentRegisterController::class,'show']);
 
 Route::prefix('/trainer')->group(function(){
     Route::prefix('/trainees')->group(function(){
