@@ -1,45 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MP : Matching Portal</title>
-  <!-- website icon -->
-  <link rel="icon" href="{{asset('images/logo.png')}}">
-  <!-- bootstrap 5.2 -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-  <!--fontawesome-->
-  <link rel="stylesheet" href="{{asset('vendor/css/all.min.css')}}">">
-
-  <!-- date picker -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
-  <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script
-    src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-  <!-- end date picker -->
-
-  <!-- css page -->
-  <link rel="stylesheet" href="{{asset('css/style.css')}}">
-</head>
-
-<body class="bg-sand">
+@extends('student.layout.master')
 @section('navbar')
   @include('student.layout.navbar')
 @endsection
+@section('content')
 
   <section class="profileSection">
     <div class="studentHeader">
-      <h1><input class="form-control form-control w-25" type="text" placeholder="Student Name"
+      <h1><input class="form-control form-control w-25 opacity-75" type="text" placeholder="Student Name"
           aria-label=".form-control-lg example">
+
+
       </h1>
       <img src="{{asset('images/userImg2.png')}}" alt="student Image">
 
-      <div class="uploadImge">
+      <div class="uploadImage">
         <input type="file" name="changeImage" id="" class="changeImage">
         <i class="fa-solid fa-camera fa-xl"></i>
 
@@ -73,38 +47,60 @@
 
   </section>
   <section class="profileSection studentSkills overflow-auto">
-    
     <div class="workExperience pb-3">
-      <h1>Work experience</h1>
-
+      <h1>Work experience <i class="fa-solid fa-plus text-primary"></i></h1>
       <div class="mt-4">
-        <div class="anWorkExperience mb-5">
+        <div class="anWorkExperience">
           <div class="goldenDiv"></div>
           <div class="anWorkExperienceInfo">
-            <input class="form-control form-control-lg mb-2 w-75" type="text" placeholder="Your Position"
-              aria-label=".form-control-lg example">
-            <input class="form-control mb-2  w-75" type="text" placeholder="Work place"
-              aria-label="default input example">
-
-            <div class="input-group date w-75 mb-2" id="datepicker">
-              <input type="text" class="form-control " placeholder="Date">
-              <span class="input-group-append">
-                <span class="input-group-text bg-white">
-                  <i class="fa fa-calendar"></i>
-                </span>
-              </span>
-            </div>
-
-            <textarea name="expDescription" id="expDescription" cols="52" rows="5"
-              class=" overflow-auto mb-2"></textarea>
+            <h2 class="expName">Freelance UX/UI designer</h2>
+            <p>Lorem ipsum</p>
+            <p>Jun 2022 — Present</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dapibus eros eu
+              vehicula interdum. Cras nec ultricies massa. Curabitur rutrum, diam id consequat consequat </p>
           </div>
 
         </div>
-        <!-- when i click on the button this section will ba appeare and if i click again new section will appeare and so 
+        <div class="anWorkExperience">
+          <div class="blueDiv"></div>
+          <div class="anWorkExperienceInfo">
+            <h2 class="expName">Freelance UX/UI designer</h2>
+            <p>Lorem ipsum</p><!--workPlace-->
+            <p>Jun 2022 — Present</p><!--date-->
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dapibus eros eu
+              vehicula interdum. Cras nec ultricies massa. Curabitur rutrum, diam id consequat consequat </p>
+            <!--expDescription-->
+          </div>
+        </div>
+
+        <div class="mt-4">
+          <div class="anWorkExperience mb-5">
+            <div class="goldenDiv"></div>
+            <div class="anWorkExperienceInfo">
+              <input class="form-control form-control-lg mb-2 w-75" type="text" placeholder="Your Position"
+                aria-label=".form-control-lg example">
+              <input class="form-control mb-2  w-75" type="text" placeholder="Work place"
+                aria-label="default input example">
+
+              <div class="input-group date w-75 mb-2" id="datepicker">
+                <input type="text" class="form-control " placeholder="Date">
+                <span class="input-group-append">
+                  <span class="input-group-text bg-white">
+                    <i class="fa fa-calendar"></i>
+                  </span>
+                </span>
+              </div>
+
+              <textarea name="expDescription" id="expDescription" cols="52" rows="5"
+                class=" overflow-auto mb-2"></textarea>
+            </div>
+
+          </div>
+          <!-- when i click on the button this section will ba appeare and if i click again new section will appeare and so 
   -the margin here different than the section apove
 - and the colered div different once golden and next blue-->
 
-        <div class="anWorkExperience mt-5 ">
+          <!-- <div class="anWorkExperience mt-5 ">
           <div class="blueDiv"></div>
           <div class="anWorkExperienceInfo">
             <input class="form-control form-control-lg mb-2 w-75" type="text" placeholder="Your Position"
@@ -122,70 +118,68 @@
              <textarea name="expDescription" id="expDescription" cols="52" rows="5"
               class=" overflow-auto mb-2"></textarea>
           </div>
+        </div> -->
         </div>
       </div>
-    </div>
-    
+
   </section>
   <section class="profileSection studentGeneralInfo">
     <h2 class="GeneralInfoHeader">General information</h2>
-    <div class="input-group aGeneralInfo">
-      <span class="input-group-text w-75 justify-content-center" id="inputGroup-sizing-default">Number of passed hour</span>
-      <input type="text" class="form-control w-25" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="0">
+    <div>
+      <input type="text" class="form-control ms-5 w-25 mb-4" id="new_skill" placeholder="Number of passed hour">
+      <div class="input-group ms-5 w-25 my-4">
+        <select class="form-select  text-secondary" id="inputGroupSelect01">
+          <option value="yes" selected>Female</option>
+          <option value="no">Male</option>
+
+        </select>
+      </div>
+      <input type="text" class="form-control ms-5 my-4 w-25" id="new_skill" placeholder="GPA">
     </div>
-<div class="input-group aGeneralInfo">
-  <span class="input-group-text w-75 justify-content-center" id="inputGroup-sizing-default">Gender</span>
-  <div class="gender">
- 
-  <div class="form-check">
-    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" >
-    <label class="form-check-label" for="flexRadioDefault2">
-      Male
-    </label>
-  </div>
-   <div class="form-check">
-    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
-    <label class="form-check-label" for="flexRadioDefault1">
-      Female
-    </label>
-  </div>
-</div>
-</div>
-<div class="input-group aGeneralInfo">
-  <span class="input-group-text w-75 justify-content-center" id="inputGroup-sizing-default">GPA</span>
-  <input type="text" class="form-control w-25 d-flex justify-content-center" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="0.0">
-</div>
-
-
-
   </section>
   <section class="profileSection studentSkills overflow-auto">
-    <h2 class="GeneralInfoHeader">Skills</h2>
+    <h2 class="GeneralInfoHeader">Skills <i class="fa-solid fa-plus text-primary"></i>
+    </h2>
     <div class="skill">
-      <p>Lorem, ipsum:</p>
-      <i class="bi bi-trash3 fs-6 text-danger float-start"></i>
+      <a class="ms-5" href="#" role="button"><i class="fa-solid fa-trash-can text-danger"></i>
+      </a>
+
+      <p class="ps-2 w-25">Lorem, ipsum:</p>
+      <!-- <i class="bi bi-trash3 fs-6 text-danger float-start"></i> -->
       <input type="range" min="1" max="100" value="75" class="w-25">
     </div>
-   
+
     <div class="skill">
-      <p>Lorem, ipsum:</p>
-      <i class="bi bi-trash3 fs-6 text-danger float-start"></i>
+      <a class="ms-5" href="#" role="button"><i class="fa-solid fa-trash-can text-danger"></i>
+      </a>
+      <p class="ps-2 w-25">Lorem, ipsum:</p>
+
+      <!-- <i class="bi bi-trash3 fs-6 text-danger float-start"></i> -->
 
       <input type="range" min="1" max="100" value="50" class="w-25">
     </div>
-    <div class="skill">
-    <div class="input-group ms-5 mt-4 w-25">
-      <span class="input-group-text"><i class="bi bi-plus-square fs-6"></i></span>
+    <div class="skill d-inline">
+      <!-- <div class="input-group ms-5 mt-4 w-25"> -->
+      <!-- <span class="input-group-text"><i class="bi bi-plus-square fs-6"></i></span>
       <input type="text" class="form-control ps-4" id="new_address" placeholder="New address">
-      <input type="range" min="1" max="100" value="50" class="w-75 ms-5">
+      <input type="range" min="1" max="100" value="50" class="w-75 ms-5"> -->
+      <div class="d-flex flex-row mb-3">
+
+        <input type="text" class="form-control ms-5 w-25" id="new_skill" placeholder="New skill">
+        <div class="ms-2 w-50">
+
+          <input type="range" min="1" max="100" value="50" class="ms-3 w-50 mt-2">
+        </div>
+
+      </div>
 
     </div>
 
-</div>
+    </div>
 
   </section>
   <section class="profileSection studentSkills overflow-auto">
-    <h2 class="GeneralInfoHeader">Spoken language</h2>
+    <h2 class="GeneralInfoHeader">Spoken language <i class="fa-solid fa-plus text-primary"></i></h2>
     <div class="skill">
       <p>Arabic</p>
       <input type="range" min="1" max="100" value="50" class="w-25">
@@ -194,7 +188,15 @@
       <p>English</p>
       <input type="range" min="1" max="100" value="50" class="w-25">
     </div>
+    <div class="d-flex flex-row mb-3">
 
+      <input type="text" class="form-control ms-5 w-25" id="new_skill" placeholder="New language">
+      <div class="ms-2 w-50">
+
+        <input type="range" min="1" max="100" value="50" class="ms-3 w-50 mt-2">
+      </div>
+
+    </div>
 
   </section>
 
@@ -202,52 +204,83 @@
     <h2 class="GeneralInfoHeader">Additional information</h2>
     <div class="info"><!--there is another potintioal ansowers-->
       <h3>Am I in contact with a specific company:</h3>
-      <p> no</p>
+      <div class="input-group w-25 studentInfo">
+        <select class="form-select  text-secondary" id="inputGroupSelect01">
+          <option value="no" selected>No</option>
+          <option value="yes">Yes</option>
+
+        </select>
+      </div>
     </div>
     <div class="info">
       <h3>Company information:</h3>
-      <p> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatum, tenetur!</p>
+
+      <textarea name="expDescription" id="expDescription" cols="40" rows="5" class=" overflow-auto mb-2"></textarea>
     </div>
     <div class="info">
       <h3>Preferred city for training:</h3>
-      <p> Nablus ,Jenin</p>
+      <div class="input-group w-25 studentInfo">
+        <select class="form-select  text-secondary" id="inputGroupSelect01">
+          <option value="no" selected>--</option>
+          <option value="yes">Jenin</option>
+          <option value="yes">Nablus</option>
 
+        </select>
+      </div>
+      <div class="row">
+        <div class="selected-box">Jenin </div>
+        <div class="selected-box">Nablus </div>
+      </div>
     </div>
     <div class="info">
       <h3>Preferred companies:</h3>
-    <p> Asal , exalt</p>
-   
+
+      <div class="input-group w-25 studentInfo">
+        <select class="form-select  text-secondary" id="inputGroupSelect01">
+          <option value="no" selected>--</option>
+          <option value="yes">Asal</option>
+          <option value="yes">exalt</option>
+
+        </select>
+      </div>
+      <div class="row">
+        <div class="selected-box">X </div>
+
+
+      </div>
     </div>
     <div class="info">
       <h3>preferred training field:</h3>
-    <p> mobile appkication</p>
-   
+
+      <div class="input-group w-25 studentInfo">
+        <select class="form-select  text-secondary" id="inputGroupSelect01">
+          <option value="no" selected>--</option>
+          <option value="yes">mobile application</option>
+          <option value="yes">Web -front end</option>
+
+        </select>
+      </div>
+      <div class="row">
+        <div class="selected-box">Web -front end </div>
+
+
+      </div>
     </div>
     <div class="info">
       <h3>when available:</h3>
-    <p> Dec-2023</p>
-   
-    </div>
-
-
+      <div class="input-group date w-25 mb-2" id="datepicker">
+        <input type="text" class="form-control " placeholder="Date">
+        <span class="input-group-append">
+          <span class="input-group-text bg-white">
+            <i class="fa fa-calendar"></i>
+          </span>
+        </span>
+      </div>
   </section>
+  </div>
 
-  <script type="text/javascript">
-    $(function () {
-      $('#datepicker').datepicker();
-    });
-  </script>
-  </script>
-  <!-- bootstrap 5.2 -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
-    crossorigin="anonymous"></script>
-  <!-- js date picker -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-
-
-  <!-- js page -->
-  <script src="main.js"></script>
-</body>
-
-</html>
+  <div class="text-center d-flex col-md-5 mx-auto">
+    <button class="btn btn-primary bg-dark-blue text-light px-5 my-3 me-2 flex-grow-1" type="button">Save</button>
+    <button class="btn btn-secondary text-light px-5 my-3 flex-grow-1" type="button">cancel</button>
+  </div>
+@endsection
