@@ -24,12 +24,20 @@
         </div>
         <input type="text" class="form-control mb-4 ps-4" id="phone" placeholder="Phone Number">
         <input type="text" class="form-control mb-4 ps-4" id="phone" placeholder="Email">
-        <input type="text" class="form-control mb-4 ps-4" id="department" placeholder="Department">
-        <input type="text" class="form-control mb-4 ps-4" id="branches" placeholder="Branches">
-        <select id="role" class="form-select">
+        <select id="company" class="form-select mb-4 ps-4">
+            <option selected>Company</option>
+        </select>
+        <select id="department" class="form-select mb-4 ps-4">
+            <option selected>Department</option>
+        </select>
+        <select id="branche" class="form-select mb-4 ps-4">
+            <option selected>Branche</option>
+        </select>
+        <select id="role" class="form-select mb-4 ps-4">
             <option selected>Role</option>
             <option value="HR">HR</option>
             <option value="Trainer">Trainer</option>
+            <option value="Both">Both</option>
         </select>
         <div class="d-flex flex-sm-row flex-column">
             <input type="password" class="form-control me-3 mb-4 ps-4" id="pass" placeholder="Password">

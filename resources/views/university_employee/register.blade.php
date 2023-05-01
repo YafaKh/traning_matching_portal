@@ -25,6 +25,12 @@
         <input type="text" class="form-control mb-4 ps-4" id="id" placeholder="Emploee ID">
         <input type="text" class="form-control mb-4 ps-4" id="phone" placeholder="Phone Number">
         <input type="text" class="form-control mb-4 ps-4" id="email" placeholder="University Email">
+        <select id="role" class="form-select mb-4 ps-4">
+            <option selected>Role</option>
+            <option value="Coorinator">Coorinator</option>
+            <option value="Supervisor">Supervisor</option>
+            <option value="Both">Both</option>
+        </select>
         <div class="d-flex flex-sm-row flex-column">
             <input type="password" class="form-control me-3 mb-4 ps-4" id="pass" placeholder="Password">
             <input type="password" class="form-control mb-4 ps-4" id="confirm_pass" placeholder="Confirm Password">

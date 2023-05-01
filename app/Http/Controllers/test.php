@@ -6,6 +6,22 @@ use Illuminate\Http\Request;
 
 class test extends Controller
 {
+    /* register validatation
+    validate name:
+    'required|alpha|between:2,20'
+'id_number' => ['required', 'digits:9', 'numeric'],
+'email' => 'required|email'
+'email' => ['required', 'email', function ($attribute, $value, $fail) {
+    if (!ends_with($value, '@aaup.edu')) {
+        $fail('The '.$attribute.' must end with "@aaup.edu".');
+    }
+}],
+'phone' => 'required|regex:/^([0-9\s\-\+\]*)$/|min:10|max:15' 
+'password' => ['required', 'min:8', 'confirmed'],
+'password_confirmation' => ['required'],
+
+
+*/
     /**
      * Display a listing of the resource.
      *
