@@ -81,8 +81,7 @@
                 </td>
                 <td><button type="button" class="btn" 
                     data-bs-toggle="tooltip" data-bs-placement="top"
-                    data-bs-title="add selected"><i class="bi bi-plus-square fs-6"></i></button>                    </button>
-                </td>
+                    data-bs-title="add selected"><i class="bi bi-plus-square fs-6"></i></button></td>
             </tr>
             <tr >
             <th scope="col" class="ps-3"><input class="form-check-input" type="checkbox" value="" id="checkAll2"></th>

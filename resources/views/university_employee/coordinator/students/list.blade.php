@@ -68,7 +68,7 @@
         
     {{-- students table --}}
     <div class="table-responsive ">
-        <table class="table txt-sm table-sm border table-hover">
+        <table class="table txt-sm table-sm border table-hover" id="table">
         <thead class="bg-mid-sand">
             <tr >
             <th scope="col" class="ps-3"><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></th>
@@ -84,7 +84,7 @@
         <tbody class="bg-light">
             @foreach($students as $student)
             <tr>
-            <td class="ps-3"><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></td>                
+            <td class="ps-3"><input class="table-checkbox form-check-input" type="checkbox" value="" id="checkAll"></td>                
             <td>{{$student['student_num']}}</td>
             <td>{{$student['first_name_en']}}</td>
             <td>{{$student['specialization']}}</td>
