@@ -33,7 +33,7 @@
         
     {{-- Employees table--}}
     <div class="table-responsive mt-3">
-        <table class="table txt-sm table-hover">
+        <table class="table txt-sm table-hover" id="table">
         <thead class="bg-mid-sand">
             <tr class="rounded-top">
                 <td colspan="8"><label class="form-label mt-2 ms-3 fs-6">
@@ -46,7 +46,7 @@
                 </td>
             </tr>
             <tr >
-            <th scope="col" class="ps-3"><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></td>
+            <th scope="col" class="ps-3"><input class="form-check-input" type="checkbox" value="" id="checkAll"></td>
             <th scope="col" >ID</th>
             <th scope="col" >Name</th>
             <th scope="col">Role</th>
@@ -59,7 +59,7 @@
         </thead>
         <tbody class="bg-light">
             <tr>
-            <td class="ps-3"><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></td>                
+            <td class="ps-3"><input class="table-checkbox form-check-input" type="checkbox" value="" id="flexCheckDefault"></td>                
             <td>****</td>
             <td>Otto</td>
             <td>@mdo</td>

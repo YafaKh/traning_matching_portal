@@ -10,8 +10,15 @@
     <h2 class="text-light">Trainee's progress</h2>
   </div>
   <div class=" col-md-9 bg-white mb-3 px-md-5 p-3 mx-auto rounded-bottom-2">
-    <div class="d-flex flex-row justify-content-between col-sm-6 col-md-8 col-10">
-          <p>Trainee's Name : *****</p>
+    <div class="d-flex flex-row ">
+        <div class="me-5">
+            <p>Trainee's Name</p>
+            <p>*****</p><hr>
+        </div>
+        <div class="ms-5">
+            <p>Training</p>
+            <p>***</p><hr>
+        </div>
     </div>
    </div>
 </section>
