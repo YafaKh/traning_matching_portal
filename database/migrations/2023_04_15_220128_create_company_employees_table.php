@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('phone_no', 15)->nullable(false);
             $table->string('type', 45)->nullable(false);
             $table->string('image', 45)->nullable(false);
+            $table->boolean('contact_person')->default(0);
 
             $table->unsignedBigInteger('company_id');
             $table->unsignedBigInteger('branch_id');
