@@ -6,7 +6,7 @@ use App\Http\Controllers\Coordinator\StudentController;
 use App\Http\Controllers\Student\StudentProfileController;
 use App\Http\Controllers\Student\EditStudentProfileController;
 use App\Http\Controllers\Student\StudentRegisterController;
-
+use App\Http\Controllers\Student\EvaluateCompanyController;
 
 Route::get('/', function () {
     return view('/all_users/login');
@@ -95,6 +95,7 @@ Route::get('student_profile',[StudentProfileController::class,'show']);
 Route::get('edit_student_profile',[EditStudentProfileController::class,'show']);
 Route::get('student_registeration',[StudentRegisterController::class,'show']);
 Route::get('student_registeration_2',[StudentRegisterController::class,'showNextPage']);
+Route::get('student_evaluate_company',[EvaluateCompanyController::class,'show']);
 
 Route::prefix('/trainer')->group(function(){
     Route::prefix('/trainees')->group(function(){
