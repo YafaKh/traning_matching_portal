@@ -10,14 +10,14 @@
   <h1 class="text-light mb-4">Visit Form</h1>
 </div>
 <div class=" col-md-9 bg-white mb-3 p-md-5 px-3 mx-auto rounded-bottom-2">
-  <div class="d-flex flex-row justify-content-between col-sm-6 col-md-8 col-10">
-    <div >
-        <p>Student Name</p>
-        <p>*****</p><hr>
+  <div class="d-flex flex-row ">
+    <div class="me-5">
+      <p>Student Name</p>
+      <p>*****</p><hr>
     </div>
-    <div>
-        <p>Company</p>
-        <p>***</p><hr>
+    <div class="ms-5">
+      <p>Company</p>
+      <p>***</p><hr>
     </div>
   </div>
 </div>

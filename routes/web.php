@@ -102,7 +102,9 @@ Route::prefix('/trainer')->group(function(){
         Route::get('/', function () {
             return view('company_employee/trainer/trainees/list'); })->name('trainer_list_traniees');   
         Route::get('/progress', function () {
-            return view('company_employee/trainer/trainees/progress'); })->name('fill_traniee_progress'); 
+            return view('company_employee/trainer/trainees/progress'); })->name('fill_traniee_progress');
+        Route::get('/evaluation', function () {
+            return view('company_employee/trainer/trainees/evaluation'); })->name('fill_traniee_evaluation');  
     });
 });
 
