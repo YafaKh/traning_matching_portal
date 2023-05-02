@@ -10,4 +10,8 @@ class StudentRegisterController extends Controller
     public function show(){
         return view('student.register');
     }
+    public function showNextPage(){
+        return view('student.register2');
+
+    }
 } 

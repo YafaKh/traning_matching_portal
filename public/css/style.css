@@ -766,3 +766,27 @@ textarea{
   
   }  
 }
+/* ----Register student 2---- */
+.registerSection {
+  min-height: 30vh;
+  border-radius: 0.5rem;
+  background-color: #fff;
+  margin: 3rem auto 0.5rem;
+  padding-bottom: 3rem;
+  width:50%;
+}
+.registerField{
+  margin: 3rem 5rem;
+}
+
+@media screen and (max-width: 992px) {
+  .registerSection {
+    width:80%;
+  }
+}
+
+@media screen and (max-width: 676px) {
+  .registerSection {
+    width:90%;
+  }
+}

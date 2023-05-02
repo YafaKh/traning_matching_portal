@@ -94,6 +94,7 @@ Route::prefix('/hr')->group(function(){
 Route::get('student_profile',[StudentProfileController::class,'show']);
 Route::get('edit_student_profile',[EditStudentProfileController::class,'show']);
 Route::get('student_registeration',[StudentRegisterController::class,'show']);
+Route::get('student_registeration_2',[StudentRegisterController::class,'showNextPage']);
 
 Route::prefix('/trainer')->group(function(){
     Route::prefix('/trainees')->group(function(){

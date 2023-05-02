@@ -1,10 +1,10 @@
 @extends('student.layout.master')
 @section('content')
-<body class="bg-sand">
+
   <div class="d-flex justify-content-center mt-5">
     <img src="{{asset('images/logo_title.png')}}" alt="logo" class="w-25" />
   </div>
-  <section class="profileSection mt-5">
+  <section class="registerSection">
     <div class="d-flex justify-content-center">
       <h1 class="mt-5">Sign up</h1>
     </div>
@@ -132,9 +132,12 @@
   </div>
  
   </section>
-  <div class="text-center d-flex col-md-5  mx-auto mb-4 row g-2 w-50">
-    <button class="btn btn-primary bg-dark-blue text-light px-5 my-3 flex-grow-1 col-md" type="button">Next</button>
-    <button class="btn btn-secondary text-light px-5 my-3 ms-1 flex-grow-1 col-md" type="button">Back</button>
-
+  <div class="text-center d-flex col-md-5 mx-auto my-4 row g-2 w-25">
+    <button class="btn btn-primary bg-dark-blue text-light px-5 my-3 flex-grow-1 col-md" type="button">
+      Submit
+    </button>
+    <button class="btn btn-secondary text-light px-5 my-3 ms-1 flex-grow-1 col-md" type="button">
+      Back
+    </button>
   </div>
 @endsection
