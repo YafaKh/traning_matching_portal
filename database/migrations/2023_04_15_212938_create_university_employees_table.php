@@ -26,8 +26,10 @@ return new class extends Migration
             
             $table->unsignedBigInteger('university_department_id');
             $table->unsignedBigInteger('university_id');
+            $table->unsignedBigInteger('employees_roles');
             $table->foreign('university_id')->references('id')->on('universities');
             $table->foreign('university_department_id')->references('id')->on('university_departments');
+            $table->foreign('employees_roles')->references('id')->on('university_employees_roles');
         });
     }
 

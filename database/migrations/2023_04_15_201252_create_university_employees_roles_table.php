@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('company_roles', function (Blueprint $table) {
+        Schema::create('university_employees_roles', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->boolean('hr')->nullable(false)->default(0);
-            $table->boolean('trainer')->nullable(false)->default(0);
-        });
+            $table->string('semester')->nullable(false);
+            $table->boolean('coordinator')->nullable(false)->default(0);
+            $table->boolean('supervisor')->nullable(false)->default(0);
+       });
     }
 
     /**
@@ -24,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('company_roles');
+        Schema::dropIfExists('university_employees_roles');
     }
 };

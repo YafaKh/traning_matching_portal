@@ -7,8 +7,6 @@ use Illuminate\Http\Request;
 class test extends Controller
 {
     /* register validatation
-    validate name:
-    'required|alpha|between:2,20'
 'id_number' => ['required', 'digits:9', 'numeric'],
 'email' => 'required|email'
 'email' => ['required', 'email', function ($attribute, $value, $fail) {

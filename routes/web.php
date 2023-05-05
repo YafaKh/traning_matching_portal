@@ -7,6 +7,7 @@ use App\Http\Controllers\Student\StudentProfileController;
 use App\Http\Controllers\Student\EditStudentProfileController;
 use App\Http\Controllers\Student\StudentRegisterController;
 use App\Http\Controllers\Student\EvaluateCompanyController;
+use App\Http\Controllers\CompanyEmployee\RegisterController;
 
 Route::get('/', function () {
     return view('/all_users/login');
@@ -61,9 +62,9 @@ Route::prefix('/supervisor')->group(function(){
 });   
 
 // company employees' routes
-Route::get('company_employee/register', function () {
-    return view('/company_employee/register'); })->name('company_employee_register');
- 
+Route::get('company_employee/register',[RegisterController::class,'create'])->name('company_employee_register');
+Route::post('company_employee/register/store',[RegisterController::class,'store'])->name('company_employee_store');
+
 Route::prefix('/hr')->group(function(){
     Route::get('/company_profile', function () {
         return view('/company_employee/hr/company_profile'); })->name('hr_company_profile');

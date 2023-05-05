@@ -26,10 +26,10 @@ return new class extends Migration
             $table->boolean('contact_person')->default(0);
 
             $table->unsignedBigInteger('company_id');
-            $table->unsignedBigInteger('branch_id');
+            $table->unsignedBigInteger('employees_roles');
             $table->foreign('company_id')->references('id')->on('companies');
-            $table->foreign('branch_id')->references('id')->on('branchs');
-          
+            $table->foreign('employees_roles')->references('id')->on('company_employees_roles');
+        
         });
     }
 
