@@ -16,7 +16,7 @@ return new class extends Migration
             $table->timestamps();
             $table->string('employee_num', 45)->nullable(false);
             $table->string('email', 45)->nullable(false)->unique();
-            $table->string('phone_no', 15)->nullable(false);
+            $table->string('phone', 15)->nullable(false);
             $table->string('password', 45)->nullable(false);
             $table->string('first_name', 45)->nullable(false);
             $table->string('second_name', 45)->nullable(false);

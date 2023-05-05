@@ -15,6 +15,14 @@ return new class extends Migration
             $table->id();
             $table->timestamps(); 
             $table->string('student_num', 12)->unique();
+            $table->string('first_arabic_name', 45)->nullable(false);
+            $table->string('first_english_name', 45)->nullable(false);
+            $table->string('second_arabic_name', 45)->nullable(false);
+            $table->string('second_english_name', 45)->nullable(false);
+            $table->string('third_arabic_name', 45)->nullable(false);
+            $table->string('third_english_name', 45)->nullable(false);
+            $table->string('last_arabic_name', 45)->nullable(false);
+            $table->string('last_english_name', 45)->nullable(false);
             $table->boolean('gender')->nullable(false);
             $table->integer('passed_hours')->nullable(false);
             $table->float('gpa')->nullable(false);
@@ -30,12 +38,9 @@ return new class extends Migration
             $table->boolean('registered')->nullable(false)->default(0);
             $table->string('image', 45)->nullable(false);
 
-            $table->unsignedBigInteger('student_name_id');
             $table->unsignedBigInteger('university_id');
             $table->unsignedBigInteger('specialization_id');
             $table->unsignedBigInteger('training_id');
-            $table->foreign('student_name_id')
-            ->references('id')->on('student_name');
             $table->foreign('university_id')
             ->references('id')->on('universities');
             $table->foreign('specialization_id')
