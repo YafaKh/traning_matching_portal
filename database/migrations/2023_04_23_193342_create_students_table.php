@@ -34,7 +34,7 @@ return new class extends Migration
             $table->string('connected_company_info', 100)->nullable();
             $table->string('country_code', 15)->nullable(false);
             $table->string('area_code', 15)->nullable(false);
-            $table->string('phone_no', 15)->nullable(false);
+            $table->string('phone', 15)->nullable(false);
             $table->boolean('registered')->nullable(false)->default(0);
             $table->string('image', 45)->nullable(false);
 
