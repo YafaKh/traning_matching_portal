@@ -31,20 +31,17 @@ return new class extends Migration
             $table->string('image', 45)->nullable(false);
 
             $table->unsignedBigInteger('student_name_id');
-            $table->unsignedBigInteger('company_id');
             $table->unsignedBigInteger('university_id');
             $table->unsignedBigInteger('specialization_id');
-            $table->unsignedBigInteger('branch_id');
+            $table->unsignedBigInteger('training_id');
             $table->foreign('student_name_id')
             ->references('id')->on('student_name');
-            $table->foreign('company_id')
-            ->references('id')->on('companies');
             $table->foreign('university_id')
             ->references('id')->on('universities');
             $table->foreign('specialization_id')
             ->references('id')->on('specializations');
-            $table->foreign('branch_id')
-            ->references('id')->on('branchs');
+            $table->foreign('training_id')
+            ->references('id')->on('training');
         });
     }
 

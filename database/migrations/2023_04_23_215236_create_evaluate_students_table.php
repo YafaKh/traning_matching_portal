@@ -32,9 +32,6 @@ return new class extends Migration
 
             $table->unsignedBigInteger('student_id');
             $table->foreign('student_id')->references('id')->on('students')->onDelete('NO ACTION')->onUpdate('NO ACTION');
-            $table->unsignedBigInteger('company_employee_id');
-            $table->foreign('company_employee_id')->references('id')->on('company_employees')->onDelete('NO ACTION')->onUpdate('NO ACTION');
-        
         
         });
     }

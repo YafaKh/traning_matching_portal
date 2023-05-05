@@ -90,4 +90,45 @@
         </table>
     </div>
 </div>
+
+<script>
+    // Get references to the select elements
+const branchSelect = document.querySelector('select[data-filter="branch"]');
+const departmentSelect = document.querySelector('select[data-filter="department"]');
+const trainerSelect = document.querySelector('select[data-filter="trainer"]');
+
+// Add event listener to branch select element
+branchSelect.addEventListener('change', () => {
+  // Get the selected branch value
+  const selectedBranch = branchSelect.value;
+
+  // Filter the department select options to only show those belonging to the selected branch
+  // Code to update the options of the department select element based on the selected branch goes here
+});
+
+// Add event listener to all select elements
+[branchSelect, departmentSelect, trainerSelect].forEach(select => {
+  select.addEventListener('change', () => {
+    // Get the selected filter values
+    const selectedBranch = branchSelect.value;
+    const selectedDepartment = departmentSelect.value;
+    const selectedTrainer = trainerSelect.value;
+
+    // Loop through the rows of the table and hide/show rows based on the selected filter values
+    const rows = document.querySelectorAll('.table tbody tr');
+    rows.forEach(row => {
+      const branch = row.querySelector('td:nth-child(2)').textContent;
+      const department = row.querySelector('td:nth-child(3)').textContent;
+      const trainer = row.querySelector('td:nth-child(4)').textContent;
+
+      // Determine whether to show or hide the row based on the selected filter values
+      const showRow = (selectedBranch === 'Branch' || branch === selectedBranch)
+        && (selectedDepartment === 'Department' || department === selectedDepartment)
+        && (selectedTrainer === 'Trainer' || trainer === selectedTrainer);
+
+      row.style.display = showRow ? '' : 'none';
+    });
+  });
+});
+</script>
 @endsection
