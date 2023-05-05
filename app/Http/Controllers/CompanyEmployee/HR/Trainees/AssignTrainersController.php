@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllersrs\HR\Trainees;
+namespace App\Http\Controllersrs\CompanyEmployee\HR\Trainees;
 
 use Illuminate\Http\Request;
 

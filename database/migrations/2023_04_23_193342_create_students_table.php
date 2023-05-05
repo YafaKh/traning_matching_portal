@@ -41,7 +41,7 @@ return new class extends Migration
             $table->foreign('specialization_id')
             ->references('id')->on('specializations');
             $table->foreign('training_id')
-            ->references('id')->on('training');
+            ->references('id')->on('trainings');
         });
     }
 

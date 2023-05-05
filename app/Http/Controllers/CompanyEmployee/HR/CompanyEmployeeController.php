@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\CompanyEmployee\HR;
 use Illuminate\Http\Request;
 
-use App\Models\UniversityEmployee;
 
 
 class CompanyEmployeeController extends Controller
