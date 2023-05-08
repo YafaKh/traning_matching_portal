@@ -9,6 +9,7 @@
       <h1 class="mt-5">Sign up</h1>
     </div>
 
+    <form action="" method="post">
     <div class="m-5">
       <label for="" class="mt-3 mb-3"> Name (Arabic)</label>
       <div class="row g-2">
@@ -140,4 +141,5 @@
       Back
     </button>
   </div>
+  </form>
 @endsection

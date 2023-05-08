@@ -7,6 +7,7 @@ use App\Http\Controllers\Student\StudentProfileController;
 use App\Http\Controllers\Student\EditStudentProfileController;
 use App\Http\Controllers\Student\StudentRegisterController;
 use App\Http\Controllers\Student\EvaluateCompanyController;
+use App\Http\Controllers\AdminController;
 
 Route::get('/', function () {
     return view('/all_users/login');
@@ -91,12 +92,24 @@ Route::prefix('/hr')->group(function(){
 
 //students' routes
 
-Route::get('student_profile',[StudentProfileController::class,'show']);
-Route::get('edit_student_profile',[EditStudentProfileController::class,'show']);
-Route::get('student_registeration',[StudentRegisterController::class,'show']);
-Route::get('student_registeration_2',[StudentRegisterController::class,'showNextPage']);
-Route::get('student_evaluate_company',[EvaluateCompanyController::class,'show']);
+Route::prefix('/student')->group(function () {
+    Route::get('/registeration',[StudentRegisterController::class,'create'])->name('student_registeration_1');
+    Route::get('/registeration_2',[StudentRegisterController::class,'createNextPage'])->name('student_registeration_2');
+    Route::get('/profile',[StudentProfileController::class,'show'])->name('student_profile');
+    Route::get('/edit_profile',[EditStudentProfileController::class,'show'])->name('edit_student_profile');
+    Route::get('/evaluate_company',[EvaluateCompanyController::class,'show'])->name('student_evaluate_company');
 
+})->name('student');
+
+// admin 
+Route::prefix('/admin')->group(function () {
+    Route::get('/',[AdminController::class,'show'])->name('admin_home');
+    Route::get('/copmanies',[AdminController::class,'show_comapnies'])->name('admin_copmanies');
+    Route::get('/comapnies_want_to_join',[AdminController::class,'show_comapnies_want_join'])->name('admin_compnies_want_to_join');
+    
+})->name('admin');
+
+// trainer
 Route::prefix('/trainer')->group(function(){
     Route::prefix('/trainees')->group(function(){
         Route::get('/', function () {
@@ -107,11 +120,3 @@ Route::prefix('/trainer')->group(function(){
             return view('company_employee/trainer/trainees/evaluation'); })->name('fill_traniee_evaluation');  
     });
 });
-
-//students' routes
-// Route::prefix('/student')->group(function() {
-//     Route::get('/profile',function(){
-//         return view('/student/profile');});
-//     Route::get('/edit_profile',function(){
-//         return view('/student/edit_profile');});
-// });
