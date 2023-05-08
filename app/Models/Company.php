@@ -13,7 +13,16 @@ use App\Models\Training;
 class Company extends Model
 {
     use HasFactory;
-    use \Staudenmeir\EloquentHasManyDeep\HasRelationships;
+    //use \Staudenmeir\EloquentHasManyDeep\HasRelationships;
+
+    protected $fillable = [
+        'name',
+        'Industry',
+        'description',
+        'website',
+        'linkedin',
+        'image',
+    ];
 
     public function employees()
     {
