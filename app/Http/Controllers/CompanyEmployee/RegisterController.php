@@ -42,8 +42,10 @@ class RegisterController extends Controller
         try {
             // Create the employee
             $employee = CompanyEmployee::create($validatedData);
-            // Sync the employee's role
+            // Sync the employee's role and company
             $employee->roles()->sync($request->employees_roles);
+            $employee->roles()->sync($request->company_id);
+           
         } catch (\Exception $e) {
             // Handle any exceptions that occur
             return redirect()->back()->with('error',

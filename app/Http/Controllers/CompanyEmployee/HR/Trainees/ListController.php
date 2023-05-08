@@ -15,6 +15,7 @@ class ListController extends Controller
     {
         //select from student id, name , branch, Department, trainer, approval, progress, visit_form, evaluation, company_evaluation, 
        /*$studentsData= */
-        return view('company_employee.hr.trainees.list');//,['students'=>$studentsData]);
+       $trainees=;
+       return view('company_employee.hr.trainees.list');//,['students'=>$studentsData]);
     }
 }

@@ -4,7 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Company;
 use App\Models\CompanyRole;
+use App\Models\Student;
+use App\Models\Training;
 
 
 class CompanyEmployee extends Model
@@ -19,5 +22,9 @@ class CompanyEmployee extends Model
     public function roles()
     {
         return $this->belongsTo(CompanyRole::class);
+    }
+    public function students(): HasManyThrough
+    {
+        return $this->hasManyThrough(Student::class, Training::class);
     }
 }

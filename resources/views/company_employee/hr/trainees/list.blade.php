@@ -37,6 +37,7 @@
         <thead class="bg-mid-sand">
             <tr >
             <th scope="col" class="ps-3">Name</th>
+            <th scope="col">Training</th>
             <th scope="col">Branch</th>
             <th scope="col">Department</th>
             <th scope="col">Trainer</th>
@@ -47,6 +48,7 @@
         <tbody class="bg-light">
             <tr>
             <td class="ps-3">****</td>
+            <td>@mdo</td>
             <td>@mdo</td>
             <td>Mark</td>
             <td>Otto</td>
