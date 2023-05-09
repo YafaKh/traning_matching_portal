@@ -27,14 +27,14 @@ return new class extends Migration
             $table->integer('passed_hours') ;
             $table->float('gpa') ;
             $table->string('address', 45)->nullable();
-            $table->string('email', 45)->unique() ;
+            $table->string('email')->unique() ;
             $table->string('password', 45) ;
             $table->date('availability_date') ;
             $table->boolean('connected_with_a_company')->default(0);
             $table->string('connected_company_info', 100)->nullable();
             $table->string('phone', 15) ;
             $table->boolean('registered')->nullable(false)->default(0);
-            $table->string('image', 45)->nullable();
+            $table->string('image')->nullable();
 
             $table->unsignedBigInteger('university_id');
             $table->unsignedBigInteger('specialization_id');

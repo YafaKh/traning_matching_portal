@@ -3,16 +3,21 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Company;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\company>
- */
-class companyFactory extends Factory
+class CompanyFactory extends Factory
 {
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Company::class;
+
     /**
      * Define the model's default state.
      *
-     * @return array<string, mixed>
+     * @return array
      */
     public function definition()
     {
@@ -20,9 +25,8 @@ class companyFactory extends Factory
             'name' => $this->faker->company,
             'Industry' => $this->faker->jobTitle,
             'description' => $this->faker->text(200),
-            'website' => $this->faker->url,
+            'website' => $this->faker->url(44),
             'linkedin' => $this->faker->url,
-            'image' => $this->faker->imageUrl(),
         ];
     }
 }

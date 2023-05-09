@@ -19,7 +19,7 @@ return new class extends Migration
             
             $table->foreign('student_id')->references('id')->on('students');
             $table->foreign('university_employee_role')->references('id')
-            ->on('university_employees_roles');
+            ->on('university_employee_roles');
         });
     }
 

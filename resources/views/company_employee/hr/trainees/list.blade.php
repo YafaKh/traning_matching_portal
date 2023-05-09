@@ -1,4 +1,5 @@
 @extends('company_employee.master')
+{{--
 @section('navbar')
     @include('company_employee.hr.navbar')
 @endsection
@@ -10,7 +11,8 @@
 @endsection
 @section('trainees_navbar')
     @include('company_employee.hr.trainees.trainees_navbar')
-@endsection
+@endsection 
+--}}
 @section('content')
 <div class="px-5">
     {{--filters--}}
@@ -46,8 +48,9 @@
             </tr>
         </thead>
         <tbody class="bg-light">
+            @foreach ($students as $student)
             <tr>
-            <td class="ps-3">****</td>
+            <td class="ps-3"><a>{{$student['name']}}</a></td>
             <td>@mdo</td>
             <td>@mdo</td>
             <td>Mark</td>
@@ -55,6 +58,7 @@
             <td><button type="button" class="btn"><i class="bi bi-box-arrow-up-right"></i></button></td>
             <td><button type="button" class="btn"><i class="bi bi-box-arrow-up-right"></i></button></td>
             </tr>
+            @endforeach
         </tbody>
         </table>
     </div>

@@ -8,8 +8,6 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use App\Models\CompanyEmployee;
 use App\Models\Training;
 
-
-
 class Company extends Model
 {
     use HasFactory;

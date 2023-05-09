@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('unadded_company_employees', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('email', 45) ;
+            $table->string('email') ;
             $table->string('password', 45) ;
             $table->string('first_name', 45) ;
             $table->string('second_name', 45) ;

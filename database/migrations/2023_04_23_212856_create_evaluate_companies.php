@@ -23,8 +23,8 @@ return new class extends Migration
                 $table->text('skills_wish_they_included') ;
                 $table->text('skills_wish_were_given_better') ;
                 $table->boolean('recommend_sending_students') ;
-                $table->string('recommended_evaluate_sys', 45) ;
-                $table->string('evaluate_companycol', 45) ;
+                $table->string('recommended_evaluate_sys') ;
+                $table->string('evaluate_companycol') ;
                 $table->text('recommended_evaluate_sys_explanation') ;
                 $table->boolean('internship_time_before_senior_year') ;
                 $table->boolean('more_than_one_internship') ;

@@ -17,9 +17,9 @@ return new class extends Migration
             $table->string('name', 45);
             $table->string('Industry', 45);
             $table->string('description', 200)->nullable();
-            $table->string('website', 45)->nullable();
-            $table->string('linkedin', 45)->nullable();
-            $table->string('image', 45)->nullable();
+            $table->string('website')->nullable();
+            $table->string('linkedin')->nullable();
+            $table->string('image')->nullable();
         });
     }
 

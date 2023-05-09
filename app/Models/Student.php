@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Training;
 
 class Student extends Model
 {
@@ -36,7 +37,7 @@ class Student extends Model
         'training_id',
     ];
 
-    public function university()
+   /* public function university()
     {
         return $this->belongsTo(University::class);
     }
@@ -44,7 +45,7 @@ class Student extends Model
     public function specialization()
     {
         return $this->belongsTo(Specialization::class);
-    }
+    }*/
 
     public function training()
     {

@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\CompanyEmployee;
+use App\Models\Students;
 
 class Training extends Model
 {
@@ -21,8 +23,13 @@ class Training extends Model
         return $this->belongsTo(CompanyEmployee::class, 'company_employee_id');
     }
 
-    public function department()
+   /* public function department()
     {
         return $this->belongsTo(CompanyBranchDepartment::class, 'branch_department_id');
+    }*/
+
+    public function students()
+    {
+        return $this->hasMany(Student::class);
     }
 }

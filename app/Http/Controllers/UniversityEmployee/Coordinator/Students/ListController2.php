@@ -4,7 +4,7 @@ namespace App\Http\Controllersrs\Coordinator\Students;
 
 use Illuminate\Http\Request;
 
-class ListController extends Controller
+class ListController2 extends Controller
 {
     //filtering
 

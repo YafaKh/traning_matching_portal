@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('company_employees_roles', function (Blueprint $table) {
+        Schema::create('company_employee_roles', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->boolean('hr')->default(0);

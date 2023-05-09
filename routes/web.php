@@ -8,6 +8,8 @@ use App\Http\Controllers\Student\EditStudentProfileController;
 use App\Http\Controllers\Student\StudentRegisterController;
 use App\Http\Controllers\Student\EvaluateCompanyController;
 use App\Http\Controllers\CompanyEmployee\RegisterController;
+use App\Http\Controllers\CompanyEmployee\HR\Trainees\ListController as ListController1;
+
 
 Route::get('/', function () {
     return view('/all_users/login');
@@ -65,29 +67,36 @@ Route::prefix('/supervisor')->group(function(){
 Route::get('company_employee/register',[RegisterController::class,'create'])->name('company_employee_register');
 Route::post('company_employee/register/store',[RegisterController::class,'store'])->name('company_employee_store');
 
-Route::prefix('/hr')->group(function(){
-    Route::get('/company_profile', function () {
-        return view('/company_employee/hr/company_profile'); })->name('hr_company_profile');
-    Route::get('/edit_company_profile', function () {
-        return view('/company_employee/hr/edit_company_profile'); })->name('hr_edit_company_profile');
-    Route::get('/messaging', function () {
-        return view('/company_employee/hr/messaging'); })->name('hr_messaging');
+Route::prefix('/{id}/hr')->group(function(){
+    /*Route::get('/company_profile', function ($id) {
+        return view('/company_employee/hr/company_profile');
+    })->name('hr_company_profile');
+
+    Route::get('/edit_company_profile', function ($id) {
+        return view('/company_employee/hr/edit_company_profile');
+    })->name('hr_edit_company_profile');
+
+    Route::get('/messaging', function ($id) {
+        return view('/company_employee/hr/messaging');
+    })->name('hr_messaging');*/
 
     Route::prefix('/trainees')->group(function(){
-        Route::get('/list', function () {
-            return view('company_employee/hr/trainees/list'); })->name('hr_list_trainees');
-        Route::get('/university_students', function () {
-            return view('company_employee/hr/trainees/university_students'); })->name('hr_university_students');
-        Route::get('/assign_trainees', function () {
-            return view('company_employee/hr/trainees/assign_trainers'); })->name('hr_assign_trainees');
+        Route::get('/list', [ListController1::class, 'index'])->name('hr_list_trainees');
+       /* Route::get('/university_students', function ($id) {
+            return view('company_employee/hr/trainees/university_students');
+        })->name('hr_university_students');
+
+        Route::get('/assign_trainees', function ($id) {
+            return view('company_employee/hr/trainees/assign_trainers');
+        })->name('hr_assign_trainees');*/
     });
 
-    Route::prefix('/company_employees')->group(function(){
-        Route::get('/', function () {
+   /* Route::prefix('/company_employees')->group(function(){
+        Route::get('/', function ($id) {
             return view('company_employee/hr/company_employees/list'); })->name('hr_list_Employees');
-        Route::get('/add', function () {
+        Route::get('/add', function ($id) {
         return view('company_employee/hr/company_employees/add'); })->name('hr_add_Employee');
-    });
+    });*/
 });
 
 //students' routes

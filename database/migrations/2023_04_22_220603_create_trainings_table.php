@@ -23,7 +23,7 @@ return new class extends Migration
 
 
             $table->unsignedBigInteger('company_employee_id');
-            $table->unsignedBigInteger('branch_department_id');
+            $table->unsignedBigInteger('branch_department_id')->nullable();
             $table->foreign('company_employee_id')->references('id')->on('company_employees');
             $table->foreign('branch_department_id')
             ->references('id')->on('company_branchs_departments');
