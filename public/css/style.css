@@ -248,6 +248,7 @@ body .bigDiv .loginForm .loginCard .creatAccountLink:hover {
   margin-right: 0.5rem;
 }
 
+
 .profileSection {
   min-height: 30vh;
   border-radius: 0.5rem;
@@ -578,13 +579,14 @@ body .bigDiv .loginForm .loginCard .creatAccountLink:hover {
 /* ---------------------- */
 /* color palate*/
 :root {
-  --dark-blue: #0A66C2;
-  --blue: #288DF2;
-  --light-Sand: #F5F5F5;
-  --sand: #E6E6E6;
-  --mid-sand:#F0F0F0;
+  --dark-blue: #0a66c2;
+  --blue: #288df2;
+  --light-Sand: #f5f5f5;
+  --sand: #e6e6e6;
+  --mid-sand: #f0f0f0;
   --dark-sand: #737373;
 }
+
 .bg-dark-blue {
   background-color:var(--dark-blue);
 }
@@ -808,4 +810,58 @@ textarea{
     margin-top: 1rem;
     min-width: 100%;
   }
+}
+/* Admin -home */
+.adminComponent {
+  background: white;
+  width: 20%;
+  height: 30vh;
+  margin-block: 5rem;
+  border-radius: 1rem;
+}
+
+.adminComponent .icon {
+  font-size: 4rem;
+  padding: 0rem 0.8rem;
+  color: #0a66c2;
+}
+.line-text-center {
+  position: relative;
+  text-transform: uppercase;
+}
+.line-text-center::before {
+  position: absolute;
+  content: "";
+  background-color: #e3e3e3;
+  width: 26%;
+  height: 0.5vh;
+  left: 11%;
+  top: 49%;
+  border-radius: 2rem;
+}
+
+.line-text-center::after {
+  position: absolute;
+  content: "";
+  background-color: #e3e3e3;
+  width: 26%;
+  height: 0.5vh;
+  right: 11%;
+  top: 49%;
+  border-radius: 2rem;
+}
+
+.btn-more {
+  width: 12%;
+  height: 6vh;
+}
+/* admin-companies */
+.company-box{
+width: 29%;
+
+}
+
+/* admin_ copmpanies want to join */
+.join_company_img{
+  width:5%;
 }
