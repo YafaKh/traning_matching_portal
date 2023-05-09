@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('branchs', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('address', 45)->nullable(false);
+            $table->string('address', 45);
             
             $table->unsignedBigInteger('company_id');
             $table->foreign('company_id')

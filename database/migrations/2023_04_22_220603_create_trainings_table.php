@@ -16,10 +16,10 @@ return new class extends Migration
         Schema::create('trainings', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('name',45)->nullable(false);
+            $table->string('name',45) ;
             $table->integer('semester')->length(1);
-            $table->string('training_feild',45)->nullable(false);
-            $table->string('details')->nullable(false);
+            $table->string('training_feild',45) ;
+            $table->string('details')->nullable();
 
 
             $table->unsignedBigInteger('company_employee_id');

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('spoken_languages', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('name', 45)->nullable(false);
+            $table->string('name', 45);
         });
     }
 

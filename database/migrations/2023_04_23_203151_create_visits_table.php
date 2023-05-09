@@ -16,10 +16,10 @@ return new class extends Migration
             $table->timestamps();
             $table->unsignedBigInteger('student_id');
             $table->unsignedBigInteger('university_employee_id');
-            $table->date('visit_date')->nullable(false);
-            $table->time('visit_time')->nullable(false);
-            $table->text('reports')->nullable(false);
-            $table->string('contact_way', 45)->nullable(false);
+            $table->date('visit_date') ;
+            $table->time('visit_time') ;
+            $table->text('report')->nullable();
+            $table->string('contact_way', 45)->nullable();
 
             $table->foreign('student_id')
                 ->references('id')

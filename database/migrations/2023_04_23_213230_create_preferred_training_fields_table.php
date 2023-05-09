@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('preferred_training_fields', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('name')->nullable(false);
+            $table->string('name') ;
         });
     }
 

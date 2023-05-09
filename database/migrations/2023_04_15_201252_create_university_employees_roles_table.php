@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('semester')->nullable(false);
-            $table->boolean('coordinator')->nullable(false)->default(0);
-            $table->boolean('supervisor')->nullable(false)->default(0);
+            $table->boolean('coordinator')->default(0);
+            $table->boolean('supervisor')->default(0);
        });
     }
 

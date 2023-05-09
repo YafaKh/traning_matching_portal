@@ -14,15 +14,15 @@ return new class extends Migration
         Schema::create('university_employees', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('employee_num', 45)->nullable(false);
-            $table->string('email', 45)->nullable(false)->unique();
-            $table->string('phone', 15)->nullable(false);
-            $table->string('password', 45)->nullable(false);
-            $table->string('first_name', 45)->nullable(false);
-            $table->string('second_name', 45)->nullable(false);
-            $table->string('third_name', 45)->nullable(false);
-            $table->string('last_name', 45)->nullable(false);
-            $table->string('image', 45)->nullable(false);
+            $table->string('employee_num', 45);
+            $table->string('email', 45)->unique();
+            $table->string('phone', 15);
+            $table->string('password', 45);
+            $table->string('first_name', 45);
+            $table->string('second_name', 45);
+            $table->string('third_name', 45);
+            $table->string('last_name', 45);
+            $table->string('image', 45)->nullable();
             
             $table->unsignedBigInteger('university_department_id');
             $table->unsignedBigInteger('university_id');

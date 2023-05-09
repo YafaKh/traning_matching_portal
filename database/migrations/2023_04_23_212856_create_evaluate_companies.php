@@ -16,20 +16,20 @@ return new class extends Migration
         Schema::create('evaluate_companies', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-                $table->integer('training_palce_evaluation')->nullable(false);
-                $table->text('pros')->nullable(false);
-                $table->text('cons')->nullable(false);
-                $table->text('new_skills_gained')->nullable(false);
-                $table->text('skills_wish_they_included')->nullable(false);
-                $table->text('skills_wish_were_given_better')->nullable(false);
-                $table->boolean('recommend_sending_students')->nullable(false);
-                $table->string('recommended_evaluate_sys', 45)->nullable(false);
-                $table->string('evaluate_companycol', 45)->nullable(false);
-                $table->text('recommended_evaluate_sys_explanation')->nullable(false);
-                $table->boolean('internship_time_before_senior_year')->nullable(false);
-                $table->boolean('more_than_one_internship')->nullable(false);
-                $table->text('finding_training_difficulties')->nullable(false);
-                $table->text('recommendations')->nullable(false);
+                $table->integer('training_palce_evaluation') ;
+                $table->text('pros') ;
+                $table->text('cons') ;
+                $table->text('new_skills_gained') ;
+                $table->text('skills_wish_they_included') ;
+                $table->text('skills_wish_were_given_better') ;
+                $table->boolean('recommend_sending_students') ;
+                $table->string('recommended_evaluate_sys', 45) ;
+                $table->string('evaluate_companycol', 45) ;
+                $table->text('recommended_evaluate_sys_explanation') ;
+                $table->boolean('internship_time_before_senior_year') ;
+                $table->boolean('more_than_one_internship') ;
+                $table->text('finding_training_difficulties') ;
+                $table->text('recommendations') ;
                 $table->text('notes_about_website')->nullable();
     
                 $table->unsignedBigInteger('student_id');
