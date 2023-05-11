@@ -50,7 +50,7 @@
         <tbody class="bg-light">
             @foreach ($students as $student)
             <tr>
-            <td class="ps-3"><a>{{$student['name']}}</a></td>
+            <td class="ps-3"><a>{{$student['first_english_name'].' '. $student['last_english_name']}}</a></td>
             <td>@mdo</td>
             <td>@mdo</td>
             <td>Mark</td>

@@ -30,9 +30,6 @@ return new class extends Migration
             $table->tinyInteger('communicational_skills') ;
             $table->tinyInteger('english_language_proficiency') ;
 
-            $table->unsignedBigInteger('student_id');
-            $table->foreign('student_id')->references('id')->on('students')->onDelete('NO ACTION')->onUpdate('NO ACTION');
-        
         });
     }
 

@@ -31,10 +31,6 @@ return new class extends Migration
                 $table->text('finding_training_difficulties') ;
                 $table->text('recommendations') ;
                 $table->text('notes_about_website')->nullable();
-    
-                $table->unsignedBigInteger('student_id');
-                $table->foreign('student_id')->references('id')->on('students')->onDelete('NO ACTION')->onUpdate('NO ACTION');
-        
         });
     }
 
@@ -45,6 +41,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('evaluate_companys');
+        Schema::dropIfExists('evaluate_companies');
     }
 };

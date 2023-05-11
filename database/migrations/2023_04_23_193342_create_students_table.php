@@ -15,18 +15,18 @@ return new class extends Migration
             $table->id();
             $table->timestamps(); 
             $table->string('student_num', 12)->unique();
-            $table->string('first_arabic_name', 45) ;
-            $table->string('first_english_name', 45) ;
-            $table->string('second_arabic_name', 45) ;
-            $table->string('second_english_name', 45) ;
-            $table->string('third_arabic_name', 45) ;
-            $table->string('third_english_name', 45) ;
-            $table->string('last_arabic_name', 45) ;
-            $table->string('last_english_name', 45) ;
+            $table->string('first_name_ar', 45) ;
+            $table->string('first_name_en', 45) ;
+            $table->string('second_name_ar', 45) ;
+            $table->string('second_name_en', 45) ;
+            $table->string('third_name_ar', 45) ;
+            $table->string('third_name_en', 45) ;
+            $table->string('last_name_ar', 45) ;
+            $table->string('last_name_en', 45) ;
             $table->boolean('gender')->nullable();
             $table->integer('passed_hours') ;
             $table->float('gpa') ;
-            $table->string('address', 45)->nullable();
+            $table->string('address')->nullable();
             $table->string('email')->unique() ;
             $table->string('password', 45) ;
             $table->date('availability_date') ;
@@ -39,12 +39,18 @@ return new class extends Migration
             $table->unsignedBigInteger('university_id');
             $table->unsignedBigInteger('specialization_id');
             $table->unsignedBigInteger('training_id');
+            $table->unsignedBigInteger('evaluate_student_id');
+            $table->unsignedBigInteger('evaluate_company_id');
             $table->foreign('university_id')
             ->references('id')->on('universities');
             $table->foreign('specialization_id')
             ->references('id')->on('specializations');
             $table->foreign('training_id')
             ->references('id')->on('trainings');
+            $table->foreign('evaluate_student_id')
+            ->references('id')->on('evaluate_students');
+            $table->foreign('evaluate_company_id')
+            ->references('id')->on('evaluate_companies');
         });
     }
 
