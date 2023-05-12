@@ -37,11 +37,11 @@ class ListController extends Controller
                     'first_name_en' => $student->first_name_en,
                     'last_name_en' => $student->last_name_en,
                     'training_name' => $training->name,
-                    'trainer' => $training->employee->id,
+                    'trainer_first_name' => $training->employee->first_name,
+                    'trainer_last_name' => $training->employee->last_name,
                 ];
             }
         }
-dd($students_data);
         return view('company_employee.hr.trainees.list', ['students_data' => $students_data]);
 
        /*foreach ($trainings as $training) {
