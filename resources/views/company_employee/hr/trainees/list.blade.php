@@ -48,15 +48,19 @@
             </tr>
         </thead>
         <tbody class="bg-light">
-            @foreach ($students as $student)
+            @foreach ($students_data as $student)
             <tr>
-            <td class="ps-3"><a>{{$student['first_english_name'].' '. $student['last_english_name']}}</a></td>
-            <td>@mdo</td>
-            <td>@mdo</td>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td><button type="button" class="btn"><i class="bi bi-box-arrow-up-right"></i></button></td>
-            <td><button type="button" class="btn"><i class="bi bi-box-arrow-up-right"></i></button></td>
+            <td class="ps-3"><a>{{$student['first_name_en'].' '. $student['last_name_en']}}</a></td>
+            <td>{{$student['training_name']}}</td>
+            <td>{{$student['training_name']}}</</td>
+            <td>{{$student['training_name']}}</</td>
+            <td>{{$student['trainer_first_name'].' '.$student['trainer_last_name']}}<//td>
+            <td><a type="button" class="btn" href="">
+                <i class="bi bi-box-arrow-up-right"></i></a>
+            </td>
+            <td><a type="button" class="btn">
+                <i class="bi bi-box-arrow-up-right"></i></a>
+            </td>
             </tr>
             @endforeach
         </tbody>
