@@ -12,6 +12,7 @@ use App\Models\Student;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Student>
  */
+
 class StudentFactory extends Factory
 {
     /**
@@ -19,11 +20,14 @@ class StudentFactory extends Factory
      *
      * @return array<string, mixed>
      */
+    // to give the evaluate_student_id and company_student_id thw same Id as student becuase they are 1:1 relations
+    public $instance_counter=0;
     public function definition()
     {
         $university_ids = University::pluck('id')->all();
         $specialization_ids = Specialization::pluck('id')->all();
         $training_ids = Training::pluck('id')->all();
+        $this->instance_counter++;
 
         return [
             'student_num' => $this->faker->unique()->randomNumber(8),
@@ -50,20 +54,9 @@ class StudentFactory extends Factory
             'university_id' => $this->faker->randomElement($university_ids),
             'specialization_id' => $this->faker->randomElement($specialization_ids),
             'training_id' => $this->faker->randomElement($training_ids),
-           // 'evaluate_student_id' =>1,
-           // 'evaluate_company_id' =>1
+            'evaluate_student_id' => $this->instance_counter,
+            'evaluate_company_id' => $this->instance_counter,
         ];
     }
-    /**
-     * Configure the model factory.
-     *
-     * @return $this
-     
-    public function configure()
-    {
-        return $this->afterMaking(function (Student $student) {
-            $student->evaluate_student_id = $student->id; // Set evaluate_student_id to the same value as id
-            $student->evaluate_company_id = $student->id; // Set evaluate_company_id to the same value as id
-        });
-    }*/
+
 }
