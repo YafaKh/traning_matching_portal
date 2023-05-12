@@ -14,19 +14,17 @@ return new class extends Migration
         Schema::create('visits', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->unsignedBigInteger('student_id');
-            $table->unsignedBigInteger('university_employee_id');
             $table->date('visit_date') ;
             $table->time('visit_time') ;
             $table->text('report')->nullable();
             $table->string('contact_way', 45)->nullable();
+            $table->unsignedBigInteger('student_id');
+          //  $table->unsignedBigInteger('university_employee_id');
 
             $table->foreign('student_id')
                 ->references('id')
                 ->on('students');
-            $table->foreign('university_employee_id')
-                ->references('id')
-                ->on('university_employees');
+           // $table->foreign('university_employee_id')->references('id')->on('university_employees');
         });
     }
 

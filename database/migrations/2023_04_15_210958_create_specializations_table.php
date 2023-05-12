@@ -16,9 +16,9 @@ return new class extends Migration
             $table->timestamps();
             $table->string('name', 45);
             
-            $table->unsignedBigInteger('university_department_id');
-            $table->foreign('university_department_id')
-                ->references('id')->on('university_departments');
+            $table->unsignedBigInteger('university_id');
+            $table->foreign('university_id')
+                ->references('id')->on('universities');
         });
     }
 

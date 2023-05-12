@@ -5,6 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Training;
+use App\Models\EvaluateStudent;
+use App\Models\EvaluateCompany;
+use App\Models\Progress;
 
 class Student extends Model
 {
@@ -36,5 +39,17 @@ class Student extends Model
     public function training()
     {
         return $this->belongsTo(Training::class);
+    }
+    public function evaluate_student()
+    {
+        return $this->hasOne(EvaluateStudent::class);
+    }
+    public function evaluate_company()
+    {
+        return $this->hasOne(EvaluateCompany::class);
+    }
+    public function progresses()
+    {
+        return $this->hasMany(Progress::class);
     }
 }
