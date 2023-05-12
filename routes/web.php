@@ -109,8 +109,11 @@ Route::prefix('/student')->group(function () {
     Route::get('/profile',[StudentProfileController::class,'show'])->name('student_profile');
     Route::get('/edit_profile',[EditStudentProfileController::class,'show'])->name('edit_student_profile');
     Route::get('/evaluate_company',[EvaluateCompanyController::class,'show'])->name('student_evaluate_company');
+    Route::get('/list',[StudentRegisterController::class,'test'])->name('test');
 
 })->name('student');
+
+
 
 Route::post('/store',[StudentRegisterController::class,'store'])->name('student_store');
 

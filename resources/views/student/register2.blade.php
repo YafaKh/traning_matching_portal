@@ -8,7 +8,7 @@
     <div class="d-flex justify-content-center">
       <h1 class="mt-5">Sign up</h1>
     </div>
-<form action="{{route('student.home')}}" method="post">
+<form action="" method="post">
    @csrf
     <div class="registerField">
       <label for="" class="mt-3 mb-3"> Skills</label>
