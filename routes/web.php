@@ -38,6 +38,8 @@ Route::prefix('/coordinator')->group(function(){
             return view('university_employee/coordinator/students/assessment'); })->name('coordinator_student_assessment');    
     });
 
+
+    
     Route::prefix('/university_employees')->group(function(){
         Route::get('/', function () {
             return view('university_employee/coordinator/university_employees/list'); })->name('coordinator_list_Employees');
@@ -109,6 +111,8 @@ Route::prefix('/student')->group(function () {
     Route::get('/evaluate_company',[EvaluateCompanyController::class,'show'])->name('student_evaluate_company');
 
 })->name('student');
+
+Route::post('/store',[StudentRegisterController::class,'store'])->name('student_store');
 
 // admin 
 Route::prefix('/admin')->group(function () {

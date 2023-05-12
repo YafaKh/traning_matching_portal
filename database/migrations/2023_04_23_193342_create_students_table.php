@@ -32,7 +32,13 @@ return new class extends Migration
             $table->date('availability_date') ;
             $table->boolean('connected_with_a_company')->default(0);
             $table->string('connected_company_info', 100)->nullable();
+<<<<<<< HEAD
             $table->string('phone', 15) ;
+=======
+            $table->string('country_code', 15)->nullable();
+            $table->string('area_code', 15)->nullable();
+            $table->string('phone_no', 15)->nullable(false);
+>>>>>>> Sabaa
             $table->boolean('registered')->nullable(false)->default(0);
             $table->string('image')->nullable();
 

@@ -20,7 +20,7 @@ class Student extends Model
     'availability_date',
     'connected_with_a_company',
     'connected_company_info',
-    'phone_no',
+    'country_code',
     'image'];
     protected $hidden = ['created_at','updated_at'];
     /* public function university()

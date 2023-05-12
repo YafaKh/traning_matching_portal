@@ -1,5 +1,6 @@
 @extends('student.layout.master')
 @section('content')
+
   <div class="d-flex justify-content-center mt-5">
     <img src="{{asset('images/logo_title.png')}}" alt="logo" class="w-25" />
   </div>
@@ -7,23 +8,26 @@
     <div class="d-flex justify-content-center">
       <h1 class="mt-5">Sign up</h1>
     </div>
-
+<form action="{{route('student.home')}}" method="post">
+   @csrf
     <div class="registerField">
       <label for="" class="mt-3 mb-3"> Skills</label>
       <div class="row g-2 ms-3 mb-2">
         <div class="form-check col">
-          <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+          <input class="form-check-input" type="checkbox" value="" name="skill" id="flexCheckDefault" />
           <label class="form-check-label" for="flexCheckDefault">
             Default checkbox
           </label>
         </div>
+
         <div class="col d-flex justify-content-center">
-          <input type="range" min="1" max="100" value="30" class="w-75" />
+          <input type="range" min="1" max="100" value="30"name="" class="w-75" />
         </div>
       </div>
+
       <div class="row g-2 ms-3 mb-2">
         <div class="form-check col">
-          <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked />
+          <input class="form-check-input" type="checkbox" value="" name="skill" id="flexCheckDefault" checked />
           <label class="form-check-label" for="flexCheckDefault">
             Default checkbox
           </label>
@@ -34,7 +38,7 @@
       </div>
       <div class="row g-2 ms-3 mb-2">
         <div class="form-check col">
-          <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+          <input class="form-check-input" type="checkbox" value="" name="skill" id="flexCheckDefault" />
           <label class="form-check-label" for="flexCheckDefault">
             Default checkbox
           </label>
@@ -45,7 +49,7 @@
       </div>
       <div class="row g-2 ms-3 mb-2">
         <div class="form-check col">
-          <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked />
+          <input class="form-check-input" type="checkbox" value="" name="skill"id="flexCheckDefault" checked />
           <label class="form-check-label" for="flexCheckDefault">
             Default checkbox
           </label>
@@ -187,4 +191,5 @@
       Back
     </button>
   </div>
+  </form>
 @endsection
