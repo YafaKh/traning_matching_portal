@@ -19,11 +19,11 @@ class ProgressFactory extends Factory
     {
         $students_ids = Student::pluck('id')->all();
         return [
-            'week' => $faker->numberBetween(1, 52),
-            'end_date' => $faker->date(),
-            'passed_hours' => $faker->numberBetween(0, 40),
-            'absences_days' => $faker->numberBetween(0, 5),
-            'note' => $faker->sentence,
+            'week' => $this->faker->numberBetween(1, 52),
+            'end_date' => $this->faker->date(),
+            'passed_hours' => $this->faker->numberBetween(0, 40),
+            'absences_days' => $this->faker->numberBetween(0, 5),
+            'note' => $this->faker->sentence,
             'student_id' => $this->faker->randomElement($students_ids),
         ];
     }

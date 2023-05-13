@@ -25,6 +25,7 @@ class Student extends Model
     'gender',
     'passed_hours',
     'gpa',
+    'load',
     'address',
     'email',
     'password',

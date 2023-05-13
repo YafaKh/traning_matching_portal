@@ -39,8 +39,8 @@ class companyEmployeeFactory extends Factory
             'last_name' => $this->faker->lastName,
             'image' => $this->faker->imageUrl(),
             'contact_person' => $this->faker->boolean,
-            'company_id' => $this->faker->randomElement($company_ids),
-            'employees_roles' => $this->faker->randomElement($company_role_ids),
+            //'company_id' => $this->faker->randomElement($company_ids),
+            //'employees_roles' => $this->faker->randomElement($company_role_ids),
         ];
     }
 }

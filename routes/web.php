@@ -10,6 +10,7 @@ use App\Http\Controllers\Student\EvaluateCompanyController;
 use App\Http\Controllers\CompanyEmployee\RegisterController;
 use App\Http\Controllers\CompanyEmployee\HR\Trainees\ListController as ListController1;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CompanyEmployee\HR\Trainees\UniversityStudentsController;
 
 Route::get('/', function () {
     return view('/all_users/login');
@@ -69,6 +70,8 @@ Route::prefix('/supervisor')->group(function(){
 Route::get('company_employee/register',[RegisterController::class,'create'])->name('company_employee_register');
 Route::post('company_employee/register/store',[RegisterController::class,'store'])->name('company_employee_store');
 
+//I put university students outside the hr prefix because it doesn't change from company to another so it doesn't require an id
+Route::get('/hr/university_students',[UniversityStudentsController::class,'index'])->name('hr_university_students');
 Route::prefix('/{id}/hr')->group(function(){
     /*Route::get('/company_profile', function ($id) {
         return view('/company_employee/hr/company_profile');

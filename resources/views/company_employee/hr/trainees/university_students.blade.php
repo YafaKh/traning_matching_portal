@@ -1,4 +1,5 @@
 @extends('company_employee.master')
+{{--
 @section('navbar')
     @include('company_employee.hr.navbar')
 @endsection
@@ -10,7 +11,7 @@
 @endsection
 @section('trainees_navbar')
     @include('company_employee.hr.trainees.trainees_navbar')
-@endsection
+@endsection--}}
 @section('content')
 <div class="px-5">
     {{--filters--}}
@@ -67,15 +68,17 @@
             </tr>
         </thead>
         <tbody class="bg-light">
+            @foreach ($students as $student)
             <tr>
             <td class="ps-3"><input class="table-checkbox form-check-input" type="checkbox" value="" id="flexCheckDefault"></td>                
-            <td>****</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td>Mark</td>
-            <td>date</td>
+            <td>{{$student['first_name_en'].' '. $student['last_name_en']}}</td>
+            <td>{{$student['first_name_en']}}</td>
+            <td>{{$student['gpa']}}</td>
+            <td>{{$student['load']}}</td>
+            <td>{{$student['availability_date']}}</td>
             <td><button type="button" class="btn"><i class="bi bi-plus-square fs-6"></i></button></td>
             </tr>
+            @endforeach
         </tbody>
         </table>
     </div>

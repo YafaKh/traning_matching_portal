@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('last_name_en', 45) ;
             $table->boolean('gender')->nullable();
             $table->integer('passed_hours') ;
+            $table->integer('load') ;
             $table->float('gpa') ;
             $table->string('address')->nullable();
             $table->string('email')->unique() ;
