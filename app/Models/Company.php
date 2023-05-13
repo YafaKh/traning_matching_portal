@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use App\Models\CompanyEmployee;
 use App\Models\Training;
+use App\Models\CompanyBranch;
 
 class Company extends Model
 {
@@ -21,6 +22,11 @@ class Company extends Model
         'linkedin',
         'image',
     ];
+
+    public function branches()
+    {
+        return $this->hasMany(CompanyBranch::class);
+    }
 
     public function employees()
     {

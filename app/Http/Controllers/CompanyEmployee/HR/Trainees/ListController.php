@@ -6,8 +6,6 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Collection;
 use App\Models\Company;
-use App\Models\Student;
-use App\Models\Training;
 
 
 class ListController extends Controller
@@ -23,20 +21,20 @@ class ListController extends Controller
         //select from student id, name , branch, Department, trainer, approval, progress, visit_form, evaluation, company_evaluation, 
        /*$studentsData= */
        $company = Company:: findOrFail($id);
-       $trainings = $company->trainings()
-       ->get();
+       $trainings = $company->trainings()->get();
        $students_data = [];
 
         foreach ($trainings as $training) {
             $students = $training->students()
                 ->select('first_name_en', 'last_name_en')
                 ->get();
-            
+             
             foreach ($students as $student) {
                 $students_data[] = [
                     'first_name_en' => $student->first_name_en,
                     'last_name_en' => $student->last_name_en,
                     'training_name' => $training->name,
+                    'training_branch' => $training->branch->address,
                     'trainer_first_name' => $training->employee->first_name,
                     'trainer_last_name' => $training->employee->last_name,
                 ];

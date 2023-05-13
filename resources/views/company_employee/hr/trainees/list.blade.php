@@ -41,7 +41,6 @@
             <th scope="col" class="ps-3">Name</th>
             <th scope="col">Training</th>
             <th scope="col">Branch</th>
-            <th scope="col">Department</th>
             <th scope="col">Trainer</th>
             <th scope="col">Progress</th>
             <th scope="col">Evaluation</th>
@@ -52,8 +51,7 @@
             <tr>
             <td class="ps-3"><a>{{$student['first_name_en'].' '. $student['last_name_en']}}</a></td>
             <td>{{$student['training_name']}}</td>
-            <td>{{$student['training_name']}}</</td>
-            <td>{{$student['training_name']}}</</td>
+            <td>{{$student['training_branch']}}</</td>
             <td>{{$student['trainer_first_name'].' '.$student['trainer_last_name']}}<//td>
             <td><a type="button" class="btn" href="">
                 <i class="bi bi-box-arrow-up-right"></i></a>

@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Http\Controllersrs\CompanyEmployee\HR\Trainees;
+namespace App\Http\Controllers\CompanyEmployee\HR\Trainees;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Models\Student;
 
 class UniversityStudentsController extends Controller
 {
@@ -13,11 +15,11 @@ class UniversityStudentsController extends Controller
      */
     public function index()
     {
-        //select from student id, student_id, name, specialization, Gpa load , avalibility, regestrtion_state, progress, visit_form, evaluation, company_evaluation, assessment
-       /* $studentsData= 
-        Student::select(['id','student_num','student_name_id','specialization','company_id',''])
-        ->get();*/
-        return view('company_employee.hr.trainees..university_students');//,['students'=>$studentsData]);
+        //remove approved ones
+        $students = Student::select(
+        'first_name_en', 'last_name_en', 'gpa', 'load','availability_date')
+        ->get();
+        return view('company_employee.hr.trainees.university_students',['students'=>$students]);
     }
 
     public function add()

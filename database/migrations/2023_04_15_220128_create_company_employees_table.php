@@ -24,8 +24,8 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->boolean('contact_person')->default(0);
 
-            $table->unsignedBigInteger('company_id');
-            $table->unsignedBigInteger('employees_roles');
+            $table->unsignedBigInteger('company_id')->nullable();
+            $table->unsignedBigInteger('employees_roles')->nullable();
             $table->foreign('company_id')->references('id')->on('companies');
             $table->foreign('employees_roles')->references('id')->on('company_employee_roles');
         
