@@ -16,6 +16,14 @@ class Student extends Model
     use HasFactory;
     protected $table ="students";
     protected $fillable = ['student_num',
+    'first_arabic_name',
+'    first_english_name',
+'    second_arabic_name',
+'    second_english_name',
+'    third_arabic_name',
+    'third_english_name',
+'    last_arabic_name',
+'    last_english_name',
     'gender',
     'passed_hours',
     'gpa',
@@ -26,9 +34,9 @@ class Student extends Model
     'availability_date',
     'connected_with_a_company',
     'connected_company_info',
-    'phone_no',
+    'phone',
     'image'];
-    protected $hidden = ['created_at','updated_at'];
+    protected $hidden = ['created_at','updated_at','pivot'];
     public function university()
     {
         return $this->belongsTo(University::class);
@@ -39,9 +47,14 @@ class Student extends Model
         return $this->belongsTo(Specialization::class, 'specialization_id');
     }
 
-    public function training()
+    // public function training()
+    // {
+    //     return $this->belongsTo(Training::class);
+    // }
+
+     public function spoken_languages()
     {
-        return $this->belongsTo(Training::class);
+        return $this->belongsToMany(Spoken_languages::class,'students_spoken_languages','student_id','spoken_language_id');
     }
     public function evaluate_student()
     {

@@ -39,6 +39,8 @@ Route::prefix('/coordinator')->group(function(){
             return view('university_employee/coordinator/students/assessment'); })->name('coordinator_student_assessment');    
     });
 
+
+    
     Route::prefix('/university_employees')->group(function(){
         Route::get('/', function () {
             return view('university_employee/coordinator/university_employees/list'); })->name('coordinator_list_Employees');
@@ -111,8 +113,13 @@ Route::prefix('/student')->group(function () {
     Route::get('/profile',[StudentProfileController::class,'show'])->name('student_profile');
     Route::get('/edit_profile',[EditStudentProfileController::class,'show'])->name('edit_student_profile');
     Route::get('/evaluate_company',[EvaluateCompanyController::class,'show'])->name('student_evaluate_company');
+    Route::get('/list',[StudentRegisterController::class,'test'])->name('test');
 
 })->name('student');
+
+
+
+Route::post('/store',[StudentRegisterController::class,'store'])->name('student_store');
 
 // admin 
 Route::prefix('/admin')->group(function () {

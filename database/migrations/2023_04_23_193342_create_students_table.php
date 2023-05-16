@@ -36,7 +36,6 @@ return new class extends Migration
             $table->string('phone', 15) ;
             $table->boolean('registered')->nullable(false)->default(0);
             $table->string('image')->nullable();
-
             $table->unsignedBigInteger('university_id');
             $table->unsignedBigInteger('specialization_id');
             $table->unsignedBigInteger('training_id');
