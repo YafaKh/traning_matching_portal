@@ -17,7 +17,7 @@ class ProgressFactory extends Factory
      */
     public function definition()
     {
-        $students_ids = Student::pluck('id')->all();
+        //$students_ids = Student::pluck('id')->all();
         return [
             'week' => $this->faker->numberBetween(1, 52),
             'end_date' => $this->faker->date(),

@@ -17,12 +17,18 @@ class UniversityStudentsController extends Controller
     {
         //remove approved ones
         $students = Student::select(
-        'first_name_en', 'last_name_en', 'gpa', 'load','availability_date')
+        'first_name_en', 'last_name_en', 'gpa', 'load', 'availability_date','specialization_id')
         ->get();
         return view('company_employee.hr.trainees.university_students',['students'=>$students]);
     }
 
-    public function add()
+    /**
+     * add a new trainee from university students.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function add($id)
     {
         
     }

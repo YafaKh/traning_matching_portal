@@ -70,6 +70,7 @@ Route::post('company_employee/register/store',[RegisterController::class,'store'
 
 //I put university students outside the hr prefix because it doesn't change from company to another so it doesn't require an id
 Route::get('/hr/university_students',[UniversityStudentsController::class,'index'])->name('hr_university_students');
+Route::get('/hr/{id}/add_trainee',[UniversityStudentsController::class,'add'])->name('hr_add_trainee');
 Route::prefix('/{id}/hr')->group(function(){
     /*Route::get('/company_profile', function ($id) {
         return view('/company_employee/hr/company_profile');

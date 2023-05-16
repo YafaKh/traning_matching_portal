@@ -8,6 +8,8 @@ use App\Models\Training;
 use App\Models\EvaluateStudent;
 use App\Models\EvaluateCompany;
 use App\Models\Progress;
+use App\Models\University;
+use App\Models\Specialization;
 
 class Student extends Model
 {
@@ -27,15 +29,15 @@ class Student extends Model
     'phone_no',
     'image'];
     protected $hidden = ['created_at','updated_at'];
-    /* public function university()
+    public function university()
     {
         return $this->belongsTo(University::class);
     }
 
     public function specialization()
     {
-        return $this->belongsTo(Specialization::class);
-    }*/
+        return $this->belongsTo(Specialization::class, 'specialization_id');
+    }
 
     public function training()
     {

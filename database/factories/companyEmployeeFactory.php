@@ -27,8 +27,8 @@ class companyEmployeeFactory extends Factory
      */
     public function definition()
     {
-        $company_ids = Company::pluck('id')->all();
-        $company_role_ids = CompanyEmployeeRole::pluck('id')->all();
+        //$company_ids = Company::pluck('id')->all();
+        //$company_role_ids = CompanyEmployeeRole::pluck('id')->all();
         return [
             'email' => $this->faker->unique()->safeEmail,
             'password' => bcrypt('password'),

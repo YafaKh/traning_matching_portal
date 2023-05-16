@@ -72,11 +72,14 @@
             <tr>
             <td class="ps-3"><input class="table-checkbox form-check-input" type="checkbox" value="" id="flexCheckDefault"></td>                
             <td>{{$student['first_name_en'].' '. $student['last_name_en']}}</td>
-            <td>{{$student['first_name_en']}}</td>
+            <td>{{$student->specialization->name}}</td>
             <td>{{$student['gpa']}}</td>
             <td>{{$student['load']}}</td>
             <td>{{$student['availability_date']}}</td>
-            <td><button type="button" class="btn"><i class="bi bi-plus-square fs-6"></i></button></td>
+            <td><a type="button" class="btn"
+            onClick="confirm('Are you sure that you want to add this student as a trainee?')"
+            href="{{route('hr_add_trainee', [$student->id])}}">
+            <i class="bi bi-plus-square fs-6"></i></a></td>
             </tr>
             @endforeach
         </tbody>

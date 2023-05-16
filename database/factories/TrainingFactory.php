@@ -25,7 +25,7 @@ class TrainingFactory extends Factory
      */
     public function definition()
     {       
-        $trainers_ids = CompanyEmployee::pluck('id')->all();
+        //$trainers_ids = CompanyEmployee::pluck('id')->all();
 
         return [
             'name' => $this->faker->word,
