@@ -70,10 +70,7 @@ Route::prefix('/supervisor')->group(function(){
 Route::get('company_employee/register',[RegisterController::class,'create'])->name('company_employee_register');
 Route::post('company_employee/register/store',[RegisterController::class,'store'])->name('company_employee_store');
 
-//I put university students outside the hr prefix because it doesn't change from company to another so it doesn't require an id
-Route::get('/hr/university_students',[UniversityStudentsController::class,'index'])->name('hr_university_students');
-Route::get('/hr/{id}/add_trainee',[UniversityStudentsController::class,'add'])->name('hr_add_trainee');
-Route::prefix('/{id}/hr')->group(function(){
+Route::prefix('/{company_id}/hr')->group(function(){
     /*Route::get('/company_profile', function ($id) {
         return view('/company_employee/hr/company_profile');
     })->name('hr_company_profile');
@@ -88,7 +85,9 @@ Route::prefix('/{id}/hr')->group(function(){
 
     Route::prefix('/trainees')->group(function(){
         Route::get('/list', [ListController1::class, 'index'])->name('hr_list_trainees');
-       /* Route::get('/university_students', function ($id) {
+        Route::get('/university_students',[UniversityStudentsController::class,'index'])->name('hr_university_students');
+        Route::get('/add_trainee/{student_id}', [UniversityStudentsController::class, 'add'])->name('hr_add_trainee');
+         /*Route::get('/university_students', function ($id) {
             return view('company_employee/hr/trainees/university_students');
         })->name('hr_university_students');
 

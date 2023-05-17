@@ -91,9 +91,12 @@
             </tr>
         </thead>
         <tbody class="bg-light">
+            @foreach($not_aaproved_students as $not_aaproved_student)
             <tr>
-            <td class="ps-3">****</td>
+            <td class="ps-3">{{$not_aaproved_student->student['first_name_en'].' '.
+                               $not_aaproved_student->student['last_name_en']}}</td>
             </tr>
+            @endforeach
         </tbody>
         </table>
     </div>

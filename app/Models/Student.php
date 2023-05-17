@@ -10,6 +10,7 @@ use App\Models\EvaluateCompany;
 use App\Models\Progress;
 use App\Models\University;
 use App\Models\Specialization;
+use App\Models\StudentCompanyApproval;
 
 class Student extends Model
 {
@@ -17,13 +18,13 @@ class Student extends Model
     protected $table ="students";
     protected $fillable = ['student_num',
     'first_arabic_name',
-'    first_english_name',
-'    second_arabic_name',
-'    second_english_name',
-'    third_arabic_name',
+    'first_english_name',
+    'second_arabic_name',
+    'second_english_name',
+    'third_arabic_name',
     'third_english_name',
-'    last_arabic_name',
-'    last_english_name',
+    'last_arabic_name',
+    'last_english_name',
     'gender',
     'passed_hours',
     'gpa',
@@ -67,5 +68,9 @@ class Student extends Model
     public function progresses()
     {
         return $this->hasMany(Progress::class);
+    }
+    public function not_approved_companies()
+    {
+        return $this->hasMany(StudentCompanyApproval::class, 'student_id');
     }
 }

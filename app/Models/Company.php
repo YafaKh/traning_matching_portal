@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use App\Models\CompanyEmployee;
 use App\Models\Training;
 use App\Models\CompanyBranch;
-
+use App\Models\StudentCompanyApproval;
 class Company extends Model
 {
     use HasFactory;
@@ -41,4 +41,8 @@ class Company extends Model
     {
         return $this->hasManyDeep(Student::class, [CompanyEmployee::class, Training::class]);
     }*/
+    public function not_approved_students()
+    {
+        return $this->hasMany(StudentCompanyApproval::class , 'company_id');
+    }
 }

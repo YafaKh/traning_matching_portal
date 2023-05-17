@@ -16,14 +16,15 @@ class ListController extends Controller
      * @param  int  $id
      * list all company trainees with some info
      */
-    public function index($id)
+    public function index($company_id)
     {
         //select from student id, name , branch, Department, trainer, approval, progress, visit_form, evaluation, company_evaluation, 
        /*$studentsData= */
-       $company = Company:: findOrFail($id);
+       $company = Company:: findOrFail($company_id);
+
+       $not_aaproved_students= $company->not_approved_students;
        $trainings = $company->trainings()->get();
        $students_data = [];
-
         foreach ($trainings as $training) {
             $students = $training->students()
                 ->select('first_name_en', 'last_name_en')
@@ -40,26 +41,8 @@ class ListController extends Controller
                 ];
             }
         }
-        return view('company_employee.hr.trainees.list', ['students_data' => $students_data]);
-
-       /*foreach ($trainings as $training) {
-            $students=$training->students()
-            ->select('first_name_en', 'last_name_en')
-            ->get();
-            foreach($students as $student)
-            {
-                $student->setAttribute('training_name', $training->name);
-            }           
-       }
-       dd($students);
-       $students = Student::select('first_english_name','last_english_name')
-       ->whereIn(
-        'training_id',
-        $trainings);
-        $students = $company->trainings()
-        ->with('students')
-        ->get()
-        ->pluck('students')
-        ->flatten();*/
+        return view('company_employee.hr.trainees.list',
+         ['students_data' => $students_data,
+          'not_aaproved_students' => $not_aaproved_students]);
     }
 }

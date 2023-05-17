@@ -76,10 +76,13 @@
             <td>{{$student['gpa']}}</td>
             <td>{{$student['load']}}</td>
             <td>{{$student['availability_date']}}</td>
-            <td><a type="button" class="btn"
-            onClick="confirm('Are you sure that you want to add this student as a trainee?')"
-            href="{{route('hr_add_trainee', [$student->id])}}">
-            <i class="bi bi-plus-square fs-6"></i></a></td>
+            <td>
+                <a type="submit" class="btn" name="add_trainee"
+                onClick="confirm('Are you sure that you want to add this student as a trainee?')"
+                href="{{ route('hr_add_trainee', ['company_id' => $company_id, 'student_id' => $student->id]) }}">
+                    <i class="bi bi-plus-square fs-6"></i>
+                </a>
+            </td>
             </tr>
             @endforeach
         </tbody>
