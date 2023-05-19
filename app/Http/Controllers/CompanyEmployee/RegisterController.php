@@ -3,9 +3,8 @@
 namespace App\Http\Controllers\CompanyEmployee;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\CompanyEmployee;
-use App\Models\CompanyRole;
-
+use App\Models\UnaddedCompanyEmployee;
+use App\Models\Company;
 
 class RegisterController extends Controller
 {
@@ -16,7 +15,8 @@ class RegisterController extends Controller
      */
     public function create()
     {
-        return view('company_employee.register');
+        $companies= Company::select('id', 'name')->get();
+        return view('company_employee.register', ['companies' => $companies]);
     }
 
     /**
@@ -36,24 +36,10 @@ class RegisterController extends Controller
             'phone' => 'required|numeric',
             'email'=> 'required|email|unique:company_employees,email|max:255',
             'company_id'=>'required|exists:companies,id',
-            'employees_roles'=> 'required|exists:company_employees_roles',
             'password' => 'required|min:8|confirmed:confirm_password',
         ]);
-        try {
-            // Create the employee
-            $employee = CompanyEmployee::create($validatedData);
-            // Sync the employee's role and company
-            $employee->roles()->sync($request->employees_roles);
-            $employee->roles()->sync($request->company_id);
-           
-        } catch (\Exception $e) {
-            // Handle any exceptions that occur
-            return redirect()->back()->with('error',
-             'An error occurred while creating the employee: ' . $e->getMessage());
-        }
-    
-        // Redirect to the index page with a success message
-        return redirect()->route('company_employee.register')
+        $employee = UnaddedCompanyEmployee::create($validatedData);           
+        return redirect()->route('company_employee_register')
         ->with('success', 'Employee created successfully.');
 }
 

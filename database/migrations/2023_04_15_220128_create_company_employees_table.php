@@ -25,9 +25,9 @@ return new class extends Migration
             $table->boolean('contact_person')->default(0);
 
             $table->unsignedBigInteger('company_id')->nullable();
-            $table->unsignedBigInteger('employees_roles')->nullable();
+            $table->unsignedBigInteger('company_employee_role_id')->nullable();
             $table->foreign('company_id')->references('id')->on('companies');
-            $table->foreign('employees_roles')->references('id')->on('company_employee_roles');
+            $table->foreign('company_employee_role_id')->references('id')->on('company_employee_roles');
         
         });
     }

@@ -11,22 +11,34 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-auto">
             <li class="nav-item">
-            <a class="nav-link @yield('Profile_activity')"  href="{{route('hr_company_profile')}}">Profile</a>
+            <a class="nav-link @yield('Profile_activity')"  
+            {{--href="{{route('hr_company_profile')}}"--}}
+            >Profile</a>
             </li>
             <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle @yield('trainees_activity')" 
             role="button" data-bs-toggle="dropdown" aria-expanded="false">Trainees</a>
             <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="{{route('hr_list_trainees')}}">List trainees</a></li>
-                <li><a class="dropdown-item" href="{{route('hr_university_students')}}">University trainees</a></li>
-                <li><a class="dropdown-item" href="{{route('hr_assign_trainees')}}">Assign trainers</a></li>
+                <li><a class="dropdown-item" 
+                {{--href="{{route('hr_list_trainees')}}"--}}
+                >List trainees</a></li>
+                <li><a class="dropdown-item" 
+                {{--href="{{route('hr_university_students')}}"--}}
+                >University trainees</a></li>
+                <li><a class="dropdown-item" 
+                {{--href="{{route('hr_assign_trainees')}}"--}}
+                >Assign trainers</a></li>
             </ul>
             </li>
             <li class="nav-item">
-            <a class="nav-link @yield('Employees_activity')" href="{{route('hr_list_Employees')}}">Employees</a>
+            <a class="nav-link @yield('Employees_activity')" 
+            {{--href="{{route('hr_list_Employees')}}"--}}
+            >Employees</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link @yield('Messaging_activity')" href="{{route('hr_messaging')}}">Messaging</a>
+            <a class="nav-link @yield('Trainings_activity')" 
+            {{--href="{{route('hr_list_trainings')}}"--}}
+            >Trainings</a>
             </li>
             <li class="nav-item">
             <a class="nav-link" href="#">Logout</a>

@@ -6,13 +6,19 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
         <li class="nav-item">
-          <a class="nav-link text-light @yield('activity1')" aria-current="page" href="{{route('hr_list_trainees')}}">Our trainees</a>
+          <a class="nav-link text-light @yield('activity1')" aria-current="page" 
+          {{--href="{{route('hr_list_trainees')}}"--}}
+          >Our trainees</a>
         </li>
         <li class="nav-item ">
-          <a class="nav-link text-light @yield('activity2')" aria-current="page" href="{{route('hr_university_students')}}">University students</a>
+          <a class="nav-link text-light @yield('activity2')" aria-current="page" 
+          {{--href="{{route('hr_university_students')}}"--}}
+          >University students</a>
         </li>
         <li class="nav-item ">
-          <a class="nav-link text-light @yield('activity3')" aria-current="page" href="{{route('hr_assign_trainees')}}">Assign trainers</a>
+          <a class="nav-link text-light @yield('activity3')" aria-current="page" 
+          {{--href="{{route('hr_assign_trainees')}}"--}}
+          >Assign trainers</a>
         </li>
       </ul>
 

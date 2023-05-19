@@ -2,7 +2,7 @@
 @section('navbar')
     @include('company_employee.hr.navbar')
 @endsection
-@section('employees_activity')
+@section('Trainings_activity')
     active
 @endsection
 @section('content')
@@ -11,17 +11,19 @@
     <div class="d-flex justify-content-between flex-sm-row flex-column mt-5">
         <div class="d-flex flex-row col-sm-7">
             <select class="form-select border-gray me-2 mb-2 txt-sm w-25" aria-label="Supervisor">
-                <option selected>Role</option>
-                <option value="1">HR</option>
-                <option value="2">Trainer</option>
-                <option value="3">Both</option>
+                <option selected>Semester</option>
+                <option value="HR">HR</option>
             </select>
             <select class="form-select border-gray me-2 mb-2 txt-sm w-25" aria-label="Company">
                 <option selected>Branch</option>
                 <option value="CS">CS</option>
             </select>
             <select class="form-select border-gray me-2 mb-2 txt-sm w-25" aria-label="Company">
-                <option selected>Department</option>
+                <option selected>Feild</option>
+                <option value="CS">CS</option>
+            </select>
+            <select class="form-select border-gray me-2 mb-2 txt-sm w-25" aria-label="Company">
+                <option selected>Trainer</option>
                 <option value="CS">CS</option>
             </select>
             <form class="input-group mb-2 h-50 w-50" role="searprimarych">
@@ -31,18 +33,19 @@
             </button>
             </form> 
         </div>
-        <a href="{{route('hr_add_Employee', ['company_id' => $company_id])}}"
+        <a 
+        {{--href="{{route('hr_add_training')}}"--}}
         class="btn btn-sm btn-primary bg-dark-blue text-light opacity-75 px-3 w-auto h-50">
-        Add Employee</a> 
+        Add Training</a> 
     </div>
         
-    {{-- Employees table--}}
+    {{-- Trainings table--}}
     <div class="table-responsive mt-3">
         <table class="table txt-sm table-hover">
         <thead class="bg-mid-sand">
             <tr class="rounded-top">
                 <td colspan="5"><label class="form-label mt-2 ms-3 fs-6">
-                Employees</label>
+                Trainings</label>
                 </td>
                 <td><button type="button" class="btn" 
                     data-bs-toggle="tooltip" data-bs-placement="top"
@@ -52,48 +55,25 @@
             </tr>
             <tr >
             <th scope="col" class="ps-3">Name</th>
-            <th scope="col">Role</th>
-            <th scope="col">Email</th>
-            <th scope="col">Phone</th>
-            <th scope="col">Trainees</th>
+            <th scope="col">Training Feild</th>
+            <th scope="col">Trainer</th>
+            <th scope="col">Branch</th>
+            <th scope="col">Details</th>
             <th scope="col">Delete</th> 
             </tr>
         </thead>
         <tbody class="bg-light">
-            @foreach ($employees_data as $employee)
             <tr>
-            <td class="ps-3"><a>{{$employee['first_name'].' '. $employee['last_name']}}</a></td>
-            <td>
-            @if ($employee['company_employee_role_id']==1)
-                hr
-            @elseif ($employee['company_employee_role_id']==2)
-                trainer
-            @elseif ($employee['company_employee_role_id']==3)
-                hr & trainer
-            @endif
-            </td>
-            <td>{{$employee['email']}}</td>
-            <td>{{$employee['phone']}}</td>
-            <td>
-            <div class="d-flex">
-                <div class="accordion" id="accordionExample">
-                    <div class="accordion-item">
-                        <h6 class="accordion-header">
-                        <button class="accordion-button collapsed txt-sm p-1" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">Trainees</button>
-                        </h6>
-                        <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                            <div class="accordion-body" style="max-height: 100px; overflow-y: auto;"><ul><li>hhhhhhhhhh</li><li>h</li><li>h</li><li>h</li></ul></div>
-                        </div>
-                    </div>
-                </div>
-                <button type="button" class="btn p-1 ms-1 h-auto"><i class="bi bi-box-arrow-up-right fs-6"></i></button>
-            </div>
-            </td>
+            <td class="ps-3">****</td>
+            <td>@mdo</td>
+            <td>****</td>
+            <td>@mdohhhhh</td>
+            <td>*</td>
             <td><button type="button" class="btn"><i class="bi bi-trash3 fs-6 text-danger"></i></button></td>
             </tr>
-            @endforeach
         </tbody>
         </table>
     </div>
 </div>
+
 @endsection

@@ -35,7 +35,7 @@ class Company extends Model
 
     public function trainings(): HasManyThrough
     {
-        return $this->hasManyThrough(Training::class, CompanyEmployee::class);
+        return $this->hasManyThrough(Training::class, CompanyBranch::class);
     }
     /*public function students()//trainees
     {

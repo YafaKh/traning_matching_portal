@@ -18,8 +18,6 @@ class ListController extends Controller
      */
     public function index($company_id)
     {
-        //select from student id, name , branch, Department, trainer, approval, progress, visit_form, evaluation, company_evaluation, 
-       /*$studentsData= */
        $company = Company:: findOrFail($company_id);
 
        $not_aaproved_students= $company->not_approved_students;

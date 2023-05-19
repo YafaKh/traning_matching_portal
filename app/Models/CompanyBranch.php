@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Training;
+use App\Models\Company;
 
 class CompanyBranch extends Model
 {
@@ -15,5 +16,9 @@ class CompanyBranch extends Model
     public function trainings()
     {
         return $this->hasMany(Training::class);
+    }
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
     }
 }

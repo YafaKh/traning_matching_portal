@@ -1,5 +1,4 @@
 @extends('company_employee.master')
-{{--
 @section('navbar')
     @include('company_employee.hr.navbar')
 @endsection
@@ -11,7 +10,7 @@
 @endsection
 @section('trainees_navbar')
     @include('company_employee.hr.trainees.trainees_navbar')
-@endsection--}}
+@endsection
 @section('content')
 <div class="px-5">
     {{--filters--}}

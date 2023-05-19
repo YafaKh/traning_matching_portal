@@ -12,10 +12,13 @@ use App\Models\EvaluateStudent;
 use App\Models\EvaluateCompany;
 use App\Models\Student;
 use App\Models\Progress;
+use App\Models\UnaddedCompanyEmployee;
 
 use Database\Seeders\UniversitySeeder;
 use Database\Seeders\SpecializationSeeder;
 use Database\Seeders\CompanyEmployeeRoleSeeder;
+use Database\Seeders\TrainingSeeder;
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -25,8 +28,11 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(UniversitySeeder::class);
         $this->call(SpecializationSeeder::class);
-        $companies=Company::factory()->count(4)->create();
+        $this->call(TrainingSeeder::class); // Move TrainingSeeder here
+
+        $companies = Company::factory()->count(4)->create();
         $this->call(CompanyEmployeeRoleSeeder::class);
+
         foreach ($companies as $company) {
             $branch_count = rand(1, 5);
             $branches = CompanyBranch::factory()->count($branch_count)->create();
@@ -35,29 +41,17 @@ class DatabaseSeeder extends Seeder
             $hr_count = rand(1, 3);
             $hr = CompanyEmployee::factory()->count($hr_count)->create();
             $company->employees()->saveMany($hr);
+
             $role = CompanyEmployeeRole::find(1); 
             $hr->each(function ($employee) use ($role) {
                 $employee->roles()->associate($role);
             });
-            foreach ($branches as $branch) 
-            {
-                $trainer_count = rand(1, 3);
-                $trainers = CompanyEmployee::factory()->count($trainer_count)->create();
-                $company->employees()->saveMany($trainers);
-
-                $training_count=rand(1, 5);
-                $trainings = Training::factory()->count($training_count)->create();
-                $trainings->each(function ($training) use ($trainers) {
-                    $trainer = $trainers->random();
-                    $training->company_employee_id = $trainer->id;
-                    $training->save();
-                });
-                $branch->trainings()->saveMany($trainings);
-            }
         }
+        $this->call(TrainingSeeder::class);
         EvaluateStudent::factory()->count(15)->create();
         EvaluateCompany::factory()->count(15)->create();
         Student::factory()->count(15)->create();
         Progress::factory()->count(25)->create();
+        UnaddedCompanyEmployee::factory()->count(10)->create();
     }
 }

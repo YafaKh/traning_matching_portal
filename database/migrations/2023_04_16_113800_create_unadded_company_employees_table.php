@@ -15,11 +15,14 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('email') ;
+            $table->char('phone', 15);
             $table->string('password', 45) ;
             $table->string('first_name', 45) ;
             $table->string('second_name', 45) ;
             $table->string('third_name', 45) ;
             $table->string('last_name', 45) ;
+            $table->string('image')->nullable();
+            $table->unsignedBigInteger('company_id');
         });
     }
 

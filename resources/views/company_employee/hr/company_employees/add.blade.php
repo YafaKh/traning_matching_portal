@@ -7,10 +7,27 @@
 @endsection
 @section('content')
 <div class="pt-3 d-flex flex-column">
-    <div class="d-flex flex-column px-6 py-4 my-3 col-md-7 col-11 mx-auto rounded-4 shadow bg-white  txt-dark-sand">
-        <label class="form-label mt-2 ms-1 fs-5" for="email">Emploee Email: </label>
-        <input type="text" class="form-control mb-4 ps-4" id="email">
-        <button type="submit" class="btn w-25 mx-auto btn-primary bg-dark-blue text-light">Add</button>      
-    </div>
+    <form enctype="multipart/form-data" action="{{route('hr_store_Employee', ['company_id' => $company_id])}}" method="POST">
+        @csrf
+        <div class="d-flex flex-column px-6 py-4 my-3 col-md-7 col-11 mx-auto rounded-4 shadow bg-white  txt-dark-sand">
+            <label class="form-label mt-2 ms-1 fs-5" for="employee">Emploee Email: </label>
+            <select class="form-select mb-4 ps-4" aria-label="Supervisor" name="employee">
+                <option selected>Email</option>
+                @foreach($un_added_employees as $un_added_employee)
+                <option value="{{$un_added_employee['id']}}">
+                    {{$un_added_employee['email']}}
+                </option>
+                @endforeach
+            </select>
+            <label class="form-label mt-2 ms-1 fs-5" for="erolemail">Role: </label>
+            <select class="form-select mb-4 ps-4" aria-label="Role" name="role">
+                <option selected>Role</option>
+                <option value="1">HR</option>
+                <option value="2">Trainer</option>
+                <option value="3">Both</option>
+            </select>
+            <button type="submit" class="btn w-25 mx-auto btn-primary bg-dark-blue text-light">Add</button>      
+        </div>
+    </form>
 </div>
 @endsection
