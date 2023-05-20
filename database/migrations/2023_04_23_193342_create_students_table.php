@@ -32,7 +32,7 @@ return new class extends Migration
             $table->date('availability_date') ;
             $table->boolean('connected_with_a_company')->default(0);
             $table->string('connected_company_info', 100)->nullable();
-            $table->string('phone', 15) ;
+            $table->string('phone', 20) ;
             $table->boolean('registered')->nullable(false)->default(0);
             $table->string('image')->nullable();
             $table->unsignedBigInteger('university_id');

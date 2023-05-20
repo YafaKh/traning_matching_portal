@@ -2,12 +2,12 @@
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use App\Models\University;
 use App\Models\Specialization;
 use App\Models\Training;
 use App\Models\Student;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Student>
@@ -48,7 +48,7 @@ class StudentFactory extends Factory
             'availability_date' => $this->faker->date(),
             'connected_with_a_company' => $this->faker->boolean,
             'connected_company_info' => $this->faker->text(100),
-            'phone' => $this->faker->phoneNumber,
+            'phone' => Str::substr($this->faker->phoneNumber, 0, 15),
             'registered' => $this->faker->boolean,
             'image' => $this->faker->imageUrl(),
             'university_id' => $this->faker->randomElement($university_ids),

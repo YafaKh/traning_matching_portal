@@ -15,7 +15,7 @@
 
       <div class="uploadImage">
         <input type="file" name="changeImage" id="" class="changeImage">
-        <i class="fa-solid fa-camera fa-xl"></i>
+        <i class="bi bi-camera-fill fs-3"></i>
 
       </div>
     </div>

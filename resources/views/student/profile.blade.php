@@ -4,21 +4,22 @@
 @endsection
 @section('content')
 <section class="profileSection">
-    <div class="studentHeader">
-      <h1>studentName*</h1>
+ 
+  <div class="studentHeader">
+      <h1>{{$student->first_name_en}} {{$student->last_name_en}}</h1>
       <img src="{{asset('images/userImg2.png')}}" alt="student Image">
     </div>
     <div class="studentInfos">
-      <p class="studentInfo"><i class="fa-solid fa-laptop icon"></i>specialization</p>
-      <p class="studentInfo"><i class="fa-solid fa-location-dot icon"></i>Address</p>
-      <p class="studentInfo"><i class="fa-solid fa-envelope icon"></i>Email*</p>
-      <p class="studentInfo"><i class="fa-solid fa-phone icon"></i>Phone</p>
-      <p class="studentInfo"><i class="fa-brands fa-linkedin icon"></i>Linkedin</p>
-      <a class="btn editBtn" href="#" role="button">Edit Profile</a>
-
+      <p class="studentInfo"><i class="bi bi-laptop-fill icon"></i>{{$specializationName}}</p>
+      <p class="studentInfo"><i class="bi bi-geo-alt-fill icon"></i>{{$student->address}}</p>
+      <p class="studentInfo"><i class="bi bi-envelope-fill icon"></i>{{$student->email}}</p>
+      <p class="studentInfo"><i class="bi bi-telephone-fill icon"></i>{{$student->phone}}</p>
+      <!-- <p class="studentInfo"><i class="bi bi-linkedin icon"></i>{{$student->address}}Linkedin</p>we need to add this to database -->
+      <a class="btn editBtn" href="{{route('edit_student_profile')}}" role="button">Edit Profile</a>
     </div>
   </section>
   <section class="profileSection">
+    <!-- we need to add this to datebase -->
     <div class="workExperience">
       <h1>Work experience</h1>
       <div class="mt-4">
@@ -49,83 +50,50 @@
   </section>
   <section class="profileSection studentSkills overflow-auto">
     <h2 class="GeneralInfoHeader">General information</h2>
-    <p>Gender: Female</p>
-    <p>GPA : 4.00</p>
-    <p>number of passed hours : 115</p>
+    <p>Gender: {{$student->gender}}</p>
+    <p>GPA : {{$student->gpa}}</p>
+    <p>number of passed hours : {{$student->passed_hours}}</p>
     
 
 
   </section>
   <section class="profileSection studentSkills overflow-auto">
     <h2 class="GeneralInfoHeader">Skills</h2>
+    @foreach($allSkills as $allSkill)
+
     <div class="skill">
-      <p>Lorem, ipsum:</p>
+      <p>{{$allSkill->name}}</p>
       <input type="range" min="1" max="100" value="70" class="w-25" disabled>
     </div>
-    <div class="skill">
-      <p>Lorem, ipsum:</p>
-      <input type="range" min="1" max="100" value="50" class="w-25" disabled>
-    </div>
-    <div class="skill">
-      <p>Lorem, ipsum:</p>
-      <input type="range" min="1" max="100" value="90" class="w-25" disabled>
-    </div>
-    <div class="skill">
-      <p>Lorem, ipsum:</p>
-      <input type="range" min="1" max="100" value="30" class="w-25"disabled>
-    </div>
-    <div class="skill">
-      <p>Lorem, ipsum:</p>
-      <input type="range" min="1" max="100" value="50" class="w-25" disabled>
-    </div>
-    <div class="skill" >
-      <p>Lorem, ipsum:</p>
-      <input type="range" min="1" max="100" value="90" class="w-25" disabled>
-    </div>
-    <div class="skill">
-      <p>Lorem, ipsum:</p>
-      <input type="range" min="1" max="100" value="30" class="w-25" disabled>
-    </div>
-    <div class="skill">
-      <p>Lorem, ipsum:</p>
-      <input type="range" min="1" max="100" value="50" class="w-25" disabled>
-    </div>
-    <div class="skill">
-      <p>Lorem, ipsum:</p>
-      <input type="range" min="1" max="100" value="50" class="w-25" disabled>
-    </div>
+    @endforeach
 
 
 
   </section>
   <section class="profileSection studentSkills overflow-auto">
     <h2 class="GeneralInfoHeader">Spoken language</h2>
+    @foreach($allLanguages as $allLanguage)
+
     <div class="skill">
-      <p>Arabic</p>
+      <p>{{$allLanguage -> name}}</p>
       <input type="range" min="1" max="100" value="50" class="w-25">
     </div>
-    <div class="skill">
-      <p>English</p>
-      <input type="range" min="1" max="100" value="50" class="w-25">
-    </div>
+    @endforeach
     
   </section>
   <!-- if there is no athor skills or languages the button will disabled  -->
 
   <section class="profileSection studentSkills overflow-auto">
     <h2 class="GeneralInfoHeader">Additional information</h2>
-    <div class="info"><!--there is another potintioal ansowers-->
-      <h3>Am I in contact with a specific company:</h3>
-      <p> no</p>
-    </div>
-    <div class="info">
-      <h3>Company information:</h3>
-      <p> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatum, tenetur!</p>
-    </div>
     <div class="info">
       <h3>Preferred city for training:</h3>
       <p> Nablus ,Jenin</p>
-
+    </div>
+    <div class="info">
+      <h3>Preferred city for training:</h3>
+      @foreach($allpreferredTrainingFields as $allpreferredTrainingField)
+      <p>{{$allpreferredTrainingField -> name}}</p>
+      @endforeach
     </div>
     <div class="info">
       <h3>Preferred companies:</h3>
@@ -139,7 +107,7 @@
     </div>
     <div class="info">
       <h3>when available:</h3>
-    <p> Dec-2023</p>
+    <p> {{$student->availability_date}}</p>
    
     </div>
 
