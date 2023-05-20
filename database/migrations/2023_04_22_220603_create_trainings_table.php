@@ -20,12 +20,11 @@ return new class extends Migration
             $table->integer('semester')->length(1);
             $table->string('training_feild',45)->nullable();
             $table->string('details')->nullable()->nullable();
-
-
             $table->unsignedBigInteger('company_employee_id')->nullable();
             $table->unsignedBigInteger('company_branch_id')->nullable();
             $table->foreign('company_employee_id')->references('id')->on('company_employees');
             $table->foreign('company_branch_id')->references('id')->on('company_branches');
+
         });
     }
 

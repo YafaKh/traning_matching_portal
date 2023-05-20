@@ -103,18 +103,23 @@ Route::prefix('/{company_id}/hr')->group(function(){
 //students' routes
 
 Route::prefix('/student')->group(function () {
-    Route::get('/registeration',[StudentRegisterController::class,'create'])->name('student_registeration_1');
+    Route::get('/registeration{id}',[StudentRegisterController::class,'create'])->name('student_registeration_1');
     Route::get('/registeration_2',[StudentRegisterController::class,'createNextPage'])->name('student_registeration_2');
-    Route::get('/profile',[StudentProfileController::class,'show'])->name('student_profile');
+    Route::get('/profile{id}',[StudentProfileController::class,'show'])->name('student_profile');
     Route::get('/edit_profile',[EditStudentProfileController::class,'show'])->name('edit_student_profile');
     Route::get('/evaluate_company',[EvaluateCompanyController::class,'show'])->name('student_evaluate_company');
-    Route::get('/list',[StudentRegisterController::class,'test'])->name('test');
+    Route::get('/list{id}',[StudentRegisterController::class,'test'])->name('test');
 
 })->name('student');
 
 
+// Route::post('/store',[StudentRegisterController::class,'store'])->name('student_store');
 
-Route::post('/store',[StudentRegisterController::class,'store'])->name('student_store');
+Route::post('store{id}',[StudentRegisterController::class,'addManyLanguageToStudent'])->name('student_store');
+// Route::post('/lang-save',[StudentRegisterController::class,'addManyLanguageToStudent'])->name('student_storing_languge');
+
+// Route::get('listSpec{id}',[StudentProfileController::class,'getSpecification'])->name('student_spec_list');
+
 
 // admin 
 Route::prefix('/admin')->group(function () {

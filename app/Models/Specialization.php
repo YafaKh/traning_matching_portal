@@ -9,8 +9,15 @@ use App\Models\Student;
 class Specialization extends Model
 {
     use HasFactory;
+
+    protected $table ="specializations";
+    protected $fillable = ['name','university_id'];
+    protected $hidden = ['created_at','updated_at'];
+   
     public function students()
     {
-        return $this->hasMany(Student::class);
+        return $this->hasMany('App\Models\Student','specialization_id');
     }
+    
+
 }

@@ -8,23 +8,27 @@ use App\Models\Training;
 use App\Models\EvaluateStudent;
 use App\Models\EvaluateCompany;
 use App\Models\Progress;
+
 use App\Models\University;
 use App\Models\Specialization;
 use App\Models\StudentCompanyApproval;
+
+// use App\Models\Spoken_language;
+
 
 class Student extends Model
 {
     use HasFactory;
     protected $table ="students";
     protected $fillable = ['student_num',
-    'first_arabic_name',
-    'first_english_name',
-    'second_arabic_name',
-    'second_english_name',
-    'third_arabic_name',
-    'third_english_name',
-    'last_arabic_name',
-    'last_english_name',
+    'first_name_ar',
+    'first_name_en',
+    'second_name_ar',
+    'second_name_en',
+    'third_name_ar',
+    'third_name_en',
+    'last_name_ar',
+    'last_name_en',
     'gender',
     'passed_hours',
     'gpa',
@@ -36,16 +40,14 @@ class Student extends Model
     'connected_with_a_company',
     'connected_company_info',
     'phone',
-    'image'];
-    protected $hidden = ['created_at','updated_at','pivot'];
+    'image',
+    'university_id',
+    'specialization_id',
+    'training_id'];
+    protected $hidden = ['created_at','updated_at'];
     public function university()
     {
         return $this->belongsTo(University::class);
-    }
-
-    public function specialization()
-    {
-        return $this->belongsTo(Specialization::class, 'specialization_id');
     }
 
     // public function training()
@@ -53,10 +55,27 @@ class Student extends Model
     //     return $this->belongsTo(Training::class);
     // }
 
+    //many to many
      public function spoken_languages()
     {
-        return $this->belongsToMany(Spoken_languages::class,'students_spoken_languages','student_id','spoken_language_id');
+        return $this->belongsToMany('App\Models\Spoken_language','students_spoken_languages','student_id','spoken_language_id'); //'pivot','fk:for this table','fk:for other table'
     }
+    public function skills()
+    {
+        return $this->belongsToMany('App\Models\Skill','students_skills','student_id','skill_id');
+    }
+    public function preferred_training_fields()
+    {
+        return $this->belongsToMany('App\Models\Preferred_training_field','preferred_training_fields_students','student_id','preferred_training_id');
+    }
+
+    //one to many
+    public function specializations()
+    {
+        return $this->belongsTo('App\Models\Specialization','specialization_id');
+    }
+   
+
     public function evaluate_student()
     {
         return $this->hasOne(EvaluateStudent::class);

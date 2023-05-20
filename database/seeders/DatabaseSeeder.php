@@ -12,7 +12,13 @@ use App\Models\EvaluateStudent;
 use App\Models\EvaluateCompany;
 use App\Models\Student;
 use App\Models\Progress;
+
 use App\Models\UnaddedCompanyEmployee;
+use App\Models\Spoken_language;
+use App\Models\Student_spoken_language;
+use App\Models\Skill;
+use App\Models\Student_Skill;
+
 
 use Database\Seeders\UniversitySeeder;
 use Database\Seeders\SpecializationSeeder;
@@ -53,5 +59,11 @@ class DatabaseSeeder extends Seeder
         Student::factory()->count(15)->create();
         Progress::factory()->count(25)->create();
         UnaddedCompanyEmployee::factory()->count(10)->create();
+        Spoken_language::factory()->count(2)->create();
+        Student_spoken_language::factory()->count(2)->create();
+        Skill::factory()->count(5)->create();
+        Student_Skill::factory()->count(5)->create();
+
+
     }
 }
