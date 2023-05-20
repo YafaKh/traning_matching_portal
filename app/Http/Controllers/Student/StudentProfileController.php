@@ -15,15 +15,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class StudentProfileController extends Controller
 {
-    //
+    //activity louk
     public function show($id){
-       
+       dd(Student::with('spoken_languages')->find(7)->spoken_languages->pivot->speaking_level);
           $student =Student::find($id);
           $spoken_languages = $student ->spoken_languages;
           $students =Student::select('id')->get();
           $allLanguages = Spoken_language::select('id','name')->get();
 
-          $specializationName = $student->specializations->name ?? null;
+          $specializationName = $student->specializations->name;
           
           $skills = $student->skills;
           $allSkills = Skill::select('id','name')->get();
@@ -33,7 +33,8 @@ class StudentProfileController extends Controller
           
           return view('student.profile',compact('student','specializationName','skills','spoken_languages','students','allLanguages','allSkills','allpreferredTrainingFields'));
 
+
+      //     
     }
-   
-  
+     
 }
