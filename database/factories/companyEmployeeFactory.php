@@ -28,7 +28,7 @@ class companyEmployeeFactory extends Factory
     public function definition()
     {
         //$company_ids = Company::pluck('id')->all();
-        //$company_role_ids = CompanyEmployeeRole::pluck('id')->all();
+        $company_role_ids = CompanyEmployeeRole::pluck('id')->all();
         return [
             'email' => $this->faker->unique()->safeEmail,
             'password' => bcrypt('password'),
@@ -40,7 +40,7 @@ class companyEmployeeFactory extends Factory
             'image' => $this->faker->imageUrl(),
             'contact_person' => $this->faker->boolean,
             //'company_id' => $this->faker->randomElement($company_ids),
-            //'employees_roles' => $this->faker->randomElement($company_role_ids),
+            'company_employee_role_id' => $this->faker->randomElement($company_role_ids),
         ];
     }
 }

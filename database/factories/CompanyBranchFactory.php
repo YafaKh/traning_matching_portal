@@ -21,7 +21,7 @@ class CompanyBranchFactory extends Factory
     {
         //$company_ids = Company::pluck('id')->all();
         return [
-            'address' => Str::substr($this->faker->address,15),
+            'address' => Str::substr($this->faker->address,1,10),
             //'company_id' =>  $this->faker->randomElement($company_ids),
         ];
     }

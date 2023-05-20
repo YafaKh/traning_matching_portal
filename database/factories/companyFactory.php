@@ -23,7 +23,7 @@ class CompanyFactory extends Factory
     {
         return [
             'name' => $this->faker->company,
-            'Industry' => $this->faker->text(20),
+            'Industry' => $this->faker->text(10),
             'description' => $this->faker->text(200),
             'website' => $this->faker->url(44),
             'linkedin' => $this->faker->url,

@@ -13,6 +13,8 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CompanyEmployee\HR\Trainees\UniversityStudentsController;
 use App\Http\Controllers\CompanyEmployee\HR\Trainees\TraineesTrainingController;
 use App\Http\Controllers\CompanyEmployee\HR\CompanyEmployeeController;
+use App\Http\Controllers\CompanyEmployee\HR\TrainingController;
+use App\Http\Controllers\CompanyEmployee\HR\CompanyProfileController;
 
 Route::get('/', function () {
     return view('/all_users/login');
@@ -73,13 +75,9 @@ Route::get('company_employee/register',[RegisterController::class,'create'])->na
 Route::post('company_employee/register/store',[RegisterController::class,'store'])->name('company_employee_store');
 
 Route::prefix('/{company_id}/hr')->group(function(){
-    Route::get('/company_profile', function ($id) {
-        return view('/company_employee/hr/company_profile');
-    })->name('hr_company_profile');
+    Route::get('/company_profile', [CompanyProfileController::class, 'index'])->name('hr_company_profile');
 
-    Route::get('/edit_company_profile', function ($id) {
-        return view('/company_employee/hr/edit_company_profile');
-    })->name('hr_edit_company_profile');
+    Route::get('/edit_company_profile', [CompanyProfileController::class, 'edit'])->name('hr_edit_company_profile');
 
     Route::prefix('/trainees')->group(function(){
         Route::get('/list', [ListController1::class, 'index'])->name('hr_list_trainees');
@@ -91,15 +89,14 @@ Route::prefix('/{company_id}/hr')->group(function(){
 
     Route::prefix('/company_employees')->group(function(){
         Route::get('/', [CompanyEmployeeController::class,'index'])->name('hr_list_Employees');
-        Route::get('/add', [CompanyEmployeeController::class,'create'])->name('hr_add_Employee');
+        Route::get('/create', [CompanyEmployeeController::class,'create'])->name('hr_add_Employee');
         Route::post('/store', [CompanyEmployeeController::class,'store'])->name('hr_store_Employee');
     });
 
     Route::prefix('/trainings')->group(function(){
-        Route::get('/', function ($id) {
-            return view('company_employee/hr/trainings/list'); })->name('hr_list_trainings');
-        Route::get('/add', function ($id) {
-        return view('company_employee/hr/trainings/add'); })->name('hr_add_training');
+        Route::get('/', [TrainingController::class,'index'])->name('hr_list_trainings');
+        Route::get('/create', [TrainingController::class,'create'])->name('hr_add_training');
+        Route::post('/store', [TrainingController::class,'store'])->name('hr_store_training');
     });
 });
 

@@ -34,13 +34,14 @@ class ListController extends Controller
                     'last_name_en' => $student->last_name_en,
                     'training_name' => $training->name,
                     'training_branch' => $training->branch->address,
-                    'trainer_first_name' => $training->employee->first_name,
-                    'trainer_last_name' => $training->employee->last_name,
+                    'trainer_first_name' => $training->employee->first_name ?? '',
+                    'trainer_last_name' => $training->employee->last_name ?? '',
                 ];
             }
         }
         return view('company_employee.hr.trainees.list',
          ['students_data' => $students_data,
-          'not_aaproved_students' => $not_aaproved_students]);
+          'not_aaproved_students' => $not_aaproved_students,
+          'company_id' => $company_id]);
     }
 }

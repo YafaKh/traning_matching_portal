@@ -10,19 +10,22 @@
     {{--filters--}}
     <div class="d-flex justify-content-between flex-sm-row flex-column mt-5">
         <div class="d-flex flex-row col-sm-7">
-            <select class="form-select border-gray me-2 mb-2 txt-sm w-25" aria-label="Supervisor">
+            <select select class="form-select border-gray me-2 mb-2 txt-sm w-25" aria-label="Supervisor">
                 <option selected>Semester</option>
-                <option value="HR">HR</option>
+                <option value="1">Fall</option>
+                <option value="2">Spring</option>
+                <option value="3">First Summer</option>
+                <option value="4">Second Summer</option>
             </select>
-            <select class="form-select border-gray me-2 mb-2 txt-sm w-25" aria-label="Company">
+            <select class="form-select border-gray me-2 mb-2 txt-sm w-25" >
                 <option selected>Branch</option>
                 <option value="CS">CS</option>
             </select>
-            <select class="form-select border-gray me-2 mb-2 txt-sm w-25" aria-label="Company">
+            <select class="form-select border-gray me-2 mb-2 txt-sm w-25">
                 <option selected>Feild</option>
                 <option value="CS">CS</option>
             </select>
-            <select class="form-select border-gray me-2 mb-2 txt-sm w-25" aria-label="Company">
+            <select class="form-select border-gray me-2 mb-2 txt-sm w-25">
                 <option selected>Trainer</option>
                 <option value="CS">CS</option>
             </select>
@@ -33,8 +36,7 @@
             </button>
             </form> 
         </div>
-        <a 
-        {{--href="{{route('hr_add_training')}}"--}}
+        <a href="{{route('hr_add_training', ['company_id' => $company_id])}}"
         class="btn btn-sm btn-primary bg-dark-blue text-light opacity-75 px-3 w-auto h-50">
         Add Training</a> 
     </div>
@@ -63,14 +65,23 @@
             </tr>
         </thead>
         <tbody class="bg-light">
+            @foreach($trainings_data as $training)
             <tr>
-            <td class="ps-3">****</td>
-            <td>@mdo</td>
-            <td>****</td>
-            <td>@mdohhhhh</td>
-            <td>*</td>
-            <td><button type="button" class="btn"><i class="bi bi-trash3 fs-6 text-danger"></i></button></td>
+            <td class="ps-3">{{$training['name']}}</td>
+            <td>{{$training['training_feild']}}</td>
+            <td>{{ $training->employee['first_name'] ?? '' }} 
+                {{ $training->employee['last_name'] ?? '' }}</td>
+            <td>{{$training->branch->address}}</td>
+            <td style="vertical-align: top;">
+                <a class="btn btn-link txt-sm" data-bs-toggle="collapse" href="#details{{$training['id']}}" 
+                    aria-expanded="false" aria-controls="details{{$training['id']}}">Show more</a>
+                <div class="collapse" id="details{{$training['id']}}">
+                    <div class="card card-body" style="width: 300px;">{{$training['details']}}</div>
+                </div>
+            </td>
+            <td><a type="button" class="btn"><i class="bi bi-trash3 fs-6 text-danger"></i></a></td>
             </tr>
+            @endforeach
         </tbody>
         </table>
     </div>
