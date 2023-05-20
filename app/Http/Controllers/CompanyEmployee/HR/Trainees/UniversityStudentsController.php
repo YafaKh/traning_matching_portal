@@ -19,7 +19,7 @@ class UniversityStudentsController extends Controller
     {
         //to edit Remove approved ones and ones who already sensed a req.
         $students = Student::select('id', 'first_name_en', 'last_name_en', 'gpa'
-        , 'load', 'availability_date', 'specialization_id')->get();
+        , 'load', 'availability_date', 'specialization_id')->paginate(6);
 
     return view('company_employee.hr.trainees.university_students', [
         'students' => $students,

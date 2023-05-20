@@ -80,7 +80,7 @@ Route::prefix('/{company_id}/hr')->group(function(){
     Route::get('/edit_company_profile', [CompanyProfileController::class, 'edit'])->name('hr_edit_company_profile');
 
     Route::prefix('/trainees')->group(function(){
-        Route::get('/list', [ListController1::class, 'index'])->name('hr_list_trainees');
+        Route::get('/', [ListController1::class, 'index'])->name('hr_list_trainees');
         Route::get('/university_students',[UniversityStudentsController::class,'index'])->name('hr_university_students');
         Route::get('/add_trainee/{student_id}', [UniversityStudentsController::class, 'add'])->name('hr_add_trainee');
         Route::get('/trainees_trainings', [TraineesTrainingController::class,'index'])->name('hr_trainees_trainings');
