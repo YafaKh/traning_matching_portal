@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Company;
 use App\Models\Student;
 
-class TraineesTrainingController extends Controller
+class AssignTrainingController extends Controller
 {
      /**
      * @param  int  $id
@@ -37,7 +37,7 @@ class TraineesTrainingController extends Controller
                 }
             }
         }
-        return view('company_employee.hr.trainees.trainees_trainings', [
+        return view('company_employee.hr.trainees.assign_trainings', [
             'unengaged_students' => $unengaged_students,
             'engaged_students' => $engaged_students,
             'company_id' => $company_id
@@ -57,6 +57,6 @@ class TraineesTrainingController extends Controller
         Student::find($student_id)
         ->update(['training_id' => $request->input('tarining')]);
 
-        return redirect()->route('hr_trainees_trainings', ['company_id' => $company_id]);
+        return redirect()->route('hr_assign_trainings', ['company_id' => $company_id]);
     }
 }

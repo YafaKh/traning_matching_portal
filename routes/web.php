@@ -11,7 +11,7 @@ use App\Http\Controllers\CompanyEmployee\RegisterController;
 use App\Http\Controllers\CompanyEmployee\HR\Trainees\ListController as ListController1;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CompanyEmployee\HR\Trainees\UniversityStudentsController;
-use App\Http\Controllers\CompanyEmployee\HR\Trainees\TraineesTrainingController;
+use App\Http\Controllers\CompanyEmployee\HR\Trainees\AssignTrainingController;
 use App\Http\Controllers\CompanyEmployee\HR\CompanyEmployeeController;
 use App\Http\Controllers\CompanyEmployee\HR\TrainingController;
 use App\Http\Controllers\CompanyEmployee\HR\CompanyProfileController;
@@ -83,8 +83,8 @@ Route::prefix('/{company_id}/hr')->group(function(){
         Route::get('/', [ListController1::class, 'index'])->name('hr_list_trainees');
         Route::get('/university_students',[UniversityStudentsController::class,'index'])->name('hr_university_students');
         Route::get('/add_trainee/{student_id}', [UniversityStudentsController::class, 'add'])->name('hr_add_trainee');
-        Route::get('/trainees_trainings', [TraineesTrainingController::class,'index'])->name('hr_trainees_trainings');
-        Route::get('/assign_training/{student_id}', [TraineesTrainingController::class,'add'])->name('hr_assign_training');
+        Route::get('/assign_trainings', [AssignTrainingController::class,'index'])->name('hr_assign_trainings');
+        Route::get('/assign_training/{student_id}', [AssignTrainingController::class,'add'])->name('hr_assign_training');
     });
 
     Route::prefix('/company_employees')->group(function(){

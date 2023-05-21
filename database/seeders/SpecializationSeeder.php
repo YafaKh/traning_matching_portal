@@ -25,7 +25,7 @@ class SpecializationSeeder extends Seeder
                 'university_id' => 1,
             ],
             [
-                'name' => 'Computer Science',
+                'name' => 'Geographic Information System',
                 'university_id' => 1,
             ],
             [
