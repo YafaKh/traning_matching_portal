@@ -54,9 +54,9 @@ class DatabaseSeeder extends Seeder
             });
         }
         $this->call(TrainingSeeder::class);
-        EvaluateStudent::factory()->count(15)->create();
-        EvaluateCompany::factory()->count(15)->create();
-        Student::factory()->count(15)->create();
+        EvaluateStudent::factory()->count(20)->create();
+        EvaluateCompany::factory()->count(20)->create();
+        Student::factory()->count(20)->create();
         Progress::factory()->count(25)->create();
         UnaddedCompanyEmployee::factory()->count(10)->create();
         Spoken_language::factory()->count(2)->create();

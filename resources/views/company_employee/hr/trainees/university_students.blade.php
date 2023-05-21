@@ -43,8 +43,9 @@
         </select>
 
         <button type="button" class="btn bg-mid-sand p-0 mb-2 me-2"
-                data-bs-toggle="tooltip" data-bs-placement="top"
-                data-bs-title="Add selected"><i class="bi bi-plus-square fs-4 my-0"></i></button>
+            data-bs-toggle="tooltip" data-bs-placement="top"
+            data-bs-title="Add selected"><i class="bi bi-plus-square fs-4 my-0"></i>
+        </button>
     </div>
 
             
@@ -86,7 +87,6 @@
     {{$students->links()}}
 </div>
 {{-- jquery cdn --}}
-<script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
 <script>
     $(document).ready(function() {
         // Event listener for filter change

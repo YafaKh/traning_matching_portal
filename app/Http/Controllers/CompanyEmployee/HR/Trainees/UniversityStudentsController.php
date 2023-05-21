@@ -20,7 +20,7 @@ class UniversityStudentsController extends Controller
     {
         //to edit Remove approved ones and ones who already sensed a req.
         $students = Student::select('id', 'first_name_en', 'last_name_en', 'gpa'
-        , 'load', 'availability_date', 'specialization_id')->paginate(6);
+        , 'load', 'availability_date', 'specialization_id')->paginate(15);
 
         //for fillters:
         $specializations =Specialization::select('name')->get();
