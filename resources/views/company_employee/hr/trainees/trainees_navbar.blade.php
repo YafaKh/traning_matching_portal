@@ -17,7 +17,7 @@
         </li>
         <li class="nav-item ">
           <a class="nav-link text-light @yield('activity3')" aria-current="page" 
-          href="{{route('hr_trainees_trainings', ['company_id' => $company_id])}}"
+          href="{{route('hr_assign_trainings', ['company_id' => $company_id])}}"
           >Assign trainers</a>
         </li>
       </ul>

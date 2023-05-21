@@ -39,8 +39,12 @@ class ListController extends Controller
                 ];
             }
         }
+
+        //filters data
+        
         return view('company_employee.hr.trainees.list',
-         ['students_data' => $students_data,
+         ['trainings_data' => $trainings,
+          'students_data' => $students_data,
           'not_aaproved_students' => $not_aaproved_students,
           'company_id' => $company_id]);
     }

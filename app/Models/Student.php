@@ -70,7 +70,7 @@ class Student extends Model
     }
 
     //one to many
-    public function specializations()
+    public function specialization()
     {
         return $this->belongsTo('App\Models\Specialization','specialization_id');
     }

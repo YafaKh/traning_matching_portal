@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Student;
 use App\Models\StudentCompanyApproval;
+use App\Models\Specialization;
 
 class UniversityStudentsController extends Controller
 {
@@ -21,9 +22,12 @@ class UniversityStudentsController extends Controller
         $students = Student::select('id', 'first_name_en', 'last_name_en', 'gpa'
         , 'load', 'availability_date', 'specialization_id')->paginate(6);
 
-    return view('company_employee.hr.trainees.university_students', [
+        //for fillters:
+        $specializations =Specialization::select('name')->get();
+        return view('company_employee.hr.trainees.university_students', [
         'students' => $students,
-        'company_id' => $company_id
+        'company_id' => $company_id,
+        'specializations' => $specializations
         ]);
     }
 
