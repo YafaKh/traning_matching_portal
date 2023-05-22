@@ -8,8 +8,6 @@ use App\Models\CompanyBranch;
 use App\Models\CompanyEmployee;
 use App\Models\CompanyEmployeeRole;
 use App\Models\Training;
-use App\Models\EvaluateStudent;
-use App\Models\EvaluateCompany;
 use App\Models\Student;
 use App\Models\Progress;
 
@@ -54,8 +52,6 @@ class DatabaseSeeder extends Seeder
             });
         }
         $this->call(TrainingSeeder::class);
-        EvaluateStudent::factory()->count(20)->create();
-        EvaluateCompany::factory()->count(20)->create();
         Student::factory()->count(20)->create();
         Progress::factory()->count(25)->create();
         UnaddedCompanyEmployee::factory()->count(10)->create();

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Student;
 use App\Models\StudentCompanyApproval;
 use App\Models\Specialization;
+use App\Models\Company;
 
 class UniversityStudentsController extends Controller
 {
@@ -19,9 +20,12 @@ class UniversityStudentsController extends Controller
     public function index($company_id)
     {
         //to edit Remove approved ones and ones who already sensed a req.
-        $students = Student::select('id', 'first_name_en', 'last_name_en', 'gpa'
-        , 'load', 'availability_date', 'specialization_id')->paginate(15);
+        $company = Company:: findOrFail($company_id);
 
+        
+        $students = Student::whereNotIn('id', $company->not_approved_students->pluck('student_id'))
+        ->select('id', 'first_name_en', 'last_name_en', 'gpa'
+        , 'load', 'availability_date', 'specialization_id') ->paginate(15);
         //for fillters:
         $specializations =Specialization::select('name')->get();
         return view('company_employee.hr.trainees.university_students', [
@@ -44,7 +48,7 @@ class UniversityStudentsController extends Controller
             'company_id' => $company_id,
             'student_id' => $student_id,
         ]);
-
+//to edit, add many
         return redirect()->route('hr_university_students', ['company_id' => $company_id]);
     }
 }

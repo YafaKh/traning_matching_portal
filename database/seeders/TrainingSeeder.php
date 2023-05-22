@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 use App\Models\Training;
 use App\Models\CompanyBranch;
 use App\Models\CompanyEmployee;
+use App\Models\Student;
 
 class TrainingSeeder extends Seeder
 {
@@ -19,10 +20,12 @@ class TrainingSeeder extends Seeder
         // Create "Unengaged Trainees" training for each company branch
         //to save new students temporary
         CompanyBranch::all()->each(function ($companyBranch) {
-            $companyBranch->trainings()->create([
+            $unengaged_training =$companyBranch->trainings()->create([
                 'name' => 'Unengaged Trainees',
                 'semester' => 1,
             ]);
+            $unengaged_students = Student::factory()->count(4)->create(); 
+            $unengaged_training->students()->saveMany($unengaged_students);
         // Create additional fake trainings with trainers
             $trainer_count = rand(1, 3);
             $trainers = CompanyEmployee::factory()->count($trainer_count)->create();
