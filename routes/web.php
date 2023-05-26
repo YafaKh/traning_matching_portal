@@ -83,8 +83,9 @@ Route::prefix('/{company_id}/hr')->group(function(){
         Route::get('/', [ListController1::class, 'index'])->name('hr_list_trainees');
         Route::get('/university_students',[UniversityStudentsController::class,'index'])->name('hr_university_students');
         Route::get('/add_trainee/{student_id}', [UniversityStudentsController::class, 'add'])->name('hr_add_trainee');
-        Route::get('/assign_trainings', [AssignTrainingController::class,'index'])->name('hr_assign_trainings');
-        Route::get('/assign_training/{student_id}', [AssignTrainingController::class,'add'])->name('hr_assign_training');
+        Route::get('/assign_trainings', [AssignTrainingController::class,'index'])->name('hr_manage_trainings');
+        Route::post('/assign_training/{student_id}', [AssignTrainingController::class,'add'])->name('hr_assign_training');
+        Route::get('/unassign_training/{student_id}', [AssignTrainingController::class,'delete'])->name('hr_unassign_training');
     });
 
     Route::prefix('/company_employees')->group(function(){

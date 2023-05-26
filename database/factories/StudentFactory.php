@@ -61,7 +61,7 @@ class StudentFactory extends Factory
             'image' => $this->faker->imageUrl(),
             'university_id' => $this->faker->randomElement($university_ids),
             'specialization_id' => $this->faker->randomElement($specialization_ids),
-            'training_id' => $this->faker->randomElement($training_ids),
+            //'training_id' => $this->faker->randomElement($training_ids),
             'evaluate_student_id' => $this->instance_counter,
             'evaluate_company_id' => $this->instance_counter,
 

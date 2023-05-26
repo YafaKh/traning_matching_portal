@@ -38,7 +38,7 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->unsignedBigInteger('university_id');
             $table->unsignedBigInteger('specialization_id');
-            $table->unsignedBigInteger('training_id');
+            $table->unsignedBigInteger('training_id')->nullable();
             $table->unsignedBigInteger('evaluate_student_id');
             $table->unsignedBigInteger('evaluate_company_id');
             $table->foreign('university_id')

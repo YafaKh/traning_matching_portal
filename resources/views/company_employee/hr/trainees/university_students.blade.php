@@ -86,7 +86,6 @@
     </div>
     {{$students->links()}}
 </div>
-{{-- jquery cdn --}}
 <script>
     $(document).ready(function() {
         // Event listener for filter change

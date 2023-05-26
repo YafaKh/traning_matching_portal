@@ -17,15 +17,7 @@ class TrainingSeeder extends Seeder
      */
     public function run()
     {
-        // Create "Unengaged Trainees" training for each company branch
-        //to save new students temporary
         CompanyBranch::all()->each(function ($companyBranch) {
-            $unengaged_training =$companyBranch->trainings()->create([
-                'name' => 'Unengaged Trainees',
-                'semester' => 1,
-            ]);
-            $unengaged_students = Student::factory()->count(4)->create(); 
-            $unengaged_training->students()->saveMany($unengaged_students);
         // Create additional fake trainings with trainers
             $trainer_count = rand(1, 3);
             $trainers = CompanyEmployee::factory()->count($trainer_count)->create();
@@ -37,6 +29,9 @@ class TrainingSeeder extends Seeder
                 $trainer = $trainers->random();
                 $training->company_employee_id = $trainer->id;
                 $training->save();
+
+                $engaged_students = Student::factory()->count(rand(3, 8))->create(); 
+                $training->students()->saveMany($engaged_students);
             });
         
             $companyBranch->trainings()->saveMany($trainings);
