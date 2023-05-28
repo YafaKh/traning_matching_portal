@@ -43,21 +43,16 @@
     <strong>Error!</strong> {{ $message }}
   </div> @enderror
   <p>Emails: </p>
-    @foreach($company_data->emails as $email)
-      <div class="d-flex">
-        <input type="text" class="form-control mb-2 me-2 ps-4" name="email[]" value="{{ old('email.' . $loop->index, $email['email_address']) }}">
-          <button class="btn delete">
-            <div class="d-flex">
-              <i class="bi bi-trash3 fs-6 text-danger"></i>
-              <i class="bi bi-arrow-clockwise"></i>
-            </div>
-          </button>
-      </div>
-    @endforeach
-    @foreach ($errors->get('email.*') as $error)
-      <div class="alert alert-danger">{{ $error }}</div>
-    @endforeach
     <div id="email-container">
+      @foreach($company_data->emails as $email)
+        <div class="d-flex">
+          <input type="text" class="form-control mb-2 me-2 ps-4" name="email[]" value="{{ old('email.' . $loop->index, $email['email_address']) }}">
+          <button class="btn delete"><i class="bi bi-trash3 fs-6 text-danger float-start"></i></button>
+        </div>
+      @endforeach
+      @foreach ($errors->get('email.*') as $error)
+        <div class="alert alert-danger">{{ $error }}</div>
+      @endforeach
     </div>
     <div class="input-group mb-3">
       <span class="input-group-text" onClick="add_input('email')">
@@ -102,16 +97,21 @@
 </section>
 <section class="col-md-9 col-11 bg-white mb-3 p-md-5 p-3 mx-auto rounded-2">
 <p class="fs-4">Branches</p>
+  @foreach($company_data->branches as $branch)
+    <div class="d-flex">
+      <input type="text" class="form-control mb-2 me-2 ps-4" name="old_branch[]" value="{{ old('old_branch.' . $loop->index, $branch['address']) }}">
+      <button class="btn d-flex delete_old" type="button">
+          <i class="bi bi-trash3 fs-6 text-danger"></i>
+          <i class="bi bi-arrow-clockwise"></i>
+      </button>
+    </div>
+  @endforeach
+  @foreach ($errors->get('branch.*') as $error)
+    <div class="alert alert-danger">{{ $error }}</div>
+  @endforeach
+  <hr>
   <div id="branch-container">
-    @foreach($company_data->branches as $branch)
-      <div class="d-flex">
-        <input type="text" class="form-control mb-2 me-2 ps-4" name="branch[]" value="{{ old('branch.' . $loop->index, $branch['address']) }}">
-        <button class="btn delete"><i class="bi bi-trash3 fs-6 text-danger float-start"></i></button>
-      </div>
-    @endforeach
-    @foreach ($errors->get('branch.*') as $error)
-      <div class="alert alert-danger">{{ $error }}</div>
-    @endforeach
+    
   </div>
   <div class="input-group mb-3">
     <span class="input-group-text" onClick="add_input('branch')">
@@ -147,11 +147,12 @@
   const deleteButtons = document.querySelectorAll('.delete');
   deleteButtons.forEach(button => {
     button.addEventListener('click', function() {
-      const input = this.parentNode.querySelector('input');
-      input.disabled = !input.disabled;    });
+      // Remove the parent div when the delete button is clicked
+      this.parentNode.remove();
+    });
   });
 
-  /*function add_input(type) {
+  function add_input(type) {
     const plusButton = document.querySelector('.input-group-text');
     const input = document.querySelector('input[name="new_' + type + '"]');
     const container = document.querySelector('#' + type + '-container');
@@ -178,7 +179,16 @@
     newDiv.appendChild(newButton);
     container.appendChild(newDiv);
     input.value = ''; // Clear the new email input field
-  }*/
+  }
+
+  const deleteOldBranches = document.querySelectorAll('.delete_old');
+  deleteOldBranches.forEach(button => {
+    button.addEventListener('click', function() {
+      const input = this.parentNode.querySelector('input');
+      input.disabled = !input.disabled;   
+    });
+  });
+
 </script>
 
 @endsection

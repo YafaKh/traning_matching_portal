@@ -123,4 +123,14 @@ class CompanyProfileController extends Controller
         $newImgName= $request->title .'.'.$request->image->extension();
         return $request->screenshot->move(public_path('assets\img'),$newImgName);     
     }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function delete_branch(string $company_id)
+    {
+        return redirect()
+        ->route('hr_edit_company_profile', ['company_id' => $company_id])
+        ->withInput();    }
+    
 }
