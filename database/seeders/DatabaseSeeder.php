@@ -6,6 +6,8 @@ use Illuminate\Database\Seeder;
 use App\Models\Company;
 use App\Models\CompanyBranch;
 use App\Models\CompanyEmployee;
+use App\Models\CompanyEmail;
+use App\Models\CompanyPhone;
 use App\Models\CompanyEmployeeRole;
 use App\Models\Training;
 use App\Models\Student;
@@ -37,8 +39,7 @@ class DatabaseSeeder extends Seeder
 
         foreach ($companies as $company) {
             
-            $branch_count = rand(1, 5);
-            $branches = CompanyBranch::factory()->count($branch_count)->create();
+            $branches = CompanyBranch::factory()->count(rand(1, 5))->create();
             $company->branches()->saveMany($branches);
 
             // Create "Unengaged Trainees" training for each company branch
@@ -51,9 +52,14 @@ class DatabaseSeeder extends Seeder
             $unengaged_students = Student::factory()->count(4)->create();
             $unengaged_training->students()->saveMany($unengaged_students);
 
-            $hr_count = rand(1, 3);
-            $hr = CompanyEmployee::factory()->count($hr_count)->create();
+            $hr = CompanyEmployee::factory()->count(rand(1, 3))->create();
             $company->employees()->saveMany($hr);
+
+            $emails = CompanyEmail::factory()->count(rand(1, 3))->create();
+            $company->emails()->saveMany($emails);
+
+            $phones = CompanyPhone::factory()->count(rand(1, 3))->create();
+            $company->phones()->saveMany($phones);
 
             $role = CompanyEmployeeRole::find(1); 
             $hr->each(function ($employee) use ($role) {

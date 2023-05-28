@@ -66,7 +66,7 @@ class CompanyEmployeeController extends Controller
      * In practice, the coordinator is only allowed to update the employee's role
      */
     public function update(Request $request, string $id)
-    {
+    {//to edit update contact person
         $request->validate();
         $universityEmployee=UniversityEmployee::where('id',$id)->first();
         $universityEmployee->update([$request->input('company_role_id')]);

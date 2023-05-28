@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('name', 45);
-            $table->string('Industry', 45);
+            $table->string('industry', 45);
             $table->string('description', 200)->nullable();
             $table->string('website')->nullable();
             $table->string('linkedin')->nullable();

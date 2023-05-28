@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('third_name', 45) ;
             $table->string('last_name', 45);
             $table->string('image')->nullable();
-            $table->boolean('contact_person')->default(0);
+            $table->boolean('contactable')->default(0);
 
             $table->unsignedBigInteger('company_id')->nullable();
             $table->unsignedBigInteger('company_employee_role_id')->nullable();

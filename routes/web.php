@@ -76,8 +76,8 @@ Route::post('company_employee/register/store',[RegisterController::class,'store'
 
 Route::prefix('/{company_id}/hr')->group(function(){
     Route::get('/company_profile', [CompanyProfileController::class, 'index'])->name('hr_company_profile');
-
     Route::get('/edit_company_profile', [CompanyProfileController::class, 'edit'])->name('hr_edit_company_profile');
+    Route::post('/edit_company_profile', [CompanyProfileController::class, 'update'])->name('hr_update_company_profile');
 
     Route::prefix('/trainees')->group(function(){
         Route::get('/', [ListController1::class, 'index'])->name('hr_list_trainees');
