@@ -18,6 +18,7 @@ return new class extends Migration
             $table->timestamps();
             $table->string('name',45) ;
             $table->integer('semester')->length(1);
+            $table->year('year');
             $table->string('training_feild',45)->nullable();
             $table->string('details')->nullable()->nullable();
             $table->unsignedBigInteger('company_employee_id')->nullable();
