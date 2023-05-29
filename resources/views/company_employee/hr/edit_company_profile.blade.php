@@ -3,7 +3,7 @@
     @include('company_employee.hr.navbar')
 @endsection
 @section('content')
-<form class="px-5" method="POST" action="{{ route('hr_update_company_profile', ['company_id' => $company_id]) }}">
+<form class="px-5" method="POST" action="{{ route('hr_update_company_profile', ['company_id' => $company_id]) }}"  enctype="multipart/form-data">
 @csrf
 <section>
 <div class="position-relative col-md-9 col-11 bg-dark-blue p-5 mx-auto mt-4 rounded-top-2">
@@ -17,12 +17,12 @@
   <div class="form-group row">
     <label class="text-light mt-3" for="prev_img">Your Profile Image</label>
     <div class="d-flex flex-row">
-        <img src="{{ asset('images/' . $company_data['image']) }}" class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32">
+        <img src="{{ asset('assets/img/' . $company_data['image']) }}" class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32">
         <input id="prev_img" type="text" name="prev_img" class="form-control ps-4 opacity-75" value = "{{$company_data['image']}}" disabled>
     </div>
   </div>
   <label class="text-light mt-3" >If you want to the profile, choose a new one.</label>
-  <input class="form-control ps-4  opacity-75" type="file" name="imge"  id="formFile">
+  <input class="form-control ps-4  opacity-75" type="file" name="image"  id="formFile">
   @error('image') 
   <div class="alert alert-danger">
     <strong>Error!</strong> {{ $message }}
@@ -98,13 +98,8 @@
 <section class="col-md-9 col-11 bg-white mb-3 p-md-5 p-3 mx-auto rounded-2">
 <p class="fs-4">Branches</p>
   @foreach($company_data->branches as $branch)
-    <div class="d-flex">
-      <input type="text" class="form-control mb-2 me-2 ps-4" name="old_branch[]" value="{{ old('old_branch.' . $loop->index, $branch['address']) }}">
-      <button class="btn d-flex delete_old" type="button">
-          <i class="bi bi-trash3 fs-6 text-danger"></i>
-          <i class="bi bi-arrow-clockwise"></i>
-      </button>
-    </div>
+    <input type="text" class="form-control mb-2 me-2 ps-4" name="old_branch[]" branch_id="{{$branch['addresids']}}"
+    value="{{ old('old_branch.' . $loop->index, $branch['address']) }}">
   @endforeach
   @foreach ($errors->get('branch.*') as $error)
     <div class="alert alert-danger">{{ $error }}</div>
@@ -122,16 +117,17 @@
 </section>
 <section class="col-md-9 col-11 bg-white mb-3 p-md-5 p-3 mx-auto rounded-2">
     <h4 class="border-bottom pb-2 mb-4">Contact Employees</h4>
-    <p>Note: use ctrl key to selct muliple employees</p>
-    <select class="form-select" name="contactable" size="15" multiple>
-      @foreach($company_data->employees as $employee)
-        @if($employee->contactable == 1)
-          <option value="{{$employee['id']}}" selected>{{$employee['id']}}- {{$employee['first_name']}} {{$employee['last_name']}}</option>
-        @else
-          <option value="{{$employee['id']}}">{{$employee['id']}}- {{$employee['first_name']}} {{$employee['last_name']}}</option>
-        @endif
-      @endforeach
-    </select>
+
+    <div class="form-group">
+    @foreach($company_data->employees as $employee)
+        <div class="form-group">
+        <input type="checkbox" id="contactable_{{ $employee->id }}" name="contactable[]" value="{{ $employee->id }}" {{ $employee->contactable ? 'checked' : '' }}>
+
+            <label for="contactable_{{ $employee->id }}">{{$employee['first_name']}} {{$employee['last_name']}}</label>
+        </div>
+    @endforeach
+
+      </div>
     @foreach ($errors->get('contactable.*') as $error)
         <div class="alert alert-danger">{{ $error }}</div>
     @endforeach
@@ -180,14 +176,6 @@
     container.appendChild(newDiv);
     input.value = ''; // Clear the new email input field
   }
-
-  const deleteOldBranches = document.querySelectorAll('.delete_old');
-  deleteOldBranches.forEach(button => {
-    button.addEventListener('click', function() {
-      const input = this.parentNode.querySelector('input');
-      input.disabled = !input.disabled;   
-    });
-  });
 
 </script>
 

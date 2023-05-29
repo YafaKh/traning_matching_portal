@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\CompanyEmployee\HR;
 use App\Http\Controllers\Controller;
 use App\Models\Company; 
+use App\Models\CompanyBranch; 
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades;
 use Illuminate\Validation\Rules\File;
+use Illuminate\Support\Str;
 
 class CompanyProfileController extends Controller
 {
@@ -58,7 +60,9 @@ class CompanyProfileController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $company_id)
-    {
+    {       // $company = Company:: findOrFail($company_id);
+        //dd($company->employees);
+        
          $request->validate([
             'name' => 'required|max:45',
             'industry' => 'required|max:45',
@@ -69,13 +73,13 @@ class CompanyProfileController extends Controller
             'email.*' => 'email|max:255',
             'phone.*' => 'string|max:20',
             'branch.*' => 'string|max:45',
-            'contactable.*' => 'exists:employees,id',
+            'contactable.*' => 'exists:company_employees,id',
         ]);
         $company = Company:: findOrFail($company_id);
         if(($request->hasFile('image')))
         {
             Facades\File::delete('assets/img/'.$company->image);
-            $image=Str::after($this->storeImg($request),'img\\');
+            $image=Str::after($this->storeImg($request, $company_id ),'img\\');
             $company->update(['image' => $image]);
         }
 
@@ -101,13 +105,28 @@ class CompanyProfileController extends Controller
         foreach ($phoneData as $phone) {
             $company->phones()->create(['phone_no' => $phone]);
         }
-        // Update the branches
-        $branchData = $request->input('branch', []);
-        $company->branches()->delete(); // Delete existing branches
 
-        foreach ($branchData as $branch) {
-            $company->branches()->create(['branch_address' => $branch]);
+        // Update the branches
+        $old_branches = $request->input('old_branch', []);
+        $i=0;
+        foreach ($company->branches as $branch) {
+            $branch->update(['address' => $old_branches[$i]]);
+            $i++;
         }
+
+        $new_branches = $request->input('branch', []);
+        foreach ($new_branches as $new_branch_address) {
+            // Add new branches
+            $company->branches()->create(['address' => $new_branch_address]);
+            }
+        //contactable
+
+        $employeeIds = $request->input('contactable', []);
+       
+        foreach ($company->employees as $employee) {
+            $employee->update([
+            'contactable' => in_array($employee->id, $employeeIds)]);
+         }
 
         return redirect()->route('hr_company_profile', ['company_id' => $company_id]);
     }
@@ -118,19 +137,9 @@ class CompanyProfileController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    private function storeImg(Request $request)
+    private function storeImg(Request $request, $company_id)
     {
-        $newImgName= $request->title .'.'.$request->image->extension();
-        return $request->screenshot->move(public_path('assets\img'),$newImgName);     
+        $newImgName= $company_id .'_company_profile.'.$request->image->extension();
+        return $request->image->move(public_path('assets\img'),$newImgName);     
     }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function delete_branch(string $company_id)
-    {
-        return redirect()
-        ->route('hr_edit_company_profile', ['company_id' => $company_id])
-        ->withInput();    }
-    
 }

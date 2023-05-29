@@ -14,6 +14,7 @@ class Training extends Model
     protected $fillable = [
         'name',
         'semester',
+        'year',
         'training_field',
         'details',
         'company_employee_id',

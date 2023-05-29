@@ -8,7 +8,7 @@
 <section class="">
 <div class="position-relative col-md-9 col-11 bg-dark-blue p-5 mx-auto mt-4 rounded-top-2">
   <h1 class="text-light mb-4">{{$company_data['name']}}</h1>
-  <img src="{{asset('images/userImg2.png')}}" alt="student Image" class="profile_img rounded-circle me-md-5 me-1 position-absolute end-0 top-50">
+  <img src="{{ asset('assets/img/' . $company_data['image']) }}" alt="profile Image" class="profile_img rounded-circle border border-5 me-md-5 me-1 position-absolute end-0 top-50">
 </div>
 <div class="col-md-9 col-11 bg-white mb-3 p-md-5 p-3 mx-auto rounded-bottom-2">
   <div class="col-8 d-inline-block">

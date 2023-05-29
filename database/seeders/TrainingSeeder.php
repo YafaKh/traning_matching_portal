@@ -30,7 +30,7 @@ class TrainingSeeder extends Seeder
                 $training->company_employee_id = $trainer->id;
                 $training->save();
 
-                $engaged_students = Student::factory()->count(rand(3, 8))->create(); 
+                $engaged_students = Student::factory()->count(rand(3, 5))->create(); 
                 $training->students()->saveMany($engaged_students);
             });
         
