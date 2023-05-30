@@ -42,15 +42,15 @@ return new class extends Migration
             $table->unsignedBigInteger('evaluate_student_id');
             $table->unsignedBigInteger('evaluate_company_id');
             $table->foreign('university_id')
-            ->references('id')->on('universities');
+            ->references('id')->on('universities')->onDelete('cascade');
             $table->foreign('specialization_id')
-            ->references('id')->on('specializations');
+            ->references('id')->on('specializations')->onDelete('cascade');
             $table->foreign('training_id')
-            ->references('id')->on('trainings');
+            ->references('id')->on('trainings')->onDelete('cascade');
             $table->foreign('evaluate_student_id')
-            ->references('id')->on('evaluate_students');
+            ->references('id')->on('evaluate_students')->onDelete('cascade');
             $table->foreign('evaluate_company_id')
-            ->references('id')->on('evaluate_companies');
+            ->references('id')->on('evaluate_companies')->onDelete('cascade');
         });
     }
 

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('name', 45);
-            
+            $table->string('acronyms', 10);
             $table->unsignedBigInteger('university_id');
             $table->foreign('university_id')
                 ->references('id')->on('universities');

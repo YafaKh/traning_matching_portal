@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllersrs\Supervisor;
+namespace App\Http\Controllers\Supervisor;
 
 use Illuminate\Http\Request;
 

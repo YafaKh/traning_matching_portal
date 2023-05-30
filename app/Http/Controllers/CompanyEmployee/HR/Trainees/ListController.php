@@ -26,7 +26,7 @@ class ListController extends Controller
         foreach ($trainings as $training) {
             $students = $training->students()
                 ->select('first_name_en', 'last_name_en')
-                ->get();
+                ->defaultOrder()->get();
              //to edit, do it as assign training
             foreach ($students as $student) {
                 $students_data[] = [

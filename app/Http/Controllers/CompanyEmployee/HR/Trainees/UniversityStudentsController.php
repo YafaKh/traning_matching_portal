@@ -25,7 +25,7 @@ class UniversityStudentsController extends Controller
         
         $students = Student::whereNotIn('id', $company->not_approved_students->pluck('student_id'))
         ->select('id', 'first_name_en', 'last_name_en', 'gpa'
-        , 'load', 'availability_date', 'specialization_id') ->paginate(15);
+        , 'load', 'availability_date', 'specialization_id')->defaultOrder()->paginate(15);
         //for fillters:
         $specializations =Specialization::select('name')->get();
         return view('company_employee.hr.trainees.university_students', [

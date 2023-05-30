@@ -8,13 +8,15 @@ use App\Http\Controllers\Student\EditStudentProfileController;
 use App\Http\Controllers\Student\StudentRegisterController;
 use App\Http\Controllers\Student\EvaluateCompanyController;
 use App\Http\Controllers\CompanyEmployee\RegisterController;
-use App\Http\Controllers\CompanyEmployee\HR\Trainees\ListController as ListController1;
+use App\Http\Controllers\CompanyEmployee\HR\Trainees\ListController as HrListController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CompanyEmployee\HR\Trainees\UniversityStudentsController;
 use App\Http\Controllers\CompanyEmployee\HR\Trainees\AssignTrainingController;
 use App\Http\Controllers\CompanyEmployee\HR\CompanyEmployeeController;
 use App\Http\Controllers\CompanyEmployee\HR\TrainingController;
 use App\Http\Controllers\CompanyEmployee\HR\CompanyProfileController;
+
+use App\Http\Controllers\UniversityEmployee\Coordinator\Students\ListController as CooListController;
 
 Route::get('/', function () {
     return view('/all_users/login');
@@ -33,7 +35,9 @@ Route::get('university_employee/register', function () {
 
 Route::prefix('/coordinator')->group(function(){
     Route::prefix('/students')->group(function(){
-        Route::get('/list', [StudentController::class,'index'])->name('coordinator_list_students');
+        Route::post('/update_register_list', [CooListController::class,'update_register_list'])->name('update_register_list');
+        Route::get('/', [CooListController::class,'index'])->name('coordinator_list_students');
+        Route::get('/destroy/{student_id}', [CooListController::class,'destroy'])->name('coordinator_delete_student');
         Route::get('/student_company_approval', function () {
             return view('university_employee/coordinator/students/student_company_approval'); })->name('coordinator_student_company_approval');
         Route::get('/assign_supervisors', function () {
@@ -81,7 +85,7 @@ Route::prefix('/{company_id}/hr')->group(function(){
     Route::get('/delete_branch', [CompanyProfileController::class, 'delete_branch'])->name('hr_delete_branch');
 
     Route::prefix('/trainees')->group(function(){
-        Route::get('/', [ListController1::class, 'index'])->name('hr_list_trainees');
+        Route::get('/', [HrListController::class, 'index'])->name('hr_list_trainees');
         Route::get('/university_students',[UniversityStudentsController::class,'index'])->name('hr_university_students');
         Route::get('/add_trainee/{student_id}', [UniversityStudentsController::class, 'add'])->name('hr_add_trainee');
         Route::get('/assign_trainings', [AssignTrainingController::class,'index'])->name('hr_manage_trainings');

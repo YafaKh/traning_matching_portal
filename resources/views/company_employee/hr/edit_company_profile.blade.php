@@ -26,7 +26,8 @@
   @error('image') 
   <div class="alert alert-danger">
     <strong>Error!</strong> {{ $message }}
-  </div> @enderror
+  </div>
+  @enderror
 </div>
 <div class="col-md-9 col-11 bg-white mb-3 p-md-5 p-3 mx-auto rounded-bottom-2">
   <div class="col-8 d-inline-block">

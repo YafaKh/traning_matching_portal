@@ -17,7 +17,7 @@ class CompanyEmployeeController extends Controller
         //to edit trainees, edit role and delete
         $employees_data= CompanyEmployee::
         select('first_name', 'last_name', 'phone', 'email', 'company_employee_role_id')
-        ->where('company_id', $company_id)->get();
+        ->where('company_id', $company_id)->defaultOrder()->get();
         return view('company_employee.hr.company_employees.list',
         ['employees_data'=>$employees_data,
          'company_id' => $company_id]);
