@@ -37,6 +37,9 @@ class DatabaseSeeder extends Seeder
         $companies = Company::factory()->count(4)->create();
         $this->call(CompanyEmployeeRoleSeeder::class);
 
+        //create students not connected with any company
+        Student::factory()->count(10 )->create();
+
         foreach ($companies as $company) {
             
             $branches = CompanyBranch::factory()->count(rand(1, 5))->create();

@@ -23,7 +23,7 @@ class TrainingSeeder extends Seeder
             $trainers = CompanyEmployee::factory()->count($trainer_count)->create();
             $companyBranch->company->employees()->saveMany($trainers);
         
-            $training_count = rand(1, 5);
+            $training_count = rand(1, 4);
             $trainings = Training::factory()->count($training_count)->create();
             $trainings->each(function ($training) use ($trainers) {
                 $trainer = $trainers->random();

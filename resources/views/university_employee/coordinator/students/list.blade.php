@@ -57,7 +57,7 @@
         <form action="{{route('update_register_list')}}"  method="POST" enctype="multipart/form-data">
         @csrf
             <div class="mb-1">
-                <label for="formFileSm" class="form-label txt-sm">Upload registered students list (.xlsx)</label>
+                <label for="formFileSm" class="form-label txt-sm">Upload registered students IDs list (.txt), ID per line.</label>
                 <div class="d-flex flex-row">
                     <input class="form-control form-control-sm w-auto me-2" id="formFileSm" name="register_list" type="file">
                     <button type="submit" class="btn btn-primary bg-dark-blue btn-sm text-light opacity-75 h-50 px-3"

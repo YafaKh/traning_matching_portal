@@ -16,23 +16,40 @@
         
     {{-- students table --}}
     <div class="table-responsive mt-5 d-flex justify-content-center ">
-        <table class="table txt-sm border table-hover w-75">
+        <table class="table border w-75">
         <thead class="bg-mid-sand">
             <tr >
-            <th scope="col" class="ps-3" >Name</th>
+            <th scope="col" class="ps-3" >ID</th>
+            <th scope="col">Name</th>
             <th scope="col">Companies</th>
             <th scope="col">Approve</th>
             </tr>
         </thead>
         <tbody class="bg-light">
+        @foreach($students as $student)
             <tr>
-            <td class="ps-3" >****</td>
-            <td>
+            <td class="ps-3">{{$student['student_num']}}</td>
+            @if($student['registered'])
+            <td>{{$student['first_name_en']}} {{$student['last_name_en']}}</td>
+            @else 
+            <td class="text-danger">{{$student['first_name_en']}} {{$student['last_name_en']}}</td>
+            @endif            <td>
                 <ul>
-
+                @foreach($student->not_approved_companies as $not_approved_company)
+                    <li class="mt-2 mb-3">{{$not_approved_company->company->name}}</li>
+                @endforeach
                 </ul>
             </td>
-            <td><button type="button" class="btn h-50 btn-sm txt-sm btn-primary bg-dark-blue text-light opacity-75 ms-2"><i class="bi bi-check-square"></i></button></td>
+            <td class="">
+            @foreach($student->not_approved_companies as $not_approved_company)
+            <a type="button" class="btn h-50 btn-sm mt-1 mb-2 txt-sm btn-primary bg-dark-blue text-light opacity-75 ms-2"
+            href="{{ route('coordinator_student_company_approve', ['not_approved_student_company' =>$not_approved_company]) }}">
+            <i class="bi bi-check-square"></i></a><br>
+            @endforeach
+            </td>
+            
+        </tr>
+        @endforeach
         </tbody>
         </table>
     </div>

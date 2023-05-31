@@ -23,7 +23,8 @@ class UniversityStudentsController extends Controller
         $company = Company:: findOrFail($company_id);
 
         
-        $students = Student::whereNotIn('id', $company->not_approved_students->pluck('student_id'))
+        $students = Student::whereDoesntHave('training')
+        ->whereNotIn('id', $company->not_approved_students->pluck('student_id'))
         ->select('id', 'first_name_en', 'last_name_en', 'gpa'
         , 'load', 'availability_date', 'specialization_id')->defaultOrder()->paginate(15);
         //for fillters:

@@ -17,6 +17,7 @@ use App\Http\Controllers\CompanyEmployee\HR\TrainingController;
 use App\Http\Controllers\CompanyEmployee\HR\CompanyProfileController;
 
 use App\Http\Controllers\UniversityEmployee\Coordinator\Students\ListController as CooListController;
+use App\Http\Controllers\UniversityEmployee\Coordinator\Students\StudentCompanyApprovalController;
 
 Route::get('/', function () {
     return view('/all_users/login');
@@ -38,8 +39,8 @@ Route::prefix('/coordinator')->group(function(){
         Route::post('/update_register_list', [CooListController::class,'update_register_list'])->name('update_register_list');
         Route::get('/', [CooListController::class,'index'])->name('coordinator_list_students');
         Route::get('/destroy/{student_id}', [CooListController::class,'destroy'])->name('coordinator_delete_student');
-        Route::get('/student_company_approval', function () {
-            return view('university_employee/coordinator/students/student_company_approval'); })->name('coordinator_student_company_approval');
+        Route::get('/students_companies_approval', [StudentCompanyApprovalController::class, 'index'])->name('coordinator_students_companies_approval');
+        Route::get('/student_company_approve/{not_approved_student_company}', [StudentCompanyApprovalController::class, 'approve'])->name('coordinator_student_company_approve');
         Route::get('/assign_supervisors', function () {
             return view('university_employee/coordinator/students/assign_supervisors'); })->name('coordinator_assign_supervisors');
             //add id
