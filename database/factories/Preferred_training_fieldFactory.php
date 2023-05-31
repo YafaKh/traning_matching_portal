@@ -20,7 +20,7 @@ class Preferred_training_fieldFactory extends Factory
     {
         
         return [
-            'name'=> $this->faker->unique()->word(),
+            'name'=> $this->faker->unique()->sentence(),
 
         ];
     }

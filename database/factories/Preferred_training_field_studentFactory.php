@@ -3,7 +3,7 @@
 namespace Database\Factories;
 use App\Models\Preferred_training_field_student;
 use App\Models\Preferred_training_field;
-use App\Models\Stduent;
+use App\Models\Student;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -22,10 +22,10 @@ class Preferred_training_field_studentFactory extends Factory
     {
 
         $studentIds = Student::pluck('id')->all();
-        $preferred_training_id = Preferred_training_field::pluck('id')->all();
+        $preferredTrainingIds = Preferred_training_field::pluck('id')->all();
         return [
             'student_id' => $this->faker->randomElement($studentIds),
-            'preferred_training_id' => $this->faker->randomElement($preferred_training_id),
+            'preferred_training_id' => $this->faker->randomElement($preferredTrainingIds),
         ];
     }
 }
