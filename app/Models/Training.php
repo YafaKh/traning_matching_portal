@@ -14,6 +14,7 @@ class Training extends Model
     protected $fillable = [
         'name',
         'semester',
+        'year',
         'training_field',
         'details',
         'company_employee_id',
@@ -31,6 +32,6 @@ class Training extends Model
 
     public function students()
     {
-        return $this->hasMany(Student::class);
+        return $this->hasMany(Student::class, 'training_id');
     }
 }

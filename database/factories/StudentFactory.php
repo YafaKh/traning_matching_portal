@@ -7,6 +7,9 @@ use App\Models\University;
 use App\Models\Specialization;
 use App\Models\Training;
 use App\Models\Student;
+use App\Models\EvaluateStudent;
+use App\Models\EvaluateCompany;
+
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -28,6 +31,10 @@ class StudentFactory extends Factory
         $specialization_ids = Specialization::pluck('id')->all();
         $training_ids = Training::pluck('id')->all();
         $this->instance_counter++;
+
+        
+        EvaluateStudent::factory()->create();
+        EvaluateCompany::factory()->create();
 
         return [
             'student_num' => $this->faker->unique()->randomNumber(8),
@@ -54,9 +61,10 @@ class StudentFactory extends Factory
             'image' => $this->faker->imageUrl(),
             'university_id' => $this->faker->randomElement($university_ids),
             'specialization_id' => $this->faker->randomElement($specialization_ids),
-            'training_id' => $this->faker->randomElement($training_ids),
+            //'training_id' => $this->faker->randomElement($training_ids),
             'evaluate_student_id' => $this->instance_counter,
             'evaluate_company_id' => $this->instance_counter,
+
         ];
     }
 

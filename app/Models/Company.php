@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use App\Models\CompanyEmployee;
+use App\Models\CompanyEmail;
+use App\Models\CompanyPhone;
 use App\Models\Training;
 use App\Models\CompanyBranch;
 use App\Models\StudentCompanyApproval;
@@ -31,6 +33,16 @@ class Company extends Model
     public function employees()
     {
         return $this->hasMany(CompanyEmployee::class);
+    }
+
+    public function emails()
+    {
+        return $this->hasMany(CompanyEmail::class);
+    }
+
+    public function phones()
+    {
+        return $this->hasMany(CompanyPhone::class);
     }
 
     public function trainings(): HasManyThrough

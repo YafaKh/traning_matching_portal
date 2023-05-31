@@ -26,7 +26,7 @@
                 href="{{route('hr_university_students', ['company_id' => $company_id])}}"
                 >University trainees</a></li>
                 <li><a class="dropdown-item" 
-                href="{{route('hr_trainees_trainings', ['company_id' => $company_id])}}"
+                href="{{route('hr_manage_trainings', ['company_id' => $company_id])}}"
                 >Assign Trainings</a></li>
             </ul>
             </li>

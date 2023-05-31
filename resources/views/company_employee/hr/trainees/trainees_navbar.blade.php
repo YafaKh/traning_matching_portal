@@ -17,13 +17,13 @@
         </li>
         <li class="nav-item ">
           <a class="nav-link text-light @yield('activity3')" aria-current="page" 
-          href="{{route('hr_trainees_trainings', ['company_id' => $company_id])}}"
-          >Assign trainers</a>
+          href="{{route('hr_manage_trainings', ['company_id' => $company_id])}}"
+          >Assign trainings</a>
         </li>
       </ul>
 
       <form class="input-group w-auto h-50" role="searprimarych">
-        <input class="form-control txt-sm h-50 border border-secondary" type="search" placeholder="Search" aria-label="Search">
+        <input class="form-control txt-sm h-50 border border-secondary" type="search" placeholder="Search Name" id="search">
         <button class="btn btn-sm bg-sand btn-outline-secondary py-0" type="submit">
         <i class="bi bi-search txt-xsm"></i>
         </button>
@@ -31,3 +31,30 @@
     </div>
   </div>
 </nav>
+<script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+<script>
+  $(document).ready(function(){  
+        $('#search').keyup(function(){  
+          tableSearch($(this).val());  
+        });  
+        function tableSearch(value){  
+            $('#table tbody tr').each(function(){  
+                  var found = 'false';  
+                  $(this).each(function(){  
+                      if($(this).text().toLowerCase().indexOf(value.toLowerCase()) >= 0)  
+                      {  
+                            found = 'true';  
+                      }  
+                  });  
+                  if(found == 'true')  
+                  {  
+                      $(this).show();  
+                  }  
+                  else  
+                  {  
+                      $(this).hide();  
+                  }  
+            });  
+        }  
+  });  
+</script>

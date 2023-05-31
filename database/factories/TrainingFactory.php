@@ -30,6 +30,7 @@ class TrainingFactory extends Factory
         return [
             'name' => $this->faker->word,
             'semester' => $this->faker->numberBetween(1, 4),
+            'year' => 2023,
             'training_feild' => $this->faker->word,
             'details' => $this->faker->text,
             //'company_employee_id' => $this->faker->randomElement($trainers_ids),

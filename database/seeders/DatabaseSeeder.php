@@ -6,10 +6,10 @@ use Illuminate\Database\Seeder;
 use App\Models\Company;
 use App\Models\CompanyBranch;
 use App\Models\CompanyEmployee;
+use App\Models\CompanyEmail;
+use App\Models\CompanyPhone;
 use App\Models\CompanyEmployeeRole;
 use App\Models\Training;
-use App\Models\EvaluateStudent;
-use App\Models\EvaluateCompany;
 use App\Models\Student;
 use App\Models\Progress;
 
@@ -34,19 +34,35 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(UniversitySeeder::class);
         $this->call(SpecializationSeeder::class);
-        $this->call(TrainingSeeder::class); // Move TrainingSeeder here
-
         $companies = Company::factory()->count(4)->create();
         $this->call(CompanyEmployeeRoleSeeder::class);
 
+        //create students not connected with any company
+        Student::factory()->count(10 )->create();
+
         foreach ($companies as $company) {
-            $branch_count = rand(1, 5);
-            $branches = CompanyBranch::factory()->count($branch_count)->create();
+            
+            $branches = CompanyBranch::factory()->count(rand(1, 5))->create();
             $company->branches()->saveMany($branches);
 
-            $hr_count = rand(1, 3);
-            $hr = CompanyEmployee::factory()->count($hr_count)->create();
+            // Create "Unengaged Trainees" training for each company branch
+            //to save new students temporary
+            $branch = $company->branches()->first();
+            $unengaged_training = $branch->trainings()->create([
+                'name' => 'Unengaged Trainees',
+                'semester' => 1,
+            ]);
+            $unengaged_students = Student::factory()->count(4)->create();
+            $unengaged_training->students()->saveMany($unengaged_students);
+
+            $hr = CompanyEmployee::factory()->count(rand(1, 3))->create();
             $company->employees()->saveMany($hr);
+
+            $emails = CompanyEmail::factory()->count(rand(1, 3))->create();
+            $company->emails()->saveMany($emails);
+
+            $phones = CompanyPhone::factory()->count(rand(1, 3))->create();
+            $company->phones()->saveMany($phones);
 
             $role = CompanyEmployeeRole::find(1); 
             $hr->each(function ($employee) use ($role) {
@@ -54,9 +70,7 @@ class DatabaseSeeder extends Seeder
             });
         }
         $this->call(TrainingSeeder::class);
-        EvaluateStudent::factory()->count(15)->create();
-        EvaluateCompany::factory()->count(15)->create();
-        Student::factory()->count(15)->create();
+        //Student::factory()->count(20)->create();
         Progress::factory()->count(25)->create();
         UnaddedCompanyEmployee::factory()->count(10)->create();
         Spoken_language::factory()->count(2)->create();

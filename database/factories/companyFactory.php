@@ -25,7 +25,7 @@ class CompanyFactory extends Factory
             'name' => $this->faker->company,
             'Industry' => $this->faker->text(10),
             'description' => $this->faker->text(200),
-            'website' => $this->faker->url(44),
+            'website' => $this->faker->url(12),
             'linkedin' => $this->faker->url,
         ];
     }

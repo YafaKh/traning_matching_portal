@@ -9,7 +9,7 @@
           <a class="nav-link text-light @yield('activity1')" aria-current="page" href="{{route('coordinator_list_students')}}">List students</a>
         </li>
         <li class="nav-item ">
-          <a class="nav-link text-light @yield('activity2')" aria-current="page" href="{{route('coordinator_student_company_approval')}}">Student-Company approval</a>
+          <a class="nav-link text-light @yield('activity2')" aria-current="page" href="{{route('coordinator_students_companies_approval')}}">Student-Company approval</a>
         </li>
         <li class="nav-item ">
           <a class="nav-link text-light @yield('activity3')" aria-current="page" href="{{route('coordinator_assign_supervisors')}}"">Assign supervisors</a>

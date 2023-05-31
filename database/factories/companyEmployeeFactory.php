@@ -38,7 +38,7 @@ class companyEmployeeFactory extends Factory
             'third_name' => $this->faker->firstName,
             'last_name' => $this->faker->lastName,
             'image' => $this->faker->imageUrl(),
-            'contact_person' => $this->faker->boolean,
+            'contactable' => $this->faker->boolean,
             //'company_id' => $this->faker->randomElement($company_ids),
             'company_employee_role_id' => $this->faker->randomElement($company_role_ids),
         ];

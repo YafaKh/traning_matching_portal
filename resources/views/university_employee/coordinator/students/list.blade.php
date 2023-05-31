@@ -54,16 +54,24 @@
     {{--Upload registered students list--}}
     <div class="d-flex flex-sm-row flex-column justify-content-between mb-2">
         <label class="txt-xsm pb-1 h-50 mt-auto">Note: students whose names are highlighted in red are not registered for the internship on the portal.</label>
-        <div class="mb-1">
-            <label for="formFileSm" class="form-label txt-sm">Upload registered students list (.xlsx)</label>
-            <div class="d-flex flex-row">
-                <input class="form-control form-control-sm w-auto me-2" id="formFileSm" type="file">
-                <button type="button" class="btn btn-primary bg-dark-blue btn-sm text-light opacity-75 h-50 px-3"
-                    data-bs-toggle="tooltip" data-bs-placement="top"
-                    data-bs-title="Update registration state">Update
-                </button>
+        <form action="{{route('update_register_list')}}"  method="POST" enctype="multipart/form-data">
+        @csrf
+            <div class="mb-1">
+                <label for="formFileSm" class="form-label txt-sm">Upload registered students IDs list (.txt), ID per line.</label>
+                <div class="d-flex flex-row">
+                    <input class="form-control form-control-sm w-auto me-2" id="formFileSm" name="register_list" type="file">
+                    <button type="submit" class="btn btn-primary bg-dark-blue btn-sm text-light opacity-75 h-50 px-3"
+                        data-bs-toggle="tooltip" data-bs-placement="top"
+                        data-bs-title="Update registration state">Update
+                    </button>
+                </div>
             </div>
-        </div>
+            @error('register_list') 
+            <div class="alert alert-danger">
+                <strong>Error!</strong> {{ $message }}
+            </div>
+            @enderror
+        </form>
     </div>
         
     {{-- students table --}}
@@ -86,10 +94,14 @@
             <tr>
             <td class="ps-3"><input class="table-checkbox form-check-input" type="checkbox" value="" id="checkAll"></td>                
             <td>{{$student['student_num']}}</td>
-            <td>{{$student['first_name_en']}}</td>
-            <td>{{$student['specialization']}}</td>
-            <td>{{$student['id']}}</td>
-            <td>Otto</td>
+            @if($student['registered'])
+            <td>{{$student['first_name_en']}} {{$student['last_name_en']}}</td>
+            @else 
+            <td class="text-danger">{{$student['first_name_en']}} {{$student['last_name_en']}}</td>
+            @endif
+            <td>{{$student->specialization->acronyms}}</td>
+            <td>{{$student->training->branch->company->name ?? ''}}</td>
+            <td>{{$student->training->branch->address ?? ''}}</td>
             <td>
             <select class="form-select txt-sm w-auto" aria-label="Go_to">
                 <option value="Progress" selected>Progress</option>
@@ -99,10 +111,13 @@
                 <option value="Assessment">Assessment</option>
             </select>
             </td>
-            <td><button type="button" class="btn"
-            data-bs-toggle="modal" data-bs-target="#deleteModal">
-            <i class="bi bi-trash3 fs-6 text-danger"></i>
-            </button></td>
+            <td>
+                <a type="submit" class="btn"
+                href="{{ route('coordinator_delete_student', ['student_id' => $student->id]) }}"
+                onClick="return confirm('Are you sure?')">
+                <i class="bi bi-trash3 fs-6 text-danger"></i>
+                </a>
+            </td>
             </tr>
             @endforeach
         </tbody>

@@ -26,8 +26,8 @@ class ListController extends Controller
         foreach ($trainings as $training) {
             $students = $training->students()
                 ->select('first_name_en', 'last_name_en')
-                ->get();
-             
+                ->defaultOrder()->get();
+             //to edit, do it as assign training
             foreach ($students as $student) {
                 $students_data[] = [
                     'first_name_en' => $student->first_name_en,
@@ -39,8 +39,12 @@ class ListController extends Controller
                 ];
             }
         }
+
+        //filters data
+        
         return view('company_employee.hr.trainees.list',
-         ['students_data' => $students_data,
+         ['trainings_data' => $trainings,
+          'students_data' => $students_data,
           'not_aaproved_students' => $not_aaproved_students,
           'company_id' => $company_id]);
     }

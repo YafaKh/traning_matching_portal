@@ -45,15 +45,19 @@ class Student extends Model
     'specialization_id',
     'training_id'];
     protected $hidden = ['created_at','updated_at'];
+    public function scopeDefaultOrder($query)
+    {
+        return $query->orderBy('first_name_en');
+    }
     public function university()
     {
         return $this->belongsTo(University::class);
     }
 
-    // public function training()
-    // {
-    //     return $this->belongsTo(Training::class);
-    // }
+    public function training()
+    {
+        return $this->belongsTo(Training::class, 'training_id');
+    }
 
     //many to many
      public function spoken_languages()
@@ -70,7 +74,7 @@ class Student extends Model
     }
 
     //one to many
-    public function specializations()
+    public function specialization()
     {
         return $this->belongsTo('App\Models\Specialization','specialization_id');
     }
