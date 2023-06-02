@@ -15,7 +15,7 @@
 <div class="px-5 mb-2">
     {{-- filters --}}
     <div class="d-flex justify-content-end  pe-3">
-        <div class="d-flex flex-md-row flex-column mt-5 col-md-6" >
+      <div class="d-flex flex-md-row flex-column mt-5 col-md-6" >
         <label class="form-label text-nowrap me-3">Choose a training to assign trainees to: </label>
         <form method="POST" action="{{ route('hr_assign_training', ['company_id' => $company_id, 'student_id' => ':student_id']) }}" id="assign_trainee_form">
         @csrf
@@ -31,7 +31,7 @@
                 </div>
             @enderror
         </form>
-    </div>
+      </div>
     </div>
     <div class="d-flex flex-lg-row flex-column mt-3">
         {{-- Unengaged Trainees table --}}

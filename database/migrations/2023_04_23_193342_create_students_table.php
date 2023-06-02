@@ -37,12 +37,15 @@ return new class extends Migration
             $table->boolean('registered')->nullable(false)->default(0);
             $table->string('image')->nullable();
             $table->unsignedBigInteger('university_id');
+            $table->unsignedBigInteger('university_employee_id')->nullable();
             $table->unsignedBigInteger('specialization_id');
             $table->unsignedBigInteger('training_id')->nullable();
             $table->unsignedBigInteger('evaluate_student_id');
             $table->unsignedBigInteger('evaluate_company_id');
             $table->foreign('university_id')
             ->references('id')->on('universities')->onDelete('cascade');
+            $table->foreign('university_employee_id')
+            ->references('id')->on('university_employees');
             $table->foreign('specialization_id')
             ->references('id')->on('specializations')->onDelete('cascade');
             $table->foreign('training_id')

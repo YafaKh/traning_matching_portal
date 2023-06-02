@@ -22,7 +22,7 @@ class UniversityStudentsController extends Controller
         //to edit Remove approved ones and ones who already sensed a req.
         $company = Company:: findOrFail($company_id);
 
-        
+        //dd($company->not_approved_students);
         $students = Student::whereDoesntHave('training')
         ->whereNotIn('id', $company->not_approved_students->pluck('student_id'))
         ->select('id', 'first_name_en', 'last_name_en', 'gpa'

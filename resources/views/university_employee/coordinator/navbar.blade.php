@@ -16,7 +16,7 @@
             <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="{{route('coordinator_list_students')}}">List students</a></li>
                 <li><a class="dropdown-item" href="{{route('coordinator_students_companies_approval')}}">Student-Company approval</a></li>
-                <li><a class="dropdown-item" href="{{route('coordinator_assign_supervisors')}}">Assign supervisors</a></li>
+                <li><a class="dropdown-item" href="{{route('coordinator_manage_supervisors')}}">Assign supervisors</a></li>
             </ul>
             </li>
             <li class="nav-item">

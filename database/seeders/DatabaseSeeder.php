@@ -18,11 +18,12 @@ use App\Models\Spoken_language;
 use App\Models\Student_spoken_language;
 use App\Models\Skill;
 use App\Models\Student_Skill;
-
+use App\Models\UniversityEmployee;
 
 use Database\Seeders\UniversitySeeder;
 use Database\Seeders\SpecializationSeeder;
 use Database\Seeders\CompanyEmployeeRoleSeeder;
+use Database\Seeders\UniversityEmployeeRoleSeeder;
 use Database\Seeders\TrainingSeeder;
 
 class DatabaseSeeder extends Seeder
@@ -35,7 +36,9 @@ class DatabaseSeeder extends Seeder
         $this->call(UniversitySeeder::class);
         $this->call(SpecializationSeeder::class);
         $companies = Company::factory()->count(4)->create();
+        $this->call(UniversityEmployeeRoleSeeder::class);
         $this->call(CompanyEmployeeRoleSeeder::class);
+        UniversityEmployee::factory()->count(10 )->create();
 
         //create students not connected with any company
         Student::factory()->count(10 )->create();

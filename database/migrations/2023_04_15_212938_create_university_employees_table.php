@@ -25,9 +25,9 @@ return new class extends Migration
             $table->string('image')->nullable();
             
             $table->unsignedBigInteger('university_id');
-            $table->unsignedBigInteger('employees_roles');
+            $table->unsignedBigInteger('university_employee_role_id');
             $table->foreign('university_id')->references('id')->on('universities');
-            $table->foreign('employees_roles')->references('id')->on('university_employee_roles');
+            $table->foreign('university_employee_role_id')->references('id')->on('university_employee_roles');
         });
     }
 

@@ -14,9 +14,10 @@ return new class extends Migration
         Schema::create('university_employee_roles', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('semester');
+            //to edit
+            //$table->string('semester');
             $table->boolean('coordinator')->default(0);
-            $table->boolean('supervisor')->default(0);
+            $table->boolean('supervisor')->default(1);
        });
     }
 

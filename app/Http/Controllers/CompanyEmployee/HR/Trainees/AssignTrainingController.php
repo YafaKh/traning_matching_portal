@@ -62,7 +62,7 @@ class AssignTrainingController extends Controller
     public function add(Request $request, $company_id, $student_id)
     { 
         $request->validate([
-            'training' => 'required',
+            'training' => 'required|exists:trainings',
         ]);
  
         Student::find($student_id)

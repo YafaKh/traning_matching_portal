@@ -12,6 +12,7 @@ use App\Models\Progress;
 use App\Models\University;
 use App\Models\Specialization;
 use App\Models\StudentCompanyApproval;
+use App\Models\UniversityEmployee;
 
 // use App\Models\Spoken_language;
 
@@ -48,15 +49,6 @@ class Student extends Model
     public function scopeDefaultOrder($query)
     {
         return $query->orderBy('first_name_en');
-    }
-    public function university()
-    {
-        return $this->belongsTo(University::class);
-    }
-
-    public function training()
-    {
-        return $this->belongsTo(Training::class, 'training_id');
     }
 
     //many to many
@@ -95,5 +87,17 @@ class Student extends Model
     public function not_approved_companies()
     {
         return $this->hasMany(StudentCompanyApproval::class, 'student_id');
+    }
+    public function university()
+    {
+        return $this->belongsTo(University::class);
+    }
+    public function training()
+    {
+        return $this->belongsTo(Training::class, 'training_id');
+    }
+    public function supervisor()
+    {
+        return $this->belongsTo(UniversityEmployee::class, 'university_employee_id');
     }
 }
