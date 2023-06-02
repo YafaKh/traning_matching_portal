@@ -590,6 +590,9 @@ body .bigDiv .loginForm .loginCard .creatAccountLink:hover {
 .bg-dark-blue {
   background-color:var(--dark-blue);
 }
+.text-dark-blue{
+  color:var(--dark-blue);
+}
 .bg-blue {
   background-color:var(--blue);
 }

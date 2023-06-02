@@ -52,19 +52,34 @@ class Student extends Model
     }
 
     //many to many
-     public function spoken_languages()
+    //  public function spoken_languages()
+    // {
+    //     return $this->belongsToMany('App\Models\Spoken_language','students_spoken_languages','student_id','spoken_language_id'); //'pivot','fk:for this table','fk:for other table'
+    // }
+    public function student_spoken_languages()
     {
-        return $this->belongsToMany('App\Models\Spoken_language','students_spoken_languages','student_id','spoken_language_id'); //'pivot','fk:for this table','fk:for other table'
+        return $this->hasMany(Student_spoken_language::class);
     }
-    public function skills()
+    public function student_skill()
     {
-        return $this->belongsToMany('App\Models\Skill','students_skills','student_id','skill_id');
+        return $this->hasMany(Student_skill::class);
     }
-    public function preferred_training_fields()
+    // public function skills()
+    // {
+    //     return $this->belongsToMany('App\Models\Skill','students_skills','student_id','skill_id');
+    // }
+    // public function preferredTrainingFields()
+    // {
+    //     return $this->belongsToMany('App\Models\Preferred_training_field','preferred_training_fields_students','student_id','preferred_training_id');
+    // }
+    public function preferredTrainingFields()
     {
-        return $this->belongsToMany('App\Models\Preferred_training_field','preferred_training_fields_students','student_id','preferred_training_id');
+        return $this->hasMany(Preferred_training_field::class);
     }
-
+    public function preferredCitiesStudent()
+    {
+        return $this->hasMany(Preferred_cities_student::class);
+    }
     //one to many
     public function specialization()
     {

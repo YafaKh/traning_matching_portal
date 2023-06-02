@@ -232,23 +232,7 @@
         <div class="selected-box">Nablus </div>
       </div>
     </div>
-    <div class="info">
-      <h3>Preferred companies:</h3>
 
-      <div class="input-group w-25 studentInfo">
-        <select class="form-select  text-secondary" id="inputGroupSelect01">
-          <option value="no" selected>--</option>
-          <option value="yes">Asal</option>
-          <option value="yes">exalt</option>
-
-        </select>
-      </div>
-      <div class="row">
-        <div class="selected-box">X </div>
-
-
-      </div>
-    </div>
     <div class="info">
       <h3>preferred training field:</h3>
 

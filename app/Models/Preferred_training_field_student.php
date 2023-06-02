@@ -12,4 +12,13 @@ class Preferred_training_field_student extends Model
     protected $fillable = ['student_id','preferred_training_id'];
     protected $hidden = ['created_at','updated_at'];
    
+    public function student()
+    {
+        return $this->belongsTo(Student::class);
+    }
+
+    public function preferredTrainingField()
+    {
+        return $this->belongsTo(Preferred_training_field::class);
+    }
 }

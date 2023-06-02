@@ -64,6 +64,7 @@ class StudentFactory extends Factory
             //'training_id' => $this->faker->randomElement($training_ids),
             'evaluate_student_id' => $this->instance_counter,
             'evaluate_company_id' => $this->instance_counter,
+            'work_experience' => $this->faker->paragraph(),
 
         ];
     }

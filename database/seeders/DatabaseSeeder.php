@@ -18,7 +18,10 @@ use App\Models\Spoken_language;
 use App\Models\Student_spoken_language;
 use App\Models\Skill;
 use App\Models\Student_Skill;
-use App\Models\UniversityEmployee;
+use App\Models\City;
+use App\Models\Preferred_cities_student;
+use App\Models\Preferred_training_field_student;
+use App\Models\Preferred_training_field;
 
 use Database\Seeders\UniversitySeeder;
 use Database\Seeders\SpecializationSeeder;
@@ -80,6 +83,10 @@ class DatabaseSeeder extends Seeder
         Student_spoken_language::factory()->count(2)->create();
         Skill::factory()->count(5)->create();
         Student_Skill::factory()->count(5)->create();
+        City::factory()->count(5)->create();
+        Preferred_cities_student::factory()->count(2)->create();
+        Preferred_training_field::factory()->count(5)->create();
+        Preferred_training_field_student::factory()->count(2)->create();
 
 
     }

@@ -13,9 +13,13 @@ class Skill extends Model
     protected $fillable = ['name'];
     protected $hidden = ['created_at','updated_at'];
    
-    public function students()
+    // public function students()
+    // {
+    //     return $this->belongsToMany('App\Models\Student','students_skills','skill_id','student_id')
+    //     ->withPivot(['level']);
+    // }
+    public function student_skill()
     {
-        return $this->belongsToMany('App\Models\Student','students_skills','skill_id','student_id')
-        ->withPivot(['level']);
+        return $this->hasMany(Student_skill::class);
     }
 }

@@ -15,16 +15,16 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->unsignedBigInteger('student_id');
-            $table->unsignedBigInteger('preferred_city_id');
+            $table->unsignedBigInteger('city_id');
             $table->foreign('student_id')
                 ->references('id')
                 ->on('students')
                 ->onDelete('no action')
                 ->onUpdate('no action');
 
-            $table->foreign('preferred_city_id')
+            $table->foreign('city_id')
                 ->references('id')
-                ->on('preferred_cities');
+                ->on('cities');
         });
     }
 

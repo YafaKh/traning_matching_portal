@@ -12,5 +12,13 @@ class Student_spoken_language extends Model
     protected $table ="students_spoken_languages";
     protected $fillable = ['speaking_level','writing_level','listening_level','student_id','spoken_language_id'];
     protected $hidden = ['created_at','updated_at'];
-   
+    public function student()
+    {
+        return $this->belongsTo(Student::class);
+    }
+
+    public function spokenLanguage()
+    {
+        return $this->belongsTo(Spoken_Language::class);
+    }
 }
