@@ -23,27 +23,44 @@
         
     {{-- supervisors table--}}
     <div class="table-responsive mt-4">
-        <table class="table txt-sm  table-hover">
+        <table class="table table-hover">
         <thead class="bg-mid-sand">
             <tr >
-            <th scope="col" class="ps-3" >ID</th>
-            <th scope="col" >Name</th>
-            <th scope="col">Email</th>
-            <th scope="col">Phone</th>
+            <th scope="col" class="ps-3" >Name</th>
+            <th scope="col">Emails</th>
+            <th scope="col">Phones</th>
             <th scope="col">Branches</th> 
             </tr>
         </thead>
         <tbody class="bg-light">
+            @foreach($companies as $company)
             <tr>
-            <td class="ps-3">****</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td>****</td>
-            <td>Otto</td>
+            <td class="ps-3">{{$company['name']}}</td>
+            <td>
+                <ul class="list-unstyled">
+                @foreach($company->emails as $email)
+                    <li class="mt-2 mb-3">{{$email->email_address}}</li>
+                @endforeach
+                </ul>
+            </td>
+            <td>
+                <ul class="list-unstyled">
+                @foreach($company->phones as $phone)
+                    <li class="mt-2 mb-3">{{$phone->phone_no}}</li>
+                @endforeach
+                </ul>
+            </td>
+            <td>
+                <ul class="list-unstyled">
+                @foreach($company->branches as $branch)
+                    <li class="mt-2 mb-3">{{$branch->address}}</li>
+                @endforeach
+                </ul>
+            </td>
             </tr>
+            @endforeach
         </tbody>
         </table>
-    </div>
     </div>
 </div>
 @endsection

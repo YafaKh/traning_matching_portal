@@ -24,6 +24,7 @@ use App\Models\Preferred_cities_student;
 use App\Models\Preferred_training_field_student;
 use App\Models\Preferred_training_field;
 
+use Database\Seeders\CitySeeder;
 use Database\Seeders\UniversitySeeder;
 use Database\Seeders\SpecializationSeeder;
 use Database\Seeders\CompanyEmployeeRoleSeeder;
@@ -42,6 +43,7 @@ class DatabaseSeeder extends Seeder
         $companies = Company::factory()->count(4)->create();
         $this->call(UniversityEmployeeRoleSeeder::class);
         $this->call(CompanyEmployeeRoleSeeder::class);
+        $this->call(CitySeeder::class);
         UniversityEmployee::factory()->count(10 )->create();
 
         //create students not connected with any company
@@ -85,7 +87,6 @@ class DatabaseSeeder extends Seeder
         Student_spoken_language::factory()->count(2)->create();
         Skill::factory()->count(5)->create();
         Student_Skill::factory()->count(5)->create();
-        City::factory()->count(5)->create();
         Preferred_cities_student::factory()->count(2)->create();
         Preferred_training_field::factory()->count(5)->create();
         Preferred_training_field_student::factory()->count(2)->create();

@@ -15,7 +15,9 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('address');
-            
+            $table->unsignedBigInteger('city_id');
+
+            $table->foreign('city_id')->references('id')->on('cities');
             $table->unsignedBigInteger('company_id')->nullable();
             $table->foreign('company_id')
                 ->references('id')->on('companies');

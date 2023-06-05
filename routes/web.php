@@ -20,6 +20,7 @@ use App\Http\Controllers\UniversityEmployee\Coordinator\Students\ListController 
 use App\Http\Controllers\UniversityEmployee\Coordinator\Students\StudentCompanyApprovalController;
 use App\Http\Controllers\UniversityEmployee\Coordinator\Students\AssignSupervisorsController;
 use App\Http\Controllers\UniversityEmployee\Coordinator\UniversityEmployeesController;
+use App\Http\Controllers\UniversityEmployee\Coordinator\CompaniesController;
 
 Route::get('/', function () {
     return view('/all_users/login');
@@ -60,8 +61,7 @@ Route::prefix('/coordinator')->group(function(){
         Route::get('/delete/{employee_id}', [UniversityEmployeesController::class, 'destroy'])->name('coordinator_delete_employee');
     });
     
-    Route::get('/companies', function () {
-        return view('university_employee/coordinator/companies'); })->name('coordinator_list_companies');   
+    Route::get('/companies',  [CompaniesController::class, 'index'])->name('coordinator_list_companies');   
 });
 
 Route::prefix('/supervisor')->group(function(){

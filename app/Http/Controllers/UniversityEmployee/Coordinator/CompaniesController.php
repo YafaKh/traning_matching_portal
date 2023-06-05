@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Coordinator;
+namespace App\Http\Controllers\UniversityEmployee\Coordinator;
+use App\Http\Controllers\Controller;
+use App\Models\Company;
 
 use Illuminate\Http\Request;
 
@@ -13,9 +15,8 @@ class CompaniesController extends Controller
      */
     public function index()
     {
-        //select from company id,  name, email, phone, branchs
-        $companiesData= Company::select(['id','name'])
+        $companies= Company::select(['id','name'])
         ->get();
-        return view('university_employee.coordinator.companies',['company'=>$companiesData]);
+        return view('university_employee.coordinator.companies',['companies'=>$companies]);
     }
 }

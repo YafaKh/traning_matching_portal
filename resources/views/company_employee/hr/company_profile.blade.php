@@ -44,7 +44,7 @@
 <section class="col-md-9 col-11 bg-white mb-3 p-md-5 p-3 mx-auto rounded-2">
 <p class="fs-4">Branches </p>
 @foreach($company_data->branches as $branch)
-<p>{{$branch['address']}}</p>
+<p>{{$branch->city->name}}-{{$branch['address']}}</p>
 @endforeach
 </section>
 <section class="col-md-9 col-11 bg-white mb-3 p-md-5 p-3 mx-auto rounded-2">

@@ -56,7 +56,7 @@ class ListController extends Controller
             'id', 'student_num', 'first_name_en', 'last_name_en', 'registered',
             'specialization_id', 'training_id'])->get();
         foreach ($students as $student) {
-            if (in_array((string)$student->student_num, $registered_students)) {
+            if (in_array($student->student_num, $registered_students)) {
                 $student->registered = true;
             } else {
                 $student->registered = false;

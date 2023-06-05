@@ -41,7 +41,7 @@
         <table class="table txt-sm table-hover">
         <thead class="bg-mid-sand">
             <tr class="rounded-top">
-                <td colspan="5"><label class="form-label mt-2 ms-3 fs-6">
+                <td colspan="4"><label class="form-label mt-2 ms-3 fs-6">
                 Employees</label>
                 </td>
                 <td><button type="button" class="btn" 
@@ -55,7 +55,6 @@
             <th scope="col">Role</th>
             <th scope="col">Email</th>
             <th scope="col">Phone</th>
-            <th scope="col">Trainees</th>
             <th scope="col">Delete</th> 
             </tr>
         </thead>
@@ -74,21 +73,6 @@
             </td>
             <td>{{$employee['email']}}</td>
             <td>{{$employee['phone']}}</td>
-            <td>
-            <div class="d-flex">
-                <div class="accordion" id="accordionExample">
-                    <div class="accordion-item">
-                        <h6 class="accordion-header">
-                        <button class="accordion-button collapsed txt-sm p-1" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">Trainees</button>
-                        </h6>
-                        <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                            <div class="accordion-body" style="max-height: 100px; overflow-y: auto;"><ul><li>hhhhhhhhhh</li><li>h</li><li>h</li><li>h</li></ul></div>
-                        </div>
-                    </div>
-                </div>
-                <button type="button" class="btn p-1 ms-1 h-auto"><i class="bi bi-box-arrow-up-right fs-6"></i></button>
-            </div>
-            </td>
             <td>
                 <a type="submit" class="btn"
                 href="{{ route('hr_delete_employee', ['company_id' => $company_id, 'employee_id' => $employee->id]) }}"

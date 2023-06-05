@@ -33,7 +33,8 @@
             <td>{{$student['first_name_en']}} {{$student['last_name_en']}}</td>
             @else 
             <td class="text-danger">{{$student['first_name_en']}} {{$student['last_name_en']}}</td>
-            @endif            <td>
+            @endif            
+            <td>
                 <ul>
                 @foreach($student->not_approved_companies as $not_approved_company)
                     <li class="mt-2 mb-3">{{$not_approved_company->company->name}}</li>
