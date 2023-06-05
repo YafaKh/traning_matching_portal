@@ -30,7 +30,6 @@ use Database\Seeders\SpecializationSeeder;
 use Database\Seeders\CompanyEmployeeRoleSeeder;
 use Database\Seeders\UniversityEmployeeRoleSeeder;
 use Database\Seeders\TrainingSeeder;
-use Database\Seeders\CitySeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -47,7 +46,6 @@ class DatabaseSeeder extends Seeder
         $companies = Company::factory()->count(20)->create();
 
         $this->call(CompanyEmployeeRoleSeeder::class);
-        $this->call(CitySeeder::class);
         UniversityEmployee::factory()->count(10 )->create();
 
         //create students not connected with any company
