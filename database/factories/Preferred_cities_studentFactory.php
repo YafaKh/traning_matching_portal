@@ -4,6 +4,7 @@ namespace Database\Factories;
 use App\Models\Student;
 use App\Models\City;
 use App\Models\Preferred_cities_student;
+// use Database\Seeders\CitySeeder;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -20,10 +21,14 @@ class Preferred_cities_studentFactory extends Factory
     public function definition()
     {
         $studentIds = Student::pluck('id')->all();
-        $cityIds = City::pluck('id')->all();
+        // $cityIds = City::pluck('id')->all();
+        $city = City::inRandomOrder()->first();
+
         return [
             'student_id' => $this->faker->randomElement($studentIds),
-            'city_id' => $this->faker->randomElement($cityIds),
+            'city_id' => $city->id,
+
+            // 'city_id' => $this->faker->randomElement($cityIds),
         ];
        
     }

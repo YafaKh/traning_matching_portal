@@ -24,7 +24,7 @@
             ><!-- active -->
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Companies want to join</a>
+            <a class="nav-link" href="{{route('admin_compnies_want_to_join')}}">Companies want to join</a>
           </li>
         </ul>
         <input
@@ -35,128 +35,33 @@
         />
       </div>
     </nav>
+    
     <section>
-      <div
-        class="d-flex flex-lg-row flex-sm-column justify-content-evenly mb-4 mt-3"
-      >
-        <div
-          class="d-flex flex-colmun bg-light align-items-center company-box justify-content-center w-25 py-3"
-        >
-          <img
-            src="{{asset('images/company_img1.png')}}"
-            alt=""
-            class="rounded-circle col-4 company_img1 w-25 me-3"
-          />
-          <div class="mt-4 mx-3">
-            <a href="http://" class="text-decoration-none">Company Name</a>
-            <p>industry</p>
-          </div>
-        </div>
-        <div
-          class="d-flex flex-colmun bg-light align-items-center company-box justify-content-center w-25"
-        >
-          <img
-            src="{{asset('images/company_img1.png')}}"
-            alt=""
-            class="rounded-circle col-4 company_img1 w-25 me-3"
-          />
-          <div class="mt-4 mx-3">
-            <a href="http://" class="text-decoration-none">Company Name</a>
-            <p>industry</p>
-          </div>
-        </div>
+   
+    @for($i = 0; $i < count($allCompanies); $i += 2)
+  <div class="d-flex flex-lg-row flex-sm-column justify-content-evenly mb-4 mt-3">
+    @php $firstCompany = $allCompanies[$i]; @endphp
+    <div class="position-relative d-flex flex-row bg-light align-items-center company-box justify-content-center w-25 py-3">
+      <img src="{{$firstCompany->image}}" alt="" class="rounded-circle col-6 w-25 h-auto" />
+      <div class="mt-4 mx-3 col-6">
+        <a href="http://" class="text-decoration-none">{{$firstCompany->name}}</a>
+        <p>{{$firstCompany->industry}}</p>
       </div>
+    </div>
 
-      <div
-        class="d-flex flex-lg-row flex-sm-column justify-content-evenly mb-4 mt-3"
-      >
-        <div
-          class="d-flex flex-colmun bg-light align-items-center company-box justify-content-center w-25 py-3"
-        >
-          <img
-            src="{{asset('images/company_img1.png')}}"
-            alt=""
-            class="rounded-circle col-4 company_img1 w-25 me-3"
-          />
-          <div class="mt-4 mx-3">
-            <a href="http://" class="text-decoration-none">Company Name</a>
-            <p>industry</p>
-          </div>
-        </div>
-        <div
-          class="d-flex flex-colmun bg-light align-items-center company-box justify-content-center w-25"
-        >
-          <img
-            src="{{asset('images/company_img1.png')}}"
-            alt=""
-            class="rounded-circle col-4 company_img1 w-25 me-3"
-          />
-          <div class="mt-4 mx-3">
-            <a href="http://" class="text-decoration-none">Company Name</a>
-            <p>industry</p>
-          </div>
+    @if($i+1 < count($allCompanies))
+      @php $secondCompany = $allCompanies[$i+1]; @endphp
+      <div class="position-relative d-flex flex-row bg-light align-items-center company-box justify-content-center w-25 py-3">
+        <img src="{{$secondCompany->image}}" alt="" class="rounded-circle col-6 w-25 h-auto" />
+        <div class="mt-4 mx-3 col-6">
+          <a href="http://" class="text-decoration-none">{{$secondCompany->name}}</a>
+          <p>{{$secondCompany->industry}}</p>
         </div>
       </div>
-      <div
-        class="d-flex flex-lg-row flex-sm-column justify-content-evenly mb-4 mt-3"
-      >
-        <div
-          class="d-flex flex-colmun bg-light align-items-center company-box justify-content-center w-25 py-3"
-        >
-          <img
-            src="{{asset('images/company_img1.png')}}"
-            alt=""
-            class="rounded-circle col-4 company_img1 w-25 me-3"
-          />
-          <div class="mt-4 mx-3">
-            <a href="http://" class="text-decoration-none">Company Name</a>
-            <p>industry</p>
-          </div>
-        </div>
-        <div
-          class="d-flex flex-colmun bg-light align-items-center company-box justify-content-center w-25"
-        >
-          <img
-            src="{{asset('images/company_img1.png')}}"
-            alt=""
-            class="rounded-circle col-4 company_img1 w-25 me-3"
-          />
-          <div class="mt-4 mx-3">
-            <a href="http://" class="text-decoration-none">Company Name</a>
-            <p>industry</p>
-          </div>
-        </div>
-      </div>
-      <div
-        class="d-flex flex-lg-row flex-sm-column justify-content-evenly mb-4 mt-3"
-      >
-        <div
-          class="d-flex flex-colmun bg-light align-items-center company-box justify-content-center w-25 py-3"
-        >
-          <img
-            src="{{asset('images/company_img1.png')}}"
-            alt=""
-            class="rounded-circle col-4 company_img1 w-25 me-3"
-          />
-          <div class="mt-4 mx-3">
-            <a href="http://" class="text-decoration-none">Company Name</a>
-            <p>industry</p>
-          </div>
-        </div>
-        <div
-          class="d-flex flex-colmun bg-light align-items-center company-box justify-content-center w-25"
-        >
-          <img
-            src="{{asset('images/company_img1.png')}}"
-            alt=""
-            class="rounded-circle col-4 company_img1 w-25 me-3"
-          />
-          <div class="mt-4 mx-3">
-            <a href="http://" class="text-decoration-none">Company Name</a>
-            <p>industry</p>
-          </div>
-        </div>
-      </div>
+    @endif
+  </div>
+@endfor
+ 
       <nav aria-label="..." class="d-flex justify-content-center mt-5">
         <ul class="pagination">
           <li class="page-item disabled">

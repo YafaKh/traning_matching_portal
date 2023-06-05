@@ -18,10 +18,12 @@ class CitySeeder extends Seeder
             ['name' => "Nablus"],
             ['name' => "Jenin"],
             ['name' => "Hebron"],
+            ['name' => "Tulkarm"],
 
         ];
         foreach ($cities as $key => $value) {
             City::create($value);
         } 
+
     }
 }
