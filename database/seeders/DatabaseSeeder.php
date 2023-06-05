@@ -41,7 +41,6 @@ class DatabaseSeeder extends Seeder
         $this->call(UniversitySeeder::class);
         $this->call(SpecializationSeeder::class);
         $this->call(UniversityEmployeeRoleSeeder::class);
-
         $this->call(CitySeeder::class);
         $companies = Company::factory()->count(20)->create();
 
@@ -93,6 +92,6 @@ class DatabaseSeeder extends Seeder
         Preferred_training_field::factory()->count(5)->create();
         Preferred_training_field_student::factory()->count(10)->create();
 
-
     }
+
 }
