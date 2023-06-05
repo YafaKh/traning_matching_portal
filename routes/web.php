@@ -10,7 +10,7 @@ use App\Http\Controllers\Student\EvaluateCompanyController;
 use App\Http\Controllers\CompanyEmployee\RegisterController;
 use App\Http\Controllers\CompanyEmployee\HR\Trainees\ListController as HrListController;
 use App\Http\Controllers\Admin\HomeController;
-use App\Http\Controllers\Admin\CompaniesController;
+use App\Http\Controllers\Admin\CompaniesController as AdminCompaniesController;
 use App\Http\Controllers\Admin\CompaniesWantJoinController;
 use App\Http\Controllers\CompanyEmployee\HR\Trainees\UniversityStudentsController;
 use App\Http\Controllers\CompanyEmployee\HR\Trainees\AssignTrainingController;
@@ -22,7 +22,7 @@ use App\Http\Controllers\UniversityEmployee\Coordinator\Students\ListController 
 use App\Http\Controllers\UniversityEmployee\Coordinator\Students\StudentCompanyApprovalController;
 use App\Http\Controllers\UniversityEmployee\Coordinator\Students\AssignSupervisorsController;
 use App\Http\Controllers\UniversityEmployee\Coordinator\UniversityEmployeesController;
-use App\Http\Controllers\UniversityEmployee\Coordinator\CompaniesController;
+use App\Http\Controllers\UniversityEmployee\Coordinator\CompaniesController as CooCompaniesController;
 
 Route::get('/', function () {
     return view('/all_users/login');
@@ -63,7 +63,7 @@ Route::prefix('/coordinator')->group(function(){
         Route::get('/delete/{employee_id}', [UniversityEmployeesController::class, 'destroy'])->name('coordinator_delete_employee');
     });
     
-    Route::get('/companies',  [CompaniesController::class, 'index'])->name('coordinator_list_companies');   
+    Route::get('/companies',  [CooCompaniesController::class, 'index'])->name('coordinator_list_companies');   
 });
 
 Route::prefix('/supervisor')->group(function(){
@@ -141,7 +141,7 @@ Route::post('store{id}',[StudentRegisterController::class,'addManyLanguageToStud
 // admin 
 Route::prefix('/admin')->group(function () {
     Route::get('/',[HomeController::class,'show'])->name('admin_home');
-    Route::get('/copmanies',[CompaniesController::class,'show_comapnies'])->name('admin_copmanies');
+    Route::get('/copmanies',[AdminCompaniesController::class,'show_comapnies'])->name('admin_copmanies');
     Route::get('/comapnies_want_to_join',[CompaniesWantJoinController::class,'show_comapnies_want_join'])->name('admin_compnies_want_to_join');
     
 })->name('admin');
