@@ -5,6 +5,7 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Training;
 use App\Models\CompanyEmployee;
+use App\Models\CompanyBranch;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Training>
@@ -26,6 +27,7 @@ class TrainingFactory extends Factory
     public function definition()
     {       
         //$trainers_ids = CompanyEmployee::pluck('id')->all();
+        $company_branch_ids = CompanyBranch::pluck('id')->all();
 
         return [
             'name' => $this->faker->word,
@@ -33,8 +35,9 @@ class TrainingFactory extends Factory
             'year' => 2023,
             'training_feild' => $this->faker->word,
             'details' => $this->faker->text,
+            'company_branch_id' => $this->faker->randomElement($company_branch_ids),
             //'company_employee_id' => $this->faker->randomElement($trainers_ids),
-            //'branch_id' => CompanyBranchDepartment::factory()->create()->id
+            // 'branch_id' => CompanyBranchDepartment::factory()->create()->id
         ];
     }
 }

@@ -22,20 +22,26 @@
     <!-- we need to add this to datebase -->
     <div class="workExperience">
       <h1>Work experience</h1>
+     
       <div class="mt-4">
+          
         <div class="anWorkExperience">
-          <div class="goldenDiv"></div>
+            <div class="goldenDiv"></div>
           <div class="anWorkExperienceInfo">
+            
             <p>{{$student->work_experience}}</p>
             <!-- <h2 class="expName">Freelance UX/UI designer</h2>
             <p>Lorem ipsum</p>
             <p>Jun 2022 — Present</p>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dapibus eros eu
               vehicula interdum. Cras nec ultricies massa. Curabitur rutrum, diam id consequat consequat </p> -->
-          </div>
-
+          </div>  
+         
+         
         </div>
+
         <div class="anWorkExperience">
+
           <div class="blueDiv"></div>
           <div class="anWorkExperienceInfo">
           <p>{{$student->work_experience}}</p>
@@ -46,13 +52,19 @@
               <!-- vehicula interdum. Cras nec ultricies massa. Curabitur rutrum, diam id consequat consequat </p> -->
             <!--expDescription-->
           </div>
+         
         </div>
+        
       </div>
     </div>
   </section>
   <section class="profileSection studentSkills overflow-auto">
     <h2 class="GeneralInfoHeader">General information</h2>
-    <p>Gender: {{$student->gender}}</p>
+    @if ($student->gender == 1)
+    <p>Gender: Female</p>
+    @else
+    <p>Gender: Male</p>
+    @endif
     <p>GPA : {{$student->gpa}}</p>
     <p>number of passed hours : {{$student->passed_hours}}</p>
     
@@ -106,9 +118,9 @@
     <div class="info">
       <h3>preferred training field:</h3>
       <!-- there is an error here about the name  -->
-    {{-- @foreach($allPreferredTrainingFields as $allPreferredTrainingField)
+     @foreach($allPreferredTrainingFields as $allPreferredTrainingField)
       <p>{{ $allPreferredTrainingField->preferredTrainingField->name }}</p>
-      @endforeach--}}
+      @endforeach
     </div>
     <div class="info">
       <h3>when available:</h3>

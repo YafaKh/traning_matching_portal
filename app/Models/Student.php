@@ -94,7 +94,11 @@ class Student extends Model
         return $this->belongsTo('App\Models\Specialization','specialization_id');
     }
    
-
+    public function trainings()
+    {
+        return $this->belongsTo('App\Models\Training','training_id');
+    }
+    
     public function evaluate_student()
     {
         return $this->hasOne(EvaluateStudent::class);

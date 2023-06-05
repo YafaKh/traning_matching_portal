@@ -23,25 +23,15 @@ class StudentProfileController extends Controller
           $student =Student::find($id);
           $students =Student::select('id')->get();
             // many to many relationship
-          $allLanguages = Student_spoken_language::with('student', 'spokenLanguage')->get();
-          $allSkills = Student_skill::with('student', 'skill')->get();
-          $allPreferredTrainingFields = Preferred_training_field_student::with('student', 'preferredTrainingField')->get();
-          $allPreferredCities = Preferred_cities_student::with('student', 'city')->get();
+          $allLanguages = Student_spoken_language::with('student', 'spokenLanguage')->where('student_id',$id)->get();
+          $allSkills = Student_skill::with('student', 'skill')->where('student_id',$id)->get();
+          $allPreferredTrainingFields = Preferred_training_field_student::with('student', 'preferredTrainingField')->where('student_id',$id)->get();
+          $allPreferredCities = Preferred_cities_student::with('student', 'city')->where('student_id',$id)->get();
 
         //   one to many
           $specializationName = $student->specialization->name;
 
-        //   $skills = $student->skills;
-        //   $allSkills = Skill::select('id','name')->get();
-          
-        //   $preferred_training_fields = $student->preferred_training_fields;
-        //   $allpreferredTrainingFields = Preferred_training_field::select('id','name')->get();
-          
-          return view('student.profile',compact('student','specializationName','allLanguages','allSkills','allPreferredTrainingFields','allPreferredCities'));
-//           return view('student.profile',compact('student','specializationName','skills','spoken_languages','students','allLanguages','allSkills','allpreferredTrainingFields'));
-
-
-      //     
+        
+          return view('student.profile',compact('student','specializationName','allLanguages','allSkills','allPreferredTrainingFields','allPreferredCities'));  
     }
-     
 }

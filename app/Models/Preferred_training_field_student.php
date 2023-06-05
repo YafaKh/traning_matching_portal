@@ -19,6 +19,6 @@ class Preferred_training_field_student extends Model
 
     public function preferredTrainingField()
     {
-        return $this->belongsTo(Preferred_training_field::class);
+        return $this->belongsTo(Preferred_training_field::class, 'preferred_training_id');
     }
 }
