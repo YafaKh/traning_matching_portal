@@ -15,8 +15,8 @@ class Skill extends Model
    
     // public function students()
     // {
-    //     return $this->belongsToMany('App\Models\Student','students_skills','skill_id','student_id')
-    //     ->withPivot(['level']);
+    //     return $this->belongsToMany('App\Models\Student','students_skills','skill_id','student_id');
+    //     // ->withPivot(['level']);
     // }
     public function student_skill()
     {

@@ -29,6 +29,7 @@ use Database\Seeders\SpecializationSeeder;
 use Database\Seeders\CompanyEmployeeRoleSeeder;
 use Database\Seeders\UniversityEmployeeRoleSeeder;
 use Database\Seeders\TrainingSeeder;
+use Database\Seeders\CitySeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -39,8 +40,11 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(UniversitySeeder::class);
         $this->call(SpecializationSeeder::class);
-        $companies = Company::factory()->count(4)->create();
         $this->call(UniversityEmployeeRoleSeeder::class);
+
+        $this->call(CitySeeder::class);
+        $companies = Company::factory()->count(20)->create();
+
         $this->call(CompanyEmployeeRoleSeeder::class);
         UniversityEmployee::factory()->count(10 )->create();
 
@@ -85,10 +89,9 @@ class DatabaseSeeder extends Seeder
         Student_spoken_language::factory()->count(2)->create();
         Skill::factory()->count(5)->create();
         Student_Skill::factory()->count(5)->create();
-        City::factory()->count(5)->create();
         Preferred_cities_student::factory()->count(2)->create();
         Preferred_training_field::factory()->count(5)->create();
-        Preferred_training_field_student::factory()->count(2)->create();
+        Preferred_training_field_student::factory()->count(10)->create();
 
 
     }

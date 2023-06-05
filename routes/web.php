@@ -9,7 +9,9 @@ use App\Http\Controllers\Student\StudentRegisterController;
 use App\Http\Controllers\Student\EvaluateCompanyController;
 use App\Http\Controllers\CompanyEmployee\RegisterController;
 use App\Http\Controllers\CompanyEmployee\HR\Trainees\ListController as HrListController;
-use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\CompaniesController;
+use App\Http\Controllers\Admin\CompaniesWantJoinController;
 use App\Http\Controllers\CompanyEmployee\HR\Trainees\UniversityStudentsController;
 use App\Http\Controllers\CompanyEmployee\HR\Trainees\AssignTrainingController;
 use App\Http\Controllers\CompanyEmployee\HR\CompanyEmployeeController;
@@ -115,10 +117,14 @@ Route::prefix('/{company_id}/hr')->group(function(){
 
 Route::prefix('/student')->group(function () {
     Route::get('/registeration{id}',[StudentRegisterController::class,'create'])->name('student_registeration_1');
+    Route::POST('/registeration{id}/store',[StudentRegisterController::class,'store'])->name('student_registeration_1.store');
+
     Route::get('/registeration_2',[StudentRegisterController::class,'createNextPage'])->name('student_registeration_2');
     Route::get('/profile{id}',[StudentProfileController::class,'show'])->name('student_profile');
     Route::get('/edit_profile',[EditStudentProfileController::class,'show'])->name('edit_student_profile');
-    Route::get('/evaluate_company',[EvaluateCompanyController::class,'show'])->name('student_evaluate_company');
+    Route::get('/evaluate_company{id}',[EvaluateCompanyController::class,'show'])->name('student_evaluate_company');
+    Route::POST('/evaluate_company/add',[EvaluateCompanyController::class,'add'])->name('student_evaluate_company.add');
+
     Route::get('/list{id}',[StudentRegisterController::class,'test'])->name('test');
 
 })->name('student');
@@ -134,9 +140,9 @@ Route::post('store{id}',[StudentRegisterController::class,'addManyLanguageToStud
 
 // admin 
 Route::prefix('/admin')->group(function () {
-    Route::get('/',[AdminController::class,'show'])->name('admin_home');
-    Route::get('/copmanies',[AdminController::class,'show_comapnies'])->name('admin_copmanies');
-    Route::get('/comapnies_want_to_join',[AdminController::class,'show_comapnies_want_join'])->name('admin_compnies_want_to_join');
+    Route::get('/',[HomeController::class,'show'])->name('admin_home');
+    Route::get('/copmanies',[CompaniesController::class,'show_comapnies'])->name('admin_copmanies');
+    Route::get('/comapnies_want_to_join',[CompaniesWantJoinController::class,'show_comapnies_want_join'])->name('admin_compnies_want_to_join');
     
 })->name('admin');
 

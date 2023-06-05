@@ -3,6 +3,8 @@
   @include('student.layout.navbar')
 @endsection
 @section('content')
+<form action="{{route('student_evaluate_company.add')}}" method="POST" enctype="multipart/form-data">
+@csrf
 
       <section class="profileSection mb-3">
         <div class="position-relative col-md-9 bg-dark-blue p-5 w-auto h-25 mt-1 rounded-top-2 ">
@@ -11,15 +13,15 @@
           <div class="d-flex flex-column col-sm-6 col-md-8 col-10 ">
             <div class="col studentInfo-evaluateCompany">
                 <p >Student Name</p>
-                <p>*****</p><hr>
+                <p>{{$student->first_name_en}}</p><hr>
             </div>
             <div class="col studentInfo-evaluateCompany">
                 <p>ID</p>
-                <p>***</p><hr>
+                <p>{{$student->student_num}}</p><hr>
             </div>
             <div class="col studentInfo-evaluateCompany">
                 <p>Training place name :</p>
-                <p>***</p><hr>
+                <p>{{$companyName}}</p><hr>
             </div>
           </div>
         </div>
@@ -30,42 +32,19 @@
           <label for="">Skills that you’ve  trained in training :</label>
         </div>
         <div class="ps-5">
+        @foreach($allSkills as $allSkill)
         <div class=" g-2 ms-3 mb-2">
         <div class="form-check col">
           <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-          <label class="form-check-label" for="flexCheckDefault">
-            Default checkbox
+          <label class="form-check-label" for="flexCheckDefault" id="name">
+          {{$allSkill->name}}
           </label>
+
         </div>
        
       </div>
-      <div class=" g-2 ms-3 mb-2">
-        <div class="form-check col">
-          <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked />
-          <label class="form-check-label" for="flexCheckDefault">
-            Default checkbox
-          </label>
-        </div>
-      
-      </div>
-      <div class=" g-2 ms-3 mb-2">
-        <div class="form-check col">
-          <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-          <label class="form-check-label" for="flexCheckDefault">
-            Default checkbox
-          </label>
-        </div>
-        
-      </div>
-      <div class=" g-2 ms-3 mb-2">
-        <div class="form-check col">
-          <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked />
-          <label class="form-check-label" for="flexCheckDefault">
-            Default checkbox
-          </label>
-        </div>
-        
-      </div>
+      @endforeach
+     
     </div>
       <div class="form-floating mt-5 mb-4 w-50 ms-5 pb-4">
         <input type="text" class="form-control" id="floatingInput" placeholder="else" />
@@ -93,7 +72,7 @@
             Pros of the training place
           </label>
             <div class="col mt-5">
-            <textarea name="expDescription" id="expDescription" cols="67" rows="7" 
+            <textarea name="pros" id="pros" cols="67" rows="7" 
             class="overflow-auto"></textarea>        </div>
       </div>  
 
@@ -168,7 +147,7 @@
             <label for="floatingInput">else</label>
           </div>
       </div>
-
+</div>
 </section>
 <section class="profileSection mb-3">
     <div class="form-floating ms-4 mb-4 gx-5">
@@ -185,7 +164,7 @@
             <label class="form-check-label" for="flexRadioDefault2"> No </label>
           </div>
       </div>
-
+</div>
 </section>
 <section class="profileSection mb-4">
     <div class="form-floating ms-4 mb-4 gx-5">
@@ -202,7 +181,7 @@
             <label class="form-check-label" for="flexRadioDefault2"> No </label>
           </div>
       </div>
-
+</div>
 </section>
 <section class="profileSection mb-4">
 
@@ -238,11 +217,12 @@
 
 </section>
 <div class="text-center d-flex col-md-5 mx-auto my-4 row g-2 w-25">
-    <button class="btn btn-primary bg-dark-blue text-light px-5 my-3 flex-grow-1 col-md" type="button">
+    <button class="btn btn-primary bg-dark-blue text-light px-5 my-3 flex-grow-1 col-md" type="submit">
       Submit
     </button>
     <button class="btn btn-secondary text-light px-5 my-3 ms-1 flex-grow-1 col-md" type="button">
       Back
     </button>
   </div>
+</from>
 @endsection
