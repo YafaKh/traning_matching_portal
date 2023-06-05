@@ -12,7 +12,6 @@
     @include('university_employee.coordinator.students.student_navbar')
 @endsection
 @section('content')
-@include('all_users.delete_modal')
 <div class="px-5">
     {{--filters--}}
     <div class= "d-flex flex-sm-row flex-column mt-5 pb-3">

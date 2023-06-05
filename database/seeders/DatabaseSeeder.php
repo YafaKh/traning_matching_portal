@@ -6,14 +6,15 @@ use Illuminate\Database\Seeder;
 use App\Models\Company;
 use App\Models\CompanyBranch;
 use App\Models\CompanyEmployee;
+use App\Models\UniversityEmployee;
 use App\Models\CompanyEmail;
 use App\Models\CompanyPhone;
 use App\Models\CompanyEmployeeRole;
 use App\Models\Training;
 use App\Models\Student;
 use App\Models\Progress;
-
 use App\Models\UnaddedCompanyEmployee;
+use App\Models\UnaddedUniversityEmployee;
 use App\Models\Spoken_language;
 use App\Models\Student_spoken_language;
 use App\Models\Skill;
@@ -79,6 +80,7 @@ class DatabaseSeeder extends Seeder
         //Student::factory()->count(20)->create();
         Progress::factory()->count(25)->create();
         UnaddedCompanyEmployee::factory()->count(10)->create();
+        UnaddedUniversityEmployee::factory()->count(10)->create();
         Spoken_language::factory()->count(2)->create();
         Student_spoken_language::factory()->count(2)->create();
         Skill::factory()->count(5)->create();

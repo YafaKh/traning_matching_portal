@@ -15,11 +15,11 @@ class AssignSupervisorsController extends Controller
         ->orWhere('university_employee_role_id', 3)->get();
         
         $assigned_students= Student::select(['id', 'student_num', 'first_name_en',
-         'last_name_en', 'registered','training_id','university_employee_id'])->whereHas('supervisor')
+         'last_name_en', 'registered','training_id','university_employee_id'])->whereNotNull('university_employee_id')
          ->defaultOrder()->get();
 
          $unassigned_students= Student::select(['id', 'student_num', 'first_name_en',
-         'last_name_en', 'registered','training_id'])->whereDoesntHave('supervisor')
+         'last_name_en', 'registered','training_id'])->whereNull('university_employee_id')
          ->defaultOrder()->get();
 
         return view('university_employee.coordinator.students.assign_supervisors', [

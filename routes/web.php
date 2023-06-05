@@ -19,6 +19,7 @@ use App\Http\Controllers\CompanyEmployee\HR\CompanyProfileController;
 use App\Http\Controllers\UniversityEmployee\Coordinator\Students\ListController as CooListController;
 use App\Http\Controllers\UniversityEmployee\Coordinator\Students\StudentCompanyApprovalController;
 use App\Http\Controllers\UniversityEmployee\Coordinator\Students\AssignSupervisorsController;
+use App\Http\Controllers\UniversityEmployee\Coordinator\UniversityEmployeesController;
 
 Route::get('/', function () {
     return view('/all_users/login');
@@ -53,12 +54,12 @@ Route::prefix('/coordinator')->group(function(){
 
     
     Route::prefix('/university_employees')->group(function(){
-        Route::get('/', function () {
-            return view('university_employee/coordinator/university_employees/list'); })->name('coordinator_list_Employees');
-        Route::get('/add', function () {
-        return view('university_employee/coordinator/university_employees/add'); })->name('coordinator_add_Employee');
+        Route::get('/', [UniversityEmployeesController::class, 'index'])->name('coordinator_list_employees');
+        Route::get('/create', [UniversityEmployeesController::class,'create'])->name('coordinator_add_employee');
+        Route::post('/store', [UniversityEmployeesController::class,'store'])->name('coordinator_stroe_employee');
+        Route::get('/delete/{employee_id}', [UniversityEmployeesController::class, 'destroy'])->name('coordinator_delete_employee');
     });
-
+    
     Route::get('/companies', function () {
         return view('university_employee/coordinator/companies'); })->name('coordinator_list_companies');   
 });
@@ -85,7 +86,7 @@ Route::prefix('/{company_id}/hr')->group(function(){
     Route::get('/company_profile', [CompanyProfileController::class, 'index'])->name('hr_company_profile');
     Route::get('/edit_company_profile', [CompanyProfileController::class, 'edit'])->name('hr_edit_company_profile');
     Route::post('/edit_company_profile', [CompanyProfileController::class, 'update'])->name('hr_update_company_profile');
-    Route::get('/delete_branch', [CompanyProfileController::class, 'delete_branch'])->name('hr_delete_branch');
+    //Route::get('/delete_branch', [CompanyProfileController::class, 'delete_branch'])->name('hr_delete_branch');
 
     Route::prefix('/trainees')->group(function(){
         Route::get('/', [HrListController::class, 'index'])->name('hr_list_trainees');
@@ -97,9 +98,10 @@ Route::prefix('/{company_id}/hr')->group(function(){
     });
 
     Route::prefix('/company_employees')->group(function(){
-        Route::get('/', [CompanyEmployeeController::class,'index'])->name('hr_list_Employees');
-        Route::get('/create', [CompanyEmployeeController::class,'create'])->name('hr_add_Employee');
-        Route::post('/store', [CompanyEmployeeController::class,'store'])->name('hr_store_Employee');
+        Route::get('/', [CompanyEmployeeController::class,'index'])->name('hr_list_employees');
+        Route::get('/create', [CompanyEmployeeController::class,'create'])->name('hr_add_employee');
+        Route::post('/store', [CompanyEmployeeController::class,'store'])->name('hr_store_employee');
+        Route::get('/delete/{employee_id}', [CompanyEmployeeController::class, 'destroy'])->name('hr_delete_employee');
     });
 
     Route::prefix('/trainings')->group(function(){

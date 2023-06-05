@@ -28,6 +28,10 @@ class CompanyEmployee extends Model
     {
         return $this->belongsTo(CompanyRole::class);
     }
+    public function trainings()
+    {
+        return $this->hasMany(Training::class);
+    }
     public function students(): HasManyThrough
     {
         return $this->hasManyThrough(Student::class, Training::class);

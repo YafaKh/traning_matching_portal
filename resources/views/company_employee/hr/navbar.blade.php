@@ -32,7 +32,7 @@
             </li>
             <li class="nav-item">
             <a class="nav-link @yield('Employees_activity')" 
-            href="{{route('hr_list_Employees', ['company_id' => $company_id])}}"
+            href="{{route('hr_list_employees', ['company_id' => $company_id])}}"
             >Employees</a>
             </li>
             <li class="nav-item">

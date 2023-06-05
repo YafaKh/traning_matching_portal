@@ -6,7 +6,6 @@
     active
 @endsection
 @section('content')
-@include('all_users.delete_modal')
 <div class="px-5">
     {{--filters--}}
     <div class="d-flex justify-content-between flex-sm-row flex-column mt-5">
@@ -26,7 +25,7 @@
             </button>
             </form> 
         </div>
-        <a href="{{route('coordinator_add_Employee')}}"
+        <a href="{{route('coordinator_add_employee')}}"
         class="btn btn-sm btn-primary bg-dark-blue text-light opacity-75 px-3 w-auto h-50">
         Add Employee</a>      
     </div>
@@ -36,7 +35,7 @@
         <table class="table txt-sm table-hover" id="table">
         <thead class="bg-mid-sand">
             <tr class="rounded-top">
-                <td colspan="8"><label class="form-label mt-2 ms-3 fs-6">
+                <td colspan="7"><label class="form-label mt-2 ms-3 fs-6">
                 Employees</label>
                 </td>
                 <td><button type="button" class="btn bg-mid-sand border mb-2 me-2"
@@ -50,7 +49,6 @@
             <th scope="col" >ID</th>
             <th scope="col" >Name</th>
             <th scope="col">Role</th>
-            <th scope="col">Department</th>
             <th scope="col">Email</th>
             <th scope="col">Phone</th>
             <th scope="col">Students</th>
@@ -58,14 +56,22 @@
             </tr>
         </thead>
         <tbody class="bg-light">
+            @foreach($university_employees as $employee)
             <tr>
             <td class="ps-3"><input class="table-checkbox form-check-input" type="checkbox" value="" id="flexCheckDefault"></td>                
-            <td>****</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td>****</td>
-            <td>Otto</td>
-            <td>@mdohhhhh</td>
+            <td>{{$employee['employee_num']}}</td>
+            <td>{{$employee['first_name']}} {{$employee['last_name']}}</td>
+            <td>
+            @if ($employee['university_employee_role_id']==1)
+                coordinator
+            @elseif ($employee['university_employee_role_id']==2)
+                supervisor
+            @elseif ($employee['university_employee_role_id']==3)
+                coordinator & supervisor
+            @endif
+            </td>
+            <td>{{$employee['email']}}</td>
+            <td>{{$employee['phone']}}</td>
             <td>
             <div class="d-flex">
                 <div class="accordion" id="accordionExample">
@@ -81,11 +87,15 @@
                 <button type="button" class="btn p-1 ms-1 h-auto"><i class="bi bi-box-arrow-up-right fs-6"></i></button>
             </div>
             </td>
-            <td><button type="button" class="btn bg-mid-sand border mb-2 me-2"
-            data-bs-toggle="modal" data-bs-target="#deleteModal"
-            data-bs-title="delete selected"><i class="bi bi-trash3 py-0 fs-6 text-danger"></i>
-            </button></td>
+            <td>
+                <a type="submit" class="btn"
+                href="{{ route('coordinator_delete_employee', ['employee_id' => $employee->id]) }}"
+                onClick="return confirm('Are you sure?')">
+                <i class="bi bi-trash3 fs-6 text-danger"></i>
+                </a>
+            </td>
             </tr>
+            @endforeach
         </tbody>
         </table>
     </div>

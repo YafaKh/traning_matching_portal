@@ -16,7 +16,7 @@ class CompanyEmployeeController extends Controller
     {
         //to edit trainees, edit role and delete
         $employees_data= CompanyEmployee::
-        select('first_name', 'last_name', 'phone', 'email', 'company_employee_role_id')
+        select('id', 'first_name', 'last_name', 'phone', 'email', 'company_employee_role_id')
         ->where('company_id', $company_id)->defaultOrder()->get();
         return view('company_employee.hr.company_employees.list',
         ['employees_data'=>$employees_data,
@@ -44,45 +44,38 @@ class CompanyEmployeeController extends Controller
     
     public function store(Request $request, $company_id)
     {
-        $employee= UnaddedCompanyEmployee::where('id', $request->employee)->first();
+        $request->validate([
+            'email'=> 'required|exists:unadded_company_employees,id',
+            'role'=> 'required|exists:company_employee_roles,id'
+        ]);
+
+        $unadded_employee= UnaddedCompanyEmployee::find($request->input('email'));
+        
         CompanyEmployee::create([
-            'email' => $employee->email,
-            'password' => $employee->password,
-            'phone' => $employee->phone,
-            'first_name' => $employee->first_name,
-            'second_name' => $employee->second_name,
-            'third_name' => $employee->third_name,
-            'last_name' => $employee->last_name,
-            'image' => $employee->image,
-            'company_id' => $employee->company_id,
+            'email' => $unadded_employee->email,
+            'password' => $unadded_employee->password,
+            'phone' => $unadded_employee->phone,
+            'first_name' => $unadded_employee->first_name,
+            'second_name' => $unadded_employee->second_name,
+            'third_name' => $unadded_employee->third_name,
+            'last_name' => $unadded_employee->last_name,
+            'image' => $unadded_employee->image,
+            'company_id' => $unadded_employee->company_id,
             'company_employee_role_id' => $request->role
         ]);
-        $employee->delete();
-        return redirect()->route('hr_add_Employee', ['company_id' => $company_id]);
+        $unadded_employee->delete();
+        return redirect()->route('hr_add_employee', ['company_id' => $company_id]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     * In practice, the coordinator is only allowed to update the employee's role
-     */
-    public function update(Request $request, string $id)
-    {//to edit update contact person
-        $request->validate();
-        $universityEmployee=UniversityEmployee::where('id',$id)->first();
-        $universityEmployee->update([$request->input('company_role_id')]);
-
-        
-            // Sync the employee's role and company
-            $employee->roles()->sync($request->company_employee_role_id);
-    }
 
     /**
      * Remove the specified resource from storage.
+     * this mehod will set all assosiated fk.s in children to null(trainings)
      */
-    public function destroy(string $id)
+    public function destroy($company_id, $employee_id)
     {
-        $universityEmployee=  UniversityEmployee::where('id',$id)->first();
-        $universityEmployee->delete();
-        index();
+        $companyEmployee=  CompanyEmployee::findOrFail($employee_id);
+        $companyEmployee->delete();
+        return redirect()->route('hr_list_employees', ['company_id' => $company_id]);
     }
 }

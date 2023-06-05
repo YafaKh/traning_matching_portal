@@ -8,7 +8,7 @@ use App\Models\Student;
 use App\Models\University;
 use App\Models\UniversityEmployeeRole;
 
-class UniversityEmployee extends Model
+class UnaddedUniversityEmployee extends Model
 {
     use HasFactory;
     protected $fillable = [
@@ -22,23 +22,9 @@ class UniversityEmployee extends Model
         'last_name',
         'image',
         'university_id',
-        'university_employee_role_id',
     ];
     public function scopeDefaultOrder($query)
     {
         return $query->orderBy('first_name');
-    }
-
-    public function university()
-    {
-        return $this->belongsTo(University::class, 'university_id');
-    }
-    public function students()
-    {
-        return $this->hasMany(Student::class);
-    }
-    public function roles()
-    {
-        return $this->belongsTo(UniversityEmployeeRole::class, 'university_employee_role_id');
     }
 }

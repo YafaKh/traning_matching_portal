@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('unadded_university_employees', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('employee_num', 9);
             $table->string('email') ;
+            $table->string('phone', 15);
             $table->string('password', 45);
             $table->string('first_name', 45) ;
             $table->string('second_name', 45) ;

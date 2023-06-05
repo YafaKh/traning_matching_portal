@@ -31,7 +31,7 @@
             </button>
             </form> 
         </div>
-        <a href="{{route('hr_add_Employee', ['company_id' => $company_id])}}"
+        <a href="{{route('hr_add_employee', ['company_id' => $company_id])}}"
         class="btn btn-sm btn-primary bg-dark-blue text-light opacity-75 px-3 w-auto h-50">
         Add Employee</a> 
     </div>
@@ -89,7 +89,12 @@
                 <button type="button" class="btn p-1 ms-1 h-auto"><i class="bi bi-box-arrow-up-right fs-6"></i></button>
             </div>
             </td>
-            <td><button type="button" class="btn"><i class="bi bi-trash3 fs-6 text-danger"></i></button></td>
+            <td>
+                <a type="submit" class="btn"
+                href="{{ route('hr_delete_employee', ['company_id' => $company_id, 'employee_id' => $employee->id]) }}"
+                onClick="return confirm('Are you sure?')">
+                <i class="bi bi-trash3 fs-6 text-danger"></i>
+                </a>            </td>
             </tr>
             @endforeach
         </tbody>

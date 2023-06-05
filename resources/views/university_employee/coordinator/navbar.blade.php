@@ -20,7 +20,7 @@
             </ul>
             </li>
             <li class="nav-item">
-            <a class="nav-link @yield('employees_activity')" href="{{route('coordinator_list_Employees')}}">Employees</a>
+            <a class="nav-link @yield('employees_activity')" href="{{route('coordinator_list_employees')}}">Employees</a>
             </li>
             <li class="nav-item">
             <a class="nav-link @yield('companies_activity')" href="{{route('coordinator_list_companies')}}">Companies</a>

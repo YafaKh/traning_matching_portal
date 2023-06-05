@@ -9,5 +9,9 @@ class UnaddedCompanyEmployee extends Model
 {
     use HasFactory;
     protected $fillable = ['first_name', 'second_name', 'third_name', 'last_name',
-                          'phone','email', 'company_id', 'password', 'img'];
+    'phone','email', 'company_id', 'password', 'img'];
+    public function scopeDefaultOrder($query)
+    {
+    return $query->orderBy('first_name');
+    }
 }

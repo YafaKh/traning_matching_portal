@@ -1,24 +1,24 @@
 <?php
 
 namespace Database\Factories;
+use Illuminate\Support\Str;
+use App\Models\Company;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
-use App\Models\UniversityEmployeeRole;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\UniversityEmployee>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\UnaddedCompanyEmployee>
  */
-class UniversityEmployeeFactory extends Factory
+class UnaddedUniversityEmployeeFactory extends Factory
 {
     /**
      * Define the model's default state.
      *
      * @return array<string, mixed>
      */
-    public function definition(): array
+    public function definition()
     {
-        $university_role_ids = UniversityEmployeeRole::pluck('id')->all();
+        $company_ids = Company::pluck('id')->all();
         return [
             'employee_num' => $this->faker->unique()->randomNumber(6),
             'email' => $this->faker->unique()->safeEmail,
@@ -29,7 +29,6 @@ class UniversityEmployeeFactory extends Factory
             'third_name' => $this->faker->lastName,
             'last_name' => $this->faker->lastName,
             'image' => null,
-            'university_employee_role_id'=> $this->faker->randomElement($university_role_ids)
         ];
     }
 }
