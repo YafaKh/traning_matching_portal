@@ -12,7 +12,7 @@ class CompanyBranch extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'address',
+        'address', 'city_id'
     ];
     public function city()
     {

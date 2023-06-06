@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\CompanyEmployee\HR;
 use App\Http\Controllers\Controller;
 use App\Models\Company; 
+use App\Models\City; 
 use App\Models\CompanyBranch; 
 
 use Illuminate\Http\Request;
@@ -47,9 +48,11 @@ class CompanyProfileController extends Controller
     public function edit($company_id)
     {
         $company_data = Company:: findOrFail($company_id);
+        $cities = City::all();
         return view('company_employee.hr.edit_company_profile',
         ['company_data' => $company_data,
-         'company_id' => $company_id,]);
+         'company_id' => $company_id,
+         'cities' => $cities]);
     }
 
     /**
@@ -108,19 +111,30 @@ class CompanyProfileController extends Controller
 
         // Update the branches
         $old_branches = $request->input('old_branch', []);
-        $i=0;
-        foreach ($company->branches as $branch) {
-            $branch->update(['address' => $old_branches[$i]]);
-            $i++;
+        $old_cities = $request->input('old_city', []);
+
+        foreach ($company->branches as $index => $branch) {
+            $branch->update([
+                'address' => $old_branches[$index],
+                'city_id' => $old_cities[$index]
+            ]);
         }
 
         $new_branches = $request->input('branch', []);
         foreach ($new_branches as $new_branch_address) {
-            // Add new branches
-            $company->branches()->create(['address' => $new_branch_address]);
-            }
-        //contactable
+            // Extract city ID and address
+            $address_parts = explode('-', $new_branch_address);
+            $city_id = trim($address_parts[0], '(');
+            $address = trim($address_parts[1]);
 
+            // Add new branch
+            $company->branches()->create([
+                'address' => $address,
+                'city_id' => $city_id[0],
+            ]);
+        }
+
+        //contactable
         $employeeIds = $request->input('contactable', []);
        
         foreach ($company->employees as $employee) {

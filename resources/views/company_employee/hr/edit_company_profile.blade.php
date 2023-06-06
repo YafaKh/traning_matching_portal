@@ -51,8 +51,10 @@
           <button class="btn delete"><i class="bi bi-trash3 fs-6 text-danger float-start"></i></button>
         </div>
       @endforeach
-      @foreach ($errors->get('email.*') as $error)
-        <div class="alert alert-danger">{{ $error }}</div>
+      @foreach ($errors->get('email.*') as $errorArray)
+        @foreach ($errorArray as $error)
+          <div class="alert alert-danger">{{ $error }}</div>
+        @endforeach
       @endforeach
     </div>
     <div class="input-group mb-3">
@@ -69,8 +71,10 @@
           <button class="btn delete"><i class="bi bi-trash3 fs-6 text-danger float-start"></i></button>
         </div>
       @endforeach
-      @foreach ($errors->get('phone.*') as $error)
-        <div class="alert alert-danger">{{ $error }}</div>
+      @foreach ($errors->get('phone.*') as $errorArray)
+        @foreach ($errorArray as $error)
+          <div class="alert alert-danger">{{ $error }}</div>
+        @endforeach
       @endforeach
     </div>
     <div class="input-group mb-3">
@@ -82,9 +86,11 @@
     
   <p>LinkedIn: </p>
   <input type="text" class="form-control mb-4 ps-4" name="linkedin" value="{{ old('linkedin', $company_data['linkedin']) }}">
-  @error('linkedin') <div class="alert alert-danger">
+  @error('linkedin') 
+  <div class="alert alert-danger">
       <strong>Error!</strong> {{ $message }}
-</div> @enderror
+  </div>
+ @enderror
   </div>
 </div>
 
@@ -98,9 +104,24 @@
 </section>
 <section class="col-md-9 col-11 bg-white mb-3 p-md-5 p-3 mx-auto rounded-2">
 <p class="fs-4">Branches</p>
-  @foreach($company_data->branches as $branch)
-    <input type="text" class="form-control mb-2 me-2 ps-4" name="old_branch[]" branch_id="{{$branch['addresids']}}"
-    value="{{ old('old_branch.' . $loop->index, $branch['address']) }}">
+  @foreach($company_data->branches as $index => $branch)
+    <div class="row">
+      <div class="col-4">
+        <select class="form-select rounded-0 ps-4" name="old_city[]">
+          @foreach($cities as $city)
+            @if($city['id'] == $branch['city_id'])
+              <option value="{{$city['id']}}" selected>{{$city['name']}}</option>
+            @else
+              <option value="{{$city['id']}}">{{$city['name']}}</option>
+            @endif
+          @endforeach
+        </select>
+      </div>
+      <div class="col">
+        <input type="text" class="form-control mb-2 me-2 ps-4" name="old_branch[]" branch_id="{{$branch['id']}}"
+        value="{{ old('old_branch.' . $index, $branch['address']) }}">
+      </div>
+    </div>
   @endforeach
   @foreach ($errors->get('branch.*') as $error)
     <div class="alert alert-danger">{{ $error }}</div>
@@ -109,11 +130,23 @@
   <div id="branch-container">
     
   </div>
-  <div class="input-group mb-3">
-    <span class="input-group-text" onClick="add_input('branch')">
-      <i class="bi bi-plus-square fs-6"></i>
-    </span>
-    <input type="text" class="form-control ps-4" name="new_branch" placeholder="New Branch">
+  New Branch:
+  <div class="row g-0 mt-1">
+    <div class="col-1">
+      <span class="input-group-text rounded-end-0" onClick="add_input('branch')">
+        <i class="bi bi-plus-square fs-6"></i>
+      </span>
+    </div>
+    <div class="col-4">
+      <select class="form-select rounded-0 mb-4 ps-4" id="city" name="city">
+        @foreach($cities as $city)
+        <option value="{{$city['id']}}">{{$city['name']}}</option>
+        @endforeach
+      </select>
+    </div>
+    <div class="col-7">
+      <input type="text" class="form-control ps-4 rounded-start-0" name="new_branch" placeholder="Branch Adess">
+    </div>
   </div>
 </section>
 <section class="col-md-9 col-11 bg-white mb-3 p-md-5 p-3 mx-auto rounded-2">
@@ -150,33 +183,42 @@
   });
 
   function add_input(type) {
-    const plusButton = document.querySelector('.input-group-text');
-    const input = document.querySelector('input[name="new_' + type + '"]');
-    const container = document.querySelector('#' + type + '-container');
+  const plusButton = document.querySelector('.input-group-text');
+  const input = document.querySelector('input[name="new_' + type + '"]');
+  const container = document.querySelector('#' + type + '-container');
 
-    const newDiv = document.createElement('div');
-    newDiv.className = 'd-flex';
+  const newDiv = document.createElement('div');
+  newDiv.className = 'd-flex';
 
-    const newInput = document.createElement('input');
-    newInput.type = 'text';
-    newInput.className = 'form-control mb-2 me-2 ps-4';
-    newInput.name = type + '[]';
+  const newInput = document.createElement('input');
+  newInput.type = 'text';
+  newInput.className = 'form-control mb-2 me-2 ps-4';
+  newInput.name = type + '[]';
+
+  if (type === 'branch') {
+    const selectElement = document.getElementById('city');
+    const selectedCityId = selectElement.options[selectElement.selectedIndex].value;
+    const selectedCity = selectElement.options[selectElement.selectedIndex].text;
+    newInput.value = '('+selectedCityId+')'+selectedCity+'-' + input.value;
+  } else {
     newInput.value = input.value;
-
-    const newButton = document.createElement('button');
-    newButton.className = 'btn delete';
-    newButton.innerHTML = '<i class="bi bi-trash3 fs-6 text-danger float-start"></i>';
-
-    newButton.addEventListener('click', function() {
-      // Remove the parent div when the delete button is clicked
-      newDiv.remove();
-    });
-
-    newDiv.appendChild(newInput);
-    newDiv.appendChild(newButton);
-    container.appendChild(newDiv);
-    input.value = ''; // Clear the new email input field
   }
+
+  const newButton = document.createElement('button');
+  newButton.className = 'btn delete';
+  newButton.innerHTML = '<i class="bi bi-trash3 fs-6 text-danger float-start"></i>';
+
+  newButton.addEventListener('click', function () {
+    // Remove the parent div when the delete button is clicked
+    newDiv.remove();
+  });
+
+  newDiv.appendChild(newInput);
+  newDiv.appendChild(newButton);
+  container.appendChild(newDiv);
+  input.value = ''; // Clear the new email/phone input field
+}
+
 
 </script>
 

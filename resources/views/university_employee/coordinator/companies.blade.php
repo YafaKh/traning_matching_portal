@@ -9,12 +9,13 @@
 <div class="px-5">
     {{--filters--}}
     <div class="d-flex flex-row mt-5">
-        <select class="form-select border-gray me-3 mb-2 txt-sm w-auto" aria-label="Supervisor">
-            <option selected>Branch*</option>
-            <option value="1">*****</option>
+        <select class="form-select ps-4 border-gray me-3 mb-2 w-auto" id="city" name="city">
+            @foreach($cities as $city)
+            <option value="{{$city['id']}}">{{$city['name']}}</option>
+            @endforeach
         </select>
         <form class="input-group mb-2 h-50 w-25" role="searprimarych">
-            <input class="form-control txt-sm border-gray" type="search" placeholder="Search" aria-label="Search">
+            <input class="form-control border-gray" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-sm bg-sand btn-outline-secondary py-0" type="submit">
             <i class="bi bi-search txt-xsm"></i>
             </button>
@@ -53,7 +54,7 @@
             <td>
                 <ul class="list-unstyled">
                 @foreach($company->branches as $branch)
-                    <li class="mt-2 mb-3">{{$branch->address}}</li>
+                    <li class="mt-2 mb-3">{{$branch->city->name}}-{{$branch->address}}</li>
                 @endforeach
                 </ul>
             </td>
