@@ -54,7 +54,6 @@ Route::prefix('/coordinator')->group(function(){
             return view('university_employee/coordinator/students/assessment'); })->name('coordinator_student_assessment');    
     });
 
-
     
     Route::prefix('/university_employees')->group(function(){
         Route::get('/', [UniversityEmployeesController::class, 'index'])->name('coordinator_list_employees');
@@ -117,7 +116,7 @@ Route::prefix('/{company_id}/hr')->group(function(){
 
 Route::prefix('/student')->group(function () {
     Route::get('/registeration{id}',[StudentRegisterController::class,'create'])->name('student_registeration_1');
-    Route::POST('/registeration{id}/store',[StudentRegisterController::class,'store'])->name('student_registeration_1.store');
+    Route::POST('/registeration/store',[StudentRegisterController::class,'store'])->name('student_registeration_1.store');
 
     Route::get('/registeration_2',[StudentRegisterController::class,'createNextPage'])->name('student_registeration_2');
     Route::get('/profile{id}',[StudentProfileController::class,'show'])->name('student_profile');

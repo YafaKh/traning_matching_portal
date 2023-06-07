@@ -48,7 +48,7 @@ class StudentFactory extends Factory
             'last_name_en' => $this->faker->lastName,
             'gender' => $this->faker->randomElement([0, 1]),
             'passed_hours' => $this->faker->numberBetween(0, 200),
-            'load' => $this->faker->numberBetween(0, 21),
+            'load' => $this->faker->numberBetween(0, 18),//number of hours for this semester without training
             'gpa' => $this->faker->randomFloat(2, 0, 4),
             'address' => $this->faker->address,
             'email' => $this->faker->unique()->safeEmail,
