@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Student;
 use App\Models\Student;
 use App\Models\Spoken_language;
 use App\Models\Specialization;
+use App\Models\Student_spoken_language;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -17,10 +18,12 @@ class StudentRegisterController extends Controller
         // $data=Student::get();
         // return view('student.register',['Studentkey'=>$data]);
         $student =Student::find($id);
-        $spoken_languages = $student ->spoken_languages;
-        $students =Student::select('id')->get();
-        $allLanguages = Spoken_language::select('id','name')->get();
-       return view('student.register',compact('spoken_languages','students','allLanguages'));
+        // $spoken_languages = $student ->spoken_languages;
+        // $students =Student::select('id')->get();
+        // $allLanguages = Spoken_language::select('id','name')->get();
+        $allLanguages = Student_spoken_language::with('student', 'spokenLanguage')->where('student_id',$id)->get();
+
+       return view('student.register',compact('student','allLanguages'));
 
     }
     public function createNextPage(){
@@ -28,7 +31,7 @@ class StudentRegisterController extends Controller
 
     }   
     public function store(Request $request){ 
-        
+        // vlidation
         $validated = $request->validate([            
             'student_num' => 'required|string',
             'first_name_ar'=>'required|string|max:15',
@@ -40,11 +43,12 @@ class StudentRegisterController extends Controller
             'last_name_ar'=>'required|string|max:15',
             'last_name_en'=>'required|string|max:15',
             'gender' =>'required|boolean',
-            'passed_hours' =>'required|numeric',
-            'gpa' =>'required|max:4|between:0.00,4.00|regex:/^[0-4]\.\d\d$/',
+            'passed_hours' =>'required|integer',//min ??
+            'load' =>'required|integer|min:0|max:18',
+            'gpa' =>'required|max:4|between:1.00,4.00|regex:/^[0-4]\.\d\d$/',//lowest gpa ??
             'address'=>'required|string',
             'email'=>'required|email|unique:students',//our uni email
-            'password'=>'required|string|min:8|regex:/^[0-9a-zA-Z][@$!%*#?&]|confirmed',//must have a character or number && special character
+            'password'=>'required|string|min:8|regex:/^[0-9a-zA-Z][@$!%*#?&]$/|confirmed',//must have a character or number && special character
             'availability_date'=>'required|date',
             'connected_with_a_company'=>'required|boolean',
             'connected_company_info'=>'required|string|max:512',
@@ -56,7 +60,7 @@ class StudentRegisterController extends Controller
 
           ]);
          
-        
+        // insert
         $student = Student::create([
             'student_num' => $request->input('student_num'),
             'first_name_ar'=> $request->input('first_name_ar'),
@@ -69,19 +73,18 @@ class StudentRegisterController extends Controller
             'last_name_en'=> $request->input('last_name_en'),
             'gender' => $request->input('gender'),
             'passed_hours' => $request->input('passed_hours'),
+            'load' => $request->input('load'),
             'gpa' => $request->input('gpa'),
             'address' => $request->input('address'),
             'email' => $request->input('email'),
             'password' => $request->input('password'),
-            // 'confirm_password' => $request->input('confirm_password'),
             'availability_date' => $request->input('availability_date'),
             'connected_with_a_company' => $request->input('connected_with_a_company'),
             'connected_company_info' => $request->input('connected_company_info'),
-            'country_code' => $request->input('country_code'),//??
-            'area_code' => $request->input('area_code'),//?
-            'phone_no' => $request->input('phone_no'),
+            'phone' => $request->input('phone'),
             'registered' => $request->input('registered'),
             'image' => $this->storeImage($request),
+            'work_experience' => $request->input('work_experience'),
 
          ]);
        
