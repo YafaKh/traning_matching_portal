@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\CompanyEmployee;
 use App\Models\Student;
 use App\Models\CompanyBranch;
+use App\Models\TrainingFeild;
 
 class Training extends Model
 {
@@ -15,7 +16,7 @@ class Training extends Model
         'name',
         'semester',
         'year',
-        'training_field',
+        'training_field_id',
         'details',
         'company_employee_id',
         'branch_id',
@@ -33,5 +34,10 @@ class Training extends Model
     public function students()
     {
         return $this->hasMany(Student::class, 'training_id');
+    }
+
+    public function training_feild()
+    {
+        return $this->belongsTo(TrainingFeild::class);
     }
 }

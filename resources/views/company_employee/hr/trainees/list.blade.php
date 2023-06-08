@@ -1,4 +1,4 @@
-@extends('company_employee.master')
+@extends('all_users.master')
 @section('navbar')
     @include('company_employee.hr.navbar')
 @endsection
@@ -8,7 +8,7 @@
 @section('activity1')
     active
 @endsection
-@section('trainees_navbar')
+@section('sub_navbar')
     @include('company_employee.hr.trainees.trainees_navbar')
 @endsection 
 @section('content')

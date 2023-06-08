@@ -8,6 +8,7 @@ use App\Models\Training;
 use App\Models\Company;
 use App\Models\CompanyBranch;
 use App\Models\CompanyEmployee;
+use App\Models\TrainingFeild;
 
 class TrainingController extends Controller
 {
@@ -20,7 +21,7 @@ class TrainingController extends Controller
     {
         //to edit: current semester
         $company = Company:: findOrFail($company_id);
-        $trainings_data= $company->trainings;
+        $trainings_data= $company->trainings->skip(1);
         return view('company_employee.hr.trainings.list',
         ['trainings_data'=>$trainings_data,
          'company_id' => $company_id]);
@@ -34,6 +35,7 @@ class TrainingController extends Controller
     public function create($company_id)
     {
         $branches = CompanyBranch::where('company_id', $company_id)->get();
+        $training_feilds = TrainingFeild::all();
 
         $trainers = CompanyEmployee::where('company_id', $company_id)
         ->where(function ($query) {
@@ -41,7 +43,9 @@ class TrainingController extends Controller
         ->orWhere('company_employee_role_id', 3);})->get();
       
         return view('company_employee.hr.trainings.add',
-        ['company_id' => $company_id, 'branches' => $branches, 'trainers' => $trainers]);
+        ['company_id' => $company_id, 'branches' => $branches,
+         'trainers' => $trainers,
+         'training_feilds' => $training_feilds]);
     }
 
     /**
@@ -51,14 +55,31 @@ class TrainingController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request, $company_id)
-    {// to edit: create name auto
+    {
+        $request->validate([
+            'name' => [
+                'required',
+                'string',
+                'max:45',
+                //the name is unique at company level
+                function ($attribute, $value, $fail) {
+                    $existingTraining = Company::find($company_id)->trainings()->where('name', $value)->exists();
+                    
+                    if ($existingTraining) {
+                        $fail('The training name already exists for your company.');
+                    }
+                },
+            ],
+        ]);
         Training::create([
             'semester' => $request->semester,
+            'year' => date('Y'),
             'company_branch_id' => $request->branch,
             'company_employee_id' => $request->trainer,
             'name' => $request->name,
-            'training_feild' => $request->training_feild,
+            'training_feild_id' => $request->training_feild,
             'details' => $request->details
+            
         ]);
         return redirect()->route('hr_list_trainings', ['company_id' => $company_id]);
     }

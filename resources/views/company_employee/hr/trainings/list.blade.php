@@ -1,4 +1,4 @@
-@extends('company_employee.master')
+@extends('all_users.master')
 @section('navbar')
     @include('company_employee.hr.navbar')
 @endsection
@@ -45,18 +45,8 @@
     <div class="table-responsive mt-3">
         <table class="table txt-sm table-hover">
         <thead class="bg-mid-sand">
-            <tr class="rounded-top">
-                <td colspan="5"><label class="form-label mt-2 ms-3 fs-6">
-                Trainings</label>
-                </td>
-                <td><button type="button" class="btn" 
-                    data-bs-toggle="tooltip" data-bs-placement="top"
-                    data-bs-title="delete selected"><i class="bi bi-trash3 fs-6 text-danger"></i>
-                    </button>
-                </td>
-            </tr>
             <tr >
-            <th scope="col" class="ps-3">Name</th>
+            <th scope="col" class="ps-3">Training Name</th>
             <th scope="col">Training Feild</th>
             <th scope="col">Trainer</th>
             <th scope="col">Branch</th>
@@ -68,7 +58,7 @@
             @foreach($trainings_data as $training)
             <tr>
             <td class="ps-3">{{$training['name']}}</td>
-            <td>{{$training['training_feild']}}</td>
+            <td>{{$training->training_feild->name ?? ''}}</td>
             <td>{{ $training->employee['first_name'] ?? '' }} 
                 {{ $training->employee['last_name'] ?? '' }}</td>
             <td>{{$training->branch->address}}</td>

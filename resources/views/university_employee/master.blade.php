@@ -22,14 +22,14 @@
 
     {{-- select all code --}}
     <script>
-        const checkAll = document.querySelector(`#${tableId} #checkAll`);
+        /*const checkAll = document.querySelector(`#${tableId} #checkAll`);
         const checkboxes = document.querySelectorAll(`#${tableId} .table-checkbox`);
 
         checkAll.addEventListener('change', () => {
         checkboxes.forEach(checkbox => {
             checkbox.checked = checkAll.checked;
         });
-        });
+        });*/
     </script>
 {{-- Bootstrap JS Poper CDN --}}
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
