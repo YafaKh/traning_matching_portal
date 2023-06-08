@@ -16,16 +16,17 @@ return new class extends Migration
         Schema::create('trainings', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('name',45) ;
+            $table->string('name',45);
             $table->integer('semester')->length(1);
             $table->year('year')->default(2023);
-            $table->string('training_feild',45)->nullable();
             $table->string('details')->nullable()->nullable();
+
             $table->unsignedBigInteger('company_employee_id')->nullable();
             $table->unsignedBigInteger('company_branch_id')->nullable();
+            $table->unsignedBigInteger('training_feild_id')->nullable();
             $table->foreign('company_employee_id')->references('id')->on('company_employees')->constrained()->onDelete('set null');
             $table->foreign('company_branch_id')->references('id')->on('company_branches');
-
+            $table->foreign('training_feild_id')->references('id')->on('training_feilds');
         });
     }
 

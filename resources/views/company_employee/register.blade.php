@@ -1,4 +1,4 @@
-@extends('company_employee.master')
+@extends('all_users.master')
 @section('content')
 <div class="pt-3 d-flex flex-column">
     <img src="{{asset('images/logo_title.png')}}" alt="Logo" class="col-md-4 col-7 mx-auto">

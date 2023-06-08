@@ -28,16 +28,6 @@ class CompanyProfileController extends Controller
         'contactable_employees' => $contactable_employees]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -110,8 +100,8 @@ class CompanyProfileController extends Controller
         }
 
         // Update the branches
-        $old_branches = $request->input('old_branch', []);
         $old_cities = $request->input('old_city', []);
+        $old_branches = $request->input('old_branch', []);
 
         foreach ($company->branches as $index => $branch) {
             $branch->update([

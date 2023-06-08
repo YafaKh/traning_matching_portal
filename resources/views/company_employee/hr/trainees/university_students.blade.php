@@ -1,4 +1,4 @@
-@extends('company_employee.master')
+@extends('all_users.master')
 @section('navbar')
     @include('company_employee.hr.navbar')
 @endsection
@@ -8,14 +8,14 @@
 @section('activity2')
     active
 @endsection
-@section('trainees_navbar')
+@section('sub_navbar')
     @include('company_employee.hr.trainees.trainees_navbar')
 @endsection
 @section('content')
 <div class="px-5">
 {{--filters--}}
     <div class="d-flex flex-sm-row flex-column mt-5 pb-3">
-        <select id="specialization-filter" class="form-select flex-grow-1 me-2 mb-2 txt-sm" aria-label="Specialization">
+        <select id="specialization-filter" class="form-select flex-grow-1 me-2 mb-2 txt-sm" onchange="filterTable('specialization-filter', 'table', 2)">
             <option value="All">Specialization</option>
             @foreach($specializations as $specialization)
             <option value="{{$specialization['name']}}">{{$specialization['name']}}</option>
@@ -41,10 +41,8 @@
             <option value="13-16">13-16</option>
             <option value="16">> 16</option>
         </select>
-
-        <button type="button" class="btn bg-mid-sand p-0 mb-2 me-2"
-            data-bs-toggle="tooltip" data-bs-placement="top"
-            data-bs-title="Add selected"><i class="bi bi-plus-square fs-4 my-0"></i>
+        <button type="button" class="btn bg-mid-sand p-0 mb-2 me-2">
+            <i class="bi bi-plus-square fs-4 my-0"></i>
         </button>
     </div>
 
@@ -89,27 +87,24 @@
 <script>
     $(document).ready(function() {
         // Event listener for filter change
-        $('#specialization-filter, #gpa-filter, #load-filter').change(filterTable);
+        $('#gpa-filter, #load-filter').change(filter);
 
-        function filterTable() {
-            var specializationFilter = $('#specialization-filter').val();
+        function filter() {
             var gpaFilter = $('#gpa-filter').val();
             var loadFilter = $('#load-filter').val();
 
             // Loop through each row in the table
             $('#table tbody tr').each(function() {
                 var row = $(this);
-                var specialization = row.find('td:eq(2)').text();
                 var gpa = parseFloat(row.find('td:eq(3)').text());
                 var load = parseInt(row.find('td:eq(4)').text());
 
                 // Filter based on selected values
-                var specializationMatch = specializationFilter === 'Specialization' || specializationFilter === "All" || specializationFilter === specialization;
                 var gpaMatch = gpaFilter === 'GPA' || !gpaFilter || checkGPAMatch(gpaFilter, gpa);
                 var loadMatch = loadFilter === 'Load' || !loadFilter || checkLoadMatch(loadFilter, load);
 
                 // Show/hide rows based on filter criteria
-                if (specializationMatch && gpaMatch && loadMatch) {
+                if (gpaMatch && loadMatch) {
                     row.show();
                 } else {
                     row.hide();

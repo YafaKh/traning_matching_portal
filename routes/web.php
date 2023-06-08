@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Controller;
+
+use App\Http\Controllers\AllUsers\CompanyProfileController as AllCompanyProfileController;
+
 use App\Http\Controllers\Coordinator\StudentController;
 use App\Http\Controllers\Student\StudentProfileController;
 use App\Http\Controllers\Student\EditStudentProfileController;
@@ -16,7 +19,7 @@ use App\Http\Controllers\CompanyEmployee\HR\Trainees\UniversityStudentsControlle
 use App\Http\Controllers\CompanyEmployee\HR\Trainees\AssignTrainingController;
 use App\Http\Controllers\CompanyEmployee\HR\CompanyEmployeeController;
 use App\Http\Controllers\CompanyEmployee\HR\TrainingController;
-use App\Http\Controllers\CompanyEmployee\HR\CompanyProfileController;
+use App\Http\Controllers\CompanyEmployee\HR\CompanyProfileController as HrCompanyProfileController;
 
 use App\Http\Controllers\UniversityEmployee\Coordinator\Students\ListController as CooListController;
 use App\Http\Controllers\UniversityEmployee\Coordinator\Students\StudentCompanyApprovalController;
@@ -34,6 +37,8 @@ Route::get('/userType', function () {
     return view('/all_users/userType');
 }); 
 
+//all users 
+Route::get('/{company_id}/company_profile', [AllCompanyProfileController::class, 'show'])->name('show_company_profile');
 
 // university employees' routes
 Route::get('university_employee/register', function () {
@@ -84,11 +89,11 @@ Route::prefix('/supervisor')->group(function(){
 Route::get('company_employee/register',[RegisterController::class,'create'])->name('company_employee_register');
 Route::post('company_employee/register/store',[RegisterController::class,'store'])->name('company_employee_store');
 
-Route::prefix('/{company_id}/hr')->group(function(){
-    Route::get('/company_profile', [CompanyProfileController::class, 'index'])->name('hr_company_profile');
-    Route::get('/edit_company_profile', [CompanyProfileController::class, 'edit'])->name('hr_edit_company_profile');
-    Route::post('/edit_company_profile', [CompanyProfileController::class, 'update'])->name('hr_update_company_profile');
-    //Route::get('/delete_branch', [CompanyProfileController::class, 'delete_branch'])->name('hr_delete_branch');
+Route::prefix('{company_id}/hr')->group(function () {
+    Route::get('/company_profile', [HrCompanyProfileController::class, 'index'])->name('hr_company_profile');
+    Route::get('/edit_company_profile', [HrCompanyProfileController::class, 'edit'])->name('hr_edit_company_profile');
+    Route::post('/edit_company_profile', [HrCompanyProfileController::class, 'update'])->name('hr_update_company_profile');
+    //Route::get('/delete_branch', [HrCompanyProfileController::class, 'delete_branch'])->name('hr_delete_branch');
 
     Route::prefix('/trainees')->group(function(){
         Route::get('/', [HrListController::class, 'index'])->name('hr_list_trainees');
