@@ -20,9 +20,9 @@ class ListController extends Controller
     {
        $company = Company:: findOrFail($company_id);
 
-       $not_aaproved_students= $company->not_approved_students;
-       $trainings = $company->trainings()->get();
-       $students_data = [];
+       $trainings = $company->trainings->skip(1);
+       //dd( $trainings[1]->students);
+       /*$students_data = [];
         foreach ($trainings as $training) {
             $students = $training->students()
                 ->select('first_name_en', 'last_name_en')
@@ -38,14 +38,22 @@ class ListController extends Controller
                     'trainer_last_name' => $training->employee->last_name ?? '',
                 ];
             }
-        }
+        }*/
 
+        $not_aaproved_students= $company->not_approved_students;
+ 
         //filters data
+        $unengaged_trainees= ($company->trainings[0])->students;
+        $branches= $company->branches;
+        $trainers= $company->employees->whereIn('company_employee_role_id', [2, 3]);
         
         return view('company_employee.hr.trainees.list',
-         ['trainings_data' => $trainings,
-          'students_data' => $students_data,
+         ['trainings' => $trainings,
+          //'students_data' => $students_data,
           'not_aaproved_students' => $not_aaproved_students,
-          'company_id' => $company_id]);
+          'company_id' => $company_id,
+          'unengaged_trainees' => $unengaged_trainees,
+          'branches' => $branches,
+          'trainers' => $trainers,]);
     }
 }

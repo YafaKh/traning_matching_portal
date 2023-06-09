@@ -15,7 +15,7 @@
 <div class="px-5">
 {{--filters--}}
     <div class="d-flex flex-sm-row flex-column mt-5 pb-3">
-        <select id="specialization-filter" class="form-select flex-grow-1 me-2 mb-2 txt-sm" onchange="filterTable('specialization-filter', 'table', 2)">
+        <select class="filter-dropdown form-select flex-grow-1 me-2 mb-2 txt-sm" data-column="2">
             <option value="All">Specialization</option>
             @foreach($specializations as $specialization)
             <option value="{{$specialization['name']}}">{{$specialization['name']}}</option>
@@ -61,7 +61,7 @@
             <th scope="col">Add</th>
             </tr>
         </thead>
-        <tbody class="bg-light">
+        <tbody class="bg-light" id="table-body">
             @foreach ($students as $student)
             <tr>
             <td class="ps-3"><input class="table-checkbox form-check-input" type="checkbox" value="" id="flexCheckDefault"></td>                
@@ -85,77 +85,77 @@
     {{$students->links()}}
 </div>
 <script>
-    $(document).ready(function() {
-        // Event listener for filter change
-        $('#gpa-filter, #load-filter').change(filter);
+// Add event listeners to the special filters
+document.getElementById('gpa-filter').addEventListener('change', customFilter);
+document.getElementById('load-filter').addEventListener('change', customFilter);
 
-        function filter() {
-            var gpaFilter = $('#gpa-filter').val();
-            var loadFilter = $('#load-filter').val();
+function customFilter() {
+  var gpaFilter = document.getElementById('gpa-filter').value;
+  var loadFilter = document.getElementById('load-filter').value;
 
-            // Loop through each row in the table
-            $('#table tbody tr').each(function() {
-                var row = $(this);
-                var gpa = parseFloat(row.find('td:eq(3)').text());
-                var load = parseInt(row.find('td:eq(4)').text());
+  // Loop through each row in the table
+  var tableRows = document.querySelectorAll('#table tbody tr');
+  tableRows.forEach(function(row) {
+    var gpa = parseFloat(row.querySelector('td:nth-child(4)').textContent);
+    var load = parseInt(row.querySelector('td:nth-child(5)').textContent);
 
-                // Filter based on selected values
-                var gpaMatch = gpaFilter === 'GPA' || !gpaFilter || checkGPAMatch(gpaFilter, gpa);
-                var loadMatch = loadFilter === 'Load' || !loadFilter || checkLoadMatch(loadFilter, load);
+    // Filter based on selected values
+    var gpaMatch = gpaFilter === 'GPA' || !gpaFilter || checkGPAMatch(gpaFilter, gpa);
+    var loadMatch = loadFilter === 'Load' || !loadFilter || checkLoadMatch(loadFilter, load);
 
-                // Show/hide rows based on filter criteria
-                if (gpaMatch && loadMatch) {
-                    row.show();
-                } else {
-                    row.hide();
-                }
-            });
-        }
+    // Show/hide rows based on filter criteria
+    if (gpaMatch && loadMatch) {
+      row.style.display = '';
+    } else {
+      row.style.display = 'none';
+    }
+  });
+}
 
-        // Helper function to check GPA filter match
-        function checkGPAMatch(filter, gpa) {
-            switch (filter) {
-                case 'All':
-                    return true;
-                case '4':
-                    return gpa >= 4;
-                case '3.67':
-                    return gpa >= 3.67;
-                case '3.5':
-                    return gpa >= 3.5;
-                case '3':
-                    return gpa >= 3;
-                case '2.5':
-                    return gpa >= 2.5;
-                case '2':
-                    return gpa >= 2;
-                case '1':
-                    return gpa < 2;
-                default:
-                    return false;
-            }
-        }
+// Helper function to check GPA filter match
+function checkGPAMatch(filter, gpa) {
+  switch (filter) {
+    case 'All':
+      return true;
+    case '4':
+      return gpa >= 4;
+    case '3.67':
+      return gpa >= 3.67;
+    case '3.5':
+      return gpa >= 3.5;
+    case '3':
+      return gpa >= 3;
+    case '2.5':
+      return gpa >= 2.5;
+    case '2':
+      return gpa >= 2;
+    case '1':
+      return gpa < 2;
+    default:
+      return false;
+  }
+}
 
-        // Helper function to check Load filter match
-        function checkLoadMatch(filter, load) {
-            switch (filter) {
-               case 'All':
-                    return true;
-                case '0':
-                    return load == 0;
-                case '10':
-                    return load < 10;
-                case '10-13':
-                    return load >= 10 && load <= 13;
-                case '13-16':
-                    return load >= 13 && load <= 16;
-                case '16':
-                    return load > 16;
-                default:
-                    return false;
-            }
-        }
-    });
+// Helper function to check Load filter match
+function checkLoadMatch(filter, load) {
+  switch (filter) {
+    case 'All':
+      return true;
+    case '0':
+      return load === 0;
+    case '10':
+      return load < 10;
+    case '10-13':
+      return load >= 10 && load <= 13;
+    case '13-16':
+      return load >= 13 && load <= 16;
+    case '16':
+      return load > 16;
+    default:
+      return false;
+  }
+}
+
 </script>
 
 @endsection
