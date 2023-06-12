@@ -1,4 +1,4 @@
-@extends('university_employee.master')
+@extends('all_users.master')
 @section('navbar')
     @include('university_employee.coordinator.navbar')
 @endsection
@@ -8,42 +8,44 @@
 @section('activity1')
     active
 @endsection
-@section('student_navbar')
+@section('sub_navbar')
     @include('university_employee.coordinator.students.student_navbar')
 @endsection
 @section('content')
 <div class="px-5">
     {{--filters--}}
     <div class= "d-flex flex-sm-row flex-column mt-5 pb-3">
-        <select class="form-select flex-grow-1 me-2 mb-2 txt-sm" aria-label="Registration_state">
+        <select class="form-select flex-grow-1 me-2 mb-2 txt-sm" id="registration_state" aria-label="Registration_state">
             <option selected>Registration state</option>
             <option value="1">registered</option>
             <option value="0">not-registered</option>
         </select>
 
-        <select class="form-select flex-grow-1 me-2 mb-2 txt-sm" aria-label="Specialization">
-            <option selected>Specialization*</option>
-            <option value="CS">CS</option>
-            <option value="MMT">MMT/option>
-            <option value="GIS">GIS</option>
-            <option value="CSE">CSE</option>
+        <select class="filter-dropdown form-select flex-grow-1 me-2 mb-2 txt-sm" data-column="3">
+            <option value="All">Specialization</option>
+            @foreach($specializations as $specialization)
+            <option value="{{$specialization['acronyms']}}">{{$specialization['acronyms']}}</option>
+            @endforeach
         </select>
 
-        <select class="form-select flex-grow-1 me-2 mb-2 txt-sm" aria-label="Company">
-            <option selected>Company*</option>
-            <option value="CS">CS</option>
-        </select>
-
-        <select class="form-select flex-grow-1 me-2 mb-2 txt-sm" aria-label="Branch">
-            <option selected>Branch*</option>
-            <option value="CS">CS</option>
+        <select class="filter-dropdown form-select flex-grow-1 me-2 mb-2 txt-sm" data-column="4">
+            <option value="All">Company</option>
+            <option value="-">Unengaged Sudents</option>
+            @foreach($companies as $company)
+                @foreach($company->branches as $branch)
+                <option value="{{$company['name']}}-{{$branch->city->name}}">{{$company['name']}}-{{$branch->city->name}}</option>
+                @endforeach
+            @endforeach
         </select>
         
-        <select class="form-select flex-grow-1 me-2 mb-2 txt-sm " aria-label="Supervisor">
-            <option selected>Supervisor*</option>
-            <option value="CS">CS</option>
+        <select class="filter-dropdown form-select flex-grow-1 me-2 mb-2 txt-sm " data-column="5">
+            <option value="All">Supervisor</option>
+            @foreach($supervisors as $supervisor)
+            <option value="{{ $supervisor['first_name']}} {{ $supervisor['last_name']}}">
+            {{ $supervisor['first_name']}} {{ $supervisor['last_name']}}
+            </option>
+            @endforeach
         </select>
-        {{--*submit/butoon--}}
         <button type="button" class="btn bg-mid-sand border mb-2 me-2"
         data-bs-toggle="modal" data-bs-target="#deleteModal"
         data-bs-title="delete selected"><i class="bi bi-trash3 py-0 fs-6 text-danger"></i>
@@ -83,24 +85,26 @@
             <th scope="col" >Name</th>
             <th scope="col">Specialization</th>
             <th scope="col">Company</th>
-            <th scope="col">Branch</th>
+            <th scope="col">Supervisor</th>
             <th scope="col">Go to student's</th>
             <th scope="col">Delete</th>
             </tr>
         </thead>
-        <tbody class="bg-light">
+        <tbody class="bg-light" id="table-body">
             @foreach($students as $student)
             <tr>
             <td class="ps-3"><input class="table-checkbox form-check-input" type="checkbox" value="" id="checkAll"></td>                
             <td>{{$student['student_num']}}</td>
-            @if($student['registered'])
-            <td>{{$student['first_name_en']}} {{$student['last_name_en']}}</td>
-            @else 
-            <td class="text-danger">{{$student['first_name_en']}} {{$student['last_name_en']}}</td>
-            @endif
+            <td class="registration-state-cell" data-registered="{{$student['registered']}}">
+                @if($student['registered'])
+                {{$student['first_name_en']}} {{$student['last_name_en']}}
+                @else
+                <span class="text-danger">{{$student['first_name_en']}} {{$student['last_name_en']}}</span>
+                @endif
+            </td>
             <td>{{$student->specialization->acronyms}}</td>
-            <td>{{$student->training->branch->company->name ?? ''}}</td>
-            <td>{{$student->training->branch->address ?? ''}}</td>
+            <td>{{$student->training->branch->company->name ?? ''}}-{{$student->training->branch->city->name ?? ''}}</td>
+            <td>{{$student->supervisor['first_name'] ?? ''}} {{$student->supervisor['last_name'] ?? ''}}</td>
             <td>
             <select class="form-select txt-sm w-auto" aria-label="Go_to">
                 <option value="Progress" selected>Progress</option>
@@ -122,22 +126,36 @@
         </tbody>
         </table>
     </div>
-    <nav aria-label="Page navigation example">
-        <ul class="pagination pagination-sm">
-            <li class="page-item">
-            <a class="page-link" href="#" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-            </a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-            <a class="page-link" href="#" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-            </a>
-            </li>
-        </ul>
-    </nav>
+    {{$students->links()}}
 </div>
+<script>
+    // Get reference to the registration state select dropdown
+    const registrationStateSelect = document.querySelector('#registration_state');
+
+    // Add event listener to the registration state select dropdown
+    registrationStateSelect.addEventListener('change', filterTable);
+
+    function filterTable() {
+        // Get the selected registration state value
+        const selectedRegistrationState = registrationStateSelect.value;
+
+        // Get all rows in the table body
+        const rows = document.querySelectorAll('#table-body tr');
+
+        // Iterate over each row and show/hide based on the selected registration state
+        rows.forEach((row) => {
+            const registrationStateCell = row.querySelector('.registration-state-cell');
+            const isRegistered = registrationStateCell.dataset.registered === '1';
+
+            if (selectedRegistrationState === '1' && isRegistered) {
+                row.style.display = '';
+            } else if (selectedRegistrationState === '0' && !isRegistered) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    }
+</script>
+
 @endsection

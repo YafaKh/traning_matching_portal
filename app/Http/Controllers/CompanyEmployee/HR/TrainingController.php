@@ -22,9 +22,19 @@ class TrainingController extends Controller
         //to edit: current semester
         $company = Company:: findOrFail($company_id);
         $trainings_data= $company->trainings->skip(1);
+        $branches= $company->branches;
+        $training_feilds = TrainingFeild::all();
+        $trainers = CompanyEmployee::where('company_id', $company_id)
+        ->where(function ($query) {
+        $query->where('company_employee_role_id', 2)
+        ->orWhere('company_employee_role_id', 3);})->get();
+
         return view('company_employee.hr.trainings.list',
         ['trainings_data'=>$trainings_data,
-         'company_id' => $company_id]);
+         'company_id' => $company_id,
+         'branches' => $branches,
+         'training_feilds' => $training_feilds,
+         'trainers' => $trainers,]);
     }
 
     /**

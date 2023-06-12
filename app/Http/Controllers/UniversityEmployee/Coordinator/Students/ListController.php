@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\UniversityEmployee\Coordinator\Students;
 use App\Http\Controllers\Controller;
 use App\Models\Student;
+use App\Models\Specialization;
+use App\Models\Company;
+use App\Models\UniversityEmployee;
 
 use Illuminate\Http\Request;
 
@@ -22,8 +25,20 @@ class ListController extends Controller
     {
         $students= Student::select([
         'id', 'student_num', 'first_name_en', 'last_name_en', 'registered',
-        'specialization_id', 'training_id'])->defaultOrder()->get();
-        return view('university_employee.coordinator.students.list',['students'=>$students]);
+        'specialization_id', 'training_id','university_employee_id'])
+        ->defaultOrder()->paginate(15);
+
+        $specializations = Specialization::select('acronyms')->get();
+        $companies = Company::select('id', 'name')->get();
+        $supervisors =  UniversityEmployee::where(function ($query) {
+        $query->where('university_employee_role_id', 2)
+        ->orWhere('university_employee_role_id', 3);})->get();
+
+        return view('university_employee.coordinator.students.list',
+        ['students'=>$students,
+        'specializations'=>$specializations,
+        'companies'=>$companies,
+        'supervisors'=>$supervisors,]);
     }
 
      /**

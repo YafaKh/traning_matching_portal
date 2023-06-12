@@ -4,6 +4,7 @@ namespace App\Http\Controllers\UniversityEmployee\Coordinator\Students;
 use App\Http\Controllers\Controller;
 use App\Models\Student;
 use App\Models\UniversityEmployee;
+use App\Models\Company;
 
 use Illuminate\Http\Request;
 
@@ -16,16 +17,19 @@ class AssignSupervisorsController extends Controller
         
         $assigned_students= Student::select(['id', 'student_num', 'first_name_en',
          'last_name_en', 'registered','training_id','university_employee_id'])->whereNotNull('university_employee_id')
-         ->defaultOrder()->get();
+         ->defaultOrder()->paginate(10);
 
          $unassigned_students= Student::select(['id', 'student_num', 'first_name_en',
          'last_name_en', 'registered','training_id'])->whereNull('university_employee_id')
          ->defaultOrder()->get();
 
+         $companies = Company::select('id', 'name')->get();
+
         return view('university_employee.coordinator.students.assign_supervisors', [
-            'supervisors' => $supervisors, 
+            'supervisors' => $supervisors,
+            'companies'=>$companies, 
             'assigned_students' => $assigned_students,
-            'unassigned_students' => $unassigned_students
+            'unassigned_students' => $unassigned_students,
         ]);
     }
 

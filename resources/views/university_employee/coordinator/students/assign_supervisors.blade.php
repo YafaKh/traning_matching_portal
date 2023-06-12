@@ -1,4 +1,4 @@
-@extends('university_employee.master')
+@extends('all_users.master')
 @section('navbar')
     @include('university_employee.coordinator.navbar')
 @endsection
@@ -8,7 +8,7 @@
 @section('activity3')
     active
 @endsection
-@section('student_navbar')
+@section('sub_navbar')
     @include('university_employee.coordinator.students.student_navbar')
 @endsection
 @section('content')
@@ -79,12 +79,18 @@
             @endforeach
         </tbody>
         </table>
+        {{$assigned_students->links()}}
     </div>
     {{--other students table--}}
     <div class="d-flex mt-2 flex-md-row col-md-6">
         <select class="form-select me-2 mb-2 txt-sm" aria-label="Company">
-            <option selected>Company*</option>
-            <option value="CS">CS</option>
+            <option value="All">Company</option>
+            <option value="-">Unengaged Sudents</option>
+            @foreach($companies as $company)
+                @foreach($company->branches as $branch)
+                <option value="{{$company['name']}}-{{$branch->city->name}}">{{$company['name']}}-{{$branch->city->name}}</option>
+                @endforeach
+            @endforeach
         </select>
 
         <select class="form-select me-2 mb-2 txt-sm" aria-label="Branch">

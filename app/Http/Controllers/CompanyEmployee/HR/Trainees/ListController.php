@@ -21,24 +21,6 @@ class ListController extends Controller
        $company = Company:: findOrFail($company_id);
 
        $trainings = $company->trainings->skip(1);
-       //dd( $trainings[1]->students);
-       /*$students_data = [];
-        foreach ($trainings as $training) {
-            $students = $training->students()
-                ->select('first_name_en', 'last_name_en')
-                ->defaultOrder()->get();
-             //to edit, do it as assign training
-            foreach ($students as $student) {
-                $students_data[] = [
-                    'first_name_en' => $student->first_name_en,
-                    'last_name_en' => $student->last_name_en,
-                    'training_name' => $training->name,
-                    'training_branch' => $training->branch->address,
-                    'trainer_first_name' => $training->employee->first_name ?? '',
-                    'trainer_last_name' => $training->employee->last_name ?? '',
-                ];
-            }
-        }*/
 
         $not_aaproved_students= $company->not_approved_students;
  

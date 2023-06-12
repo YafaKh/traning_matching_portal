@@ -1,4 +1,4 @@
-@extends('university_employee.master')
+@extends('all_users.master')
 @section('navbar')
     @include('university_employee.coordinator.navbar')
 @endsection

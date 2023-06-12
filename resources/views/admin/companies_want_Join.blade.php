@@ -1,25 +1,14 @@
-@extends('admin.layout.master')
+@extends('all_users.master')
 @section('navbar')
-  @include('admin.layout.navbar')
+  @include('admin.navbar')
+@endsection
+@section('activity2')
+    active
+@endsection
+@section('sub_navbar')
+    @include('admin.companies_navbar')
 @endsection
 @section('content')
-  <nav class="navbar navbar-expand-md shadow-sm px-sm-5">
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse nav-items d-flex" id="navbarNav">
-      <ul class="navbar-nav w-75 d-flex justify-content-start">
-        <li class="nav-item">
-          <a class="nav-link " aria-current="page" href="#">All companies</a><!-- active -->
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" href="#">Companies want to join</a>
-        </li>
-      </ul>
-      <input class="form-control me-5 w-25" type="search" id="search" placeholder="Search" aria-label="Search" />
-    </div>
-  </nav>
   <section class="d-flex justify-content-center">
    
     <div class="d-flex flex-column w-75 mt-5">

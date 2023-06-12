@@ -9,8 +9,8 @@ use App\Models\Company;
 class CompaniesController extends Controller
 {
     public function show_comapnies(){
-        $allCompanies =Company::all();
+        $companies =Company::all();
 
-        return view('admin.companies',compact('allCompanies'));
+        return view('admin.companies', ['companies'=>$companies]);
     }
 }

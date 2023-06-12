@@ -10,19 +10,11 @@
     {{--filters--}}
     <div class="d-flex justify-content-between flex-sm-row flex-column mt-5">
         <div class="d-flex flex-row col-sm-7">
-            <select class="form-select border-gray me-2 mb-2 txt-sm w-25" aria-label="Supervisor">
-                <option selected>Role</option>
-                <option value="1">HR</option>
-                <option value="2">Trainer</option>
-                <option value="3">Both</option>
-            </select>
-            <select class="form-select border-gray me-2 mb-2 txt-sm w-25" aria-label="Company">
-                <option selected>Branch</option>
-                <option value="CS">CS</option>
-            </select>
-            <select class="form-select border-gray me-2 mb-2 txt-sm w-25" aria-label="Company">
-                <option selected>Department</option>
-                <option value="CS">CS</option>
+            <select class="filter-dropdown form-select border-gray me-2 mb-2 txt-sm w-25" data-column="1">
+                <option value="All">Role</option>
+                <option value="HR">HR</option>
+                <option value="Trainer">Trainer</option>
+                <option value="HR & Trainer">Both</option>
             </select>
             <form class="input-group mb-2 h-50 w-50" role="searprimarych">
             <input class="form-control txt-sm border border-secondary" type="search" placeholder="Search" aria-label="Search">
@@ -58,17 +50,17 @@
             <th scope="col">Delete</th> 
             </tr>
         </thead>
-        <tbody class="bg-light">
+        <tbody class="bg-light" id="table-body">
             @foreach ($employees_data as $employee)
             <tr>
             <td class="ps-3"><a>{{$employee['first_name'].' '. $employee['last_name']}}</a></td>
             <td>
             @if ($employee['company_employee_role_id']==1)
-                hr
+                HR
             @elseif ($employee['company_employee_role_id']==2)
-                trainer
+                Trainer
             @elseif ($employee['company_employee_role_id']==3)
-                hr & trainer
+                HR & Trainer
             @endif
             </td>
             <td>{{$employee['email']}}</td>

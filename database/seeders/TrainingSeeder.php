@@ -19,18 +19,16 @@ class TrainingSeeder extends Seeder
     {
         CompanyBranch::all()->each(function ($companyBranch) {
         // Create additional fake trainings with trainers
-            $trainer_count = rand(1, 3);
-            $trainers = CompanyEmployee::factory()->count($trainer_count)->create();
+            $trainers = CompanyEmployee::factory()->count(rand(1, 3))->create();
             $companyBranch->company->employees()->saveMany($trainers);
         
-            $training_count = rand(1, 4);
-            $trainings = Training::factory()->count($training_count)->create();
+            $trainings = Training::factory()->count(rand(1, 3))->create();
             $trainings->each(function ($training) use ($trainers) {
                 $trainer = $trainers->random();
                 $training->company_employee_id = $trainer->id;
                 $training->save();
 
-                $engaged_students = Student::factory()->count(rand(3, 5))->create(); 
+                $engaged_students = Student::factory()->count(rand(2, 5))->create(); 
                 $training->students()->saveMany($engaged_students);
             });
         

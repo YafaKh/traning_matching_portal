@@ -46,10 +46,10 @@ function filterTable() {
 
   // Filter rows based on selected values
   Object.entries(selectedValues).forEach(([columnIndex, selectedValue]) => {
-    if (selectedValue !== 'All') {
+    if (selectedValue != 'All') {
       Array.from(tableBody.rows).forEach((row) => {
         const cellValue = row.cells[columnIndex].textContent;
-        if (!cellValue.includes(selectedValue)) {
+        if (cellValue.trim() !== selectedValue.trim()) {
           row.style.display = 'none';
         }
       });

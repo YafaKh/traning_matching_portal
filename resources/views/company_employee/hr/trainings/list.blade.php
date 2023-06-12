@@ -9,25 +9,33 @@
 <div class="px-5">
     {{--filters--}}
     <div class="d-flex justify-content-between flex-sm-row flex-column mt-5">
-        <div class="d-flex flex-row col-sm-7">
-            <select select class="form-select border-gray me-2 mb-2 txt-sm w-25" aria-label="Supervisor">
+        <div class="d-flex flex-row">
+            <select select class="form-select border-gray me-2 mb-2 txt-sm w-25" >
                 <option selected>Semester</option>
                 <option value="1">Fall</option>
                 <option value="2">Spring</option>
                 <option value="3">First Summer</option>
                 <option value="4">Second Summer</option>
             </select>
-            <select class="form-select border-gray me-2 mb-2 txt-sm w-25" >
-                <option selected>Branch</option>
-                <option value="CS">CS</option>
+            <select class="filter-dropdown form-select border-gray me-2 mb-2 txt-sm w-25"  data-column="1">
+                <option value="All">Feild</option>
+                @foreach($training_feilds as $training_feild)
+                <option value="{{$training_feild['name']}}">{{ $training_feild['name'] }}</option>
+                @endforeach
             </select>
-            <select class="form-select border-gray me-2 mb-2 txt-sm w-25">
-                <option selected>Feild</option>
-                <option value="CS">CS</option>
+            <select class="filter-dropdown form-select border-gray me-2 mb-2 txt-sm w-25"  data-column="2">
+                <option value="All">Trainer</option>
+                @foreach($trainers as $trainer)
+                <option value="{{ $trainer['first_name']}} {{ $trainer['last_name']}}">
+                {{ $trainer['first_name']}} {{ $trainer['last_name']}}
+                </option>
+                @endforeach
             </select>
-            <select class="form-select border-gray me-2 mb-2 txt-sm w-25">
-                <option selected>Trainer</option>
-                <option value="CS">CS</option>
+            <select class="filter-dropdown form-select border-gray me-2 mb-2 txt-sm w-25"  data-column="3">
+                <option value="All">Branch</option>
+                @foreach($branches as $branch)
+                    <option value="{{$branch->city->name}}-{{$branch['address']}}">{{$branch->city->name}}-{{$branch['address']}}</option>
+                @endforeach
             </select>
             <form class="input-group mb-2 h-50 w-50" role="searprimarych">
             <input class="form-control txt-sm border border-secondary" type="search" placeholder="Search" aria-label="Search">
@@ -54,14 +62,14 @@
             <th scope="col">Delete</th> 
             </tr>
         </thead>
-        <tbody class="bg-light">
+        <tbody class="bg-light" id="table-body">
             @foreach($trainings_data as $training)
             <tr>
             <td class="ps-3">{{$training['name']}}</td>
             <td>{{$training->training_feild->name ?? ''}}</td>
             <td>{{ $training->employee['first_name'] ?? '' }} 
                 {{ $training->employee['last_name'] ?? '' }}</td>
-            <td>{{$training->branch->address}}</td>
+            <td>{{$training->branch->city->name}}-{{$training->branch['address']}}</td>
             <td style="vertical-align: top;">
                 <a class="btn btn-link txt-sm" data-bs-toggle="collapse" href="#details{{$training['id']}}" 
                     aria-expanded="false" aria-controls="details{{$training['id']}}">Show more</a>

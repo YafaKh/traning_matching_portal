@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-md shadow-sm px-sm-5">
-        <a class="navbar-brand w-25" href="#">
+        <a class="navbar-brand w-25" href="{{route('admin_home')}}">
             <img src="{{asset('images/logo.png')}}" alt="logo" class="" />Admin Name</a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -9,22 +9,16 @@
         <div class="collapse navbar-collapse nav-items" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a><!-- active -->
+                    <a class="nav-link" href="{{route('admin_companies')}}">Companies</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Companies</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link">Company Employees</a>
+                    <a class="nav-link">companies' employees</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link">University Employees</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Student</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link">Change password </a>
+                    <a class="nav-link" href="#">Students</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link">Logout</a>

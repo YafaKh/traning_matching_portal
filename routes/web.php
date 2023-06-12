@@ -145,7 +145,7 @@ Route::post('store{id}',[StudentRegisterController::class,'addManyLanguageToStud
 // admin 
 Route::prefix('/admin')->group(function () {
     Route::get('/',[HomeController::class,'show'])->name('admin_home');
-    Route::get('/copmanies',[AdminCompaniesController::class,'show_comapnies'])->name('admin_copmanies');
+    Route::get('/companies',[AdminCompaniesController::class,'show_comapnies'])->name('admin_companies');
     Route::get('/comapnies_want_to_join',[CompaniesWantJoinController::class,'show_comapnies_want_join'])->name('admin_compnies_want_to_join');
     
 })->name('admin');

@@ -1,6 +1,6 @@
-@extends('admin.layout.master')
+@extends('all_users.master')
 @section('navbar')
-  @include('admin.layout.navbar')
+  @include('admin.navbar')
 @endsection
 @section('content')
     <section class="w-75 m-auto bg-primary mt-0 d-flex justify-content-evenly align-items-center row g-0">

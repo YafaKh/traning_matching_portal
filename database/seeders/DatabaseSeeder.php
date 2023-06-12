@@ -44,17 +44,17 @@ class DatabaseSeeder extends Seeder
         $this->call(UniversityEmployeeRoleSeeder::class);
         $this->call(CitySeeder::class);
         $this->call(TrainingFeildSeeder::class);
-        $companies = Company::factory()->count(20)->create();
+        $companies = Company::factory()->count(7)->create();
 
         $this->call(CompanyEmployeeRoleSeeder::class);
         UniversityEmployee::factory()->count(10 )->create();
 
         //create students not connected with any company
-        Student::factory()->count(10 )->create();
+        Student::factory()->count(8)->create();
 
         foreach ($companies as $company) {
             
-            $branches = CompanyBranch::factory()->count(rand(1, 5))->create();
+            $branches = CompanyBranch::factory()->count(rand(1, 3))->create();
             $company->branches()->saveMany($branches);
 
             // Create "Unengaged Trainees" training for each company branch
@@ -82,7 +82,6 @@ class DatabaseSeeder extends Seeder
             });
         }
         $this->call(TrainingSeeder::class);
-        //Student::factory()->count(20)->create();
         Progress::factory()->count(25)->create();
         UnaddedCompanyEmployee::factory()->count(10)->create();
         UnaddedUniversityEmployee::factory()->count(10)->create();

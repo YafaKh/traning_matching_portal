@@ -1,4 +1,4 @@
-@extends('university_employee.master')
+@extends('all_users.master')
 @section('navbar')
     @include('university_employee.coordinator.navbar')
 @endsection
@@ -8,7 +8,7 @@
 @section('activity2')
     active
 @endsection
-@section('student_navbar')
+@section('sub_navbar')
     @include('university_employee.coordinator.students.student_navbar')
 @endsection
 @section('content')

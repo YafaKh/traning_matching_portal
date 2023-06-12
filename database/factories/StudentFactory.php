@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Support\Str;
 use App\Models\University;
+use App\Models\UniversityEmployee;
 use App\Models\Specialization;
 use App\Models\Training;
 use App\Models\Student;
@@ -28,6 +29,14 @@ class StudentFactory extends Factory
     public function definition()
     {
         $university_ids = University::pluck('id')->all();
+        $supervisors = UniversityEmployee::where(function ($query) {
+            $query->where('university_employee_role_id', 2)
+                ->orWhere('university_employee_role_id', 3);
+        })->pluck('id');
+        //to create some students without assigned supervisors
+        $supervisors[count($supervisors)]=NULL;
+        $supervisors[count($supervisors)]=NULL;
+
         $specialization_ids = Specialization::pluck('id')->all();
         $training_ids = Training::pluck('id')->all();
         $this->instance_counter++;
@@ -60,6 +69,7 @@ class StudentFactory extends Factory
             'registered' => $this->faker->boolean,
             'image' => $this->faker->imageUrl(),
             'university_id' => $this->faker->randomElement($university_ids),
+            'university_employee_id' => $this->faker->randomElement($supervisors),
             'specialization_id' => $this->faker->randomElement($specialization_ids),
             //'training_id' => $this->faker->randomElement($training_ids),
             'evaluate_student_id' => $this->instance_counter,
