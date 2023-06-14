@@ -123,7 +123,6 @@ Route::prefix('/student')->group(function () {
     Route::get('/registeration{id}',[StudentRegisterController::class,'create'])->name('student_registeration_1');
     Route::POST('/registeration/store',[StudentRegisterController::class,'store'])->name('student_registeration_1.store');
 
-    Route::get('/registeration_2',[StudentRegisterController::class,'createNextPage'])->name('student_registeration_2');
     Route::get('/profile{id}',[StudentProfileController::class,'show'])->name('student_profile');
     Route::get('/edit_profile',[EditStudentProfileController::class,'show'])->name('edit_student_profile');
     Route::get('/evaluate_company{id}',[EvaluateCompanyController::class,'show'])->name('student_evaluate_company');

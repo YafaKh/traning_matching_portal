@@ -9,7 +9,23 @@ use App\Models\Student;
 class EvaluateCompany extends Model
 {
     use HasFactory;
-    protected $fillable = ['training_palce_evaluation', 'pros','cons'];
+    protected $table ="evaluate_companies";
+    // protected $hidden = ['created_at','updated_at'];
+    protected $fillable = ['training_palce_evaluation',
+    'pros',
+    'cons',
+    'new_skills_gained',
+    'skills_wish_they_included',
+    'skills_wish_were_given_better',
+    'recommend_sending_students',
+    'recommended_evaluate_sys',
+    // evaluate_companycol
+    'recommended_evaluate_sys_explanation',
+    'internship_time_before_senior_year',
+    'more_than_one_internship',
+    'finding_training_difficulties',
+    'recommendations',
+    'notes_about_website'];
 
     
     public function student()
