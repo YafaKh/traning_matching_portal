@@ -8,7 +8,7 @@ use App\Models\UnaddedUniversityEmployee;
 use Illuminate\Http\Request;
 
 
-class UniversityEmployeesController extends Controller
+class UniversityEmployeeController extends Controller
 {
     /**
      * Display a listing of the employees.

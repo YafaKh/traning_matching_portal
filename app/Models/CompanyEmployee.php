@@ -20,6 +20,10 @@ class CompanyEmployee extends Model
     {
         return $query->orderBy('first_name');
     }
+    public function scopeOrderByCompany($query)
+    {
+        return $query->orderBy('company_id');
+    }
     public function company()
     {
         return $this->belongsTo(Company::class);

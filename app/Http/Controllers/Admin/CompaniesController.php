@@ -8,7 +8,7 @@ use App\Models\Company;
 
 class CompaniesController extends Controller
 {
-    public function show_comapnies(){
+    public function index(){
         $companies =Company::all();
 
         return view('admin.companies', ['companies'=>$companies]);

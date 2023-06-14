@@ -15,11 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('name', 45);
             $table->string('industry', 45);
-            $table->string('description', 200)->nullable();
             $table->string('website')->nullable();
             $table->string('linkedin')->nullable();
-            $table->char('phone_no', 15);
-            $table->string('email_address');
+            $table->char('phone', 15);
+            $table->string('email');
             $table->timestamps();
         });
     }

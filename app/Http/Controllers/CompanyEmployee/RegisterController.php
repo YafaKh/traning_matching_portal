@@ -4,6 +4,7 @@ namespace App\Http\Controllers\CompanyEmployee;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\UnaddedCompanyEmployee;
+use App\Models\UnaddedCompany;
 use App\Models\Company;
 
 class RegisterController extends Controller
@@ -33,14 +34,38 @@ class RegisterController extends Controller
             'second_name' => 'required|alpha|between:2,20',
             'third_name' => 'required|alpha|between:2,20',
             'last_name' => 'required|alpha|between:2,20',
-            'phone' => 'required|numeric',
+            'phone' => 'required',
             'email'=> 'required|email|unique:company_employees,email|max:255',
-            'company_id'=>'required|exists:companies,id',
             'password' => 'required|min:8|confirmed:confirm_password',
-        ]);
+        ]);        
         $employee = UnaddedCompanyEmployee::create($validatedData);           
-        return redirect()->route('company_employee_register')
-        ->with('success', 'Employee created successfully.');
-}
+
+        if ($request->has('company_id')) {
+            $request->validate(['company_id'=>'required|exists:companies,id']);
+            $employee->company_id=$request->input('company_id');   
+            $employee->save();
+        } else {
+            $request->validate([
+                'company_name' => 'required|between:2,20',
+                'company_industry' => 'required|max:45',
+                'company_website' => 'nullable|url',
+                'company_email' => 'required|email',
+                'company_phone' => 'required',
+                'company_linkedin' => 'nullable|url',
+            ]);
+            $new_company = UnaddedCompany::create([
+                'name' => $request->input('company_name'),
+                'industry' => $request->input('company_industry'),
+                'website' => $request->input('company_website'),
+                'email' => $request->input('company_email'),
+                'phone' => $request->input('company_phone'),
+                'linkedin' => $request->input('company_linkedin'),
+            ]);   
+            $employee->company_addition=0;  
+            $employee->company_id= $new_company->id;   
+            $employee->save();
+        }
+        return redirect()->route('user_type');
+   }
 
 }
