@@ -13,7 +13,7 @@
     <div class="row px-5">
         @foreach($companies as $company)
         <div class="col-md-6">
-            <div class="d-flex flex-row bg-light align-items-center company-box justify-content-center w-100 py-3 m-4 rounded-3">
+            <div class="d-flex flex-row bg-light align-items-center company-box justify-content-center w-100 py-3 m-4 rounded-3 shadow">
                 <img src="{{$company->image}}" class="rounded-circle col-6 w-25 h-auto" />
                 <div class="mt-4 mx-3 col-6">
                     <a href="http://" class="text-decoration-none">{{$company->name}}</a>

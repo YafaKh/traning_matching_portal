@@ -616,7 +616,9 @@ body .bigDiv .loginForm .loginCard .creatAccountLink:hover {
 .txt-dark-sand {
   color: var(--dark-sand);
 }
-
+.txt-dark-blue {
+  color: var(--dark-blue);
+}
 .txt-sm {
   font-size: 0.8rem;
 }

@@ -12,13 +12,13 @@
                     <a class="nav-link" href="{{route('admin_companies')}}">Companies</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link">companies' employees</a>
+                    <a class="nav-link" href="{{route('admin_companies_employees')}}">companies' employees</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link">University Employees</a>
+                    <a class="nav-link" href="{{route('admin_university_employees')}}">University Employees</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Students</a>
+                    <a class="nav-link" href="{{route('admin_students')}}">Students</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link">Logout</a>

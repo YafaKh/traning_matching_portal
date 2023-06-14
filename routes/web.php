@@ -5,37 +5,41 @@ use App\Http\Controllers\Controller;
 
 use App\Http\Controllers\AllUsers\CompanyProfileController as AllCompanyProfileController;
 
-use App\Http\Controllers\Coordinator\StudentController;
 use App\Http\Controllers\Student\StudentProfileController;
 use App\Http\Controllers\Student\EditStudentProfileController;
 use App\Http\Controllers\Student\StudentRegisterController;
 use App\Http\Controllers\Student\EvaluateCompanyController;
 use App\Http\Controllers\CompanyEmployee\RegisterController;
 use App\Http\Controllers\CompanyEmployee\HR\Trainees\ListController as HrListController;
-use App\Http\Controllers\Admin\HomeController;
-use App\Http\Controllers\Admin\CompaniesController as AdminCompaniesController;
-use App\Http\Controllers\Admin\CompaniesWantJoinController;
+
 use App\Http\Controllers\CompanyEmployee\HR\Trainees\UniversityStudentsController;
 use App\Http\Controllers\CompanyEmployee\HR\Trainees\AssignTrainingController;
-use App\Http\Controllers\CompanyEmployee\HR\CompanyEmployeeController;
+use App\Http\Controllers\CompanyEmployee\HR\CompanyEmployeeController as HrCompanyEmployeeController;
 use App\Http\Controllers\CompanyEmployee\HR\TrainingController;
 use App\Http\Controllers\CompanyEmployee\HR\CompanyProfileController as HrCompanyProfileController;
 
 use App\Http\Controllers\UniversityEmployee\Coordinator\Students\ListController as CooListController;
 use App\Http\Controllers\UniversityEmployee\Coordinator\Students\StudentCompanyApprovalController;
 use App\Http\Controllers\UniversityEmployee\Coordinator\Students\AssignSupervisorsController;
-use App\Http\Controllers\UniversityEmployee\Coordinator\UniversityEmployeesController;
+use App\Http\Controllers\UniversityEmployee\Coordinator\UniversityEmployeeController as CooUniversityEmployeeController;
 use App\Http\Controllers\UniversityEmployee\Coordinator\CompaniesController as CooCompaniesController;
+
+use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\CompaniesController as AdminCompaniesController;
+use App\Http\Controllers\Admin\CompaniesWantJoinController;
+use App\Http\Controllers\Admin\CompanyEmployeeController as AdCompanyEmployeeController;
+use App\Http\Controllers\Admin\UniversityEmployeeController as AdUniversityEmployeeController;
+use App\Http\Controllers\Admin\StudentController;
 
 Route::get('/', function () {
     return view('/all_users/login');
-}); 
-Route::get('/resetPassword', function () {
-    return view('/all_users/resetPassword');
-}); 
-Route::get('/userType', function () {
+})->name('login'); 
+Route::get('/reset_password', function () {
+    return view('/all_users/reset_password');
+})->name('reset_password'); 
+Route::get('/user_type', function () {
     return view('/all_users/userType');
-}); 
+})->name('user_type'); 
 
 //all users 
 Route::get('/{company_id}/company_profile', [AllCompanyProfileController::class, 'show'])->name('show_company_profile');
@@ -61,10 +65,10 @@ Route::prefix('/coordinator')->group(function(){
 
     
     Route::prefix('/university_employees')->group(function(){
-        Route::get('/', [UniversityEmployeesController::class, 'index'])->name('coordinator_list_employees');
-        Route::get('/create', [UniversityEmployeesController::class,'create'])->name('coordinator_add_employee');
-        Route::post('/store', [UniversityEmployeesController::class,'store'])->name('coordinator_stroe_employee');
-        Route::get('/delete/{employee_id}', [UniversityEmployeesController::class, 'destroy'])->name('coordinator_delete_employee');
+        Route::get('/', [CooUniversityEmployeeController::class, 'index'])->name('coordinator_list_employees');
+        Route::get('/create', [CooUniversityEmployeeController::class,'create'])->name('coordinator_add_employee');
+        Route::post('/store', [CooUniversityEmployeeController::class,'store'])->name('coordinator_stroe_employee');
+        Route::get('/delete/{employee_id}', [CooUniversityEmployeeController::class, 'destroy'])->name('coordinator_delete_employee');
     });
     
     Route::get('/companies',  [CooCompaniesController::class, 'index'])->name('coordinator_list_companies');   
@@ -104,10 +108,10 @@ Route::prefix('{company_id}/hr')->group(function () {
     });
 
     Route::prefix('/company_employees')->group(function(){
-        Route::get('/', [CompanyEmployeeController::class,'index'])->name('hr_list_employees');
-        Route::get('/create', [CompanyEmployeeController::class,'create'])->name('hr_add_employee');
-        Route::post('/store', [CompanyEmployeeController::class,'store'])->name('hr_store_employee');
-        Route::get('/delete/{employee_id}', [CompanyEmployeeController::class, 'destroy'])->name('hr_delete_employee');
+        Route::get('/', [HrCompanyEmployeeController::class,'index'])->name('hr_list_employees');
+        Route::get('/create', [HrCompanyEmployeeController::class,'create'])->name('hr_add_employee');
+        Route::post('/store', [HrCompanyEmployeeController::class,'store'])->name('hr_store_employee');
+        Route::get('/delete/{employee_id}', [HrCompanyEmployeeController::class, 'destroy'])->name('hr_delete_employee');
     });
 
     Route::prefix('/trainings')->group(function(){
@@ -144,11 +148,15 @@ Route::post('store{id}',[StudentRegisterController::class,'addManyLanguageToStud
 
 // admin 
 Route::prefix('/admin')->group(function () {
-    Route::get('/',[HomeController::class,'show'])->name('admin_home');
-    Route::get('/companies',[AdminCompaniesController::class,'show_comapnies'])->name('admin_companies');
-    Route::get('/comapnies_want_to_join',[CompaniesWantJoinController::class,'show_comapnies_want_join'])->name('admin_compnies_want_to_join');
-    
-})->name('admin');
+    Route::get('/',[HomeController::class,'index'])->name('admin_home');
+    Route::get('/companies',[AdminCompaniesController::class,'index'])->name('admin_companies');
+    Route::get('/comapnies_want_to_join',[CompaniesWantJoinController::class,'index'])->name('admin_compnies_want_to_join');
+    Route::get('/accept_company{company_id}',[CompaniesWantJoinController::class,'accept'])->name('admin_accept_company');
+    Route::get('/reject_company{company_id}',[CompaniesWantJoinController::class,'reject'])->name('admin_reject_company');
+    Route::get('/companies_employees',[AdCompanyEmployeeController::class,'index'])->name('admin_companies_employees');
+    Route::get('/university_employees',[AdUniversityEmployeeController::class,'index'])->name('admin_university_employees');
+    Route::get('/students',[StudentController::class,'index'])->name('admin_students');
+});
 
 // trainer
 Route::prefix('/trainer')->group(function(){

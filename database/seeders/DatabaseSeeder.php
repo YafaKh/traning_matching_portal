@@ -15,6 +15,7 @@ use App\Models\Student;
 use App\Models\Progress;
 use App\Models\UnaddedCompanyEmployee;
 use App\Models\UnaddedUniversityEmployee;
+use App\Models\UnaddedCompany;
 use App\Models\Spoken_language;
 use App\Models\Student_spoken_language;
 use App\Models\Skill;
@@ -92,6 +93,14 @@ class DatabaseSeeder extends Seeder
         Preferred_cities_student::factory()->count(2)->create();
         Preferred_training_field::factory()->count(5)->create();
         Preferred_training_field_student::factory()->count(10)->create();
+
+        for($i = 0; $i < 4 ; $i++){
+           $temp_company= UnaddedCompany::factory()->create();
+           $temp_emp= UnaddedCompanyEmployee::factory()->create();
+           $temp_emp->company_addition =0;
+           $temp_emp->company_id = $temp_company->id;
+           $temp_emp->save();
+        }
 
     }
 

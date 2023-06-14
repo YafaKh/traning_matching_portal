@@ -30,8 +30,8 @@ class CompanyEmployeeController extends Controller
 
     public function create($company_id)
     {
-        $un_added_employees = UnaddedCompanyEmployee::where(
-        'company_id', $company_id)->get();
+        $un_added_employees = UnaddedCompanyEmployee::where('company_addition', 1)
+        ->where('company_id', $company_id)->get();
 
         return view('company_employee.hr.company_employees.add',
         ['un_added_employees' => $un_added_employees,

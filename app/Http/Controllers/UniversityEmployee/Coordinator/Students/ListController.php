@@ -27,6 +27,7 @@ class ListController extends Controller
         'id', 'student_num', 'first_name_en', 'last_name_en', 'registered',
         'specialization_id', 'training_id','university_employee_id'])
         ->defaultOrder()->paginate(15);
+       // dd($students);
 
         $specializations = Specialization::select('acronyms')->get();
         $companies = Company::select('id', 'name')->get();

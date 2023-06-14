@@ -8,15 +8,45 @@
         <label class="form-label fs-3 mx-auto mb-3">Sign up</label>
         <label class="form-label mt-2 ms-1 fs-5">Name: </label>
         <div class="d-flex mb-3">
-            <input type="text" class="form-control me-3 ps-4" id="fname" placeholder="First" name="first_name">
-            <input type="text" class="form-control ps-4" id="sname" placeholder="Second" name="second_name">
+            <input type="text" class="form-control me-3 ps-4" id="fname" placeholder="First" name="first_name" value="{{ old('first_name')}}">
+            <input type="text" class="form-control ps-4" id="sname" placeholder="Second" name="second_name" value="{{ old('second_name')}}">
         </div>
         <div class="d-flex mb-4">
-            <input type="text" class="form-control me-3 ps-4" id="thname" placeholder="Third" name="third_name">
-            <input type="text" class="form-control ps-4" id="lname" placeholder="Last" name="last_name">
+            <input type="text" class="form-control me-3 ps-4" id="thname" placeholder="Third" name="third_name" value="{{ old('third_name')}}">
+            <input type="text" class="form-control ps-4" id="lname" placeholder="Last" name="last_name" value="{{ old('last_name')}}">
         </div>
-        <input type="text" class="form-control mb-4 ps-4" id="phone" placeholder="Phone Number" name="phone">
-        <input type="text" class="form-control mb-4 ps-4" id="email" placeholder="Email" name="email">
+        @error('first_name') 
+          <div class="alert alert-danger">
+              <strong>Error!</strong> {{ $message }}
+          </div> 
+        @enderror
+        @error('second_name') 
+        <div class="alert alert-danger">
+            <strong>Error!</strong> {{ $message }}
+        </div> 
+        @enderror
+        @error('third_name') 
+        <div class="alert alert-danger">
+            <strong>Error!</strong> {{ $message }}
+        </div> 
+        @enderror
+        @error('last_name') 
+        <div class="alert alert-danger">
+            <strong>Error!</strong> {{ $message }}
+        </div> 
+        @enderror
+        <input type="text" class="form-control mb-4 ps-4" id="phone" placeholder="Phone Number" name="phone" value="{{ old('phone')}}">
+        @error('phone') 
+            <div class="alert alert-danger">
+                <strong>Error!</strong> {{ $message }}
+            </div> 
+        @enderror
+        <input type="text" class="form-control mb-4 ps-4" id="email" placeholder="Email" name="email" value="{{ old('email')}}">
+        @error('email') 
+            <div class="alert alert-danger">
+                <strong>Error!</strong> {{ $message }}
+            </div> 
+        @enderror
         <select id="company" class="form-select mb-4 ps-4" name="company_id">
             <option selected>Company</option>
             @foreach($companies as $company)
@@ -24,72 +54,78 @@
             @endforeach
 
         </select>
-
-        <button id="toggle-section-button" class="btn btn-secondary mb-4">new company</button>
+        @error('company_id') 
+            <div class="alert alert-danger">
+                <strong>Error!</strong> {{ $message }}
+            </div> 
+       @enderror
+        <button id="toggle-section-button" class="btn btn-secondary mb-4">
+          new company</button>
 <section id="hidden-section" class="d-none">
-<div class="col-md-9 col-11 bg-white mb-3 p-md-5 p-3 rounded-bottom-2 w-100">
-  <div class="col-12 d-inline-block">
-  <input type="text" class="form-control mb-4 ps-4" name="industry" value="" placeholder="Industry">
-  <!-- <div class="alert alert-danger">
-      <strong>Error!</strong> 
-  </div> -->
-    <input type="text" class="form-control mb-4 ps-4" name="website" value="" placeholder="Website">
-  <!-- <div class="alert alert-danger">
-    <strong>Error!</strong>
-  </div> -->
-    <div id="email-container">
-     
-        <div class="d-flex">
-          <input type="text" class="form-control mb-4 me-2 ps-4" name="email" value="" placeholder="Emails">
-          <!-- <button class="btn delete"><i class="bi bi-trash3 fs-6 text-danger float-start"></i></button> -->
-        </div>
-        <!-- <div class="alert alert-danger"></div> -->
+  <div class="col-md-9 col-11 bg-white mb-3 p-md-5 p-3 rounded-bottom-2 w-100">
+    <div class="col-12 d-inline-block">  
+    <input type="text" class="form-control mb-4 ps-4" name="company_name" value="{{ old('company_name')}}" placeholder="Name">
+    @error('company_name') 
+    <div class="alert alert-danger">
+        <strong>Error!</strong> {{ $message }}
+    </div> 
+    @enderror
+    <input type="text" class="form-control mb-4 ps-4" name="company_industry" value="{{ old('company_industry')}}" placeholder="Industry">
+    @error('company_industry') 
+    <div class="alert alert-danger">
+        <strong>Error!</strong> {{ $message }}
+    </div> 
+    @enderror
+    <input type="text" class="form-control mb-4 ps-4" name="company_website" value="{{ old('company_website')}}" placeholder="Website">
+    @error('company_website') 
+    <div class="alert alert-danger">
+        <strong>Error!</strong> {{ $message }}
+    </div> 
+    @enderror
+    <input type="text" class="form-control mb-4 ps-4" name="company_phone" value="{{ old('company_phone')}}" placeholder="Phone">
+    @error('company_phone') 
+    <div class="alert alert-danger">
+        <strong>Error!</strong> {{ $message }}
+    </div> 
+    @enderror
+    <input type="text" class="form-control mb-4 me-2 ps-4" name="company_email" value="{{ old('company_email')}}" placeholder="Main Email">
+    @error('company_email') 
+    <div class="alert alert-danger">
+        <strong>Error!</strong> {{ $message }}
+    </div> 
+    @enderror
+    <input type="text" class="form-control mb-4 ps-4" name="company_linkedin" value="{{ old('company_linkedin')}}" placeholder="LinkedIn">
+    @error('company_linkedin') 
+    <div class="alert alert-danger">
+        <strong>Error!</strong> {{ $message }}
+    </div> 
+    @enderror
     </div>
-    <!-- <div class="input-group mb-3">
-      <span class="input-group-text" onClick="add_input('email')">
-        <i class="bi bi-plus-square fs-6"></i>
-      </span>
-      <input type="text" class="form-control ps-4" name="new_email" placeholder="New Email">
-    </div> -->
-    <div id="phone-container">
-        <div class="d-flex">
-          <input type="text" class="form-control mb-4 me-2 ps-4" name="phone" value="" placeholder="Phones">
-          <!-- <button class="btn delete"><i class="bi bi-trash3 fs-6 text-danger float-start"></i></button> -->
-        </div>
-        <!-- <div class="alert alert-danger"></div> -->
-    </div>
-    <!-- <div class="input-group mb-3">
-      <span class="input-group-text" onClick="add_input('phone')">
-        <i class="bi bi-plus-square fs-6"></i> 
-      </span>
-      <input type="text" class="form-control ps-4" name="new_phone" placeholder="New Phone">
-    </div> -->
-    
-  <input type="text" class="form-control mb-4 ps-4" name="linkedin" value="" placeholder="LinkedIn">
-   <!-- <div class="alert alert-danger">
-      <strong>Error!</strong>
-</div> -->
   </div>
+  
+ </section>
+      <div class="d-flex flex-sm-row flex-column" >
+          <input type="password" class="form-control me-3 mb-4 ps-4" id="password" placeholder="Password" name="password">
+          <input type="password" class="form-control mb-4 ps-4" id="password_confirmation" placeholder="Confirm Password" name="password_confirmation">
+      </div>
+      @error('password') 
+          <div class="alert alert-danger">
+              <strong>Error!</strong> {{ $message }}
+          </div> 
+      @enderror
+      <button type="submit" class="btn w-50 mx-auto btn-primary bg-dark-blue text-light">Submit</button>      
+  </div>
+</form>
 </div>
-</section>
-        <div class="d-flex flex-sm-row flex-column">
-            <input type="password" class="form-control me-3 mb-4 ps-4" id="password" placeholder="Password" name="password">
-            <input type="password" class="form-control mb-4 ps-4" id="password_confirmation" placeholder="Confirm Password" name="password_confirmation">
-        </div>
-        <button type="submit" class="btn w-50 mx-auto btn-primary bg-dark-blue text-light">Submit</button>      
-    </div>
-    </form>
-</div>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
 <script>
  // jQuery code
  $(document).ready(function() {
   $('#toggle-section-button').click(function(event) {
     event.preventDefault();
-    $('#hidden-section').removeClass('d-none').addClass('d-block');
+    $('#hidden-section').toggleClass('d-none d-block');
+    const companyDropdown = document.getElementById('company');
+    companyDropdown.disabled = !companyDropdown.disabled;
   });
 });
-
 </script>
 @endsection
