@@ -85,7 +85,7 @@ class DatabaseSeeder extends Seeder
         UnaddedCompanyEmployee::factory()->count(10)->create();
         UnaddedUniversityEmployee::factory()->count(10)->create();
         Spoken_language::factory()->count(2)->create();
-        Student_spoken_language::factory()->count(2)->create();
+        Student_spoken_language::factory()->count(10)->create();
         Skill::factory()->count(5)->create();
         Student_Skill::factory()->count(5)->create();
         Preferred_cities_student::factory()->count(2)->create();

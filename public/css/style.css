@@ -751,8 +751,9 @@ textarea{
 
 .uploadImage .imgicon {
   position: absolute;
-  left: 1%;
-  top: 34%;
+  font-size: 1.5rem;
+  left: 3%;
+  top: 23%;
   background: transparent;
   color: gray;
 
@@ -765,13 +766,8 @@ textarea{
   top: 26%;
   opacity: 0;
 }
-@media screen and (max-width:992px) {
-  .uploadImage .imgicon {
-    left: 6%;
-  
-  }  
-}
-/* ----Register student 2---- */
+
+/* ----second part of student registration ---- */
 .registerSection {
   min-height: 30vh;
   border-radius: 0.5rem;

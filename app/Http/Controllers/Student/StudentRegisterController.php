@@ -6,6 +6,11 @@ use App\Models\Student;
 use App\Models\Spoken_language;
 use App\Models\Specialization;
 use App\Models\Student_spoken_language;
+use App\Models\Skill;
+use App\Models\Company;
+use App\Models\City;
+use App\Models\Preferred_cities_student;
+use App\Models\Preferred_training_field;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -21,16 +26,23 @@ class StudentRegisterController extends Controller
         // $spoken_languages = $student ->spoken_languages;
         // $students =Student::select('id')->get();
         // $allLanguages = Spoken_language::select('id','name')->get();
-        $allLanguages = Student_spoken_language::with('student', 'spokenLanguage')->where('student_id',$id)->get();
-
-       return view('student.register',compact('student','allLanguages'));
+        // $allLanguages = Student_spoken_language::with('student', 'spokenLanguage')->where('student_id',$id)->get();
+        $allLevels = Student_spoken_language::all();
+                // $allLanguages = Student_spoken_language::with('student', 'spokenLanguage')->where('student_id',$id)->get();
+        $allLanguages = Spoken_language::all();
+        $specializations = Specialization::all();
+        $skills = Skill::all();
+        $companies = Company::all();
+        // dd($companybranches =$companies->branches);
+        // $companiesBranches = Company::with('student', 'companies')->where('student_id',$id)->get();
+        $cities=City::all();
+        $trainingFields=Preferred_training_field::all();
+       return view('student.register',compact('student','allLanguages','allLevels','specializations','skills','companies','cities','trainingFields'));
 
     }
-    public function createNextPage(){
-        return view('student.register2');
-
-    }   
+    
     public function store(Request $request){ 
+        dd($request->all());
         // vlidation
         $validated = $request->validate([            
             'student_num' => 'required|string',
@@ -47,18 +59,27 @@ class StudentRegisterController extends Controller
             'load' =>'required|integer|min:0|max:18',
             'gpa' =>'required|max:4|between:1.00,4.00|regex:/^[0-4]\.\d\d$/',//lowest gpa ??
             'address'=>'required|string',
-            'email'=>'required|email|unique:students',//our uni email
+            'email'=>'required|email|unique:students',
+            'linkedin' =>'required|url',
             'password'=>'required|string|min:8|regex:/^[0-9a-zA-Z][@$!%*#?&]$/|confirmed',//must have a character or number && special character
             'availability_date'=>'required|date',
             'connected_with_a_company'=>'required|boolean',
-            'connected_company_info'=>'required|string|max:512',
+            // 'connected_company_info'=>'required|string|max:512',//name + branch
             'phone'=>'required|string|regex:/^+[0-9]{13}$/',
-            'registered'=>'required|boolean',// must i write a default value here ?
+            // 'registered'=>'required|boolean',// must i write a default value here ?
             'image'=>'required|image',
 // 'avatar' => 'dimensions:min_width=100,min_height=200' for img
 // 'image' => 'file|size:512';
+            'work_experience'=>'required|string|max:512',
 
           ]);
+         $input = $request -> all();
+         $cities =$input['cities'];
+         $input['cities'] = implode(' , ',$cities);
+         Preferred_cities_student::create([
+            // student-id 
+            //city-id
+         ]);
          
         // insert
         $student = Student::create([
@@ -71,12 +92,13 @@ class StudentRegisterController extends Controller
             'third_name_en'=> $request->input('third_name_en'),
             'last_name_ar'=> $request->input('last_name_ar'),
             'last_name_en'=> $request->input('last_name_en'),
-            'gender' => $request->input('gender'),
+            'gender' => $request->input('gender') === 'on',
             'passed_hours' => $request->input('passed_hours'),
             'load' => $request->input('load'),
             'gpa' => $request->input('gpa'),
             'address' => $request->input('address'),
             'email' => $request->input('email'),
+            'linkedin' => $request->input('linkedin'),
             'password' => $request->input('password'),
             'availability_date' => $request->input('availability_date'),
             'connected_with_a_company' => $request->input('connected_with_a_company'),

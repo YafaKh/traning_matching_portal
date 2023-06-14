@@ -34,7 +34,8 @@ class EvaluateCompanyController extends Controller
     }
    
     public function add(Request $request){
-         
+        //  dd('inside add');
+        // dd($request->all());
         $request->validate([
         'training_palce_evaluation'=>'required|integer|min:0|max:100',
         'pros'=>'required|max:255|string',
@@ -43,14 +44,14 @@ class EvaluateCompanyController extends Controller
         'skills_wish_they_included'=> 'required|max:255|string',
         'skills_wish_were_given_better'=> 'required|max:255|string',
         'recommend_sending_students'=>'required|boolean',
-        'recommended_evaluate_sys'=> 'recommended_evaluate_sys',
-        'evaluate_companycol'=> 'evaluate_companycol',
-        'recommended_evaluate_sys_explanation'=> 'recommended_evaluate_sys_explanation',
-        'internship_time_before_senior_year'=> 'internship_time_before_senior_year',
-        'more_than_one_internship'=> 'more_than_one_internship',
-        'finding_training_difficulties'=> 'finding_training_difficulties',
-        'recommendations'=> 'recommendations',
-        'notes_about_website'=> 'notes_about_website',
+        'recommended_evaluate_sys'=>'required|max:255|string',
+        // 'evaluate_companycol'=> 'required|max:255|string',
+        'recommended_evaluate_sys_explanation'=>'required|max:255|string',
+        'internship_time_before_senior_year'=> 'required|max:255|string',
+        'more_than_one_internship'=> 'required|max:255|string',
+        'finding_training_difficulties'=> 'required|max:255|string',
+        'recommendations'=> 'required|max:255|string',
+        'notes_about_website'=>'required|max:255|string',
 
     //         'title' => 'required|max:20|regex:/^[a-zA-Z-0-9\s]*$/',
     //         'contactinfo' => 'required|unique:contact_infos|max:255|string',
@@ -68,9 +69,9 @@ class EvaluateCompanyController extends Controller
         'new_skills_gained'=> $request->new_skills_gained ,
         'skills_wish_they_included'=> $request-> skills_wish_they_included,
         'skills_wish_were_given_better'=> $request-> skills_wish_were_given_better,
-        'recommend_sending_students'=> $request-> recommend_sending_students,
+        'recommend_sending_students'=> $request-> recommend_sending_students === 'on',
         'recommended_evaluate_sys'=> $request-> recommended_evaluate_sys,
-        'evaluate_companycol'=> $request-> evaluate_companycol,
+        // 'evaluate_companycol'=> $request-> evaluate_companycol,
         'recommended_evaluate_sys_explanation'=> $request-> recommended_evaluate_sys_explanation,
         'internship_time_before_senior_year'=> $request-> internship_time_before_senior_year,
         'more_than_one_internship'=> $request-> more_than_one_internship,
