@@ -51,7 +51,7 @@ return new class extends Migration
             $table->foreign('specialization_id')
             ->references('id')->on('specializations')->onDelete('cascade');
             $table->foreign('training_id')
-            ->references('id')->on('trainings')->onDelete('cascade');
+            ->references('id')->on('trainings')->constrained()->onDelete('set null');
             $table->foreign('evaluate_student_id')
             ->references('id')->on('evaluate_students')->onDelete('cascade');
             $table->foreign('evaluate_company_id')

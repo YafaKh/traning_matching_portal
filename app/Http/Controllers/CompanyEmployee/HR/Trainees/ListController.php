@@ -28,7 +28,6 @@ class ListController extends Controller
         $unengaged_trainees= ($company->trainings[0])->students;
         $branches= $company->branches;
         $trainers= $company->employees->whereIn('company_employee_role_id', [2, 3]);
-        
         return view('company_employee.hr.trainees.list',
          ['trainings' => $trainings,
           //'students_data' => $students_data,

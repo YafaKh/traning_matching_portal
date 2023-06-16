@@ -118,6 +118,7 @@ Route::prefix('{company_id}/hr')->group(function () {
         Route::get('/', [TrainingController::class,'index'])->name('hr_list_trainings');
         Route::get('/create', [TrainingController::class,'create'])->name('hr_add_training');
         Route::post('/store', [TrainingController::class,'store'])->name('hr_store_training');
+        Route::get('/delete/{training_id}', [TrainingController::class, 'destroy'])->name('hr_delete_training');
     });
 });
 

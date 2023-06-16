@@ -70,7 +70,8 @@
                 href="{{ route('hr_delete_employee', ['company_id' => $company_id, 'employee_id' => $employee->id]) }}"
                 onClick="return confirm('Are you sure?')">
                 <i class="bi bi-trash3 fs-6 text-danger"></i>
-                </a>            </td>
+                </a>            
+            </td>
             </tr>
             @endforeach
         </tbody>

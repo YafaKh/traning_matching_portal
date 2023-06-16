@@ -16,10 +16,10 @@ class Training extends Model
         'name',
         'semester',
         'year',
-        'training_field_id',
+        'training_feild_id',
         'details',
         'company_employee_id',
-        'branch_id',
+        'company_branch_id',
     ];
     public function employee()
     {
