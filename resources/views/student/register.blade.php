@@ -115,14 +115,13 @@
       </div>
       <div class="form-floating">
         <select class="form-select col mb-4" name="address" id="studentAddress">
-        <option value="--" selected>Permanent residence address</option>
+        <option value="--" >Permanent residence address</option>
         @foreach($cities as $city)
         <option value="{{$city->id}}">{{$city->name}}</option>
         @endforeach
 
         </select>
       </div>
-
        <div class="form-floating">
 
       <div class="form-check">
@@ -307,18 +306,19 @@
       </div>
       <!-- if Yes the user can choose from these dropdowns:  -->
       <div class="form-floating mb-4 row conectedCompany d-none ">
-        <select class="form-select col mx-2" id="companiesName">
+        <select class="form-select col mx-2" id="companiesName" name="companyName" wire:model="selectedCompany">
           <!--here the user can choose multi value-->
-          <option value="--" selected>Company name</option>
+          <option value="--">Company name</option>
           @foreach($companies as $company)
           <option value="{{$company->id}}">{{$company->name}}</option>
           @endforeach
         </select>
-        <select class="form-select col mx-3 disabled" id="companyBranch">
+        <select class="form-select col mx-3 disabled" id="companyBranch" name="companyBranch">
           <!--here the user can choose multi value-->
           <option value="--" selected>Company branch</option>
-          <option value="yes">Jenin</option>
-          <option value="yes">Nablus</option>
+          @foreach($branches as $branch)
+          <option value="{{$branch->id}}">{{$branch->address}}</option>
+          @endforeach
         </select>
       </div>
       <div class="form-floating mb-4 row">
