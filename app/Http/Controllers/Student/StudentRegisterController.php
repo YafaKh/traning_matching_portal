@@ -126,7 +126,7 @@ class StudentRegisterController extends Controller
          ]);
        
 
-        return redirect(route('student_registeration_2'));
+        return redirect(route('student_registeration_1'));
     }
 
 
