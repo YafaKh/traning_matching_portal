@@ -80,9 +80,10 @@
             </tr>
             @endforeach
         </tbody>
-        </table>    
+        </table> 
+        {{$students->links()}}
+   
     </div>
-    {{$students->links()}}
 </div>
 <script>
 // Add event listeners to the special filters

@@ -77,7 +77,13 @@
                     <div class="card card-body" style="width: 300px;">{{$training['details']}}</div>
                 </div>
             </td>
-            <td><a type="button" class="btn"><i class="bi bi-trash3 fs-6 text-danger"></i></a></td>
+            <td>
+                <a type="submit" class="btn"
+                href="{{ route('hr_delete_training', ['company_id' => $company_id, 'training_id' => $training->id]) }}"
+                onClick="return confirm('Are you sure?')">
+                <i class="bi bi-trash3 fs-6 text-danger"></i>
+                </a>
+            </td>
             </tr>
             @endforeach
         </tbody>

@@ -18,7 +18,7 @@ class Company extends Model
 
     protected $fillable = [
         'name',
-        'Industry',
+        'industry',
         'description',
         'website',
         'linkedin',
@@ -47,7 +47,7 @@ class Company extends Model
 
     public function trainings(): HasManyThrough
     {
-        return $this->hasManyThrough(Training::class, CompanyBranch::class);
+        return $this->hasManyThrough(Training::class, CompanyBranch::class); 
     }
     /*public function students()//trainees
     {

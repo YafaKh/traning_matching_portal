@@ -9,10 +9,13 @@ use App\Models\Company;
 use App\Models\Student;
 
 class AssignTrainingController extends Controller
-{
-     /**
-     * @param  int  $id
-     * 
+{  
+    /**
+     * Method index
+     *
+     * @param $company_id $company_id [explicite description]
+     *
+     * @return void
      */
     public function index($company_id)
     {
@@ -60,13 +63,13 @@ class AssignTrainingController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function add(Request $request, $company_id, $student_id)
-    { 
+    {  
         $request->validate([
-            'training' => 'required|exists:trainings',
+            'training' => 'required|exists:trainings,id',
         ]);
- 
+        //dd($request->input('training'));
         Student::find($student_id)
-        ->update(['training_id' => (int)$request->input('training')]);
+        ->update(['training_id' => $request->input('training')]);
         return redirect()->route('hr_manage_trainings', ['company_id' => $company_id]);
     }
 

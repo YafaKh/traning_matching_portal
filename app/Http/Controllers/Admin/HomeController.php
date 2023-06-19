@@ -7,7 +7,7 @@ use Illuminate\Routing\Controller;
 
 class HomeController extends Controller
 {
-    public function show(){
+    public function index(){
 
         return view('admin.home');
     }

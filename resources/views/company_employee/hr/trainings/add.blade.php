@@ -16,6 +16,7 @@
                 <option value="2">Spring-{{ date('Y') }} </option>
                 <option value="3">First Summer-{{ date('Y') }} </option>
                 <option value="4">Second Summer-{{ date('Y') }} </option>
+                <option value="5">Fall-{{ date('Y')+1 }} </option>
             </select>
             <select class="form-select me-2 mb-2  flex-grow-1" name="branch">
                 <option selected>Branch</option>
@@ -34,7 +35,7 @@
             </select>
         </div>             
         <div class="d-flex flex-sm-row flex-column mb-2 mx-auto col-12">
-            <select class="form-select me-2 mb-2 flex-grow-1" id= "training_feild"name="training_feild">
+            <select class="form-select me-2 mb-2 flex-grow-1" id= "training_feild" name="training_feild">
                 <option selected>Training Feild</option>
                 @foreach($training_feilds as $training_feild)
                 <option value="{{$training_feild['id']}}">{{ $training_feild['name'] }}</option>
@@ -42,7 +43,7 @@
             </select>
         </div>                
         <div class="form-floating">
-            <textarea class="form-control" id="details" name="Details" placeholder="details" ></textarea >
+            <textarea class="form-control" id="details" name="details" placeholder="Details" ></textarea >
             <label for="floatingInput">Details</label>
         </div>
         <button type="button" class="btn btn-light fst-italic mt-3 mb-1" onClick="recommend_name()">

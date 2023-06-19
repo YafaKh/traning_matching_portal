@@ -53,7 +53,7 @@
         <tbody class="bg-light" id="table-body">
             @foreach ($employees_data as $employee)
             <tr>
-            <td class="ps-3"><a>{{$employee['first_name'].' '. $employee['last_name']}}</a></td>
+            <td class="ps-3">{{$employee['first_name'].' '. $employee['last_name']}}</td>
             <td>
             @if ($employee['company_employee_role_id']==1)
                 HR
@@ -70,7 +70,8 @@
                 href="{{ route('hr_delete_employee', ['company_id' => $company_id, 'employee_id' => $employee->id]) }}"
                 onClick="return confirm('Are you sure?')">
                 <i class="bi bi-trash3 fs-6 text-danger"></i>
-                </a>            </td>
+                </a>            
+            </td>
             </tr>
             @endforeach
         </tbody>
