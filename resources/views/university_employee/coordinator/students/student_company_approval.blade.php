@@ -21,6 +21,7 @@
             <tr >
             <th scope="col" class="ps-3" >ID</th>
             <th scope="col">Name</th>
+            <th scope="col">Student's preferences</th>
             <th scope="col">Companies</th>
             <th scope="col">Approve</th>
             </tr>
@@ -34,6 +35,11 @@
             @else 
             <td class="text-danger">{{$student['first_name_en']}} {{$student['last_name_en']}}</td>
             @endif            
+            <td>
+                <ul>
+                    <li class="mt-2 mb-3">{{$stydent->n}}</li>
+                </ul>
+            </td>
             <td>
                 <ul>
                 @foreach($student->not_approved_companies as $not_approved_company)
