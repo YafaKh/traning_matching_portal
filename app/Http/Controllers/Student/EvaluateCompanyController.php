@@ -53,9 +53,7 @@ class EvaluateCompanyController extends Controller
         'recommendations'=> 'required|max:255|string',
         'notes_about_website'=>'required|max:255|string',
 
-    //         'title' => 'required|max:20|regex:/^[a-zA-Z-0-9\s]*$/',
-    //         'contactinfo' => 'required|unique:contact_infos|max:255|string',
-    //         'icon' => 'required|max:30|regex:/^[a-zA-Z-0-9\s]*/'
+
                 ]);
     Skill::create([
         'name'=>$request->name,

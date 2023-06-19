@@ -4,6 +4,7 @@
 @endsection
 
 @section('content')
+<form action="{{route('fill_traniee_progress.add', ['id' => $trainer->id,'trainee_id' => $trainee->id])}}" method="post">
 <div class="px-2">
 <section class="">
   <div class="position-relative col-md-9 bg-dark-blue px-5 py-4 mx-auto mt-4 rounded-top-2">
@@ -13,11 +14,11 @@
     <div class="d-flex flex-row ">
         <div class="me-5">
             <p>Trainee's Name</p>
-            <p>*****</p><hr>
+            <p>{{$trainee->first_name_en}} {{$trainee->last_name_en}}</p><hr>
         </div>
         <div class="ms-5">
             <p>Training</p>
-            <p>***</p><hr>
+            <p>{{$training->semester}} - {{$training->year}} - {{$trainee->first_name_en}} {{$trainee->last_name_en}}</p><hr>
         </div>
     </div>
    </div>
@@ -41,11 +42,11 @@
   </thead>
   <tbody class="bg-light">
       <tr>
-      <td>Week 1</td>
+      <td name="week">Week 1</td>
       <td><input type = "date" name = "end_date"></td>
       <td><input type="number" id="passed_hours" name="passed_hours" min="0" max="40" value="20"></td>
       <td><input type="number" id="absences_days" name="absences_days" min="0" max="5" value="0"></td>
-      <td><textarea class="col-10" ></textarea></td>
+      <td><textarea class="col-10" name="note"></textarea></td>
       </tr>
   </tbody>
   </table>
@@ -54,6 +55,7 @@
 <div class="text-center">
     <button class="btn btn-primary bg-dark-blue px-5 my-3 mx-auto" type="submit">Submit</button>
 </div>
+</form>
 <script>
 var table = document.querySelector("table");
 var tbody = table.querySelector("tbody");

@@ -16,6 +16,8 @@ use App\Http\Controllers\CompanyEmployee\HR\Trainees\UniversityStudentsControlle
 use App\Http\Controllers\CompanyEmployee\HR\Trainees\AssignTrainingController;
 use App\Http\Controllers\CompanyEmployee\HR\CompanyEmployeeController as HrCompanyEmployeeController;
 use App\Http\Controllers\CompanyEmployee\HR\TrainingController;
+use App\Http\Controllers\CompanyEmployee\Trainer\TrainerController;
+use App\Http\Controllers\CompanyEmployee\Trainer\progressController;
 use App\Http\Controllers\CompanyEmployee\HR\CompanyProfileController as HrCompanyProfileController;
 
 use App\Http\Controllers\UniversityEmployee\Coordinator\Students\ListController as CooListController;
@@ -161,10 +163,10 @@ Route::prefix('/admin')->group(function () {
 // trainer
 Route::prefix('/trainer')->group(function(){
     Route::prefix('/trainees')->group(function(){
-        Route::get('/', function () {
-            return view('company_employee/trainer/trainees/list'); })->name('trainer_list_traniees');   
-        Route::get('/progress', function () {
-            return view('company_employee/trainer/trainees/progress'); })->name('fill_traniee_progress');
+        Route::get('/{id}',[TrainerController::class,'show'])->name('trainer_list_traniees');
+        Route::get('/progress/{id}/{trainee_id}',[progressController::class,'show'])->name('fill_traniee_progress');
+        Route::get('/progress/add/{id}/{trainee_id}',[progressController::class,'add'])->name('fill_traniee_progress.add');
+
         Route::get('/evaluation', function () {
             return view('company_employee/trainer/trainees/evaluation'); })->name('fill_traniee_evaluation');  
     });

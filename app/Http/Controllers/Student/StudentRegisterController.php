@@ -11,7 +11,7 @@ use App\Models\Company;
 use App\Models\City;
 use App\Models\Preferred_cities_student;
 use App\Models\Preferred_training_field;
-
+use App\Models\CompanyBranch;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -19,10 +19,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class StudentRegisterController extends Controller
 {
+    public $selectedCompany="null";
     public function create($id){
         // $data=Student::get();
         // return view('student.register',['Studentkey'=>$data]);
         $student =Student::find($id);
+
         // $spoken_languages = $student ->spoken_languages;
         // $students =Student::select('id')->get();
         // $allLanguages = Spoken_language::select('id','name')->get();
@@ -32,15 +34,22 @@ class StudentRegisterController extends Controller
         $allLanguages = Spoken_language::all();
         $specializations = Specialization::all();
         $skills = Skill::all();
-        $companies = Company::all();
-        // dd($companybranches =$companies->branches);
+       $companies = Company::all();
+        $branches=CompanyBranch::all();
+        // dd($companyid = $student->training->branch->);
         // $companiesBranches = Company::with('student', 'companies')->where('student_id',$id)->get();
         $cities=City::all();
+        // dd($branches->$cities->name);
+        // $branchesCity = CompanyBranch::with('city', 'city')->where('student_id',$id)->get();
+
         $trainingFields=Preferred_training_field::all();
-       return view('student.register',compact('student','allLanguages','allLevels','specializations','skills','companies','cities','trainingFields'));
+       return view('student.register',compact('student','allLanguages','allLevels','specializations','skills','companies','cities','trainingFields','branches'));
 
     }
     
+    // public class updateSelectedbranch(){
+
+    // }
     public function store(Request $request){ 
         dd($request->all());
         // vlidation
@@ -73,13 +82,13 @@ class StudentRegisterController extends Controller
             'work_experience'=>'required|string|max:512',
 
           ]);
-         $input = $request -> all();
-         $cities =$input['cities'];
-         $input['cities'] = implode(' , ',$cities);
-         Preferred_cities_student::create([
-            // student-id 
-            //city-id
-         ]);
+        //  $input = $request -> all();
+        //  $cities =$input['cities'];
+        //  $input['cities'] = implode(' , ',$cities);
+        //  Preferred_cities_student::create([
+        //     // student-id 
+        //     //city-id
+        //  ]);
          
         // insert
         $student = Student::create([
@@ -107,11 +116,17 @@ class StudentRegisterController extends Controller
             'registered' => $request->input('registered'),
             'image' => $this->storeImage($request),
             'work_experience' => $request->input('work_experience'),
+            // 'university_id'=>$request ->input('university_id'),
+            // 'university_employee_id'=>$request ->input('university_employee_id'),
+            'specialization_id'=>$request ->input('specialization_id'),
+            // 'training_id'=>$request ->input('training_id'),
+            // 'evaluate_student_id'=>$request ->input('evaluate_student_id'),
+            // 'evaluate_company_id'=>$request ->input('evaluate_company_id'),
 
          ]);
        
 
-        return redirect(route('student_registeration_2'));
+        return redirect(route('student_registeration_1'));
     }
 
 

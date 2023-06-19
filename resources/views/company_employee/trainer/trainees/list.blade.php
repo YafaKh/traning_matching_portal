@@ -20,21 +20,30 @@
         <thead class="bg-mid-sand">
             <tr >
             <th scope="col" class="ps-3">Name</th>
-            <th scope="col">Ttaning</th>
+            <th scope="col">Traning</th>
             <th scope="col">Progress</th>
             <th scope="col">Evaluation</th>
             </tr>
         </thead>
+        @foreach($allTrainees as $allTrainee)
+
         <tbody class="bg-light">
-            <tr>
-            <td class="ps-3">****</td>
-            <td>@mdo</td>
-            <td><a type="button" class="btn" href="{{route('fill_traniee_progress')}}">
+   
+        <tr>
+
+            <td class="ps-3" name="">{{$allTrainee->first_name_en}} {{$allTrainee->second_name_en}} {{$allTrainee->third_name_en}} {{$allTrainee->last_name_en}}</td>
+            @foreach($allTrainings as $allTraining )
+            <td>{{$allTraining->semester}} - {{$allTraining->year}} - {{$allTrainee->first_name_en}} {{$allTrainee->last_name_en}}</td>
+            <td><a type="button" class="btn" href="{{route('fill_traniee_progress', ['id' => $trainer->id,'trainee_id' => $allTrainee->id])}}">
             <i class="bi bi-box-arrow-up-right"></i></a></td>
             <td><a type="button" class="btn">
             <i class="bi bi-box-arrow-up-right"></i></a></td>
+            @endforeach
             </tr>
+          
+
         </tbody>
+        @endforeach
         </table>
     </div>
 
