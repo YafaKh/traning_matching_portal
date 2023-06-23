@@ -41,9 +41,9 @@
             <option value="13-16">13-16</option>
             <option value="16">> 16</option>
         </select>
-        <button type="button" class="btn bg-mid-sand p-0 mb-2 me-2">
-            <i class="bi bi-plus-square fs-4 my-0"></i>
-        </button>
+        <a class="btn bg-mid-sand p-0 mb-2 me-2" name="add_selected" id="add-selected-btn" href="javascript:void(0);">
+       <i class="bi bi-plus-square fs-4 my-0"></i>
+        </a>
     </div>
 
             
@@ -52,7 +52,7 @@
         <table class="table txt-sm table-sm border table-hover" id="table">
         <thead class="bg-mid-sand">
             <tr >
-            <th scope="col" class="ps-3"><input class="form-check-input" type="checkbox" value="" id="checkAll"></th>
+            <th scope="col" class="ps-3"><input class="form-check-input" type="checkbox" id="check-all1" onClick="check_all_check_boxes('check-all1', 'table')"></th>
             <th scope="col" >Name</th>
             <th scope="col">Specialization</th>
             <th scope="col">GPA</th>
@@ -64,18 +64,18 @@
         <tbody class="bg-light" id="table-body">
             @foreach ($students as $student)
             <tr>
-            <td class="ps-3"><input class="table-checkbox form-check-input" type="checkbox" value="" id="flexCheckDefault"></td>                
+            <td class="ps-3"><input class="table-checkbox form-check-input" type="checkbox" id="flexCheckDefault" name="selected_students[]" value="{{ $student->id }}"></td>                
             <td>{{$student['first_name_en'].' '. $student['last_name_en']}}</td>
             <td>{{$student->specialization->name}}</td>
             <td>{{$student['gpa']}}</td>
             <td>{{$student['load']}}</td>
             <td>{{$student['availability_date']}}</td>
             <td>
-                <a type="submit" class="btn" name="add_trainee"
+            <a class="btn" name="add_trainee"
                 onClick="confirm('Are you sure that you want to add this student as a trainee?')"
-                href="{{ route('hr_add_trainee', ['company_id' => $company_id, 'student_id' => $student->id]) }}">
-                    <i class="bi bi-plus-square fs-6"></i>
-                </a>
+                href="{{ route('hr_add_trainee', ['company_id' => $company_id, 'user_id'=>$user->id, 'student_id' => $student->id]) }}">
+                <i class="bi bi-plus-square fs-6"></i>
+            </a>
             </td>
             </tr>
             @endforeach
@@ -85,6 +85,31 @@
    
     </div>
 </div>
+<script>
+    function addSelectedStudents() {
+        // Get all the selected checkboxes
+        var checkboxes = document.querySelectorAll('input[name="selected_students[]"]:checked');
+        var studentIds = [];
+
+        // Collect the IDs of the selected students
+        checkboxes.forEach(function(checkbox) {
+            studentIds.push(checkbox.value);
+        });
+
+        // Confirm the action with the user
+        var confirmation = confirm('Are you sure that you want to add selected students to your company?');
+        if (confirmation) {
+            // Redirect to the server-side route with the selected student IDs
+            var url = '{{ route('hr_add_selected_trainees', ['company_id' => $company_id, 'user_id' => $user->id]) }}';
+            window.location.href = url + '?student_ids=' + studentIds.join(',');
+        }
+    }
+
+    // Attach the click event handler to the "Add Selected" button
+    var addSelectedBtn = document.getElementById('add-selected-btn');
+    addSelectedBtn.addEventListener('click', addSelectedStudents);
+</script>
+
 <script>
 // Add event listeners to the special filters
 document.getElementById('gpa-filter').addEventListener('change', customFilter);

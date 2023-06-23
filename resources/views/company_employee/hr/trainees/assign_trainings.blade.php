@@ -17,12 +17,14 @@
     <div class="d-flex justify-content-end  pe-3">
       <div class="d-flex flex-md-row flex-column mt-5 col-md-6" >
         <label class="form-label text-nowrap me-3">Choose a training to assign trainees to: </label>
-        <form method="POST" action="{{ route('hr_assign_training', ['company_id' => $company_id, 'student_id' => ':student_id']) }}" id="assign_trainee_form">
+        <form method="POST" action="{{ route('hr_assign_training', ['company_id' => $company_id, 'user_id'=>$user->id]) }}" id="assign_trainee_form">
         @csrf
             <select class="form-select" id="training-filter" name="training" aria-label="Training">
                 <option value=''>Training</option>
                 @foreach($trainings as $training)
+                @if($training->active == 1)
                 <option value="{{(int)$training['id']}}">{{$training['name']}}</option>
+                @endif
                 @endforeach
             </select>
             @error('training')
@@ -30,99 +32,81 @@
                     <strong>Error!</strong> {{ $message }}
                 </div>
             @enderror
-        </form>
       </div>
     </div>
     <div class="d-flex flex-lg-row flex-column mt-3">
         {{-- Unengaged Trainees table --}}
         <div class="table-responsive flex-grow-1 me-3">
-            <table class="table table-sm border table-hover">
+            <table class="table table-sm border table-hover" id="unengaged_trainees">
                 <thead class="bg-mid-sand">
                     <tr class="rounded-top">
-                        <td colspan="2">
+                        <td>
                             <label class="form-label mt-2 ms-3 fs-6">Unengaged Trainees:</label>
                         </td>
                         <td>
-                            <button type="button" class="btn" 
-                                data-bs-toggle="tooltip" data-bs-placement="top"
-                                data-bs-title="add selected">
-                                <i class="bi bi-plus-square fs-6"></i>
+                            <button type="submit" class="btn" id="assign_training">
+                            <i class="bi bi-plus-square fs-5"></i>
                             </button>
                         </td>
                     </tr>
                     <tr>
                         <th scope="col" class="ps-3">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <input class="form-check-input" type="checkbox"  id="check-all1" onClick="check_all_check_boxes('check-all1', 'unengaged_trainees')">
                         </th>
                         <th scope="col">Name</th>
-                        <th scope="col">Add</th>
                     </tr>
                 </thead>
                 <tbody class="bg-light">
                 @foreach ($unengaged_students as $unengaged_student)
                         <tr>
                             <td class="ps-3">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <input class="form-check-input" type="checkbox" value="{{ $unengaged_student['id'] }}" name="students[]" id="flexCheckDefault">
                             </td>                
                             <td>{{$unengaged_student['first_name_en'].' '. $unengaged_student['last_name_en']}}</td>
-                            <td>
-                            <button type="button" class="btn" name="assign_training"
-                            onclick="assign_training('{{ $unengaged_student->id}}')">
-                            <i class="bi bi-plus-square fs-6"></i>
-                            </button>
-
-                            </td>
                         </tr>
                     @endforeach
                 
                 </tbody>
             </table>
         </div>
-
+        </form>
         {{-- engaged Trainees table --}}
-        <div class="table-responsive flex-grow-1 me-3">
-            <table class="table table-sm border table-hover" id="engaged_trainees">
-                <thead class="bg-mid-sand">
-                    <tr class="rounded-top">
-                        <td colspan="3">
-                            <label class="form-label mt-2 ms-3 fs-6">Engaged Trainees: </label>
-                        </td>
-                        <td>
-                            <button type="button" class="btn" 
-                                data-bs-toggle="tooltip" data-bs-placement="top"
-                                data-bs-title="delete selected">
-                                <i class="bi bi-trash3 fs-6 text-danger"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="col" class="ps-3">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        </th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Training</th>
-                        <th scope="col">Delete</th> 
-                    </tr>
-                </thead>
-                <tbody class="bg-light">
-                    @foreach ($engaged_students as $engaged_student)
-                        <tr>
-                            <td class="ps-3">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                            </td>                
-                            <td>{{$engaged_student['first_name_en'].' '. $engaged_student['last_name_en']}}</td>
-                            <td>{{$engaged_student['training_name']}}</td>
+        <div class="table-responsive flex-grow-1 mx-3">
+            <form id="delete-form" method="POST" action="{{ route('hr_unassign_training', ['company_id' => $company_id, 'user_id' => $user->id]) }}">
+                @csrf
+                <table class="table table-sm border table-hover" id="engaged_trainees">
+                    <thead class="bg-mid-sand">
+                        <tr class="rounded-top">
+                            <td colspan="2">
+                                <label class="form-label mt-2 ms-3 fs-6">Engaged Trainees: </label>
+                            </td>
                             <td>
-                                <a type="submit" class="btn"
-                                href="{{ route('hr_unassign_training', ['company_id' => $company_id, 'student_id' => $engaged_student->id]) }}"
-                                onClick="return confirm('Are you certain that you want to remove this student from their training?')">
-                                <i class="bi bi-trash3 fs-6 text-danger"></i>
-                                </a>
+                                <button type="submit" class="btn" onclick="confirm('Are you certain that you want to remove the selected students from their training?')">
+                                    <i class="bi bi-trash3 fs-5 text-danger"></i>
+                                </button>
                             </td>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                        <tr>
+                            <th scope="col" class="ps-3">
+                                <input class="form-check-input" type="checkbox" id="check-all2" onclick="checkAllCheckboxes('check-all2', 'engaged_trainees')">
+                            </th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Training</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-light">
+                        @foreach ($engaged_students as $engaged_student)
+                            <tr>
+                                <td class="ps-3">
+                                    <input class="form-check-input student-checkbox" type="checkbox" name="student_ids[]" value="{{ $engaged_student['id'] }}">
+                                </td>
+                                <td>{{ $engaged_student['first_name_en'].' '. $engaged_student['last_name_en'] }}</td>
+                                <td>{{ $engaged_student['training_name'] }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </form>
         </div>
     </div>
 </div>
@@ -151,11 +135,19 @@
     });
 
     function assign_training(student_id) {
-        var form = document.getElementById('assign_trainee_form');
+       var form = document.getElementById('assign_trainee_form');
         form.action = form.action.replace(':student_id', student_id);
         if (confirm('Are you sure?')) {
         form.submit();
         }
+    }
+    function checkAllCheckboxes(checkAllId, checkboxesTableId) {
+        const checkAll = document.getElementById(checkAllId);
+        const checkboxes = document.querySelectorAll(`#${checkboxesTableId} .student-checkbox`);
+        
+        checkboxes.forEach(checkbox => {
+            checkbox.checked = checkAll.checked;
+        });
     }
 </script>
 @endsection

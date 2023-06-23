@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\UnaddedCompanyEmployee;
 use App\Models\UnaddedCompany;
 use App\Models\Company;
+use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
@@ -34,11 +35,17 @@ class RegisterController extends Controller
             'second_name' => 'required|alpha|between:2,20',
             'third_name' => 'required|alpha|between:2,20',
             'last_name' => 'required|alpha|between:2,20',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'phone' => 'required',
             'email'=> 'required|email|unique:company_employees,email|max:255',
             'password' => 'required|min:8|confirmed:confirm_password',
-        ]);        
-        $employee = UnaddedCompanyEmployee::create($validatedData);           
+        ]);      
+        $employee = UnaddedCompanyEmployee::create($validatedData);   
+        if(($request->hasFile('image')))
+        {
+            $image=Str::after($this->storeImg($request, $employee->id ),'img\\');
+            $employee->update(['image' => $image]);
+        }        
 
         if ($request->has('company_id')) {
             $request->validate(['company_id'=>'required|exists:companies,id']);
@@ -46,7 +53,7 @@ class RegisterController extends Controller
             $employee->save();
         } else {
             $request->validate([
-                'company_name' => 'required|between:2,20',
+                'company_name' => 'required|between:2,45',
                 'company_industry' => 'required|max:45',
                 'company_website' => 'nullable|url',
                 'company_email' => 'required|email',
@@ -67,5 +74,16 @@ class RegisterController extends Controller
         }
         return redirect()->route('user_type');
    }
+    /**
+     * store image.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    private function storeImg(Request $request, $employee_id)
+    {
+        $newImgName= 'emp_'.$employee_id .'.'.$request->image->extension();
+        return $request->image->move(public_path('assets\img'),$newImgName);     
+    }
 
 }

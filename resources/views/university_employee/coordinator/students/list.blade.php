@@ -55,7 +55,7 @@
     {{--Upload registered students list--}}
     <div class="d-flex flex-sm-row flex-column justify-content-between mb-2">
         <label class="txt-xsm pb-1 h-50 mt-auto">Note: students whose names are highlighted in red are not registered for the internship on the portal.</label>
-        <form action="{{route('update_register_list')}}"  method="POST" enctype="multipart/form-data">
+        <form action="{{route('update_register_list', ['user_id'=>$user->id])}}"  method="POST" enctype="multipart/form-data">
         @csrf
             <div class="mb-1">
                 <label for="formFileSm" class="form-label txt-sm">Upload registered students IDs list (.txt), ID per line.</label>
@@ -81,7 +81,7 @@
         <thead class="bg-mid-sand">
             <tr >
             <th scope="col" class="ps-3"><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></th>
-            <th scope="col">ID</th>
+            <th scope="col">University ID</th>
             <th scope="col" >Name</th>
             <th scope="col">Specialization</th>
             <th scope="col">Company</th>
@@ -93,7 +93,7 @@
         <tbody class="bg-light" id="table-body">
             @foreach($students as $student)
             <tr>
-            <td class="ps-3"><input class="table-checkbox form-check-input" type="checkbox" value="" id="checkAll"></td>                
+            <td class="ps-3"><input class="table-checkbox form-check-input" type="checkbox" id="check-all1" onClick="check_all_check_boxes('check-all1', 'table1')"></td>                
             <td>{{$student['student_num']}}</td>
             <td class="registration-state-cell" data-registered="{{$student['registered']}}">
                 @if($student['registered'])
@@ -116,7 +116,7 @@
             </td>
             <td>
                 <a type="submit" class="btn"
-                href="{{ route('coordinator_delete_student', ['student_id' => $student->id]) }}"
+                href="{{ route('coordinator_delete_student', ['student_id' => $student->id, 'user_id'=>$user->id]) }}"
                 onClick="return confirm('Are you sure?')">
                 <i class="bi bi-trash3 fs-6 text-danger"></i>
                 </a>

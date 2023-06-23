@@ -74,7 +74,7 @@ class Student extends Model
     // }
     public function preferredTrainingFields()
     {
-        return $this->hasMany(Preferred_training_field::class);
+        return $this->belongsToMany(Preferred_training_field::class, 'preferred_training_fields_students', 'student_id', 'preferred_training_id');
     }
     public function preferredCitiesStudent()
     {

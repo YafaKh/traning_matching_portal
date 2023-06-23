@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Company; 
 use App\Models\City; 
 use App\Models\CompanyBranch; 
+use App\Models\CompanyEmployee;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades;
@@ -18,12 +19,16 @@ class CompanyProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($company_id)
+    public function index($company_id, $user_id)
     {
         $company_data = Company:: findOrFail($company_id);
+        $user = CompanyEmployee::where('id', $user_id)
+        ->select('id', 'first_name', 'last_name')->first();
+
         $contactable_employees = $company_data->employees()->where('contactable', 1)->get();
         return view('company_employee.hr.company_profile',
         ['company_id' => $company_id,
+        'user' => $user,
         'company_data' => $company_data,
         'contactable_employees' => $contactable_employees]);
     }
@@ -35,14 +40,18 @@ class CompanyProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($company_id)
+    public function edit($company_id, $user_id)
     {
         $company_data = Company:: findOrFail($company_id);
+        $user = CompanyEmployee::where('id', $user_id)
+        ->select('id', 'first_name', 'last_name')->first();
+
         $cities = City::all();
         return view('company_employee.hr.edit_company_profile',
-        ['company_data' => $company_data,
-         'company_id' => $company_id,
-         'cities' => $cities]);
+        ['company_id' => $company_id,
+        'user' => $user,
+        'company_data' => $company_data,
+        'cities' => $cities]);
     }
 
     /**
@@ -52,10 +61,12 @@ class CompanyProfileController extends Controller
      * @param  int  $company_id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $company_id)
+    public function update(Request $request, $company_id, $user_id)
     {       // $company = Company:: findOrFail($company_id);
         //dd($company->employees);
-        
+        $user = CompanyEmployee::where('id', $user_id)
+       ->select('id', 'first_name', 'last_name')->first();
+
          $request->validate([
             'name' => 'required|max:45',
             'industry' => 'required|max:45',
@@ -132,7 +143,7 @@ class CompanyProfileController extends Controller
             'contactable' => in_array($employee->id, $employeeIds)]);
          }
 
-        return redirect()->route('hr_company_profile', ['company_id' => $company_id]);
+        return redirect()->route('hr_company_profile', ['company_id' => $company_id, 'user_id' => $user_id]);
     }
 
     /**
@@ -141,7 +152,7 @@ class CompanyProfileController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    private function storeImg(Request $request, $company_id)
+    private function storeImg(Request $request, $company_id, $user_id)
     {
         $newImgName= $company_id .'_company_profile.'.$request->image->extension();
         return $request->image->move(public_path('assets\img'),$newImgName);     

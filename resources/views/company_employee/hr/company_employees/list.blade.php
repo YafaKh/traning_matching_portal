@@ -23,7 +23,7 @@
             </button>
             </form> 
         </div>
-        <a href="{{route('hr_add_employee', ['company_id' => $company_id])}}"
+        <a href="{{route('hr_add_employee', ['company_id' => $company_id, 'user_id'=>$user->id])}}"
         class="btn btn-sm btn-primary bg-dark-blue text-light opacity-75 px-3 w-auto h-50">
         Add Employee</a> 
     </div>
@@ -55,19 +55,28 @@
             <tr>
             <td class="ps-3">{{$employee['first_name'].' '. $employee['last_name']}}</td>
             <td>
-            @if ($employee['company_employee_role_id']==1)
-                HR
-            @elseif ($employee['company_employee_role_id']==2)
-                Trainer
-            @elseif ($employee['company_employee_role_id']==3)
-                HR & Trainer
-            @endif
+            <form action="{{ route('hr_update_role', ['company_id' => $company_id, 'user_id'=>$user->id, 'employee_id' => $employee['id']]) }}" class="d-flex">
+            @csrf
+            <select class="form-select border-gray me-2 mb-2 txt-sm" name="role" disabled id="roleDropdown_{{ $employee['id'] }}">
+                <option value="1" {{ $employee['company_employee_role_id'] == 1 ? 'selected' : '' }}>HR</option>
+                <option value="2" {{ $employee['company_employee_role_id'] == 2 ? 'selected' : '' }}>Trainer</option>
+                <option value="3" {{ $employee['company_employee_role_id'] == 3 ? 'selected' : '' }}>HR & Trainer</option>
+            </select>
+            <div>
+                <button type="button" class="btn p-0" onclick="enableDropdown({{ $employee['id'] }})">
+                    <i class="bi bi-pencil-square"></i>
+                </button>
+                <button type= "submit" class="btn p-0" onClick="return confirm('Are you sure?')">
+                    <i class="bi bi-check-square-fill"></i>
+                </button> 
+            </div>
+            </form>
             </td>
             <td>{{$employee['email']}}</td>
             <td>{{$employee['phone']}}</td>
             <td>
-                <a type="submit" class="btn"
-                href="{{ route('hr_delete_employee', ['company_id' => $company_id, 'employee_id' => $employee->id]) }}"
+                <a class="btn"
+                href="{{ route('hr_delete_employee', ['company_id' => $company_id, 'user_id'=>$user->id, 'employee_id' => $employee->id]) }}"
                 onClick="return confirm('Are you sure?')">
                 <i class="bi bi-trash3 fs-6 text-danger"></i>
                 </a>            
@@ -78,4 +87,9 @@
         </table>
     </div>
 </div>
+<script>
+    function enableDropdown(employeeId) {
+        document.getElementById("roleDropdown_" + employeeId).disabled = false;
+    }
+</script>
 @endsection

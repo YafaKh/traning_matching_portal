@@ -19,21 +19,26 @@ class TrainingController extends Controller
      * @param $company_id $company_id [explicite description]
      * @return \Illuminate\Http\Response
      */
-    public function index($company_id)
+    public function index($company_id, $user_id)
     {
         //to edit: current semester
         $company = Company:: findOrFail($company_id);
-        $trainings_data= $company->trainings->skip(1);
+        $user = CompanyEmployee::where('id', $user_id)
+        ->select('id', 'first_name', 'last_name')->first();
+        
+        $trainings_data= $company->trainings->where('active', 1)->skip(1);
         $branches= $company->branches;
         $training_feilds = TrainingFeild::all();
         $trainers = CompanyEmployee::where('company_id', $company_id)
+        ->where('active', 1)
         ->where(function ($query) {
         $query->where('company_employee_role_id', 2)
         ->orWhere('company_employee_role_id', 3);})->get();
 
         return view('company_employee.hr.trainings.list',
-        ['trainings_data'=>$trainings_data,
-         'company_id' => $company_id,
+        ['company_id' => $company_id,
+         'user' => $user,
+         'trainings_data'=>$trainings_data,
          'branches' => $branches,
          'training_feilds' => $training_feilds,
          'trainers' => $trainers,]);
@@ -45,18 +50,24 @@ class TrainingController extends Controller
      * @param $company_id $company_id [explicite description]
      * @return \Illuminate\Http\Response
      */
-    public function create($company_id)
+    public function create($company_id, $user_id)
     {
+        $user = CompanyEmployee::where('id', $user_id)
+        ->select('id', 'first_name', 'last_name')->first();
+
         $branches = CompanyBranch::where('company_id', $company_id)->get();
         $training_feilds = TrainingFeild::all();
 
         $trainers = CompanyEmployee::where('company_id', $company_id)
+        ->where('active', 1)
         ->where(function ($query) {
         $query->where('company_employee_role_id', 2)
         ->orWhere('company_employee_role_id', 3);})->get();
       
         return view('company_employee.hr.trainings.add',
-        ['company_id' => $company_id, 'branches' => $branches,
+        ['company_id' => $company_id,
+         'user' => $user,
+         'branches' => $branches,
          'trainers' => $trainers,
          'training_feilds' => $training_feilds]);
     }
@@ -68,7 +79,7 @@ class TrainingController extends Controller
      * @param $company_id $company_id [explicite description]
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $company_id)
+    public function store(Request $request, $company_id, $user_id)
     {
         $request->validate([
             'name' => [
@@ -102,7 +113,7 @@ class TrainingController extends Controller
             'training_feild_id' => $request->training_feild,
             'details' => $request->details
         ]);
-        return redirect()->route('hr_list_trainings', ['company_id' => $company_id]);
+        return redirect()->route('hr_list_trainings', ['company_id' => $company_id, 'user_id' => $user_id]);
     }
 
         
@@ -117,19 +128,12 @@ class TrainingController extends Controller
      *Remove the specified resource from storage.
      * this mehod will set all assosiated fk.s in children to null(trainees)
      */
-    public function destroy($company_id, $training_id)
+    public function destroy($company_id, $user_id, $training_id)
     {
         $training=  Training::findOrFail($training_id);
 
-         // Get the unengaged training ID associated with the company
-         $company = Company::findOrFail($company_id);
-
-         $unengged_training = $company->trainings[0]->id;
-        // Update the students' training_id to the first training ID
-        Student::where('training_id', $training_id)
-            ->update(['training_id' => $unengged_training]);
-
-        $training->delete();
-        return redirect()->route('hr_list_trainings', ['company_id' => $company_id]);
+        $training->active = 0; // Set the "active" column to 0
+        $training->save();
+        return redirect()->route('hr_list_trainings', ['company_id' => $company_id, 'user_id' => $user_id]);
     }
 }

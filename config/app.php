@@ -212,5 +212,8 @@ return [
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
 
-
+    'providers' => [
+        // ...
+        Yajra\DataTables\DataTablesServiceProvider::class,
+    ],
 ];

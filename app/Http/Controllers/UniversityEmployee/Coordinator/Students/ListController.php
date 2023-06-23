@@ -21,8 +21,11 @@ class ListController extends Controller
      /**
      * list all university students with some info
      */
-    public function index()
+    public function index($user_id)
     {
+        $user = UniversityEmployee::where('id', $user_id)
+        ->select('id', 'first_name', 'last_name')->first();
+
         $students= Student::select([
         'id', 'student_num', 'first_name_en', 'last_name_en', 'registered',
         'specialization_id', 'training_id','university_employee_id'])
@@ -36,7 +39,8 @@ class ListController extends Controller
         ->orWhere('university_employee_role_id', 3);})->get();
 
         return view('university_employee.coordinator.students.list',
-        ['students'=>$students,
+        ['user' => $user,
+        'students'=>$students,
         'specializations'=>$specializations,
         'companies'=>$companies,
         'supervisors'=>$supervisors,]);
@@ -45,21 +49,21 @@ class ListController extends Controller
      /**
      * Remove the specified student from storage.
      */
-    public function destroy($student_id)
+    public function destroy($user_id, $student_id)
     {
         $student=  Student::findOrFail($student_id);
         $student->delete();
         $students = Student::select([
             'id', 'student_num', 'first_name_en', 'last_name_en', 'registered',
             'specialization_id', 'training_id'])->get();
-        return redirect()->route('coordinator_list_students', ['students' => $students]);
+        return redirect()->route('coordinator_list_students', ['students' => $students, 'user_id'=>$user_id]);
     }
 
     /**
      * Update registration state for the students
      * by uploading a file with updated registration state
      */
-    public function update_register_list(Request $request)
+    public function update_register_list(Request $request, $user_id)
     {
         $request->validate([
             'register_list' => 'required|mimes:txt',
@@ -80,7 +84,7 @@ class ListController extends Controller
             
             $student->save();
         }
-        return redirect()->route('coordinator_list_students', ['students' => $students]);
+        return redirect()->route('coordinator_list_students', ['students' => $students, 'user_id'=>$user_id]);
     }
 
 }

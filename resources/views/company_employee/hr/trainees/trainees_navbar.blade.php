@@ -7,17 +7,17 @@
       <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
         <li class="nav-item">
           <a class="nav-link text-light @yield('activity1')" aria-current="page" 
-          href="{{route('hr_list_trainees', ['company_id' => $company_id])}}"
+          href="{{route('hr_list_trainees', ['company_id' => $company_id, 'user_id'=>$user->id])}}"
           >Our trainees</a>
         </li>
         <li class="nav-item ">
           <a class="nav-link text-light @yield('activity2')" aria-current="page" 
-          href="{{route('hr_university_students', ['company_id' => $company_id])}}"
+          href="{{route('hr_university_students', ['company_id' => $company_id, 'user_id'=>$user->id])}}"
           >University students</a>
         </li>
         <li class="nav-item ">
           <a class="nav-link text-light @yield('activity3')" aria-current="page" 
-          href="{{route('hr_manage_trainings', ['company_id' => $company_id])}}"
+          href="{{route('hr_manage_trainings', ['company_id' => $company_id, 'user_id'=>$user->id])}}"
           >Assign trainings</a>
         </li>
       </ul>

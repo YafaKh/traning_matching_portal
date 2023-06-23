@@ -16,10 +16,10 @@
         
     {{-- students table --}}
     <div class="table-responsive mt-5 d-flex justify-content-center ">
-        <table class="table border w-75">
+        <table class="table border">
         <thead class="bg-mid-sand">
             <tr >
-            <th scope="col" class="ps-3" >ID</th>
+            <th scope="col" class="ps-3" >University ID</th>
             <th scope="col">Name</th>
             <th scope="col">Student's preferences</th>
             <th scope="col">Companies</th>
@@ -36,9 +36,12 @@
             <td class="text-danger">{{$student['first_name_en']}} {{$student['last_name_en']}}</td>
             @endif            
             <td>
-                <ul>
-                    <li class="mt-2 mb-3">{{$stydent->n}}</li>
-                </ul>
+                Training feilds:<br>
+                @foreach($student->preferredTrainingFields as $training_feild)
+                {{training_feild->name ??''}}, 
+                @endforeach 
+                Cities:<br>
+                Companies:<br>
             </td>
             <td>
                 <ul>
@@ -50,7 +53,7 @@
             <td class="">
             @foreach($student->not_approved_companies as $not_approved_company)
             <a type="button" class="btn h-50 btn-sm mt-1 mb-2 txt-sm btn-primary bg-dark-blue text-light opacity-75 ms-2"
-            href="{{ route('coordinator_student_company_approve', ['not_approved_student_company' =>$not_approved_company]) }}">
+            href="{{ route('coordinator_student_company_approve', ['not_approved_student_company' =>$not_approved_company, 'user_id'=>$user->id]) }}">
             <i class="bi bi-check-square"></i></a><br>
             @endforeach
             </td>

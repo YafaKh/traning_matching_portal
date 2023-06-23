@@ -50,7 +50,7 @@ Route::get('/{company_id}/company_profile', [AllCompanyProfileController::class,
 Route::get('university_employee/register', function () {
     return view('/university_employee/register'); })->name('university_employee_register');
 
-Route::prefix('/coordinator')->group(function(){
+Route::prefix('/coordinator/{user_id}')->group(function(){
     Route::prefix('/students')->group(function(){
         Route::post('/update_register_list', [CooListController::class,'update_register_list'])->name('update_register_list');
         Route::get('/', [CooListController::class,'index'])->name('coordinator_list_students');
@@ -71,6 +71,7 @@ Route::prefix('/coordinator')->group(function(){
         Route::get('/create', [CooUniversityEmployeeController::class,'create'])->name('coordinator_add_employee');
         Route::post('/store', [CooUniversityEmployeeController::class,'store'])->name('coordinator_stroe_employee');
         Route::get('/delete/{employee_id}', [CooUniversityEmployeeController::class, 'destroy'])->name('coordinator_delete_employee');
+        Route::get('/update_role/{employee_id}', [CooUniversityEmployeeController::class, 'update_role'])->name('coordinator_update_role');
     });
     
     Route::get('/companies',  [CooCompaniesController::class, 'index'])->name('coordinator_list_companies');   
@@ -94,7 +95,7 @@ Route::prefix('/supervisor')->group(function(){
 Route::get('company_employee/register',[RegisterController::class,'create'])->name('company_employee_register');
 Route::post('company_employee/register/store',[RegisterController::class,'store'])->name('company_employee_store');
 
-Route::prefix('{company_id}/hr')->group(function () {
+Route::prefix('{company_id}/hr/{user_id}')->group(function () {
     Route::get('/company_profile', [HrCompanyProfileController::class, 'index'])->name('hr_company_profile');
     Route::get('/edit_company_profile', [HrCompanyProfileController::class, 'edit'])->name('hr_edit_company_profile');
     Route::post('/edit_company_profile', [HrCompanyProfileController::class, 'update'])->name('hr_update_company_profile');
@@ -104,9 +105,10 @@ Route::prefix('{company_id}/hr')->group(function () {
         Route::get('/', [HrListController::class, 'index'])->name('hr_list_trainees');
         Route::get('/university_students',[UniversityStudentsController::class,'index'])->name('hr_university_students');
         Route::get('/add_trainee/{student_id}', [UniversityStudentsController::class, 'add'])->name('hr_add_trainee');
+        Route::get('/add-selected-trainees}', [UniversityStudentsController::class, 'addSelectedTrainees'])->name('hr_add_selected_trainees');
         Route::get('/assign_trainings', [AssignTrainingController::class,'index'])->name('hr_manage_trainings');
-        Route::post('/assign_training/{student_id}', [AssignTrainingController::class,'add'])->name('hr_assign_training');
-        Route::get('/unassign_training/{student_id}', [AssignTrainingController::class,'delete'])->name('hr_unassign_training');
+        Route::post('/assign_training', [AssignTrainingController::class,'add'])->name('hr_assign_training');
+        Route::post('/unassign_training', [AssignTrainingController::class,'delete'])->name('hr_unassign_training');
     });
 
     Route::prefix('/company_employees')->group(function(){
@@ -114,6 +116,7 @@ Route::prefix('{company_id}/hr')->group(function () {
         Route::get('/create', [HrCompanyEmployeeController::class,'create'])->name('hr_add_employee');
         Route::post('/store', [HrCompanyEmployeeController::class,'store'])->name('hr_store_employee');
         Route::get('/delete/{employee_id}', [HrCompanyEmployeeController::class, 'destroy'])->name('hr_delete_employee');
+        Route::get('/update_role/{employee_id}', [HrCompanyEmployeeController::class, 'update_role'])->name('hr_update_role');
     });
 
     Route::prefix('/trainings')->group(function(){

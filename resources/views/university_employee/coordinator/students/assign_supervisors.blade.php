@@ -16,7 +16,7 @@
     {{--filters--}}            
     <div class="d-flex flex-md-row flex-column mt-4 col-md-6">
         <label class="form-label me-3 mt-1 txt-sm text-nowrap">Choose a supervisor to assign students to: </label>
-        <form method="POST" class="w-auto" action="{{ route('coordinator_assign_supervisor', ['student_id' => ':student_id']) }}" id="assign_trainee_form">
+        <form method="POST" class="w-auto" action="{{ route('coordinator_assign_supervisor', ['student_id' => ':student_id', 'user_id'=>$user->id]) }}" id="assign_trainee_form">
         @csrf
             <select class="form-select txt-sm " id="supervisor-filter" name="supervisor">
                 <option value=''>Supervisor</option>
@@ -46,8 +46,8 @@
                 </td>
             </tr>
             <tr >
-            <th scope="col" class="ps-3"><input class="form-check-input" type="checkbox" id="checkAll1"></td>
-            <th scope="col" >ID</th>
+            <th scope="col" class="ps-3"><input class="form-check-input" type="checkbox" id="check-all1" onClick="check_all_check_boxes('check-all1', 'table1')"></td>
+            <th scope="col" >University ID</th>
             <th scope="col" >Name</th>
             <th scope="col" >Supervisor</th>
             <th scope="col">Company</th>
@@ -70,7 +70,7 @@
             <td>{{$assigned_student->training->branch->address ?? ''}}</td>
             <td>
                 <a type="submit" class="btn"
-                href="{{ route('coordinator_unassign_supervisor', ['student_id' => $assigned_student->id]) }}"
+                href="{{ route('coordinator_unassign_supervisor', ['student_id' => $assigned_student->id, 'user_id'=>$user->id]) }}"
                 onClick="return confirm('Are you sure?')">
                 <i class="bi bi-trash3 fs-6 text-danger"></i>
                 </a>
@@ -110,8 +110,8 @@
                     data-bs-title="add selected"><i class="bi bi-plus-square fs-6"></i></button></td>
             </tr>
             <tr >
-            <th scope="col" class="ps-3"><input class="form-check-input" type="checkbox" value="" id="checkAll2"></th>
-            <th scope="col" >ID</th>
+            <th scope="col" class="ps-3"><input class="form-check-input" type="checkbox"  id="check-all2" onClick="check_all_check_boxes('check-all2', 'table2')"></th>
+            <th scope="col" >University ID</th>
             <th scope="col" >Name</th>
             <th scope="col">Company</th>
             <th scope="col">Branch</th>
@@ -144,23 +144,6 @@
 </div>
 
 <script>
-    const checkAll = document.querySelector('#checkAll1');
-    const checkboxes1 = document.querySelectorAll('#table1 .table1-checkbox');
-
-    checkAll.addEventListener('change', () => {
-    checkboxes1.forEach(checkbox => {
-        checkbox.checked = checkAll.checked;
-    });
-    });
-    const checkAl2 = document.querySelector('#checkAll2');
-    const checkboxes2 = document.querySelectorAll('#table2 .table2-checkbox');
-
-    checkAl2.addEventListener('change', () => {
-    checkboxes2.forEach(checkbox => {
-        checkbox.checked = checkAl2.checked;
-    });
-    });
-
     function assign_supervisor(student_id) {
         var form = document.getElementById('assign_trainee_form');
         form.action = form.action.replace(':student_id', student_id);

@@ -23,7 +23,8 @@ return new class extends Migration
             $table->string('third_name', 45);
             $table->string('last_name', 45);
             $table->string('image')->nullable();
-            
+            $table->boolean('active')->default(1);
+
             $table->unsignedBigInteger('university_id')->default(1);
             $table->unsignedBigInteger('university_employee_role_id');
             $table->foreign('university_id')->references('id')->on('universities');

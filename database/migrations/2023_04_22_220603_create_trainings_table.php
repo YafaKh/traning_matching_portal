@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('semester')->length(1);
             $table->year('year')->default(2023);
             $table->string('details')->nullable()->nullable();
+            $table->boolean('active')->default(1);
 
             $table->unsignedBigInteger('company_employee_id')->nullable();
             $table->unsignedBigInteger('company_branch_id')->nullable();

@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Student;
 use App\Models\Company;
 use App\Models\StudentCompanyApproval;
+use App\Models\UniversityEmployee;
 
 use Illuminate\Http\Request;
 
@@ -13,18 +14,25 @@ class StudentCompanyApprovalController extends Controller
     /**
      * list all students who have unappreved company
      */
-    public function index()
+    public function index($user_id)
     {
-        $students= Student::whereHas('not_approved_companies')->select([
-        'id', 'student_num', 'first_name_en', 'last_name_en', 'registered',])->defaultOrder()->get();
+        $user = UniversityEmployee::where('id', $user_id)
+        ->select('id', 'first_name', 'last_name')->first();
+
+        $students = Student::whereHas('not_approved_companies')
+        ->with('preferredTrainingFields.preferredTrainingField')
+        ->select(['id', 'student_num', 'first_name_en', 'last_name_en', 'registered'])
+        ->defaultOrder()
+        ->get();
         return view('university_employee.coordinator.students.student_company_approval',
-        ['students'=>$students]);
+        ['user' => $user,
+        'students'=>$students]);
     }
 
     /**
      * Approve specific student with specific company
      */
-    public function approve($not_approved_student_company)
+    public function approve($user_id, $not_approved_student_company)
     {
 
         $not_approved=  StudentCompanyApproval::findOrFail($not_approved_student_company);
@@ -41,7 +49,7 @@ class StudentCompanyApprovalController extends Controller
         $students = Student::select([
         'id', 'student_num', 'first_name_en', 'last_name_en', 'registered',])->get();
         
-        return redirect()->route('coordinator_students_companies_approval', ['students' => $students]);
+        return redirect()->route('coordinator_students_companies_approval', ['students' => $students, 'user_id'=>$user_id]);
     }
 
 }

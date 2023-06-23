@@ -36,7 +36,7 @@
                 @foreach($companies as $company)
                 <tr class="company-row">
                     <td class="ps-3">
-                        <a class="link-dark link-underline-opacity-0 fw-bold" href="{{route('show_company_profile', ['company_id' => $company->id])}}">
+                        <a class="link-dark link-underline-opacity-0 fw-bold" href="{{route('show_company_profile', ['company_id' => $company->id, 'user_id'=>$user->id])}}">
                             {{$company['name']}}</a>
                     </td>
                     <td>

@@ -6,14 +6,15 @@
     active
 @endsection
 @section('content')
-<form method="POST" class="w-auto" action="{{ route('coordinator_stroe_employee') }}" id="assign_trainee_form">
+<form method="POST" class="w-auto" action="{{ route('coordinator_stroe_employee', ['user_id'=>$user->id]) }}" id="assign_trainee_form">
 @csrf
 <div class="pt-3 d-flex flex-column">
     <div class="d-flex flex-column px-6 py-4 my-3 col-md-7 col-11 mx-auto rounded-4 shadow bg-white  txt-dark-sand">
         <label class="form-label my-4 ms-1 fs-5" for="email">Emploee's University Email: </label>
         <select class="form-select " name="email">
+            <option selected>Email</option>
             @foreach($un_added_employees as $employee)
-            <option value="{{$employee['id']}}">{{$employee['email']}}</option>
+            <option value="{{$employee['id']}}">{{$employee['email']}} ({{$employee['first_name']}} {{$employee['last_name']}})</option>
             @endforeach
         </select>
         @error('email')

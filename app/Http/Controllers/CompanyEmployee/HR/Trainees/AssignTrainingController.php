@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Collection;
 use App\Models\Company;
 use App\Models\Student;
+use App\Models\CompanyEmployee;
 
 class AssignTrainingController extends Controller
 {  
@@ -17,10 +18,12 @@ class AssignTrainingController extends Controller
      *
      * @return void
      */
-    public function index($company_id)
+    public function index($company_id, $user_id)
     {
         $company = Company::findOrFail($company_id);
-
+        $user = CompanyEmployee::where('id', $user_id)
+        ->select('id', 'first_name', 'last_name')->first();
+        
         $trainings = $company->trainings()->get();
         
         $unengaged_students = collect();
@@ -45,48 +48,60 @@ class AssignTrainingController extends Controller
     
         
         return view('company_employee.hr.trainees.assign_trainings', [
+            'company_id' => $company_id,
+            'user' => $user,
             'trainings' => $trainings->reject(function ($training) {
                 return $training->name == 'Unengaged Trainees';}),
             'unengaged_students' => $unengaged_students,
             'engaged_students' => $engaged_students,
-            'company_id' => $company_id
         ]);
     }
     
-
+    
     /**
-     * Add a trainee for selected training.
+     * Method add
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $company_id
-     * @param  int  $student_id
-     * @return \Illuminate\Http\Response
+     * @param Request $request [explicite description]
+     * @param $company_id $company_id [explicite description]
+     * @param $user_id $user_id [explicite description]
+     *
+     * @return void
      */
-    public function add(Request $request, $company_id, $student_id)
-    {  
+    public function add(Request $request, $company_id, $user_id)
+    {
+        $user = CompanyEmployee::where('id', $user_id)
+            ->select('id', 'first_name', 'last_name')->first();
+    
         $request->validate([
             'training' => 'required|exists:trainings,id',
+            'students' => 'required|array',
         ]);
-        //dd($request->input('training'));
-        Student::find($student_id)
-        ->update(['training_id' => $request->input('training')]);
-        return redirect()->route('hr_manage_trainings', ['company_id' => $company_id]);
-    }
-
+    
+        $trainingId = $request->input('training');
+        $studentIds = $request->input('students');
+    
+        // Update training for selected students
+        Student::whereIn('id', $studentIds)
+            ->update(['training_id' => $trainingId]);
+    
+        return redirect()->route('hr_manage_trainings', ['company_id' => $company_id, 'user_id' => $user_id]);
+    }    
+    
     /**
-     * delete a trainee form his training.
+     * Method delete
      *
-     * @param  int  $company_id
-     * @param  int  $student_id
-     * @return \Illuminate\Http\Response
+     * @param $company_id $company_id [explicite description]
+     * @param $user_id $user_id [explicite description]
+     *
+     * @return void
      */
-    public function delete($company_id, $student_id)
-    { 
+    public function delete($company_id, $user_id)
+    {
+        $student_ids = request('student_ids', []);
         $company = Company::findOrFail($company_id);
         $unengaged_training = $company->trainings->first()->id;
-        //dd($unengaged_training);
-        Student::find($student_id)
-        ->update(['training_id' => $unengaged_training]);
-        return redirect()->route('hr_manage_trainings', ['company_id' => $company_id]);
+        Student::whereIn('id', $student_ids)->update(['training_id' => $unengaged_training]);
+
+        return redirect()->route('hr_manage_trainings', ['company_id' => $company_id, 'user_id' => $user_id]);
     }
 }

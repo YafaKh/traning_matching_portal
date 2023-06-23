@@ -3,7 +3,7 @@
     @include('company_employee.hr.navbar')
 @endsection
 @section('content')
-<form class="px-5" method="POST" action="{{ route('hr_update_company_profile', ['company_id' => $company_id]) }}"  enctype="multipart/form-data">
+<form class="px-5" method="POST" action="{{ route('hr_update_company_profile', ['company_id' => $company_id, 'user_id'=>$user->id]) }}"  enctype="multipart/form-data">
 @csrf
 <section>
 <div class="position-relative col-md-9 col-11 bg-dark-blue p-5 mx-auto mt-4 rounded-top-2">
