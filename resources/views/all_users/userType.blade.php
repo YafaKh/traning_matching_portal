@@ -29,20 +29,14 @@
             <h2 class="card-title text-center">Who are you ?</h2>
               <form>
                 <div class=" d-flex flex-column">
-                  <a class="btn userType p-2" href="#" role="button">
-                    <h1>Coordinator</h1>
-                </a>
-                <a class="btn userType p-2" href="#" role="button">
-                    <h1>Supervisor</h1>
-                </a>
-                <a class="btn userType p-2" href="#" role="button">
+                <a class="btn userType p-2" href="{{route('login', ['user_type' => 'student'])}}" role="button">
                     <h1>Student</h1>
                 </a>
-                <a class="btn userType p-2" href="#" role="button">
-                    <h1>HR</h1>
+                <a class="btn userType p-2" href="{{route('login', ['user_type' => 'company_employee'])}}" role="button">
+                    <h1>Company Employee</h1>
                 </a>
-                <a class="btn userType p-2" href="#" role="button">
-                    <h1>Trainer</h1>
+                <a class="btn userType p-2" href="{{route('login', ['user_type' => 'university_employee'])}}" role="button">
+                    <h1>University Employee</h1>
                 </a>  
               
 

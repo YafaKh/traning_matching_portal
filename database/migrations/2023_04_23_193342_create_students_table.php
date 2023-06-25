@@ -29,7 +29,7 @@ return new class extends Migration
             $table->float('gpa') ;
             $table->string('address')->nullable();
             $table->string('email')->unique() ;
-            $table->string('password', 45) ;
+            $table->string('password') ;
             $table->date('availability_date') ;
             $table->boolean('connected_with_a_company')->default(0);
             $table->string('connected_company_info', 100)->nullable();
@@ -37,6 +37,7 @@ return new class extends Migration
             $table->boolean('registered')->nullable(false)->default(0);
             $table->string('image')->nullable();
             $table->longText('work_experience')->nullable();
+            $table->boolean('active')->default(1);
 
             $table->unsignedBigInteger('university_id');
             $table->unsignedBigInteger('university_employee_id')->nullable();

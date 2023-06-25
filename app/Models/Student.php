@@ -44,7 +44,8 @@ class Student extends Model
     'image',
     'university_id',
     'specialization_id',
-    'training_id'];
+    'training_id', 
+    'active'];
     protected $hidden = ['created_at','updated_at'];
     public function scopeDefaultOrder($query)
     {

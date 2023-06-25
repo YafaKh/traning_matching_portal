@@ -38,7 +38,19 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'users'
+        ],
+        'student' => [
+            'driver' => 'session',
+            'provider' => 'students',
+        ],
+        'university_employee' => [
+            'driver' => 'session',
+            'provider' => 'university_employees',
+        ],
+        'company_employee' => [
+            'driver' => 'session',
+            'provider' => 'company_employees',
         ],
     ],
 
@@ -64,7 +76,18 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
-
+        'students' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Student::class,
+        ],
+        'university_employees' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\UniversityEmployee::class,
+        ],
+        'company_employees' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\CompanyEmployee::class,
+        ],
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',

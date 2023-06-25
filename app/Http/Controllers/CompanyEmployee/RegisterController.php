@@ -7,6 +7,7 @@ use App\Models\UnaddedCompanyEmployee;
 use App\Models\UnaddedCompany;
 use App\Models\Company;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
@@ -28,7 +29,8 @@ class RegisterController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {            
+
         //check data validation
         $validatedData=$request->validate([
             'first_name' => 'required|alpha|between:2,20',
@@ -39,7 +41,8 @@ class RegisterController extends Controller
             'phone' => 'required',
             'email'=> 'required|email|unique:company_employees,email|max:255',
             'password' => 'required|min:8|confirmed:confirm_password',
-        ]);      
+        ]);     
+        $validatedData['password'] = Hash::make($validatedData['password']);
         $employee = UnaddedCompanyEmployee::create($validatedData);   
         if(($request->hasFile('image')))
         {

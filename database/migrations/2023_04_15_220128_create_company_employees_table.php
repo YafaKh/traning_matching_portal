@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('company_employees', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->rememberToken();
             $table->string('email');
+            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->char('phone', 15);
             $table->string('first_name', 45);

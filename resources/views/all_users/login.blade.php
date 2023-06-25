@@ -28,10 +28,20 @@
       <div class="card border-0 bg-transparent d-flex align-items-center ">
         <div class="card-body loginCard">
           <h2 class="card-title text-center mb-5 mt-3">Login</h2>
-          <form>
-            <div class="mb-3">
-              <input type="email" class="form-control loginInput" placeholder="Email">
-              <input type="password" class="form-control loginInput" placeholder="Password">
+          <form enctype="multipart/form-data" action="{{ route('authenticate', ['user_type' => $user_type]) }}" method="POST">
+          @csrf 
+           <div class="mb-3">
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+              <input type="email" class="form-control loginInput" placeholder="Email" name="email">
+              <input type="password" class="form-control loginInput" placeholder="Password" name="password">
               <a href="" class="forgotPassLink">forgot password</a>
               <input class="btn loginBtn" type="submit" value="log in ">
               <a href="" class="creatAccountLink">Creat an account</a>

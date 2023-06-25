@@ -23,6 +23,7 @@ class UniversityEmployee extends Model
         'image',
         'university_id',
         'university_employee_role_id',
+        'active'
     ];
     public function scopeDefaultOrder($query)
     {

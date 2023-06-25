@@ -24,7 +24,7 @@
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
   
 <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
-
+hhhhhhhhhhhhhhh
 @yield('navbar')
 @yield('sub_navbar')
 @yield('content')

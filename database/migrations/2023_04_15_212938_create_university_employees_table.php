@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('employee_num', 9);
             $table->string('email', 45)->unique();
             $table->string('phone', 15);
-            $table->string('password', 45);
+            $table->string('password');
             $table->string('first_name', 45);
             $table->string('second_name', 45);
             $table->string('third_name', 45);

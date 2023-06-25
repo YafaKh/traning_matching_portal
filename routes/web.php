@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Controller;
 
 use App\Http\Controllers\AllUsers\CompanyProfileController as AllCompanyProfileController;
+use App\Http\Controllers\AllUsers\UserTypeController;
+use App\Http\Controllers\AllUsers\LoginController;
 
 use App\Http\Controllers\Student\StudentProfileController;
 use App\Http\Controllers\Student\EditStudentProfileController;
@@ -32,16 +34,20 @@ use App\Http\Controllers\Admin\CompaniesWantJoinController;
 use App\Http\Controllers\Admin\CompanyEmployeeController as AdCompanyEmployeeController;
 use App\Http\Controllers\Admin\UniversityEmployeeController as AdUniversityEmployeeController;
 use App\Http\Controllers\Admin\StudentController;
+Route::get('/home', function () {
+    return view('/home');
+})->name('home'); 
 
 Route::get('/', function () {
-    return view('/all_users/login');
-})->name('login'); 
+    return view('/all_users/userType');
+})->name('user_type'); 
+
+Route::get('/{user_type}', [UserTypeController::class, 'login'])->name('login');
+Route::post('/authenticate_{user_type}', [LoginController::class, 'authenticate'])->name('authenticate');
+
 Route::get('/reset_password', function () {
     return view('/all_users/reset_password');
 })->name('reset_password'); 
-Route::get('/user_type', function () {
-    return view('/all_users/userType');
-})->name('user_type'); 
 
 //all users 
 Route::get('/{company_id}/company_profile', [AllCompanyProfileController::class, 'show'])->name('show_company_profile');
