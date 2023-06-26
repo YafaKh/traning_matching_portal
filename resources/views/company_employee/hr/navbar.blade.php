@@ -12,7 +12,7 @@
         <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-auto">
             <li class="nav-item">
             <a class="nav-link @yield('Profile_activity')"  
-            href="{{route('hr_company_profile', ['company_id' => $company_id, 'user_id'=>$user->id])}}"
+            href="{{route('hr_company_profile', ['user_id'=>$user->id])}}"
             >Profile</a>
             </li>
             <li class="nav-item dropdown">
@@ -20,24 +20,24 @@
             role="button" data-bs-toggle="dropdown" aria-expanded="false">Trainees</a>
             <ul class="dropdown-menu">
                 <li><a class="dropdown-item" 
-                href="{{route('hr_list_trainees', ['company_id' => $company_id, 'user_id'=>$user->id])}}"
+                href="{{route('hr_list_trainees', ['user_id'=>$user->id])}}"
                 >List trainees</a></li>
                 <li><a class="dropdown-item" 
-                href="{{route('hr_university_students', ['company_id' => $company_id, 'user_id'=>$user->id])}}"
+                href="{{route('hr_university_students', ['user_id'=>$user->id])}}"
                 >University trainees</a></li>
                 <li><a class="dropdown-item" 
-                href="{{route('hr_manage_trainings', ['company_id' => $company_id, 'user_id'=>$user->id])}}"
+                href="{{route('hr_manage_trainings', ['user_id'=>$user->id])}}"
                 >Assign Trainings</a></li>
             </ul>
             </li>
             <li class="nav-item">
             <a class="nav-link @yield('Employees_activity')" 
-            href="{{route('hr_list_employees', ['company_id' => $company_id, 'user_id'=>$user->id])}}"
+            href="{{route('hr_list_employees', ['user_id'=>$user->id])}}"
             >Employees</a>
             </li>
             <li class="nav-item">
             <a class="nav-link @yield('Trainings_activity')" 
-            href="{{route('hr_list_trainings', ['company_id' => $company_id, 'user_id'=>$user->id])}}"
+            href="{{route('hr_list_trainings', ['user_id'=>$user->id])}}"
             >Trainings</a>
             </li>
             <li class="nav-item">

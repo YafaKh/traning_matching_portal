@@ -19,12 +19,19 @@ class LoginController extends Controller
     
         if (Auth::guard($user_type)->attempt($credentials)) {
             $request->session()->regenerate();
-    
-            return redirect()->route('home');
+            
+            // Get the logged-in employee
+            $user = Auth::guard($user_type)->user();
+            
+            if($user_type=='company_employee'){
+                // Redirect the employee to the specific route using their  user_id
+                return redirect()->route('hr_list_trainees', ['user_id' => $user->id]);
+            }
+            
         }
     
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
         ])->onlyInput('email');
-    }    
+    }     
 }

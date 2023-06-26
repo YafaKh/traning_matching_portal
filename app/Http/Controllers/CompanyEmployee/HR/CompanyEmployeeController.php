@@ -12,19 +12,19 @@ class CompanyEmployeeController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index($company_id, $user_id)
+    public function index( $user_id)
     {
-        $user = CompanyEmployee::where('id', $user_id)
-        ->select('id', 'first_name', 'last_name')->first();
+        $user = CompanyEmployee::where('id', $user_id)->first();
+        $company = $user->company;
 
         //to edit trainees, edit role and delete
         $employees_data= CompanyEmployee::
         select('id', 'first_name', 'last_name', 'phone', 'email', 'company_employee_role_id')
-        ->where('company_id', $company_id)
+        ->where('company_id', $company->id)
         ->where('active', 1)->defaultOrder()->get();
 
         return view('company_employee.hr.company_employees.list',
-        ['company_id' => $company_id,
+        [
          'user' => $user,
          'employees_data'=>$employees_data,
          ]);
@@ -34,16 +34,16 @@ class CompanyEmployeeController extends Controller
      * Show the form for creating a new resource.
      */
 
-    public function create($company_id, $user_id)
+    public function create($user_id)
     {
-        $user = CompanyEmployee::where('id', $user_id)
-        ->select('id', 'first_name', 'last_name')->first();
+        $user = CompanyEmployee::where('id', $user_id)->first();
+       $company = $user->company;
 
         $un_added_employees = UnaddedCompanyEmployee::where('company_addition', 1)
-        ->where('company_id', $company_id)->get();
+        ->where('company_id', $company->id)->get();
 
         return view('company_employee.hr.company_employees.add',
-        ['company_id' => $company_id,
+        [
         'user' => $user,
         'un_added_employees' => $un_added_employees,
         ]);
@@ -54,7 +54,7 @@ class CompanyEmployeeController extends Controller
      * Store a newly created resource in storage.
      */
     
-    public function store(Request $request, $company_id, $user_id)
+    public function store(Request $request, $user_id)
     {
         $request->validate([
             'email'=> 'required|exists:unadded_company_employees,id',
@@ -76,7 +76,7 @@ class CompanyEmployeeController extends Controller
             'company_employee_role_id' => $request->role
         ]);
         $unadded_employee->delete();
-        return redirect()->route('hr_add_employee', ['company_id' => $company_id, 'user_id' => $user_id]);
+        return redirect()->route('hr_add_employee', ['user_id' => $user_id]);
     }
     
     /**
@@ -87,7 +87,7 @@ class CompanyEmployeeController extends Controller
      *
      * @return void
      */
-    public function update_role(Request $request,$company_id, $user_id, $employee_id)
+    public function update_role(Request $request, $user_id, $employee_id)
     {
          $employee=  CompanyEmployee::findOrFail($employee_id);
          $request->validate([
@@ -95,18 +95,18 @@ class CompanyEmployeeController extends Controller
         ]);
          $employee->company_employee_role_id = $request->input('role'); 
          $employee->save(); 
-         return redirect()->route('hr_list_employees', ['company_id' => $company_id, 'user_id' => $user_id]);
+         return redirect()->route('hr_list_employees', ['user_id' => $user_id]);
     }
     /**
      * Remove the specified resource from storage.
      * this mehod will set all assosiated fk.s in children to null(trainings)
      */
-    public function destroy($company_id, $user_id, $employee_id)
+    public function destroy( $user_id, $employee_id)
     {
         $companyEmployee=  CompanyEmployee::select(
             'id', 'email', 'first_name', 'last_name')->get();
         $companyEmployee->active = 0; // Set the "active" column to 0
         $companyEmployee->save();
-        return redirect()->route('hr_list_employees', ['company_id' => $company_id, 'user_id' => $user_id]);
+        return redirect()->route('hr_list_employees', ['user_id' => $user_id]);
     }
 }

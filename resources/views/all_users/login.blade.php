@@ -44,7 +44,7 @@
               <input type="password" class="form-control loginInput" placeholder="Password" name="password">
               <a href="" class="forgotPassLink">forgot password</a>
               <input class="btn loginBtn" type="submit" value="log in ">
-              <a href="" class="creatAccountLink">Creat an account</a>
+              <a href="{{route($user_type.'_registeration')}}" class="creatAccountLink">Creat an account</a>
 
             </div>
           </form>

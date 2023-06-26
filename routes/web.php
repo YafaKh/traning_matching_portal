@@ -98,10 +98,10 @@ Route::prefix('/supervisor')->group(function(){
 });   
 
 // company employees' routes
-Route::get('company_employee/register',[RegisterController::class,'create'])->name('company_employee_register');
+Route::get('company_employee/register',[RegisterController::class,'create'])->name('company_employee_registeration');
 Route::post('company_employee/register/store',[RegisterController::class,'store'])->name('company_employee_store');
 
-Route::prefix('{company_id}/hr/{user_id}')->group(function () {
+Route::prefix('hr/{user_id}')->group(function () {
     Route::get('/company_profile', [HrCompanyProfileController::class, 'index'])->name('hr_company_profile');
     Route::get('/edit_company_profile', [HrCompanyProfileController::class, 'edit'])->name('hr_edit_company_profile');
     Route::post('/edit_company_profile', [HrCompanyProfileController::class, 'update'])->name('hr_update_company_profile');
@@ -136,7 +136,7 @@ Route::prefix('{company_id}/hr/{user_id}')->group(function () {
 //students' routes
 
 Route::prefix('/student')->group(function () {
-    Route::get('/registeration{id}',[StudentRegisterController::class,'create'])->name('student_registeration_1');
+    Route::get('/registeration{id}',[StudentRegisterController::class,'create'])->name('student_registeration');
     Route::POST('/registeration/store',[StudentRegisterController::class,'store'])->name('student_registeration_1.store');
 
     Route::get('/profile{id}',[StudentProfileController::class,'show'])->name('student_profile');

@@ -15,15 +15,14 @@ class UniversityStudentsController extends Controller
     /**
      * List all university students with some info.
      *
-     * @param  int  $company_id
+     * @param  int  $user_id
      * @return \Illuminate\Http\Response
      */
-    public function index($company_id, $user_id)
+    public function index($user_id)
     {
         //to edit Remove approved ones and ones who already sensed a req.
-        $company = Company:: findOrFail($company_id);
-        $user = CompanyEmployee::where('id', $user_id)
-        ->select('id', 'first_name', 'last_name')->first();
+        $user = CompanyEmployee::where('id', $user_id)->first();
+        $company = $user->company;
 
         //dd($company->not_approved_students);
         $students = Student::whereDoesntHave('training')
@@ -35,7 +34,6 @@ class UniversityStudentsController extends Controller
         //for fillters:
         $specializations =Specialization::select('name')->get();
         return view('company_employee.hr.trainees.university_students', [
-        'company_id' => $company_id,
         'user' => $user,
         'students' => $students,
         'specializations' => $specializations
@@ -45,36 +43,36 @@ class UniversityStudentsController extends Controller
     /**
      * Add a new trainee from university students.
      *
-     * @param  int  $company_id
      * @param  int  $student_id
      * @return \Illuminate\Http\Response
      */
-    public function add($company_id, $user_id, $student_id)
+    public function add($user_id, $student_id)
     {
-        $user = CompanyEmployee::where('id', $user_id)
-        ->select('id', 'first_name', 'last_name')->first();
-
+        $user = CompanyEmployee::where('id', $user_id)->first();
+        $company = $user->company;
         $approval = StudentCompanyApproval::create([
-            'company_id' => $company_id,
+            'company_id' => $company->id,
             'student_id' => $student_id,
         ]);
         return redirect()->route('hr_university_students', 
-        ['company_id' => $company_id, 'user_id' => $user_id]);
+        ['user_id' => $user_id]);
     }
-    public function addSelectedTrainees($company_id, $user_id)
+    public function addSelectedTrainees($user_id)
     {
+        $user = CompanyEmployee::where('id', $user_id)->first();
+        $company = $user->company;
         // Get the selected student IDs from the query string
         $selectedStudentIds = explode(',', request('student_ids'));
 
         // Perform the necessary operations to add the selected students
         foreach ($selectedStudentIds as $studentId) {
             $approval = StudentCompanyApproval::create([
-                'company_id' => $company_id,
+                'company_id' => $company->id,
                 'student_id' => $studentId,
             ]);
         }
 
-        return redirect()->route('hr_university_students', ['company_id' => $company_id, 'user_id' => $user_id]);
+        return redirect()->route('hr_university_students', ['user_id' => $user_id]);
     }
 
 }

@@ -17,7 +17,7 @@
     <div class="d-flex justify-content-end  pe-3">
       <div class="d-flex flex-md-row flex-column mt-5 col-md-6" >
         <label class="form-label text-nowrap me-3">Choose a training to assign trainees to: </label>
-        <form method="POST" action="{{ route('hr_assign_training', ['company_id' => $company_id, 'user_id'=>$user->id]) }}" id="assign_trainee_form">
+        <form method="POST" action="{{ route('hr_assign_training', ['user_id'=>$user->id]) }}" id="assign_trainee_form">
         @csrf
             <select class="form-select" id="training-filter" name="training" aria-label="Training">
                 <option value=''>Training</option>
@@ -72,7 +72,7 @@
         </form>
         {{-- engaged Trainees table --}}
         <div class="table-responsive flex-grow-1 mx-3">
-            <form id="delete-form" method="POST" action="{{ route('hr_unassign_training', ['company_id' => $company_id, 'user_id' => $user->id]) }}">
+            <form id="delete-form" method="POST" action="{{ route('hr_unassign_training', ['user_id' => $user->id]) }}">
                 @csrf
                 <table class="table table-sm border table-hover" id="engaged_trainees">
                     <thead class="bg-mid-sand">

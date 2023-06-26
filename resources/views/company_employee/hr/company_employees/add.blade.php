@@ -7,7 +7,7 @@
 @endsection
 @section('content')
 <div class="pt-3 d-flex flex-column">
-    <form enctype="multipart/form-data" action="{{route('hr_store_employee', ['company_id' => $company_id, 'user_id'=>$user->id])}}" method="POST">
+    <form enctype="multipart/form-data" action="{{route('hr_store_employee', ['user_id'=>$user->id])}}" method="POST">
         @csrf
         <div class="d-flex flex-column px-6 py-4 my-3 col-md-7 col-11 mx-auto rounded-4 shadow bg-white  txt-dark-sand">
             <label class="form-label mt-2 ms-1 fs-5" for="employee">Emploee Email: </label>

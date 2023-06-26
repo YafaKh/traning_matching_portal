@@ -44,7 +44,7 @@
             </button>
             </form> 
         </div>
-        <a href="{{route('hr_add_training', ['company_id' => $company_id, 'user_id'=>$user->id])}}"
+        <a href="{{route('hr_add_training', ['user_id'=>$user->id])}}"
         class="btn btn-sm btn-primary bg-dark-blue text-light opacity-75 px-3 w-auto h-50">
         Add Training</a> 
     </div>
@@ -79,7 +79,7 @@
             </td>
             <td>
                 <a type="submit" class="btn"
-                href="{{ route('hr_delete_training', ['company_id' => $company_id, 'user_id'=>$user->id, 'training_id' => $training->id]) }}"
+                href="{{ route('hr_delete_training', [ 'user_id'=>$user->id, 'training_id' => $training->id]) }}"
                 onClick="return confirm('Are you sure?')">
                 <i class="bi bi-trash3 fs-6 text-danger"></i>
                 </a>

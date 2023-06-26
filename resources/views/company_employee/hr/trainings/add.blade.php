@@ -6,7 +6,7 @@
     active
 @endsection
 @section('content')
-<form enctype="multipart/form-data" action="{{route('hr_store_training', ['company_id' => $company_id, 'user_id'=>$user->id])}}" method="POST">
+<form enctype="multipart/form-data" action="{{route('hr_store_training', ['user_id'=>$user->id])}}" method="POST">
     @csrf
     <div class="pt-5 d-flex flex-column col-md-8 col-11 mx-auto ">  
     <div class="d-flex flex-sm-row flex-column mt-4 mb-2 mx-auto col-12">

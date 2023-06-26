@@ -23,7 +23,7 @@
             </button>
             </form> 
         </div>
-        <a href="{{route('hr_add_employee', ['company_id' => $company_id, 'user_id'=>$user->id])}}"
+        <a href="{{route('hr_add_employee', ['user_id'=>$user->id])}}"
         class="btn btn-sm btn-primary bg-dark-blue text-light opacity-75 px-3 w-auto h-50">
         Add Employee</a> 
     </div>
@@ -55,7 +55,7 @@
             <tr>
             <td class="ps-3">{{$employee['first_name'].' '. $employee['last_name']}}</td>
             <td>
-            <form action="{{ route('hr_update_role', ['company_id' => $company_id, 'user_id'=>$user->id, 'employee_id' => $employee['id']]) }}" class="d-flex">
+            <form action="{{ route('hr_update_role', ['user_id'=>$user->id, 'employee_id' => $employee['id']]) }}" class="d-flex">
             @csrf
             <select class="form-select border-gray me-2 mb-2 txt-sm" name="role" disabled id="roleDropdown_{{ $employee['id'] }}">
                 <option value="1" {{ $employee['company_employee_role_id'] == 1 ? 'selected' : '' }}>HR</option>
@@ -76,7 +76,7 @@
             <td>{{$employee['phone']}}</td>
             <td>
                 <a class="btn"
-                href="{{ route('hr_delete_employee', ['company_id' => $company_id, 'user_id'=>$user->id, 'employee_id' => $employee->id]) }}"
+                href="{{ route('hr_delete_employee', ['user_id'=>$user->id, 'employee_id' => $employee->id]) }}"
                 onClick="return confirm('Are you sure?')">
                 <i class="bi bi-trash3 fs-6 text-danger"></i>
                 </a>            

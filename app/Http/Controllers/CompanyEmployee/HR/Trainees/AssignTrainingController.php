@@ -14,16 +14,14 @@ class AssignTrainingController extends Controller
     /**
      * Method index
      *
-     * @param $company_id $company_id [explicite description]
      *
      * @return void
      */
-    public function index($company_id, $user_id)
+    public function index($user_id)
     {
-        $company = Company::findOrFail($company_id);
-        $user = CompanyEmployee::where('id', $user_id)
-        ->select('id', 'first_name', 'last_name')->first();
-        
+        $user = CompanyEmployee::where('id', $user_id)->first();
+        $company = $user->company;
+
         $trainings = $company->trainings()->get();
         
         $unengaged_students = collect();
@@ -48,7 +46,6 @@ class AssignTrainingController extends Controller
     
         
         return view('company_employee.hr.trainees.assign_trainings', [
-            'company_id' => $company_id,
             'user' => $user,
             'trainings' => $trainings->reject(function ($training) {
                 return $training->name == 'Unengaged Trainees';}),
@@ -62,12 +59,11 @@ class AssignTrainingController extends Controller
      * Method add
      *
      * @param Request $request [explicite description]
-     * @param $company_id $company_id [explicite description]
      * @param $user_id $user_id [explicite description]
      *
      * @return void
      */
-    public function add(Request $request, $company_id, $user_id)
+    public function add(Request $request, $user_id)
     {
         $user = CompanyEmployee::where('id', $user_id)
             ->select('id', 'first_name', 'last_name')->first();
@@ -84,24 +80,24 @@ class AssignTrainingController extends Controller
         Student::whereIn('id', $studentIds)
             ->update(['training_id' => $trainingId]);
     
-        return redirect()->route('hr_manage_trainings', ['company_id' => $company_id, 'user_id' => $user_id]);
+        return redirect()->route('hr_manage_trainings', ['user_id' => $user_id]);
     }    
     
     /**
      * Method delete
      *
-     * @param $company_id $company_id [explicite description]
      * @param $user_id $user_id [explicite description]
      *
      * @return void
      */
-    public function delete($company_id, $user_id)
+    public function delete($user_id)
     {
         $student_ids = request('student_ids', []);
-        $company = Company::findOrFail($company_id);
+        $user = CompanyEmployee::where('id', $user_id)->first();
+        $company = $user->company;
         $unengaged_training = $company->trainings->first()->id;
         Student::whereIn('id', $student_ids)->update(['training_id' => $unengaged_training]);
 
-        return redirect()->route('hr_manage_trainings', ['company_id' => $company_id, 'user_id' => $user_id]);
+        return redirect()->route('hr_manage_trainings', ['user_id' => $user_id]);
     }
 }

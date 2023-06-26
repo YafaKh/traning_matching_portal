@@ -73,7 +73,7 @@
             <td>
             <a class="btn" name="add_trainee"
                 onClick="confirm('Are you sure that you want to add this student as a trainee?')"
-                href="{{ route('hr_add_trainee', ['company_id' => $company_id, 'user_id'=>$user->id, 'student_id' => $student->id]) }}">
+                href="{{ route('hr_add_trainee', ['user_id'=>$user->id, 'student_id' => $student->id]) }}">
                 <i class="bi bi-plus-square fs-6"></i>
             </a>
             </td>
@@ -100,7 +100,7 @@
         var confirmation = confirm('Are you sure that you want to add selected students to your company?');
         if (confirmation) {
             // Redirect to the server-side route with the selected student IDs
-            var url = '{{ route('hr_add_selected_trainees', ['company_id' => $company_id, 'user_id' => $user->id]) }}';
+            var url = '{{ route('hr_add_selected_trainees', ['user_id' => $user->id]) }}';
             window.location.href = url + '?student_ids=' + studentIds.join(',');
         }
     }
