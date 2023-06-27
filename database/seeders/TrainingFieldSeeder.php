@@ -4,16 +4,16 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\TrainingFeild;
+use App\Models\TrainingField;
 
-class TrainingFeildSeeder extends Seeder
+class TrainingFieldSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        $feilds= [
+        $fields= [
             ['name' => "Front-End"],
             ['name' => "Back-End"],
             ['name' => "Full-Stack"],
@@ -22,8 +22,8 @@ class TrainingFeildSeeder extends Seeder
             ['name' => "Laravel"],
 
         ];
-        foreach ($feilds as $key => $value) {
-            TrainingFeild::create($value);
+        foreach ($fields as $key => $value) {
+            TrainingField::create($value);
         } 
     }
 }

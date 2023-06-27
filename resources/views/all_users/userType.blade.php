@@ -29,6 +29,9 @@
             <h2 class="card-title text-center">Who are you ?</h2>
               <form>
                 <div class=" d-flex flex-column">
+                <a class="btn userType p-2" href="{{route('login', ['user_type' => 'admin'])}}" role="button">
+                    <h1>ِAdmin</h1>
+                </a>
                 <a class="btn userType p-2" href="{{route('login', ['user_type' => 'student'])}}" role="button">
                     <h1>Student</h1>
                 </a>

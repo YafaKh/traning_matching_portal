@@ -18,7 +18,6 @@ class UniversityEmployeeController extends Controller
         $user = UniversityEmployee::where('id', $user_id)
         ->select('id', 'first_name', 'last_name')->first();
 
-        //to edit: add img
         $university_employees= UniversityEmployee::select([
         'id', 'employee_num', 'first_name', 'last_name','email', 'phone', 'university_employee_role_id'])
         ->where('active',1)->defaultOrder()->get();

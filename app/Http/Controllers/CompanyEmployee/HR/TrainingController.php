@@ -8,7 +8,7 @@ use App\Models\Training;
 use App\Models\Company;
 use App\Models\CompanyBranch;
 use App\Models\CompanyEmployee;
-use App\Models\TrainingFeild;
+use App\Models\TrainingField;
 use App\Models\Student;
 
 class TrainingController extends Controller
@@ -18,28 +18,28 @@ class TrainingController extends Controller
      * 
      * @return \Illuminate\Http\Response
      */
-    public function index($user_id)
+    public function index($user_id, Request $request)
     {
-        //to edit: current semester
         $user = CompanyEmployee::where('id', $user_id)->first();
         $company = $user->company;
         
-        $trainings_data= $company->trainings->where('active', 1)->skip(1);
-        $branches= $company->branches;
-        $training_feilds = TrainingFeild::all();
+        $trainings = $company->trainings->where('active', 1)->skip(1);
+        $branches = $company->branches;
+        $training_fields = TrainingField::all();
         $trainers = CompanyEmployee::where('company_id', $company->id)
-        ->where('active', 1)
-        ->where(function ($query) {
-        $query->where('company_employee_role_id', 2)
-        ->orWhere('company_employee_role_id', 3);})->get();
+            ->whereIn('company_employee_role_id', [2, 3])->get();
 
-        return view('company_employee.hr.trainings.list',
-        [
-         'user' => $user,
-         'trainings_data'=>$trainings_data,
-         'branches' => $branches,
-         'training_feilds' => $training_feilds,
-         'trainers' => $trainers,]);
+        if ($request->input('filter') === 'all') {
+            $trainings = $company->trainings->where('active', 1);
+        }
+
+        return view('company_employee.hr.trainings.list', [
+            'user' => $user,
+            'trainings' => $trainings,
+            'branches' => $branches,
+            'training_fields' => $training_fields,
+            'trainers' => $trainers,
+        ]);
     }
 
     /**
@@ -53,7 +53,7 @@ class TrainingController extends Controller
         $company = $user->company;
 
         $branches = CompanyBranch::where('company_id', $company->id)->get();
-        $training_feilds = TrainingFeild::all();
+        $training_fields = TrainingField::all();
 
         $trainers = CompanyEmployee::where('company_id', $company->id)
         ->where('active', 1)
@@ -66,7 +66,7 @@ class TrainingController extends Controller
          'user' => $user,
          'branches' => $branches,
          'trainers' => $trainers,
-         'training_feilds' => $training_feilds]);
+         'training_fields' => $training_fields]);
     }
 
     /**
@@ -106,7 +106,7 @@ class TrainingController extends Controller
             'company_branch_id' => $request->branch,
             'company_employee_id' => $request->trainer,
             'name' => $request->name,
-            'training_feild_id' => $request->training_feild,
+            'training_field_id' => $request->training_field,
             'details' => $request->details
         ]);
         return redirect()->route('hr_list_trainings', ['user_id' => $user_id]);

@@ -17,7 +17,6 @@ class CompanyEmployeeController extends Controller
         $user = CompanyEmployee::where('id', $user_id)->first();
         $company = $user->company;
 
-        //to edit trainees, edit role and delete
         $employees_data= CompanyEmployee::
         select('id', 'first_name', 'last_name', 'phone', 'email', 'company_employee_role_id')
         ->where('company_id', $company->id)
@@ -47,7 +46,6 @@ class CompanyEmployeeController extends Controller
         'user' => $user,
         'un_added_employees' => $un_added_employees,
         ]);
-        //to edit: pass onle email
     }
 
     /**

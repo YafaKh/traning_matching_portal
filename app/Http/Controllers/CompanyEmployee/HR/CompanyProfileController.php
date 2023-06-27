@@ -22,7 +22,7 @@ class CompanyProfileController extends Controller
     public function index($user_id)
     {
         $user = CompanyEmployee::where('id', $user_id)->first();
-        $company = $user->company;
+        $company_data = $user->company;
 
         $contactable_employees = $company_data->employees()->where('contactable', 1)->get();
         return view('company_employee.hr.company_profile',
@@ -41,7 +41,7 @@ class CompanyProfileController extends Controller
     public function edit($user_id)
     {
         $user = CompanyEmployee::where('id', $user_id)->first();
-        $company = $user->company;
+        $company_data = $user->company;
 
         $cities = City::all();
         return view('company_employee.hr.edit_company_profile',

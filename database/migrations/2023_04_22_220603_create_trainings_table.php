@@ -24,10 +24,10 @@ return new class extends Migration
 
             $table->unsignedBigInteger('company_employee_id')->nullable();
             $table->unsignedBigInteger('company_branch_id')->nullable();
-            $table->unsignedBigInteger('training_feild_id')->nullable();
+            $table->unsignedBigInteger('training_field_id')->nullable();
             $table->foreign('company_employee_id')->references('id')->on('company_employees')->constrained()->onDelete('set null');
             $table->foreign('company_branch_id')->references('id')->on('company_branches');
-            $table->foreign('training_feild_id')->references('id')->on('training_feilds');
+            $table->foreign('training_field_id')->references('id')->on('training_fields');
         });
     }
 

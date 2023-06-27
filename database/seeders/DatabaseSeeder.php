@@ -31,7 +31,7 @@ use Database\Seeders\SpecializationSeeder;
 use Database\Seeders\CompanyEmployeeRoleSeeder;
 use Database\Seeders\UniversityEmployeeRoleSeeder;
 use Database\Seeders\TrainingSeeder;
-use Database\Seeders\TrainingFeildSeeder;
+use Database\Seeders\TrainingFieldSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -44,7 +44,7 @@ class DatabaseSeeder extends Seeder
         $this->call(SpecializationSeeder::class);
         $this->call(UniversityEmployeeRoleSeeder::class);
         $this->call(CitySeeder::class);
-        $this->call(TrainingFeildSeeder::class);
+        $this->call(TrainingFieldSeeder::class);
         $companies = Company::factory()->count(7)->create();
 
         $this->call(CompanyEmployeeRoleSeeder::class);
@@ -68,8 +68,8 @@ class DatabaseSeeder extends Seeder
             $unengaged_students = Student::factory()->count(4)->create();
             $unengaged_training->students()->saveMany($unengaged_students);
 
-            $hr = CompanyEmployee::factory()->count(rand(1, 3))->create();
-            $company->employees()->saveMany($hr);
+            $employees = CompanyEmployee::factory()->count(rand(3, 9))->create();
+            $company->employees()->saveMany($employees);
 
             $emails = CompanyEmail::factory()->count(rand(1, 3))->create();
             $company->emails()->saveMany($emails);
@@ -78,7 +78,7 @@ class DatabaseSeeder extends Seeder
             $company->phones()->saveMany($phones);
 
             $role = CompanyEmployeeRole::find(1); 
-            $hr->each(function ($employee) use ($role) {
+            $employees->each(function ($employee) use ($role) {
                 $employee->roles()->associate($role);
             });
         }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\AllUsers\CompanyProfileController as AllCompanyProfileController;
 use App\Http\Controllers\AllUsers\UserTypeController;
 use App\Http\Controllers\AllUsers\LoginController;
+use App\Http\Controllers\AllUsers\LogoutController;
 
 use App\Http\Controllers\Student\StudentProfileController;
 use App\Http\Controllers\Student\EditStudentProfileController;
@@ -44,6 +45,7 @@ Route::get('/', function () {
 
 Route::get('/{user_type}', [UserTypeController::class, 'login'])->name('login');
 Route::post('/authenticate_{user_type}', [LoginController::class, 'authenticate'])->name('authenticate');
+Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 
 Route::get('/reset_password', function () {
     return view('/all_users/reset_password');
@@ -58,8 +60,8 @@ Route::get('university_employee/register', function () {
 
 Route::prefix('/coordinator/{user_id}')->group(function(){
     Route::prefix('/students')->group(function(){
-        Route::post('/update_register_list', [CooListController::class,'update_register_list'])->name('update_register_list');
         Route::get('/', [CooListController::class,'index'])->name('coordinator_list_students');
+        Route::post('/update_register_list', [CooListController::class,'update_register_list'])->name('update_register_list');
         Route::get('/destroy/{student_id}', [CooListController::class,'destroy'])->name('coordinator_delete_student');
         Route::get('/students_companies_approval', [StudentCompanyApprovalController::class, 'index'])->name('coordinator_students_companies_approval');
         Route::get('/student_company_approve/{not_approved_student_company}', [StudentCompanyApprovalController::class, 'approve'])->name('coordinator_student_company_approve');
@@ -101,11 +103,12 @@ Route::prefix('/supervisor')->group(function(){
 Route::get('company_employee/register',[RegisterController::class,'create'])->name('company_employee_registeration');
 Route::post('company_employee/register/store',[RegisterController::class,'store'])->name('company_employee_store');
 
-Route::prefix('hr/{user_id}')->group(function () {
+Route::prefix('hr/{user_id}')
+//->middleware('web', 'hr')
+->group(function () {
     Route::get('/company_profile', [HrCompanyProfileController::class, 'index'])->name('hr_company_profile');
     Route::get('/edit_company_profile', [HrCompanyProfileController::class, 'edit'])->name('hr_edit_company_profile');
     Route::post('/edit_company_profile', [HrCompanyProfileController::class, 'update'])->name('hr_update_company_profile');
-    //Route::get('/delete_branch', [HrCompanyProfileController::class, 'delete_branch'])->name('hr_delete_branch');
 
     Route::prefix('/trainees')->group(function(){
         Route::get('/', [HrListController::class, 'index'])->name('hr_list_trainees');
@@ -126,7 +129,7 @@ Route::prefix('hr/{user_id}')->group(function () {
     });
 
     Route::prefix('/trainings')->group(function(){
-        Route::get('/', [TrainingController::class,'index'])->name('hr_list_trainings');
+        Route::get('/', [TrainingController::class, 'index'])->name('hr_list_trainings');
         Route::get('/create', [TrainingController::class,'create'])->name('hr_add_training');
         Route::post('/store', [TrainingController::class,'store'])->name('hr_store_training');
         Route::get('/delete/{training_id}', [TrainingController::class, 'destroy'])->name('hr_delete_training');

@@ -71,11 +71,11 @@
             <td>{{$student['load']}}</td>
             <td>{{$student['availability_date']}}</td>
             <td>
-            <a class="btn" name="add_trainee"
-                onClick="confirm('Are you sure that you want to add this student as a trainee?')"
-                href="{{ route('hr_add_trainee', ['user_id'=>$user->id, 'student_id' => $student->id]) }}">
+            <a class="btn"
+                href="{{ route('hr_add_trainee', ['user_id'=>$user->id, 'student_id' => $student->id]) }}"
+                onClick="return confirm('Are you sure that you want to add this student as a trainee?')">
                 <i class="bi bi-plus-square fs-6"></i>
-            </a>
+            </a>  
             </td>
             </tr>
             @endforeach

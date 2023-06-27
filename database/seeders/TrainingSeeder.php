@@ -19,9 +19,11 @@ class TrainingSeeder extends Seeder
     {
         CompanyBranch::all()->each(function ($companyBranch) {
         // Create additional fake trainings with trainers
-            $trainers = CompanyEmployee::factory()->count(rand(1, 3))->create();
+            $trainers = $companyBranch->company->employees
+            ->whereIn('company_employee_role_id', [2, 3]);
+            
             $companyBranch->company->employees()->saveMany($trainers);
-        
+
             $trainings = Training::factory()->count(rand(1, 3))->create();
             $trainings->each(function ($training) use ($trainers) {
                 $trainer = $trainers->random();

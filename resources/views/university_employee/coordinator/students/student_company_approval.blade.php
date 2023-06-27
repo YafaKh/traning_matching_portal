@@ -36,9 +36,9 @@
             <td class="text-danger">{{$student['first_name_en']}} {{$student['last_name_en']}}</td>
             @endif            
             <td>
-                Training feilds:<br>
-                @foreach($student->preferredTrainingFields as $training_feild)
-                {{training_feild->name ??''}}, 
+                Training fields:<br>
+                @foreach($student->preferredTrainingFields as $training_field)
+                {{training_field->name ??''}}, 
                 @endforeach 
                 Cities:<br>
                 Companies:<br>

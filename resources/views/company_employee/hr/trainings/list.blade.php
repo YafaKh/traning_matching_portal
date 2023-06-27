@@ -10,17 +10,17 @@
     {{--filters--}}
     <div class="d-flex justify-content-between flex-sm-row flex-column mt-5">
         <div class="d-flex flex-row">
-            <select select class="form-select border-gray me-2 mb-2 txt-sm w-25" >
-                <option selected>Semester</option>
-                <option value="1">Fall</option>
-                <option value="2">Spring</option>
-                <option value="3">First Summer</option>
-                <option value="4">Second Summer</option>
-            </select>
+            <form action="{{ route('hr_list_trainings', ['user_id' => $user->id]) }}" method="GET">
+                <select class="filter-dropdown form-select border-gray me-2 mb-2 txt-sm w-25" data-column="1" name="filter">
+                    <option value="latest">Latest Training</option>
+                    <option value="all">All Trainings</option>
+                </select>
+                <button type="submit" class="btn btn-sm bg-sand btn-outline-secondary mb-2">Apply</button>
+            </form>
             <select class="filter-dropdown form-select border-gray me-2 mb-2 txt-sm w-25"  data-column="1">
-                <option value="All">Feild</option>
-                @foreach($training_feilds as $training_feild)
-                <option value="{{$training_feild['name']}}">{{ $training_feild['name'] }}</option>
+                <option value="All">Field</option>
+                @foreach($training_fields as $training_field)
+                <option value="{{$training_field['name']}}">{{ $training_field['name'] }}</option>
                 @endforeach
             </select>
             <select class="filter-dropdown form-select border-gray me-2 mb-2 txt-sm w-25"  data-column="2">
@@ -38,7 +38,7 @@
                 @endforeach
             </select>
             <form class="input-group mb-2 h-50 w-50" role="searprimarych">
-            <input class="form-control txt-sm border border-secondary" type="search" placeholder="Search" aria-label="Search">
+            <input class="form-control txt-sm border border-secondary" type="search" placeholder="Search" id="search">
             <button class="btn btn-sm bg-sand btn-outline-secondary py-0" type="submit">
             <i class="bi bi-search txt-xsm"></i>
             </button>
@@ -51,11 +51,11 @@
         
     {{-- Trainings table--}}
     <div class="table-responsive mt-3">
-        <table class="table txt-sm table-hover">
+        <table class="table txt-sm table-hover" id="table">
         <thead class="bg-mid-sand">
             <tr >
             <th scope="col" class="ps-3">Training Name</th>
-            <th scope="col">Training Feild</th>
+            <th scope="col">Training Field</th>
             <th scope="col">Trainer</th>
             <th scope="col">Branch</th>
             <th scope="col">Details</th>
@@ -66,7 +66,7 @@
             @foreach($trainings_data as $training)
             <tr>
             <td class="ps-3">{{$training['name']}}</td>
-            <td>{{$training->training_feild->name ?? ''}}</td>
+            <td>{{$training->training_field->name ?? ''}}</td>
             <td>{{ $training->employee['first_name'] ?? '' }} 
                 {{ $training->employee['last_name'] ?? '' }}</td>
             <td>{{$training->branch->city->name}}-{{$training->branch['address']}}</td>
@@ -74,7 +74,20 @@
                 <a class="btn btn-link txt-sm" data-bs-toggle="collapse" href="#details{{$training['id']}}" 
                     aria-expanded="false" aria-controls="details{{$training['id']}}">Show more</a>
                 <div class="collapse" id="details{{$training['id']}}">
-                    <div class="card card-body" style="width: 300px;">{{$training['details']}}</div>
+                    <div class="card card-body" style="width: 300px;">
+                        Semester: 
+                        @if($training['semester']==1)
+                        Fall
+                        @esleif($training['semester']==2)
+                        Spring
+                        @esleif($training['semester']==3)
+                        First Summer
+                        @else
+                        Second Summer 
+                        @endif
+                        -{{$training['year']}}<br>
+                        {{$training['details']}}
+                    </div>
                 </div>
             </td>
             <td>

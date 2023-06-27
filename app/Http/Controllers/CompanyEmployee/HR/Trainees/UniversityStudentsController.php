@@ -20,17 +20,14 @@ class UniversityStudentsController extends Controller
      */
     public function index($user_id)
     {
-        //to edit Remove approved ones and ones who already sensed a req.
         $user = CompanyEmployee::where('id', $user_id)->first();
         $company = $user->company;
 
-        //dd($company->not_approved_students);
         $students = Student::whereDoesntHave('training')
         ->whereNotIn('id', $company->not_approved_students->pluck('student_id'))
         ->select('id', 'first_name_en', 'last_name_en', 'gpa'
-        , 'load', 'availability_date', 'specialization_id')->defaultOrder()->get();
+        , 'load', 'availability_date', 'specialization_id')->defaultOrder()->paginate(15);
 
-       // dd($students);
         //for fillters:
         $specializations =Specialization::select('name')->get();
         return view('company_employee.hr.trainees.university_students', [

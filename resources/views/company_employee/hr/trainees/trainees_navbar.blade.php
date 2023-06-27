@@ -7,9 +7,9 @@
       <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
         @if($user->company_employee_role_id==3)
         <li class="nav-item">
-          <a class="nav-link text-light @yield('activity1')" aria-current="page" 
-          href="{{route('trainer_list_traniees', ['user_id'=>$user->id])}}"
-          >My trainees</a>
+          <a class="nav-link text-light @yield('activity')" aria-current="page" 
+          href="{{route('home')}}"
+          >My trainees</a> 
         </li>
         @endif
         <li class="nav-item">
@@ -38,30 +38,3 @@
     </div>
   </div>
 </nav>
-<script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
-<script>
-  $(document).ready(function(){  
-        $('#search').keyup(function(){  
-          tableSearch($(this).val());  
-        });  
-        function tableSearch(value){  
-            $('#table tbody tr').each(function(){  
-                  var found = 'false';  
-                  $(this).each(function(){  
-                      if($(this).text().toLowerCase().indexOf(value.toLowerCase()) >= 0)  
-                      {  
-                            found = 'true';  
-                      }  
-                  });  
-                  if(found == 'true')  
-                  {  
-                      $(this).show();  
-                  }  
-                  else  
-                  {  
-                      $(this).hide();  
-                  }  
-            });  
-        }  
-  });  
-</script>

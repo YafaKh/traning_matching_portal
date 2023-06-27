@@ -10,14 +10,8 @@
     {{--filters--}}
     <div class="d-flex justify-content-between flex-sm-row flex-column mt-5">
         <div class="d-flex flex-row col-sm-7">
-            <select class="filter-dropdown form-select border-gray me-2 mb-2 txt-sm w-25" data-column="1">
-                <option value="All">Role</option>
-                <option value="HR">HR</option>
-                <option value="Trainer">Trainer</option>
-                <option value="HR & Trainer">Both</option>
-            </select>
             <form class="input-group mb-2 h-50 w-50" role="searprimarych">
-            <input class="form-control txt-sm border border-secondary" type="search" placeholder="Search" aria-label="Search">
+            <input class="form-control txt-sm border border-secondary" type="search" placeholder="Search" id="search">
             <button class="btn btn-sm bg-sand btn-outline-secondary py-0" type="submit">
             <i class="bi bi-search txt-xsm"></i>
             </button>
@@ -30,7 +24,7 @@
         
     {{-- Employees table--}}
     <div class="table-responsive mt-3">
-        <table class="table txt-sm table-hover">
+        <table class="table txt-sm table-hover" id="table">
         <thead class="bg-mid-sand">
             <tr class="rounded-top">
                 <td colspan="4"><label class="form-label mt-2 ms-3 fs-6">

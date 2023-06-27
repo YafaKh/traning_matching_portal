@@ -35,10 +35,10 @@
             </select>
         </div>             
         <div class="d-flex flex-sm-row flex-column mb-2 mx-auto col-12">
-            <select class="form-select me-2 mb-2 flex-grow-1" id= "training_feild" name="training_feild">
-                <option selected>Training Feild</option>
-                @foreach($training_feilds as $training_feild)
-                <option value="{{$training_feild['id']}}">{{ $training_feild['name'] }}</option>
+            <select class="form-select me-2 mb-2 flex-grow-1" id= "training_field" name="training_field">
+                <option selected>Training Field</option>
+                @foreach($training_fields as $training_field)
+                <option value="{{$training_field['id']}}">{{ $training_field['name'] }}</option>
                 @endforeach
             </select>
         </div>                
@@ -58,10 +58,10 @@
 <script>
     function recommend_name() {
         var name = document.getElementById("name");
-        var feild = document.getElementById("training_feild").value;
+        var field = document.getElementById("training_field").value;
         var trainer = document.getElementById("trainer").options[document.getElementById("trainer").selectedIndex].text;
         var semester = document.getElementById("semester").options[document.getElementById("semester").selectedIndex].text;
-        name.value = feild + "-" + trainer + "/" + semester;
+        name.value = field + "-" + trainer + "/" + semester;
     }
 </script>
 

@@ -19,6 +19,11 @@
             <a class="nav-link dropdown-toggle @yield('trainees_activity')" 
             role="button" data-bs-toggle="dropdown" aria-expanded="false">Trainees</a>
             <ul class="dropdown-menu">
+                @if($user->company_employee_role_id==3)
+                <li class="nav-item"><a class="dropdown-item" 
+                href="{{route('home')}}"
+                >My trainees</a></li>
+                @endif
                 <li><a class="dropdown-item" 
                 href="{{route('hr_list_trainees', ['user_id'=>$user->id])}}"
                 >List trainees</a></li>
@@ -41,7 +46,7 @@
             >Trainings</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" href="#">Logout</a>
+            <a class="nav-link" href="{{route('logout')}}">Logout</a>
             </li>
         </ul>
         </div>

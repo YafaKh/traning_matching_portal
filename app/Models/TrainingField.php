@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Training;
 
-class TrainingFeild extends Model
+class TrainingField extends Model
 {
     use HasFactory;
     public function trainings()

@@ -22,12 +22,18 @@ class LoginController extends Controller
             
             // Get the logged-in employee
             $user = Auth::guard($user_type)->user();
-            
+            // Redirect the user to his main page according to his type
             if($user_type=='company_employee'){
-                // Redirect the employee to the specific route using their  user_id
-                return redirect()->route('hr_list_trainees', ['user_id' => $user->id]);
+                if($user->company_employee_role_id==1 || $user->company_employee_role_id==3)
+                    return redirect()->route('hr_list_trainees', ['user_id' => $user->id]);
+               // else trainer
+               
             }
-            
+            else if($user_type=='university_employee'){
+                if($user->university_employee_role_id==1 || $user->university_employee_role_id==3)
+                    return redirect()->route('coordinator_list_students', ['user_id' => $user->id]);
+               // else trainer
+            }
         }
     
         return back()->withErrors([
