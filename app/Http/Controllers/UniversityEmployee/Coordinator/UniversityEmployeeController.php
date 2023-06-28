@@ -35,7 +35,7 @@ class UniversityEmployeeController extends Controller
     public function create($user_id)
     {
         $user = UniversityEmployee::where('id', $user_id)
-        ->select('id', 'first_name', 'last_name')->first();
+        ->select('id', 'first_name', 'last_name', 'university_employee_role_id')->first();
 
         $un_added_employees = UnaddedUniversityEmployee::select(
             'id', 'email', 'first_name', 'last_name')->get();

@@ -32,6 +32,7 @@ use Database\Seeders\CompanyEmployeeRoleSeeder;
 use Database\Seeders\UniversityEmployeeRoleSeeder;
 use Database\Seeders\TrainingSeeder;
 use Database\Seeders\TrainingFieldSeeder;
+use Database\Seeders\AdminSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -45,6 +46,7 @@ class DatabaseSeeder extends Seeder
         $this->call(UniversityEmployeeRoleSeeder::class);
         $this->call(CitySeeder::class);
         $this->call(TrainingFieldSeeder::class);
+        $this->call(AdminSeeder::class);
         $companies = Company::factory()->count(7)->create();
 
         $this->call(CompanyEmployeeRoleSeeder::class);

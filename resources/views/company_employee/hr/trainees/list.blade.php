@@ -13,34 +13,25 @@
 @endsection 
 @section('content')
 <div class="px-3 d-flex flex-lg-row flex-column">       
-    <div class="col-lg-9">
+    <div class="col-lg-9 mt-4 pe-3">
         {{--filters--}}
-        <div class= " d-flex flex mt-5 pb-3">
+        <div class="d-flex ">
             <select class="filter-dropdown form-select flex-grow-1 me-2 mb-2 txt-sm" data-column="1">
                 <option value="All">Training</option>
                 @foreach($trainings as $training)
                     <option value="{{$training['name']}}">{{$training['name']}}</option>
                 @endforeach
             </select>
-            <select class="filter-dropdown form-select flex-grow-1 me-2 mb-2 txt-sm" data-column="2">
-                <option value="All">Branch</option>
-                @foreach($branches as $branch)
-                    <option value="{{$branch->city->name}}-{{$branch['address']}}">{{$branch->city->name}}-{{$branch['address']}}</option>
-                @endforeach
-            </select>
-            
-            <select class="filter-dropdown form-select flex-grow-1 me-2 mb-2 txt-sm " data-column="3">
-                <option value="All">Trainer</option>
-                @foreach($trainers as $trainer)
-                    <option value="{{$trainer['first_name']}} {{$trainer['last_name']}}">
-                    {{ $trainer['first_name']}} {{ $trainer['last_name']}}
-                    </option>
-                @endforeach
-            </select>
+            <form class="input-group flex-grow-1  mb-2" role="searprimarych">
+                <input class="form-control txt-sm border  border-secondary-subtle" type="search" placeholder="Search Name" id="search">
+                <button class="btn btn-sm bg-sand btn-outline-secondary py-0" type="submit">
+                <i class="bi bi-search txt-xsm"></i>
+                </button>
+            </form>
         </div>
         <div class="mt-3">
             {{-- students table --}}
-            <div class="table-responsive pe-3">
+            <div class="table-responsive">
                 <table class="table txt-sm table-sm border table-hover" id="table">
                 <thead class="bg-mid-sand">
                     <tr >

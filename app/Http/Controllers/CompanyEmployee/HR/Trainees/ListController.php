@@ -24,7 +24,7 @@ class ListController extends Controller
 
        $trainings = $company->trainings->skip(1);
 
-        $not_aaproved_students= $company->not_approved_students;
+       $not_aaproved_students= $company->not_approved_students;
  
         //filters data
         $unengaged_trainees= ($company->trainings[0])->students;

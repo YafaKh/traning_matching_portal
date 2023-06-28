@@ -16,7 +16,8 @@
             <div class="d-flex flex-row bg-light align-items-center company-box justify-content-center w-100 py-3 m-4 rounded-3 shadow">
                 <img src="{{$company->image}}" class="rounded-circle col-6 w-25 h-auto" />
                 <div class="mt-4 mx-3 col-6">
-                    <a href="http://" class="text-decoration-none">{{$company->name}}</a>
+                    <a href="{{route('admin_company_profile',['company_id' => $company->id])}}" 
+                         class="text-decoration-none">{{$company->name}}</a>
                     <p>{{$company->industry}}</p>
                 </div>
             </div>

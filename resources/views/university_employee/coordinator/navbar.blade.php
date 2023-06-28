@@ -14,6 +14,9 @@
                 Students
             </a>
             <ul class="dropdown-menu">
+                @if($user->university_employee_role_id==3)
+                <li><a class="dropdown-item" href="{{route('supervisor_list_students', ['user_id'=>$user->id])}}">My students</a></li>
+                @endif
                 <li><a class="dropdown-item" href="{{route('coordinator_list_students', ['user_id'=>$user->id])}}">List students</a></li>
                 <li><a class="dropdown-item" href="{{route('coordinator_students_companies_approval', ['user_id'=>$user->id])}}">Student-Company approval</a></li>
                 <li><a class="dropdown-item" href="{{route('coordinator_manage_supervisors', ['user_id'=>$user->id])}}">Assign supervisors</a></li>

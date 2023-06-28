@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Controller;
 
-use App\Http\Controllers\AllUsers\CompanyProfileController as AllCompanyProfileController;
+use App\Http\Controllers\AllUsers\AllUsersController;
 use App\Http\Controllers\AllUsers\UserTypeController;
 use App\Http\Controllers\AllUsers\LoginController;
 use App\Http\Controllers\AllUsers\LogoutController;
@@ -35,6 +35,8 @@ use App\Http\Controllers\Admin\CompaniesWantJoinController;
 use App\Http\Controllers\Admin\CompanyEmployeeController as AdCompanyEmployeeController;
 use App\Http\Controllers\Admin\UniversityEmployeeController as AdUniversityEmployeeController;
 use App\Http\Controllers\Admin\StudentController;
+
+//all users 
 Route::get('/home', function () {
     return view('/home');
 })->name('home'); 
@@ -50,9 +52,6 @@ Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 Route::get('/reset_password', function () {
     return view('/all_users/reset_password');
 })->name('reset_password'); 
-
-//all users 
-Route::get('/{company_id}/company_profile', [AllCompanyProfileController::class, 'show'])->name('show_company_profile');
 
 // university employees' routes
 Route::get('university_employee/register', function () {
@@ -83,6 +82,7 @@ Route::prefix('/coordinator/{user_id}')->group(function(){
     });
     
     Route::get('/companies',  [CooCompaniesController::class, 'index'])->name('coordinator_list_companies');   
+    Route::get('/company{company_id}_profile', [CooCompaniesController::class, 'show_company_profile'])->name('coordinator_company_profile');
 });
 
 Route::prefix('/supervisor')->group(function(){
@@ -164,6 +164,7 @@ Route::post('store{id}',[StudentRegisterController::class,'addManyLanguageToStud
 Route::prefix('/admin')->group(function () {
     Route::get('/',[HomeController::class,'index'])->name('admin_home');
     Route::get('/companies',[AdminCompaniesController::class,'index'])->name('admin_companies');
+    Route::get('/company{company_id}_profile', [AdminCompaniesController::class, 'show_company_profile'])->name('admin_company_profile');
     Route::get('/comapnies_want_to_join',[CompaniesWantJoinController::class,'index'])->name('admin_compnies_want_to_join');
     Route::get('/accept_company{company_id}',[CompaniesWantJoinController::class,'accept'])->name('admin_accept_company');
     Route::get('/reject_company{company_id}',[CompaniesWantJoinController::class,'reject'])->name('admin_reject_company');

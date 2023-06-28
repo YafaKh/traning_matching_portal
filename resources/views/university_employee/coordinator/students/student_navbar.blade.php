@@ -5,6 +5,11 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
+        @if($user->university_employee_role_id==3)
+        <li class="nav-item">
+          <a class="nav-link text-light @yield('activity')" aria-current="page" href="{{route('supervisor_list_students', ['user_id'=>$user->id])}}">My students</a>
+        </li>
+        @endif
         <li class="nav-item">
           <a class="nav-link text-light @yield('activity1')" aria-current="page" href="{{route('coordinator_list_students', ['user_id'=>$user->id])}}">List students</a>
         </li>

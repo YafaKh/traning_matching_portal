@@ -8,22 +8,27 @@
 @section('content')
 <div class="px-5">
     {{--filters--}}
-    <div class="d-flex justify-content-between flex-sm-row flex-column mt-5">
-        <div class="d-flex flex-row">
-            <form action="{{ route('hr_list_trainings', ['user_id' => $user->id]) }}" method="GET">
-                <select class="filter-dropdown form-select border-gray me-2 mb-2 txt-sm w-25" data-column="1" name="filter">
-                    <option value="latest">Latest Training</option>
-                    <option value="all">All Trainings</option>
+    <div class="d-flex justify-content-between flex-column mt-5">
+        <div class="d-flex justify-content-between">
+            <form action="{{ route('hr_list_trainings', ['user_id' => $user->id]) }}" method="GET" class="d-flex">
+                <select class="form-select border-gray me-3 mb-2 txt-sm w-auto" data-column="1" name="filter">
+                    <option value="latest" {{ $request->input('filter') === 'latest' ? 'selected' : '' }}>Latest Training</option>
+                    <option value="all" {{ $request->input('filter') === 'all' ? 'selected' : '' }}>All Trainings</option>
                 </select>
-                <button type="submit" class="btn btn-sm bg-sand btn-outline-secondary mb-2">Apply</button>
+                <button type="submit" class="btn btn-sm bg-sand btn-outline-secondary me-2 mb-2">Apply</button>
             </form>
-            <select class="filter-dropdown form-select border-gray me-2 mb-2 txt-sm w-25"  data-column="1">
+            <a href="{{route('hr_add_training', ['user_id'=>$user->id])}}"
+            class="btn btn-sm btn-primary bg-dark-blue text-light opacity-75 px-3 w-auto h-50">
+            Add Training</a> 
+        </div>
+        <div class="d-flex flex-sm-row flex-column mt-1">
+            <select class="form-select border-gray me-2 mb-2 txt-sm flex-grow-1"  data-column="1">
                 <option value="All">Field</option>
                 @foreach($training_fields as $training_field)
                 <option value="{{$training_field['name']}}">{{ $training_field['name'] }}</option>
                 @endforeach
             </select>
-            <select class="filter-dropdown form-select border-gray me-2 mb-2 txt-sm w-25"  data-column="2">
+            <select class=" form-select border-gray me-2 mb-2 txt-sm flex-grow-1"  data-column="2">
                 <option value="All">Trainer</option>
                 @foreach($trainers as $trainer)
                 <option value="{{ $trainer['first_name']}} {{ $trainer['last_name']}}">
@@ -31,22 +36,19 @@
                 </option>
                 @endforeach
             </select>
-            <select class="filter-dropdown form-select border-gray me-2 mb-2 txt-sm w-25"  data-column="3">
+            <select class="form-select border-gray me-2 mb-2 txt-sm flex-grow-1"  data-column="3">
                 <option value="All">Branch</option>
                 @foreach($branches as $branch)
                     <option value="{{$branch->city->name}}-{{$branch['address']}}">{{$branch->city->name}}-{{$branch['address']}}</option>
                 @endforeach
             </select>
-            <form class="input-group mb-2 h-50 w-50" role="searprimarych">
+            <form class="input-group mb-2 h-50 flex-grow-1 " role="searprimarych">
             <input class="form-control txt-sm border border-secondary" type="search" placeholder="Search" id="search">
             <button class="btn btn-sm bg-sand btn-outline-secondary py-0" type="submit">
             <i class="bi bi-search txt-xsm"></i>
             </button>
             </form> 
         </div>
-        <a href="{{route('hr_add_training', ['user_id'=>$user->id])}}"
-        class="btn btn-sm btn-primary bg-dark-blue text-light opacity-75 px-3 w-auto h-50">
-        Add Training</a> 
     </div>
         
     {{-- Trainings table--}}
@@ -63,7 +65,7 @@
             </tr>
         </thead>
         <tbody class="bg-light" id="table-body">
-            @foreach($trainings_data as $training)
+            @foreach($trainings as $training)
             <tr>
             <td class="ps-3">{{$training['name']}}</td>
             <td>{{$training->training_field->name ?? ''}}</td>

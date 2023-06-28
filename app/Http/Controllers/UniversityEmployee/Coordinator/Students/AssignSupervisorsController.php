@@ -13,7 +13,7 @@ class AssignSupervisorsController extends Controller
     public function index($user_id)
     {
         $user = UniversityEmployee::where('id', $user_id)
-        ->select('id', 'first_name', 'last_name')->first();
+        ->select('id', 'first_name', 'last_name', 'university_employee_role_id')->first();
 
         $supervisors = UniversityEmployee::where('active', 1)
         ->where(function ($query) {

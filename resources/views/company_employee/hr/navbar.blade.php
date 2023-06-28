@@ -22,7 +22,8 @@
                 @if($user->company_employee_role_id==3)
                 <li class="nav-item"><a class="dropdown-item" 
                 href="{{route('home')}}"
-                >My trainees</a></li>
+                >My trainees</a>
+                </li>
                 @endif
                 <li><a class="dropdown-item" 
                 href="{{route('hr_list_trainees', ['user_id'=>$user->id])}}"

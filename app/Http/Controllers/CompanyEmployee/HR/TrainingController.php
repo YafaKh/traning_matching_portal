@@ -23,14 +23,15 @@ class TrainingController extends Controller
         $user = CompanyEmployee::where('id', $user_id)->first();
         $company = $user->company;
         
-        $trainings = $company->trainings->where('active', 1)->skip(1);
+        $trainings = $company->trainings->where('active', 1)
+        ->where('year', '>=', date('Y'))->skip(1);
         $branches = $company->branches;
         $training_fields = TrainingField::all();
         $trainers = CompanyEmployee::where('company_id', $company->id)
             ->whereIn('company_employee_role_id', [2, 3])->get();
 
         if ($request->input('filter') === 'all') {
-            $trainings = $company->trainings->where('active', 1);
+            $trainings = $company->trainings->where('active', 1)->skip(1);
         }
 
         return view('company_employee.hr.trainings.list', [
@@ -39,6 +40,7 @@ class TrainingController extends Controller
             'branches' => $branches,
             'training_fields' => $training_fields,
             'trainers' => $trainers,
+            'request' => $request,
         ]);
     }
 

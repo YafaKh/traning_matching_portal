@@ -24,7 +24,7 @@ class ListController extends Controller
     public function index($user_id)
     {
         $user = UniversityEmployee::where('id', $user_id)
-        ->select('id', 'first_name', 'last_name')->first();
+        ->select('id', 'first_name', 'last_name', 'university_employee_role_id')->first();
 
         $students= Student::select([
         'id', 'student_num', 'first_name_en', 'last_name_en', 'registered',
