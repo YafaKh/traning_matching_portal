@@ -28,7 +28,8 @@ return new class extends Migration
             $table->integer('load') ;
             $table->float('gpa') ;
             $table->string('address')->nullable();
-            $table->string('email')->unique() ;
+            $table->string('email')->unique();
+            $table->string('linkedin')->nullable();
             $table->string('password', 45) ;
             $table->date('availability_date') ;
             $table->boolean('connected_with_a_company')->default(0);

@@ -25,6 +25,8 @@
             <th scope="col">Evaluation</th>
             </tr>
         </thead>
+        @foreach($allTrainings as $allTraining )
+
         @foreach($allTrainees as $allTrainee)
 
         <tbody class="bg-light">
@@ -32,20 +34,29 @@
         <tr>
 
             <td class="ps-3" name="">{{$allTrainee->first_name_en}} {{$allTrainee->second_name_en}} {{$allTrainee->third_name_en}} {{$allTrainee->last_name_en}}</td>
-            @foreach($allTrainings as $allTraining )
-            <td>{{$allTraining->semester}} - {{$allTraining->year}} - {{$allTrainee->first_name_en}} {{$allTrainee->last_name_en}}</td>
-            <td><a type="button" class="btn" href="{{route('fill_traniee_progress', ['id' => $trainer->id,'trainee_id' => $allTrainee->id])}}">
+           @if($allTraining->semester == "1")
+            <td>Fall - {{$allTraining->year}} - {{$trainer->first_name}} {{$trainer->last_name}}</td>
+         @elseif($allTraining->semester == '2')
+         <td>Spring - {{$allTraining->year}} - {{$trainer->first_name}} {{$trainer->last_name}}</td>
+         @elseif($allTraining->semester == '3')
+         <td>First Summer - {{$allTraining->year}} - {{$trainer->first_name}} {{$trainer->last_name}}</td>
+         @elseif($allTraining->semester == '4')
+         <td>Second Summer - {{$allTraining->year}} - {{$trainer->first_name}} {{$trainer->last_name}}</td>
+        @endif
+            <td><a type="button" class="btn" href="{{route('fill_traniee_progress', ['user_id' => $trainer->id,'trainee_id' => $allTrainee->id])}}">
             <i class="bi bi-box-arrow-up-right"></i></a></td>
-            <td><a type="button" class="btn">
+            <td><a type="button" class="btn" href="{{route('fill_traniee_evaluation', ['user_id' => $trainer->id,'trainee_id' => $allTrainee->id])}}">
             <i class="bi bi-box-arrow-up-right"></i></a></td>
-            @endforeach
-            </tr>
           
-
+            </tr>
+            
+            
+           
         </tbody>
+        @endforeach
         @endforeach
         </table>
     </div>
-
+        {{$allTrainees->links()}}
 </div>
 @endsection

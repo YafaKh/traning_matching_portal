@@ -18,6 +18,7 @@ use App\Http\Controllers\CompanyEmployee\HR\CompanyEmployeeController as HrCompa
 use App\Http\Controllers\CompanyEmployee\HR\TrainingController;
 use App\Http\Controllers\CompanyEmployee\Trainer\TrainerController;
 use App\Http\Controllers\CompanyEmployee\Trainer\progressController;
+use App\Http\Controllers\CompanyEmployee\Trainer\EvaluateController;
 use App\Http\Controllers\CompanyEmployee\HR\CompanyProfileController as HrCompanyProfileController;
 
 use App\Http\Controllers\UniversityEmployee\Coordinator\Students\ListController as CooListController;
@@ -25,7 +26,7 @@ use App\Http\Controllers\UniversityEmployee\Coordinator\Students\StudentCompanyA
 use App\Http\Controllers\UniversityEmployee\Coordinator\Students\AssignSupervisorsController;
 use App\Http\Controllers\UniversityEmployee\Coordinator\UniversityEmployeeController as CooUniversityEmployeeController;
 use App\Http\Controllers\UniversityEmployee\Coordinator\CompaniesController as CooCompaniesController;
-
+use App\Http\Controllers\UniversityEmployee\Supervisor\StudentsController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\CompaniesController as AdminCompaniesController;
 use App\Http\Controllers\Admin\CompaniesWantJoinController;
@@ -77,8 +78,15 @@ Route::prefix('/coordinator')->group(function(){
 });
 
 Route::prefix('/supervisor')->group(function(){
-    Route::get('/students', function () {
-        return view('university_employee/supervisor/students'); })->name('supervisor_list_students');   
+    Route::prefix('/students')->group(function(){
+
+    Route::get('/{user_id}', [StudentsController::class, 'index'])->name('supervisor_list_students');
+    Route::get('/progress/{user_id}/{student_id}', [StudentsController::class, 'showProgressPage'])->name('show_student_progress');
+    Route::get('/evaluation/{user_id}/{student_id}', [StudentsController::class, 'showEvaluateStudentPage'])->name('show_student_Evaluation');
+    });
+    
+    // Route::get('/students', function () {
+        // return view('university_employee/supervisor/students'); })->name('supervisor_list_students');   
     Route::prefix('/visit_forms')->group(function(){
         Route::get('/', function () {
             return view('university_employee/supervisor/visit_forms/list'); })->name('list_visit_forms');
@@ -127,15 +135,15 @@ Route::prefix('{company_id}/hr')->group(function () {
 //students' routes
 
 Route::prefix('/student')->group(function () {
-    Route::get('/registeration{id}',[StudentRegisterController::class,'create'])->name('student_registeration_1');
+    Route::get('/registeration/{user_id}',[StudentRegisterController::class,'create'])->name('student_registeration_1');
     Route::POST('/registeration/store',[StudentRegisterController::class,'store'])->name('student_registeration_1.store');
 
-    Route::get('/profile{id}',[StudentProfileController::class,'show'])->name('student_profile');
-    Route::get('/edit_profile',[EditStudentProfileController::class,'show'])->name('edit_student_profile');
-    Route::get('/evaluate_company{id}',[EvaluateCompanyController::class,'show'])->name('student_evaluate_company');
+    Route::get('/profile/{user_id}',[StudentProfileController::class,'show'])->name('student_profile');
+    Route::get('/edit_profile/{user_id}',[EditStudentProfileController::class,'show'])->name('edit_student_profile');
+    Route::get('/evaluate_company/{user_id}',[EvaluateCompanyController::class,'show'])->name('student_evaluate_company');
     Route::POST('/evaluate_company/add',[EvaluateCompanyController::class,'add'])->name('student_evaluate_company.add');
 
-    Route::get('/list{id}',[StudentRegisterController::class,'test'])->name('test');
+    Route::get('/list{user_id}',[StudentRegisterController::class,'test'])->name('test');
 
 })->name('student');
 
@@ -163,11 +171,17 @@ Route::prefix('/admin')->group(function () {
 // trainer
 Route::prefix('/trainer')->group(function(){
     Route::prefix('/trainees')->group(function(){
-        Route::get('/{id}',[TrainerController::class,'show'])->name('trainer_list_traniees');
-        Route::get('/progress/{id}/{trainee_id}',[progressController::class,'show'])->name('fill_traniee_progress');
-        Route::get('/progress/add/{id}/{trainee_id}',[progressController::class,'add'])->name('fill_traniee_progress.add');
+        Route::get('/{user_id}',[TrainerController::class,'show'])->name('trainer_list_traniees');
+        Route::prefix('/progress')->group(function(){
+        Route::get('/{user_id}/{trainee_id}',[progressController::class,'show'])->name('fill_traniee_progress');
+        Route::POST('/add/{user_id}/{trainee_id}',[progressController::class,'add'])->name('fill_traniee_progress.add');
+        Route::get('/edit/{user_id}/{trainee_id}/{progress_id}',[progressController::class,'edit'])->name('fill_traniee_progress.edit');
+        Route::PUT('/update/{user_id}/{trainee_id}/{progress_id}',[progressController::class,'update'])->name('fill_traniee_progress.update');
+        Route::POST('/delete/{user_id}/{trainee_id}/{progress_id}',[progressController::class,'destroy'])->name('fill_traniee_progress.delete');
+        });
+        Route::get('/evaluation/{user_id}/{trainee_id}',[EvaluateController::class,'show'])->name('fill_traniee_evaluation');
+        Route::post('/evaluation/add/{user_id}/{trainee_id}',[EvaluateController::class,'add'])->name('fill_traniee_evaluation.add');
 
-        Route::get('/evaluation', function () {
-            return view('company_employee/trainer/trainees/evaluation'); })->name('fill_traniee_evaluation');  
-    });
+
+        });
 });

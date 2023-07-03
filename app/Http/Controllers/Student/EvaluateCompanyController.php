@@ -18,7 +18,7 @@ class EvaluateCompanyController extends Controller
      public function show($id){
             $student =Student::find($id);
             $students =Student::select('id')->get();
-            $companyName = $student->trainings->branch->company->name;
+            // $companyName = $student->trainings->branch->company->name;
             $allSkills =Skill::all();
             // $data = [
             //     'student' => $student,
@@ -29,8 +29,8 @@ class EvaluateCompanyController extends Controller
             // $view2 = View::make('student.layout.navbar', $data);
         
             // return Response::make($view1->render().$view2->render());
-
-            return view('student.evaluate_company',compact('student','allSkills','companyName'));
+// ,'companyName'
+            return view('student.evaluate_company',compact('student','allSkills'));
     }
    
     public function add(Request $request){

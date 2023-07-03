@@ -14,8 +14,8 @@
       <p class="studentInfo"><i class="bi bi-geo-alt-fill icon"></i>{{$student->address}}</p>
       <p class="studentInfo"><i class="bi bi-envelope-fill icon"></i>{{$student->email}}</p>
       <p class="studentInfo"><i class="bi bi-telephone-fill icon"></i>{{$student->phone}}</p>
-      <!-- <p class="studentInfo"><i class="bi bi-linkedin icon"></i>{{$student->address}}Linkedin</p>we need to add this to database -->
-      <a class="btn editBtn" href="{{route('edit_student_profile')}}" role="button">Edit Profile</a>
+      <p class="studentInfo"><i class="bi bi-linkedin icon"></i>{{$student->address}}Linkedin</p>
+      <a class="btn editBtn" href="{{route('edit_student_profile',['user_id'=> $student->id])}}" role="button">Edit Profile</a>
     </div>
   </section>
   <section class="profileSection">
@@ -77,7 +77,9 @@
 
     <div class="skill">
       <p>{{ $allSkill->skill->name }}</p>
-      <input type="range" min="1" max="100" value="{{ $allSkill->level }}" class="w-25" disabled>
+      <input type="range" class="form-range w-25" value="{{  $allSkill->level }}" id="disabledRange" disabled>
+
+      <!-- <input type="range" min="1" max="100" value="{{ $allSkill->level }}" class="w-25" disabled> -->
     </div>
     @endforeach
 
@@ -91,15 +93,17 @@
     <p class="fs-4 text-dark-blue">{{ $allLanguage->spokenLanguage->name }}</p>
     <div class="skill">
       <p>speaking_level :</p>
-    <input type="range" min="1" max="100" value="{{ $allLanguage->speaking_level }}" class="w-25">
+      <input type="range" class="form-range w-25" value="{{ $allLanguage->speaking_level }}" id="disabledRange" disabled>
     </div>
     <div class="skill">
     <p>writing_level :</p>
-    <input type="range" min="1" max="100" value="{{ $allLanguage->writing_level }}" class="w-25">
+    <input type="range" class="form-range w-25" value="{{ $allLanguage->writing_level }}" id="disabledRange" disabled>
+
      </div>
      <div class="skill">
      <p>listening_level :</p>
-     <input type="range" min="1" max="100" value="{{ $allLanguage->listening_level }}" class="w-25">
+    <input type="range" class="form-range w-25" value="{{ $allLanguage->listening_level }}" id="disabledRange" disabled>
+
      </div>
     @endforeach
   </section>

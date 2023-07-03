@@ -10,11 +10,15 @@ use Illuminate\Http\Request;
 class TrainerController extends Controller
 {
     public function show($id){
-        $trainer=CompanyEmployee::find($id);
-        $trainers=CompanyEmployee::all();
-        // dd($trainees = CompanyEmployee::with('students')->find($id));
-        $allTrainees=$trainer->students;//trainer_id: 43 have three trainees
+        // return the emoloyee if he have company_employee_role_id = 2 or 3
+        $trainer=CompanyEmployee::whereIn('company_employee_role_id', [2, 3])->find($id);
+        if ($trainer==null) {
+            return "Trainer not found ";
+        }
+
+        $allTrainees=$trainer->students()->paginate(10);
         $allTrainings=$trainer->trainings;
-        return view('company_employee.trainer.trainees.list',compact('trainer','trainers','allTrainees','allTrainings'));
+        
+        return view('company_employee.trainer.trainees.list',compact('trainer','allTrainees','allTrainings'));
     }
 }

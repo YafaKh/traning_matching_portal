@@ -7,7 +7,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link @yield('profile_activity')" href="{{ route('student_profile', ['id' => $student->id]) }}">Profile</a>
+          <a class="nav-link @yield('profile_activity')" href="{{ route('student_profile', ['user_id' => $student->id]) }}">Profile</a>
         </li>
         <li class="nav-item">
           <a class="nav-link @yield('progress_activity')" href="#">My progress</a>
