@@ -20,24 +20,31 @@
       </div>
     </div>
     <div class="studentInfos">
-    <div class="form-floating col-md mb-3 w-25 mb-1 studentInfo">
-          <input type="text" class="form-control" id="Specialization" name="Specialization" value="CS" />
+    <div class="form-floating col-md w-50 mb-1 studentInfo">
+          <input type="text" class="form-control fs-6 " id="Specialization" name="Specialization" value="{{$student->specialization->name}}" />
           <label for="Specialization">Specialization</label>
     </div>
      
-      <div class="input-group w-25 studentInfo">
+      <div class="input-group w-50 studentInfo">
         <select class="form-select  text-secondary w-50" id="inputGroupSelect01">
-          <option selected>Address</option>
+          <option selected>{{$student->city->name}}</option>
           @foreach($cities as $city)
           <option value="{{$city->id}}">{{$city->name}}</option>
-
           @endforeach
         </select>
       </div>
 
 
+      <div class="form-floating col-md mb-3 w-25 mb-1 studentInfo">
+          <input type="text" class="form-control" id="email" name="email" value="{{$student->email}}" />
+          <label for="email">email</label>
+    </div>
 
-      <input class="form-control form-control w-25 studentInfo" type="email" placeholder="Email:{{$student->email}}"
+    <div class="form-floating col-md mb-3 w-25 mb-1 studentInfo">
+          <input type="text" class="form-control" id="email" name="email" value="{{$student->email}}" />
+          <label for="email">email</label>
+    </div>
+      <input class="form-control form-control w-25 studentInfo" type="email" placeholder="{{$student->email}}"
         aria-label=".form-control-lg example">
       <input class="form-control form-control w-25 studentInfo" type="text" placeholder="phone:{{$student->phone}}"
         aria-label=".form-control-lg example">

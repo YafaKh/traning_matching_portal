@@ -11,11 +11,9 @@ use App\Models\Progress;
 
 use App\Models\University;
 use App\Models\Specialization;
+use App\Models\City;
 use App\Models\StudentCompanyApproval;
 use App\Models\UniversityEmployee;
-
-// use App\Models\Spoken_language;
-
 
 class Student extends Model
 {
@@ -46,6 +44,7 @@ class Student extends Model
     'university_id',
     'specialization_id',
     'training_id', 
+    'city_id', 
     'active'];
     protected $hidden = ['created_at','updated_at'];
     public function scopeDefaultOrder($query)
@@ -114,5 +113,9 @@ class Student extends Model
     public function supervisor()
     {
         return $this->belongsTo(UniversityEmployee::class, 'university_employee_id');
+    }
+    public function city()//student city
+    {
+        return $this->belongsTo(City::class, 'city_id');
     }
 }

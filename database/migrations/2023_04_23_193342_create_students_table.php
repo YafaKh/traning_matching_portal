@@ -46,6 +46,8 @@ return new class extends Migration
             $table->unsignedBigInteger('training_id')->nullable();
             $table->unsignedBigInteger('evaluate_student_id');
             $table->unsignedBigInteger('evaluate_company_id');
+            $table->unsignedBigInteger('city_id');
+
             $table->foreign('university_id')
             ->references('id')->on('universities')->onDelete('cascade');
             $table->foreign('university_employee_id')
@@ -58,6 +60,8 @@ return new class extends Migration
             ->references('id')->on('evaluate_students')->onDelete('cascade');
             $table->foreign('evaluate_company_id')
             ->references('id')->on('evaluate_companies')->onDelete('cascade');
+            $table->foreign('city_id')
+            ->references('id')->on('cities')->onDelete('cascade');
         });
     }
 

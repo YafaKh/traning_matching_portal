@@ -15,8 +15,7 @@ class EditStudentProfileController extends Controller
         $student =Student::find($id);
         $cities=City::all();
         $skills = Skill::all();
-        // $allSkills = Student_skill::with('student', 'skill')->where('student_id',$id)->get();
-
+        
         return view('student.edit_profile',compact('student','cities','skills'));
     }
     public function update(Request $request)
