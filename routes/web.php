@@ -99,12 +99,12 @@ Route::prefix('/coordinator/{user_id}')->group(function(){
     Route::get('/company{company_id}_profile', [CooCompaniesController::class, 'show_company_profile'])->name('coordinator_company_profile');
 });
 
-Route::prefix('/supervisor')->group(function(){
+Route::prefix('/supervisor/{user_id}')->group(function(){
     Route::prefix('/students')->group(function(){
 
-    Route::get('/{user_id}', [StudentsController::class, 'index'])->name('supervisor_list_students');
-    Route::get('/progress/{user_id}/{student_id}', [StudentsController::class, 'showProgressPage'])->name('show_student_progress');
-    Route::get('/evaluation/{user_id}/{student_id}', [StudentsController::class, 'showEvaluateStudentPage'])->name('show_student_Evaluation');
+    Route::get('/', [StudentsController::class, 'index'])->name('supervisor_list_students');
+    Route::get('/progress/{student_id}', [StudentsController::class, 'showProgressPage'])->name('show_student_progress');
+    Route::get('/evaluation/{student_id}', [StudentsController::class, 'showEvaluateStudentPage'])->name('show_student_Evaluation');
     });
     
     // Route::get('/students', function () {
