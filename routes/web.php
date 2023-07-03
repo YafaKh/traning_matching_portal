@@ -54,6 +54,19 @@ Route::get('/reset_password', function () {
     return view('/all_users/reset_password');
 })->name('reset_password'); 
 
+// admin 
+Route::prefix('/admin')->group(function () {
+    Route::get('/',[HomeController::class,'index'])->name('admin_home');
+    Route::get('/companies',[AdminCompaniesController::class,'index'])->name('admin_companies');
+    Route::get('/company{company_id}_profile', [AdminCompaniesController::class, 'show_company_profile'])->name('admin_company_profile');
+    Route::get('/comapnies_want_to_join',[CompaniesWantJoinController::class,'index'])->name('admin_compnies_want_to_join');
+    Route::get('/accept_company{company_id}',[CompaniesWantJoinController::class,'accept'])->name('admin_accept_company');
+    Route::get('/reject_company{company_id}',[CompaniesWantJoinController::class,'reject'])->name('admin_reject_company');
+    Route::get('/companies_employees',[AdCompanyEmployeeController::class,'index'])->name('admin_companies_employees');
+    Route::get('/university_employees',[AdUniversityEmployeeController::class,'index'])->name('admin_university_employees');
+    Route::get('/students',[StudentController::class,'index'])->name('admin_students');
+});
+
 // university employees' routes
 Route::get('university_employee/register', function () {
     return view('/university_employee/register'); })->name('university_employee_register');
@@ -145,18 +158,15 @@ Route::prefix('hr/{user_id}')
 });
 
 //students' routes
+Route::get('student/register',[StudentRegisterController::class,'create'])->name('student_registeration');
+Route::post('student/register/store',[StudentRegisterController::class,'store'])->name('student_registeration_1.store');
 
-Route::prefix('/student')->group(function () {
-
-    Route::get('/registeration/{user_id}',[StudentRegisterController::class,'create'])->name('student_registeration_1');
-    Route::POST('/registeration/store',[StudentRegisterController::class,'store'])->name('student_registeration_1.store');
-
-    Route::get('/profile/{user_id}',[StudentProfileController::class,'show'])->name('student_profile');
-    Route::get('/edit_profile/{user_id}',[EditStudentProfileController::class,'show'])->name('edit_student_profile');
-    Route::get('/evaluate_company/{user_id}',[EvaluateCompanyController::class,'show'])->name('student_evaluate_company');
+Route::prefix('/student/{user_id}')->group(function () {
+    Route::get('/profile',[StudentProfileController::class,'show'])->name('student_profile');
+    Route::get('/edit_profile',[EditStudentProfileController::class,'show'])->name('edit_student_profile');
+    Route::get('/evaluate_company',[EvaluateCompanyController::class,'show'])->name('student_evaluate_company');
     Route::POST('/evaluate_company/add',[EvaluateCompanyController::class,'add'])->name('student_evaluate_company.add');
-
-    Route::get('/list{user_id}',[StudentRegisterController::class,'test'])->name('test');
+    Route::get('/list',[StudentRegisterController::class,'test'])->name('test');
 
 })->name('student');
 
@@ -169,32 +179,19 @@ Route::post('store{id}',[StudentRegisterController::class,'addManyLanguageToStud
 // Route::get('listSpec{id}',[StudentProfileController::class,'getSpecification'])->name('student_spec_list');
 
 
-// admin 
-Route::prefix('/admin')->group(function () {
-    Route::get('/',[HomeController::class,'index'])->name('admin_home');
-    Route::get('/companies',[AdminCompaniesController::class,'index'])->name('admin_companies');
-    Route::get('/company{company_id}_profile', [AdminCompaniesController::class, 'show_company_profile'])->name('admin_company_profile');
-    Route::get('/comapnies_want_to_join',[CompaniesWantJoinController::class,'index'])->name('admin_compnies_want_to_join');
-    Route::get('/accept_company{company_id}',[CompaniesWantJoinController::class,'accept'])->name('admin_accept_company');
-    Route::get('/reject_company{company_id}',[CompaniesWantJoinController::class,'reject'])->name('admin_reject_company');
-    Route::get('/companies_employees',[AdCompanyEmployeeController::class,'index'])->name('admin_companies_employees');
-    Route::get('/university_employees',[AdUniversityEmployeeController::class,'index'])->name('admin_university_employees');
-    Route::get('/students',[StudentController::class,'index'])->name('admin_students');
-});
-
 // trainer
-Route::prefix('/trainer')->group(function(){
+Route::prefix('/trainer/{user_id}')->group(function(){
     Route::prefix('/trainees')->group(function(){
-        Route::get('/{user_id}',[TrainerController::class,'show'])->name('trainer_list_traniees');
-        Route::prefix('/progress')->group(function(){
-        Route::get('/{user_id}/{trainee_id}',[progressController::class,'show'])->name('fill_traniee_progress');
-        Route::POST('/add/{user_id}/{trainee_id}',[progressController::class,'add'])->name('fill_traniee_progress.add');
-        Route::get('/edit/{user_id}/{trainee_id}/{progress_id}',[progressController::class,'edit'])->name('fill_traniee_progress.edit');
-        Route::PUT('/update/{user_id}/{trainee_id}/{progress_id}',[progressController::class,'update'])->name('fill_traniee_progress.update');
-        Route::POST('/delete/{user_id}/{trainee_id}/{progress_id}',[progressController::class,'destroy'])->name('fill_traniee_progress.delete');
+        Route::get('/',[TrainerController::class,'show'])->name('trainer_list_traniees');
+        Route::prefix('/progress/{trainee_id}')->group(function(){
+        Route::get('/',[progressController::class,'show'])->name('fill_traniee_progress');
+        Route::POST('/add',[progressController::class,'add'])->name('fill_traniee_progress.add');
+        Route::get('/edit/{progress_id}',[progressController::class,'edit'])->name('fill_traniee_progress.edit');
+        Route::PUT('/update/{progress_id}',[progressController::class,'update'])->name('fill_traniee_progress.update');
+        Route::POST('/delete/{progress_id}',[progressController::class,'destroy'])->name('fill_traniee_progress.delete');
         });
-        Route::get('/evaluation/{user_id}/{trainee_id}',[EvaluateController::class,'show'])->name('fill_traniee_evaluation');
-        Route::post('/evaluation/add/{user_id}/{trainee_id}',[EvaluateController::class,'add'])->name('fill_traniee_evaluation.add');
+        Route::get('/evaluation/{trainee_id}',[EvaluateController::class,'show'])->name('fill_traniee_evaluation');
+        Route::post('/evaluation/add/{trainee_id}',[EvaluateController::class,'add'])->name('fill_traniee_evaluation.add');
 
         });
 });
