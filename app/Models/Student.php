@@ -36,6 +36,7 @@ class Student extends Model
     'load',
     'address',
     'email',
+    'linkedin',
     'password',
     'availability_date',
     'connected_with_a_company',

@@ -1,4 +1,4 @@
-@extends('university_employee.master')
+@extends('company_employee.master')
 @section('navbar')
     @include('university_employee.supervisor.navbar')
 @endsection
@@ -57,26 +57,44 @@
             </tr>
         </thead>
         <tbody class="bg-light">
+        @foreach($allStudents as $student)
+
             <tr>
             <td class="ps-3"><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></td>                
-            <td>****</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td>Mark</td>
-            <td>Mark</td>
-            <td>Otto</td>
+            <td>{{$student ->student_num}}</td>
+            <td>{{$student ->first_name_en}} {{$student ->second_name_en}} {{$student ->third_name_en}} {{$student ->last_name_en}}</td>
+            <td>{{$student ->specialization->name}}</td>
+            <td>{{$student ->training->branch->company->name ?? "__"}}</td>
+            <td>{{$student ->training->branch->address ?? "__"}}</td>
+
+            @if($student ->training->semester ?? "__" == "1")
+            <td>Fall - {{$student ->training->year}} - {{$student ->training->employee->first_name ?? "__"}} {{$student ->training->employee->last_name ?? "__"}}</td>
+            @elseif($student ->training->semester ?? "__" == '2')
+            <td>Spring - {{$student ->training->year}} - {{$student ->training->employee->first_name ?? "__"}} {{$student ->training->employee->last_name ?? "__"}}</td>
+            @elseif($student ->training->semester ?? "__" == '3')
+            <td>First Summer - {{$student ->training->year}} - {{$student ->training->employee->first_name ?? "__"}} {{$student ->training->employee->last_name ?? "__"}}</td>
+            @elseif($student ->training->semester ?? "__" == '4')
+            <td>Second Summer - {{$student ->training->year}} - {{$student ->training->employee->first_name ?? "__"}} {{$student ->training->employee->last_name ?? "__"}}</td>
+            @elseif($student ->training->semester ?? "__" == "__")
+            <td>__</td>
+            @endif
+           
+
+
             <td>
             <a class="dropdown-toggle text-dark" 
             role="button" data-bs-toggle="dropdown" aria-expanded="false">Go to student's</a>
             <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="{{route('student_visit_forms')}}">Visit forms</a></li>
-                <li><a class="dropdown-item" href="">Progress</a></li>
-                <li><a class="dropdown-item" href="">Evaluation</a></li>
+                <li><a class="dropdown-item" href="{{route('show_student_progress',['user_id' => $supervisor->id,'student_id' => $student->id])}}">Progress</a></li>
+                <li><a class="dropdown-item" href="{{route('show_student_Evaluation',['user_id' => $supervisor->id,'student_id' => $student->id])}}">Evaluation</a></li>
                 <li><a class="dropdown-item" href="">Company evaluation</a></li>
                 <li><a class="dropdown-item" href="">Assessment</a></li>
             </ul>
             </td>
-            </tr>
+            </tr>        
+            @endforeach
+
         </tbody>
         </table>
     </div>

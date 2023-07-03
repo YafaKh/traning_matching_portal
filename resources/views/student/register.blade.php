@@ -16,37 +16,41 @@
         <div class="form-floating col-md mb-3">
           <input type="text" class="form-control" id="first_name_ar" name="first_name_ar" placeholder="First" />
           <label for="first_name_ar">First</label>
-          <!-- <div class="text-danger mt-3 mb-3">
-          error message
-         
-        </div> -->
+          <div class="row">
+            @error('first_name_ar')
+                <span class="text-danger">{{ $message }}</span>
+            @enderror
+          </div>
         </div>
         
         <div class="form-floating col-md  mb-3">
           <input type="text" class="form-control" id="second_name_ar" name="second_name_ar" placeholder="Second" />
           <label for="second_name_ar">Second</label>
-          <!-- <div class="text-danger mt-3 mb-3">
-          error message
-          
-        </div> -->
+          <div class="row">
+        @error('first_name_ar')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
+      </div>
         </div>
       </div>
       <div class="row g-2">
         <div class="form-floating col-md">
           <input type="text" class="form-control" id="third_name_ar" name="third_name_ar" placeholder="Third" />
           <label for="third_name_ar">Third</label>
-          <!-- <div class="text-danger mt-3 mb-3">
-          error message
-          
-        </div> -->
+          <div class="row">
+        @error('first_name_ar')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
+      </div>
         </div>
         <div class="form-floating col-md">
           <input type="text" class="form-control" id="last_name_ar" name="last_name_ar" placeholder="Last" />
           <label for="last_name_ar">Last</label>
-          <!-- <div class="text-danger mt-3 mb-3">
-          error message
-         
-        </div> -->
+          <div class="row">
+        @error('first_name_ar')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
+      </div>
         </div>
       </div>
     </div>
@@ -56,35 +60,40 @@
         <div class="form-floating col-md  mb-3">
           <input type="text" class="form-control" id="first_name_en" name="first_name_en" placeholder="First" />
           <label for="first_name_en">First</label>
-          <!-- <div class="text-danger mt-3 mb-3">
-          error message
-        </div> -->
+          <div class="row">
+        @error('first_name_ar')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
+      </div>
         </div>
         <div class="form-floating col-md  mb-3">
           <input type="text" class="form-control" id="second_name_en" name="second_name_en" placeholder="Second" />
           <label for="second_name_en">Second</label>
-          <!-- <div class="text-danger mt-3 mb-3">
-          error message
-         
-        </div> -->
+          <div class="row">
+        @error('first_name_ar')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
+      </div>
         </div>
       </div>
       <div class="row g-2">
         <div class="form-floating col-md">
           <input type="text" class="form-control" id="third_name_en" name="third_name_en" placeholder="Third" />
           <label for="third_name_en">Third</label>
-          <!-- <div class="text-danger mt-3 mb-3">
-          error message
-         
-        </div> -->
+          <div class="row">
+        @error('first_name_ar')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
+      </div>
         </div>
         <div class="form-floating col-md">
           <input type="text" class="form-control" id="last_name_en" name="last_name_en" placeholder="Last" />
           <label for="last_name_en">Last</label>
-          <!-- <div class="text-danger mt-3 mb-3">
-          error message
-         
-        </div> -->
+          <div class="row">
+        @error('first_name_ar')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
+      </div>
         </div>
       </div>
     </div>
@@ -92,26 +101,29 @@
       <div class="form-floating ">
         <input type="text" class="form-control" id="student_num" name="student_num" placeholder="StudentID" />
         <label for="student_num">StudentID</label>
-        <div class="text-danger mt-3 mb-3">
-          error message
-         
-        </div>
+        <div class="row">
+        @error('first_name_ar')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
+      </div>
       </div>
       <div class="form-floating">
         <input type="text" class="form-control" id="Studentphone" name="phone" placeholder="Phone number" />
         <label for="Studentphone">Phone number</label>
-        <div class="text-danger mt-3 mb-3">
-          error message 
-         
-        </div>
+        <div class="row">
+        @error('first_name_ar')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
+      </div>
       </div>
       <div class="form-floating">
         <input type="text" class="form-control" id="StudentEmail" name="email" placeholder="University email" />
         <label for="StudentEmail">University email</label>
-        <div class="text-danger mt-3 mb-3">
-          error message
-         
-        </div>
+        <div class="row">
+        @error('first_name_ar')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
+      </div>
       </div>
       <div class="form-floating">
         <select class="form-select col mb-4" name="address" id="studentAddress">
@@ -153,10 +165,11 @@
 </div>
 @endforeach
 
-      <div class="text-danger mt-3 mb-3">
-          error message
-          
-        </div>
+<div class="row">
+        @error('first_name_ar')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
+      </div>
       
       </div>
     <div class="form-floating ms-4 mb-4 d-flex flex-row gx-5">
@@ -175,10 +188,7 @@
       </div>
       
     </div>
-    <div class="text-danger mt-3 mb-3">
-          error message
-          
-        </div>
+    
 
     <div class="form-floating mb-4">
       <select class="form-select" id="specialization" name="specialization">
@@ -190,42 +200,47 @@
         @endforeach
 
       </select>
-      <div class="text-danger mt-3 mb-3">
-          error message
-         
-        </div>
+      <div class="row">
+        @error('first_name_ar')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
+      </div>
     </div>
     <div class="form-floating mb-4">
       <input type="text" class="form-control" id="gpa" name="gpa" placeholder="GPA" />
       <label for="gpa">GPA</label>
-      <div class="text-danger mt-3 mb-3">
-          error message
-         
-       </div>
+      <div class="row">
+        @error('first_name_ar')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
+      </div>
     </div>
     <div class="form-floating mb-4">
       <input type="Number" class="form-control" id="passed_hours" name="passed_hours" placeholder="Number of passed hour" />
       <label for="passed_hours">Number of passed hour</label>
-      <div class="text-danger mt-3 mb-3">
-          error message
-        
-        </div>
+      <div class="row">
+        @error('first_name_ar')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
+      </div>
     </div>
     <div class="form-floating mb-4">
       <input type="password" class="form-control" id="password" name="password" placeholder="Password" />
       <label for="password">Password</label>
-      <div class="text-danger mt-3 mb-3">
-          error message
-         
-        </div>
+      <div class="row">
+        @error('first_name_ar')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
+      </div>
     </div>
     <div class="form-floating mb-4">
       <input type="password" class="form-control" id="cofirmPassword" name="cofirmPassword" placeholder="Confirm password" />
       <label for="cofirmPassword">Confirm password</label>
-      <div class="text-danger mt-3 mb-3">
-          error message
-        
-        </div>
+      <div class="row">
+        @error('first_name_ar')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
+      </div>
     </div>
     
       <div class="uploadImage">
@@ -233,9 +248,11 @@
 
           <input type="text" class="form-control" id="floatingInput" placeholder="         Personal image" />
           <i class="bi bi-link-45deg imgicon "></i>
-          <div class="text-danger mb-3">
-          error message
-        </div>
+          <div class="row">
+        @error('first_name_ar')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
+      </div>
       </div>
 </div>
 </div>
@@ -274,16 +291,30 @@
         <input type="link" class="form-control" id="linkedin" name="linkedin" placeholder="Linkedin" />
         <label for="linkedin" class="ms-5">Linkedin</label>
         <i class="bi bi-link-45deg imgicon"></i>
-
+       
+      </div>
+      <div class="row">
+        @error('first_name_ar')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
       </div>
       <div class="form-floating mb-4">
         <input type="number" class="form-control" id="load" name="load" placeholder="Number of semester hours" />
         <label for="load">Number of semester hours (without internship)</label>
       </div>
-
+      <div class="row">
+        @error('first_name_ar')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
+      </div>
       <div class="form-floating mb-4">
         <textarea name="work_experience" id="work_experience" cols="55" rows="7" placeholder="Experience ( optional )"
           class="overflow-auto"></textarea>
+      </div>
+      <div class="row">
+        @error('first_name_ar')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
       </div>
 
       <div class="form-floating ms-4 mb-4 gx-5">
@@ -313,6 +344,11 @@
           <option value="{{$company->id}}">{{$company->name}}</option>
           @endforeach
         </select>
+        <div class="row">
+        @error('first_name_ar')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
+      </div>
         <select class="form-select col mx-3 disabled" id="companyBranch" name="companyBranch">
           <!--here the user can choose multi value-->
           <option value="--" selected>Company branch</option>
@@ -320,6 +356,11 @@
           <option value="{{$branch->id}}">{{$branch->address}}</option>
           @endforeach
         </select>
+      </div>
+      <div class="row">
+        @error('first_name_ar')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
       </div>
       <div class="form-floating mb-4 row">
         <select class="form-select col mx-2" id="inputGroupSelect01">
@@ -329,6 +370,11 @@
           <option value="yes">exalt</option>
           <option value="yes">nothing</option>
         </select>
+        <div class="row">
+        @error('first_name_ar')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
+      </div>
         <div class="row">
           <div class="selected-box">Asal</div>
           <div class="selected-box">exalt</div>
@@ -345,7 +391,11 @@
           @endforeach
 
         </select>
-      
+        <div class="row">
+        @error('first_name_ar')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
+      </div>
         <div class="form-floating mt-5">
         <input type="text" class="form-control mb-5" id="floatingInput" placeholder="else" />
         <label for="floatingInput">else</label>
@@ -360,6 +410,11 @@
           <input type="date" class="form-control" name="availability_date" placeholder="Date" />
         </div>
       </div>
+      <div class="row">
+        @error('first_name_ar')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
+      </div>
     </div>
     <div class="registerField">
       <label for="" class="mt-3 mb-3"> Preferred training field :</label>
@@ -367,7 +422,7 @@
 
       <div class="row g-2 ms-3 mb-2">
         <div class="form-check col">
-          <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+          <input class="form-check-input" type="checkbox" value="" id="trainingFields" name="trainingFields" />
           <label class="form-check-label" for="flexCheckDefault">
             {{$trainingField->name}}
           </label>
@@ -375,7 +430,11 @@
 
       </div>
       @endforeach
-      
+      <div class="row">
+        @error('first_name_ar')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
+      </div>      
       <div class="form-floating my-5">
         <input type="text" class="form-control mb-5" id="floatingInput" placeholder="else" />
         <label for="floatingInput">else</label>

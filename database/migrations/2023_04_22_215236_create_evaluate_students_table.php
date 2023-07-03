@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->text('student_weaknesses');
-            $table->boolean('willing_to_hire')->default(0);
+            $table->boolean('willing_to_hire');
             $table->text('willing_to_hire_reason');
             $table->string('comments', 200);
             $table->tinyInteger('fulfilling_required_tasks');
@@ -29,6 +29,7 @@ return new class extends Migration
             $table->tinyInteger('enthusiasm');
             $table->tinyInteger('communicational_skills');
             $table->tinyInteger('english_language_proficiency');
+            $table->Integer('sum')->default(0);
         });
     }
 

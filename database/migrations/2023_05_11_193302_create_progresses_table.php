@@ -13,14 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('progress', function (Blueprint $table) {
+        Schema::create('progresses', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->integer('week');
+            $table->string('week');
             $table->date('end_date') ;
             $table->integer('passed_hours');
             $table->integer('absences_days')->length(1);
-            $table->string('note');
+            $table->string('note')->nullable();
 
             $table->unsignedBigInteger('student_id');
             $table->foreign('student_id')->references('id')->on('students');

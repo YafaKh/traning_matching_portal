@@ -66,7 +66,7 @@ class StudentRegisterController extends Controller
             'gender' =>'required|boolean',
             'passed_hours' =>'required|integer',//min ??
             'load' =>'required|integer|min:0|max:18',
-            'gpa' =>'required|max:4|between:1.00,4.00|regex:/^[0-4]\.\d\d$/',//lowest gpa ??
+            'gpa' =>'required|max:4|between:2.00,4.00|regex:/^[0-4]\.\d\d$/',//lowest gpa ??
             'address'=>'required|string',
             'email'=>'required|email|unique:students',
             'linkedin' =>'required|url',

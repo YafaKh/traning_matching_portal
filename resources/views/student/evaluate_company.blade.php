@@ -21,7 +21,7 @@
             </div>
             <div class="col studentInfo-evaluateCompany">
                 <p>Training place name :</p>
-                <p>{{$companyName}}</p><hr>
+                <p>{{--$companyName--}}</p><hr>
             </div>
           </div>
         </div>

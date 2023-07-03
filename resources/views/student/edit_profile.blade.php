@@ -6,7 +6,7 @@
 
   <section class="profileSection">
     <div class="studentHeader">
-      <h1><input class="form-control form-control w-25 opacity-75" type="text" placeholder="Student Name"
+      <h1><input class="form-control form-control w-25 opacity-75" type="text" placeholder="{{$student->first_name_en}} {{$student->last_name_en}}"
           aria-label=".form-control-lg example">
 
 
@@ -20,26 +20,28 @@
       </div>
     </div>
     <div class="studentInfos">
-      <!-- in placeholder inputs the info will appears to make the user able to change them -->
-      <input class="form-control form-control w-25 studentInfo" type="text" placeholder="specialization : CS"
-        aria-label=".form-control-lg example">
+    <div class="form-floating col-md mb-3 w-25 mb-1 studentInfo">
+          <input type="text" class="form-control" id="Specialization" name="Specialization" value="CS" />
+          <label for="Specialization">Specialization</label>
+    </div>
+     
       <div class="input-group w-25 studentInfo">
-        <select class="form-select  text-secondary" id="inputGroupSelect01">
+        <select class="form-select  text-secondary w-50" id="inputGroupSelect01">
           <option selected>Address</option>
-          <option value="1">Jenin</option>
-          <option value="2">Nablus</option>
-          <option value="3">Ramallah</option>
+          @foreach($cities as $city)
+          <option value="{{$city->id}}">{{$city->name}}</option>
+
+          @endforeach
         </select>
       </div>
 
 
 
-      <input class="form-control form-control w-25 studentInfo" type="email" placeholder="Email"
+      <input class="form-control form-control w-25 studentInfo" type="email" placeholder="Email:{{$student->email}}"
         aria-label=".form-control-lg example">
-      <!-- الفون هو بدخلو عادي واحنا منقسمو ولا بدخل الكود اريا وهي القصص ومنحطهم بالداتا بيس ؟ -->
-      <input class="form-control form-control w-25 studentInfo" type="text" placeholder="Phone"
+      <input class="form-control form-control w-25 studentInfo" type="text" placeholder="phone:{{$student->phone}}"
         aria-label=".form-control-lg example">
-      <input class="form-control form-control w-25 studentInfo" type="text" placeholder="Linkedin"
+      <input class="form-control form-control w-25 studentInfo" type="text" placeholder="linkedin:{{$student->linkedin}}"
         aria-label=".form-control-lg example">
       <a class="text-decoration-none changePassword" href="#">Change password</a>
 
@@ -53,27 +55,17 @@
         <div class="anWorkExperience">
           <div class="goldenDiv"></div>
           <div class="anWorkExperienceInfo">
-            <h2 class="expName">Freelance UX/UI designer</h2>
+          
+                <textarea name="expDescription" id="expDescription" cols="50" rows="10" placeholder="{{$student->work_experience}}"
+                class=" overflow-auto mb-2"></textarea>
+            <!-- <h2 class="expName">Freelance UX/UI designer</h2>
             <p>Lorem ipsum</p>
             <p>Jun 2022 — Present</p>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dapibus eros eu
-              vehicula interdum. Cras nec ultricies massa. Curabitur rutrum, diam id consequat consequat </p>
+              vehicula interdum. Cras nec ultricies massa. Curabitur rutrum, diam id consequat consequat </p> -->
           </div>
 
-        </div>
-        <div class="anWorkExperience">
-          <div class="blueDiv"></div>
-          <div class="anWorkExperienceInfo">
-            <h2 class="expName">Freelance UX/UI designer</h2>
-            <p>Lorem ipsum</p><!--workPlace-->
-            <p>Jun 2022 — Present</p><!--date-->
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dapibus eros eu
-              vehicula interdum. Cras nec ultricies massa. Curabitur rutrum, diam id consequat consequat </p>
-            <!--expDescription-->
-          </div>
-        </div>
-
-        <div class="mt-4">
+        <!-- <div class="mt-4">
           <div class="anWorkExperience mb-5">
             <div class="goldenDiv"></div>
             <div class="anWorkExperienceInfo">
@@ -95,7 +87,7 @@
                 class=" overflow-auto mb-2"></textarea>
             </div>
 
-          </div>
+          </div> -->
           <!-- when i click on the button this section will ba appeare and if i click again new section will appeare and so 
   -the margin here different than the section apove
 - and the colered div different once golden and next blue-->
@@ -126,38 +118,31 @@
   <section class="profileSection studentGeneralInfo">
     <h2 class="GeneralInfoHeader">General information</h2>
     <div>
-      <input type="text" class="form-control ms-5 w-25 mb-4" id="new_skill" placeholder="Number of passed hour">
+      <input type="text" class="form-control ms-5 w-25 mb-4" id="new_skill" placeholder="Number of passed hour :{{$student->passed_hours}}">
       <div class="input-group ms-5 w-25 my-4">
         <select class="form-select  text-secondary" id="inputGroupSelect01">
-          <option value="yes" selected>Female</option>
-          <option value="no">Male</option>
+          <option value="{{$student->gender}}" selected>Female</option>
+          <option value="{{$student->gender}}">Male</option>
 
         </select>
       </div>
-      <input type="text" class="form-control ms-5 my-4 w-25" id="new_skill" placeholder="GPA">
+      <input type="text" class="form-control ms-5 my-4 w-25" id="new_skill" placeholder="GPA: {{$student->gpa}}">
     </div>
   </section>
   <section class="profileSection studentSkills overflow-auto">
     <h2 class="GeneralInfoHeader">Skills <i class="fa-solid fa-plus text-primary"></i>
     </h2>
+    @foreach($skills as $skill)
+
     <div class="skill">
       <a class="ms-5" href="#" role="button"><i class="fa-solid fa-trash-can text-danger"></i>
       </a>
-
-      <p class="ps-2 w-25">Lorem, ipsum:</p>
+      <p class="ps-2 w-25">{{$skill->name}}</p>
       <!-- <i class="bi bi-trash3 fs-6 text-danger float-start"></i> -->
       <input type="range" min="1" max="100" value="75" class="w-25">
     </div>
-
-    <div class="skill">
-      <a class="ms-5" href="#" role="button"><i class="fa-solid fa-trash-can text-danger"></i>
-      </a>
-      <p class="ps-2 w-25">Lorem, ipsum:</p>
-
-      <!-- <i class="bi bi-trash3 fs-6 text-danger float-start"></i> -->
-
-      <input type="range" min="1" max="100" value="50" class="w-25">
-    </div>
+@endforeach
+    
     <div class="skill d-inline">
       <!-- <div class="input-group ms-5 mt-4 w-25"> -->
       <!-- <span class="input-group-text"><i class="bi bi-plus-square fs-6"></i></span>
