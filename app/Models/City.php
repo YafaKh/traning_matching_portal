@@ -22,4 +22,8 @@ class City extends Model
     {
         return $this->hasMany(Company::class);
     }
+    public function students()
+    {
+        return $this->hasMany('App\Models\Student','city_id');
+    }
 }

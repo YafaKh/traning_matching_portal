@@ -6,6 +6,7 @@ use Illuminate\Support\Str;
 use App\Models\University;
 use App\Models\UniversityEmployee;
 use App\Models\Specialization;
+use App\Models\City;
 use App\Models\Training;
 use App\Models\Student;
 use App\Models\EvaluateStudent;
@@ -38,6 +39,8 @@ class StudentFactory extends Factory
         $supervisors[count($supervisors)]=NULL;
 
         $specialization_ids = Specialization::pluck('id')->all();
+        $city_ids = City::pluck('id')->all();
+
         $training_ids = Training::pluck('id')->all();
         $this->instance_counter++;
 
@@ -61,7 +64,7 @@ class StudentFactory extends Factory
             'gpa' => $this->faker->randomFloat(2, 0, 4),
             'address' => $this->faker->address,
             'email' => $this->faker->unique()->safeEmail,
-            'linkedin' => $this->faker-->url(),
+            'linkedin' => $this->faker->url(),
             'password' => Str::substr(bcrypt('password'),15), 
             'availability_date' => $this->faker->date(),
             'connected_with_a_company' => $this->faker->boolean,
@@ -72,6 +75,8 @@ class StudentFactory extends Factory
             'university_id' => $this->faker->randomElement($university_ids),
             'university_employee_id' => $this->faker->randomElement($supervisors),
             'specialization_id' => $this->faker->randomElement($specialization_ids),
+            'city_id' => $this->faker->randomElement($city_ids),
+
             //'training_id' => $this->faker->randomElement($training_ids),
             'evaluate_student_id' => $this->instance_counter,
             'evaluate_company_id' => $this->instance_counter,
