@@ -1,4 +1,22 @@
 // evaluate student - by trainer
+
+
+var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+var sliders = document.querySelectorAll('input[type="range"]');
+
+checkboxes.forEach(function(checkbox, index) {
+  checkbox.addEventListener('change', function() {
+    if (checkbox.checked) {
+    sliders[index].disabled = true;
+    // give the slider lowest possible value 
+    sliders[index].value = 0;
+  } else {
+    sliders[index].disabled = false;
+  }
+  });
+}); 
+
+
 function calculateAvg() {
     var rangeInputs = document.querySelectorAll('input[type="range"]');
     var checkboxes = document.querySelectorAll('input[type="checkbox"]');

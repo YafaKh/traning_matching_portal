@@ -88,11 +88,11 @@ class Student extends Model
     }    
     public function evaluate_student()
     {
-        return $this->hasOne(EvaluateStudent::class);
+        return $this->belongsTo(EvaluateStudent::class,'evaluate_student_id');
     }
     public function evaluate_company()
     {
-        return $this->hasOne(EvaluateCompany::class);
+        return $this->belongsTo(EvaluateCompany::class);
     }
     public function progresses()
     {

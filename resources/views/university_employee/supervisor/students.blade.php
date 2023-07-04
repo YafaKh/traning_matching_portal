@@ -55,6 +55,7 @@
             <th scope="col">Training</th>
             <th scope="col">Go to student's</th>
             </tr>
+          
         </thead>
         <tbody class="bg-light">
         @foreach($allStudents as $student)
@@ -98,5 +99,8 @@
         </tbody>
         </table>
     </div>
+    {{$allStudents->links()}}
+
 </div>
+
 @endsection

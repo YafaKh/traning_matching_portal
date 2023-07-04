@@ -33,15 +33,16 @@ class StudentsController extends Controller
         if ($supervisor==null) {
             return "supervisor not found ";
         }
-        $allStudents=$supervisor->students();
+        $allStudents=$supervisor->students()->paginate(10);
         $student = $allStudents->find($student_id);
+
 
         if ($student == null) {
             return "Student not found";
         }
         $studentProgress =Progress::where('student_id',$student_id)->get();
 
-        return view('university_employee.supervisor.progress', compact('supervisor', 'student','studentProgress'));
+        return view('university_employee.supervisor.progress', compact('supervisor', 'student','studentProgress','allStudents'));
         
     }
     public function showEvaluateStudentPage($user_id,$student_id)
@@ -56,9 +57,13 @@ class StudentsController extends Controller
         if ($student == null) {
             return "Student not found";
         }
-        // $studentEvalute =EvaluateStudent::where('student_id',$student_id)->get();
+        // company rmployee should be trainier in training table ?
+        $trainer = $student->training->employee;
+        $training = $student->training;
+        $evaluateStudent =$student->evaluate_student;
 
-        return view('university_employee.supervisor.studentEvaluate', compact('supervisor', 'student','studentEvalute'));
+        return view('university_employee.supervisor.evaluateStduent',compact('supervisor','student','trainer','training','evaluateStudent'));
         
     }
+
 }
