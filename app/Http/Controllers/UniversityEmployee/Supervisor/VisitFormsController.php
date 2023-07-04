@@ -11,7 +11,7 @@ class VisitFormsController extends Controller
      /**
      * list all visit formd
      */
-    public function index()
+    public function index($user_id)
     {
     }
 

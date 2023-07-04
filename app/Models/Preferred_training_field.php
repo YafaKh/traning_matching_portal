@@ -16,8 +16,9 @@ class Preferred_training_field extends Model
     // {
     //     return $this->belongsToMany('App\Models\Student','preferred_training_fields_students','preferred_training_id','student_id');
     // }
-    public function studentPreferredTrainingField()
+    public function studentPreferredTrainingField():HasManyThrough
     {
-        return $this->hasMany(Preferred_training_field_student::class);
+        return $this->hasManyThrough(Preferred_training_field_student::class,Student::class);
     }
+    
 }

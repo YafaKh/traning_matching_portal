@@ -77,7 +77,7 @@
 
     <div class="skill">
       <p>{{ $allSkill->skill->name }}</p>
-      <input type="range" class="form-range w-25" value="{{  $allSkill->level }}" id="disabledRange" disabled>
+      <input type="range" class="form-range w-25"  min="0" max="5" value="{{  $allSkill->level }}" id="disabledRange" disabled>
 
       <!-- <input type="range" min="1" max="100" value="{{ $allSkill->level }}" class="w-25" disabled> -->
     </div>
@@ -93,16 +93,16 @@
     <p class="fs-4 text-dark-blue">{{ $allLanguage->spokenLanguage->name }}</p>
     <div class="skill">
       <p>speaking_level :</p>
-      <input type="range" class="form-range w-25" value="{{ $allLanguage->speaking_level }}" id="disabledRange" disabled>
+      <input type="range" class="form-range w-25"  min="0" max="5" value="{{ $allLanguage->speaking_level }}" id="disabledRange" disabled>
     </div>
     <div class="skill">
     <p>writing_level :</p>
-    <input type="range" class="form-range w-25" value="{{ $allLanguage->writing_level }}" id="disabledRange" disabled>
+    <input type="range" class="form-range w-25"  min="0" max="5" value="{{ $allLanguage->writing_level }}" id="disabledRange" disabled>
 
      </div>
      <div class="skill">
      <p>listening_level :</p>
-    <input type="range" class="form-range w-25" value="{{ $allLanguage->listening_level }}" id="disabledRange" disabled>
+    <input type="range" class="form-range w-25"  min="0" max="5" value="{{ $allLanguage->listening_level }}" id="disabledRange" disabled>
 
      </div>
     @endforeach

@@ -69,7 +69,7 @@
 <section class="col-md-9 bg-white mb-3 p-md-5 p-3 mx-auto rounded-2">
   <div>
     <p>Additional comments: </p>
-    <textarea class="w-100" style="height: 100px;" value="comments" name="comments"></textarea>
+    <textarea class="w-100" style="height: 100px;" name="comments"></textarea>
   </div>
   @error('comments')
             <span class="text-danger">{{ $message }}</span>
@@ -84,80 +84,86 @@
         <tr>
           <td></td>
           <td class="d-flex flex-row justify-content-betwee" style="width: 500px;">
-            <p style="width: 20%;">(poor)<br>1</p>
-            <p style="width: 20%;"><br>2</p>
-            <p style="width: 20%;"><br>3</p>
-            <p style="width: 20%;"><br>4</p>
-            <p style="width: 20%;">(excellent)<br>5</p>
+            <p style="width: 16.67%;">(poor)<br>0</p>
+            <p style="width: 16.67%;"><br>1</p>
+            <p style="width: 16.67%;"><br>2</p>
+            <p style="width: 16.67%;"><br>3</p>
+            <p style="width: 16.67%;"><br>4</p>
+            <p style="width: 16.67%;">(excellent)<br>5</p>
           </td>
           <td class="mb-3"><p>Can't judge</p></td>
         </tr>
       </thead>
       <tbody class="bg-sand">
+      <tr>
+          <td>Attendance</td>
+          <td><input type="range" class="form-range" min="0" max="5" id="mark1" style="width: 400px;" name="attendance"></td>
+          <td class="d-flex justify-content-center">
+            <input  class="form-check-input shadow" type="checkbox" value="" id="checkbox1" name="attendance"></td>
+          </tr>
           <tr>
           <td>Fulfilling required tasks</td>
-          <td><input type="range" class="form-range" min="1" max="5" id="mark1" style="width: 400px;" name="fulfilling_required_tasks"></td>
+          <td><input type="range" class="form-range" min="0" max="5" id="mark1" style="width: 400px;" name="fulfilling_required_tasks"></td>
           <td class="d-flex justify-content-center">
             <input  class="form-check-input shadow" type="checkbox" value="" id="checkbox1" name="fulfilling_required_tasks"></td>
           </tr>
           <tr>
-            <!-- if null make it = 0 ??-->
           <td>Cooperation with colleagues and Teamwork ability</td>
-          <td><input type="range" class="form-range" min="1" max="5" id="mark2" style="width: 400px;" name="teamwork_ability"></td>
+          <td><input type="range" class="form-range" min="0" max="5" id="mark2" style="width: 400px;" name="teamwork_ability"></td>
           <td class="d-flex justify-content-center"><input class="form-check-input shadow" type="checkbox" value="" id="checkbox2" name="teamwork_ability"></td>
           </tr>
           <tr>
           <td>Punctuality</td>
-          <td><input type="range" class="form-range" min="1" max="5" id="mark3" style="width: 400px;" name="punctuality"></td>
-          <td class="d-flex justify-content-center"><input class="form-check-input shadow" type="checkbox" value="" id="checkbox3" name="punctuality"></td>
+          <td><input type="range" class="form-range" min="0" max="5" id="mark3" style="width: 400px;" name="punctuality"></td>
+          <td class="d-flex justify-content-center"><input class="form-check-input shadow" type="checkbox" id="checkbox3" name="punctuality"></td>
           </tr>
           <tr>
           <td>Quality of work</td>
-          <td><input type="range" class="form-range" min="1" max="5" id="mark4" style="width: 400px;" name="quality_of_work"></td>
-          <td class="d-flex justify-content-center"><input class="form-check-input shadow" type="checkbox" value="" id="checkbox4" name="quality_of_work"></td>
+          <td><input type="range" class="form-range" min="0" max="5" id="mark4" style="width: 400px;" name="quality_of_work"></td>
+          <td class="d-flex justify-content-center"><input class="form-check-input shadow" type="checkbox" id="checkbox4" name="quality_of_work"></td>
           </tr>
           <tr>
           <td>Dependability</td>
-          <td><input type="range" class="form-range" min="1" max="5" id="mark5" style="width: 400px;" name="dependability"></td>
+          <td><input type="range" class="form-range" min="0" max="5" id="mark5" style="width: 400px;" name="dependability"></td>
           <td class="d-flex justify-content-center"><input class="form-check-input shadow" type="checkbox" value="" id="checkbox5" name="dependability"></td>
           </tr>
           <tr>
           <td>Initiative</td>
-          <td><input type="range" class="form-range" min="1" max="5" id="mark6" style="width: 400px;" name="initiative"></td>
+          <td><input type="range" class="form-range" min="0" max="5" id="mark6" style="width: 400px;" name="initiative"></td>
           <td class="d-flex justify-content-center"><input class="form-check-input shadow" type="checkbox" value="" id="checkbox6" name="initiative"></td>
           </tr>
           <tr>
           <td>General appearance</td>
-          <td><input type="range" class="form-range" min="1" max="5" id="mark7" style="width: 400px;" name="general_appearance"></td>
+          <td><input type="range" class="form-range" min="0" max="5" id="mark7" style="width: 400px;" name="general_appearance"></td>
           <td class="d-flex justify-content-center"><input class="form-check-input shadow" type="checkbox" value="" id="checkbox7" name="general_appearance"></td>
           </tr>
           <tr>
           <td>Ability to judge</td>
-          <td><input type="range" class="form-range" min="1" max="5" id="mark8" style="width: 400px;"  name="ability_to_judge"></td>
+          <td><input type="range" class="form-range" min="0" max="5" id="mark8" style="width: 400px;"  name="ability_to_judge"></td>
           <td class="d-flex justify-content-center"><input class="form-check-input shadow" type="checkbox" value="" id="checkbox8" name="ability_to_judge"></td>
           </tr>
           <tr>
           <td>Enthusiasm</td>
-          <td><input type="range" class="form-range" min="1" max="5" id="mark9" style="width: 400px;" name="enthusiasm"></td>
+          <td><input type="range" class="form-range" min="0" max="5" id="mark9" style="width: 400px;" name="enthusiasm"></td>
           <td class="d-flex justify-content-center"><input class="form-check-input shadow" type="checkbox" value="" id="checkbox9" name="enthusiasm"></td>
           </tr>
           <tr>
           <td>Communicational Skills</td>
-          <td><input type="range" class="form-range" min="1" max="5" id="mark10" style="width: 400px;" name="communicational_skills"></td>
+          <td><input type="range" class="form-range" min="0" max="5" id="mark10" style="width: 400px;" name="communicational_skills"></td>
           <td class="d-flex justify-content-center"><input class="form-check-input shadow" type="checkbox" value="" id="checkbox10" name="communicational_skills"></td>
           </tr>
           <tr>
           <td>English Language proficiency</td>
-          <td><input type="range" class="form-range" min="1" max="5" id="mark11" style="width: 400px;" name="english_language_proficiency"></td>
+          <td><input type="range" class="form-range" min="0" max="5" id="mark11" style="width: 400px;" name="english_language_proficiency"></td>
           <td class="d-flex justify-content-center"><input class="form-check-input shadow" type="checkbox" value="" id="checkbox11" name="english_language_proficiency"></td>
           </tr>
           <tr>
           <td class="fw-bold">
-          <button class="btn btn-primary" id="sumBtn"> Sum</button></td>
-          <td><input type="text" id="sum" name="sum" disabled class="w-25 form-control text-center bg-white">
-          <input type="hidden" id="hiddenSum" name="sum" class="w-25 form-control text-center bg-white">
+          <button class="btn btn-primary" id="sumBtn">Average</button></td>
+          <td><input type="text" id="avg" name="avg" disabled class="w-25 form-control text-center bg-white">
+          <input type="hidden" id="hiddenavg" name="avg" class="w-25 form-control text-center bg-white">
 
-          @error('sum')
+          @error('avg')
             <span class="text-danger">{{ $message }}</span>
           @enderror
           </td>
@@ -172,7 +178,7 @@
 <div class="text-center">
 <a class="btn btn-secondary px-5 my-3 mx-auto" type="button" href="{{route('trainer_list_traniees',['user_id' => $trainer->id])}}">Back</a>
 
-    <button class="btn btn-primary bg-dark-blue px-5 my-3 mx-auto" type="submit">Submit</button>
+<button class="btn btn-primary bg-dark-blue px-5 my-3 mx-auto" type="submit">Submit</button>
 
   </div>
 </form>
@@ -193,54 +199,8 @@
     });
   }); 
 </script>
-<!-- calculate sum -->
-<script>
-  function calculateSum() {
-    var rangeInputs = document.querySelectorAll('input[type="range"]');
-    var checkboxes = document.querySelectorAll('input[type="checkbox"]');
-checkboxes.forEach(function(checkbox, index) {
-  if (checkbox.checked) {
-    console.log('checked');
-  }
-});
-// label ,input hidden for sum
-    var sum = 0;
+<!-- calculate avg -->
 
-    rangeInputs.forEach(function(input) {
-      sum += parseInt(input.value);
-    });
 
-    return sum;
-  }
 
-  //when click on button it will be shown in input element
-  var submitButton = document.getElementById('sumBtn');
-  submitButton.addEventListener('click', function(event) {
-    event.preventDefault(); // Prevent form submission for demonstration purposes
-
-    var totalSum = calculateSum();
-    
-    // Display the sum in the input:text element
-    var resultElement = document.getElementById('sum');
-    var resultElementHidden = document.getElementById('hiddenSum');
-
-    resultElement.value = totalSum;
-    resultElementHidden.value = totalSum;
-
-  });
-</script>
-
-<!-- <script>
-var checkbox = document.querySelectorAll('input[type="checkbox"]');
-var slider = document.querySelectorAll('input[type="range"]');
-
-checkbox.addEventListener("click", function() {
-  if (checkbox.checked) {
-    slider.value = 0;
-    slider.disabled = true;
-  } else {
-    slider.disabled = false;
-  }
-});
-</script> -->
 @endsection

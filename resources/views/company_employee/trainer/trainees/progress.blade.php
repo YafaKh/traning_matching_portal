@@ -34,10 +34,6 @@
 </section>
 <!-- to add progress -->
 <section class="col-md-9 bg-white mb-3 p-md-5 p-3 mx-auto rounded-2">
-<!-- <div class="text-center d-flex col-md-5 mb-3"> -->
-  <!-- <button type="button" class="btn btn-sm btn-primary bg-dark-blue px-4 me-2" onclick="addRow()">Add Row</button> -->
-  <!-- <button type="button" class="btn btn-sm btn-danger" onclick="deleteRow()">Delete Last Row</button> -->
-<!-- </div> -->
 <div class="table-responsive ">
   <table class="table txt-sm table-sm border table-hover">
   <thead class="bg-mid-sand">
@@ -83,11 +79,6 @@
       </div></td>
       
       <td><textarea class="col-10" name="note"></textarea>
-      <div class="note">
-        @error('end_date')
-            <span class="text-danger">{{ $message }}</span>
-        @enderror
-      </div></td>
         
     </tr>
 
@@ -137,11 +128,9 @@
       <a class="btn btn-sm btn-success bg-success px-4 me-2" id="update" href="{{ route('fill_traniee_progress.edit', ['user_id' => $trainer->id, 'trainee_id' => $trainee->id, 'progress_id' => $progress->id]) }}">Update</a>
       </th>
       <th scope="col">
-      <form action="{{ route('fill_traniee_progress.delete', ['user_id' => $trainer->id, 'trainee_id' => $trainee->id, 'progress_id' => $progress->id]) }}" method="POST">
-          @csrf
-          <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+
+          <a class="btn btn-sm btn-danger" href="{{ route('fill_traniee_progress.delete', ['user_id' => $trainer->id, 'trainee_id' => $trainee->id, 'progress_id' => $progress->id]) }}">Delete</a>
           
-      </form>
       </th>
 
 

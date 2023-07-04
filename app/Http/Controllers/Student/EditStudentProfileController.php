@@ -7,6 +7,9 @@ use Illuminate\Routing\Controller;
 use App\Models\Student;
 use App\Models\City;
 use App\Models\Skill;
+use App\Models\Student_skill;
+use App\Models\Spoken_language;
+use App\Models\Preferred_training_field;
 
 class EditStudentProfileController extends Controller
 {
@@ -15,22 +18,23 @@ class EditStudentProfileController extends Controller
         $student =Student::find($id);
         $cities=City::all();
         $skills = Skill::all();
-        
-        return view('student.edit_profile',compact('student','cities','skills'));
+        $spokenLanguages = Spoken_language::all();
+        $trainingFields = Preferred_training_field::all();
+        return view('student.edit_profile',compact('student','cities','skills','spokenLanguages','trainingFields'));
     }
-    public function update(Request $request)
-    {
-        $student = Student::find($id);
-        // Update the student data based on the form inputs
-        $student->name = $request->input('name');
-        $student->specialization = $request->input('specialization');
-        $student->address = $request->input('address');
-        $student->email = $request->input('email');
-        $student->phone = $request->input('phone');
-        $student->linkedin = $request->input('linkedin');
-        // Save the updated data
-        $student->save();
+    // public function update(Request $request)
+    // {
+    //     $student = Student::find($id);
+    //     // Update the student data based on the form inputs
+    //     $student->name = $request->input('name');
+    //     $student->specialization = $request->input('specialization');
+    //     $student->address = $request->input('address');
+    //     $student->email = $request->input('email');
+    //     $student->phone = $request->input('phone');
+    //     $student->linkedin = $request->input('linkedin');
+    //     // Save the updated data
+    //     $student->save();
 
-        // Redirect or return a response
-    }
+    //     // Redirect or return a response
+    // }
 }

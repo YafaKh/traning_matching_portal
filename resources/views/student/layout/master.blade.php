@@ -14,7 +14,13 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
  <!-- bootstrap 5.2 icons -->
+
  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+   
+ <!-- for multi select dropdownlist -->
+   <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css" type="text/css"/> -->
+ <!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> -->
+
    <!-- css page -->
   {{-- our custom style sheet --}}
     <link href="{{asset('css/style.css')}}" rel="stylesheet" type="text/css">
@@ -29,7 +35,8 @@
     crossorigin="anonymous"></script>
 <!-- jquery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
+<!-- for multi select dropdownlist -->
+<!-- <  -->
   <!-- js page -->
   <script src="{{asset('js/main.js')}}"></script>
 </body>

@@ -250,7 +250,7 @@ body .bigDiv .loginForm .loginCard .creatAccountLink:hover {
 
 
 .profileSection {
-  min-height: 30vh;
+  min-height: 50vh;
   border-radius: 0.5rem;
   background-color: #fff;
   margin: -0.2rem 9rem 1rem;
@@ -692,14 +692,15 @@ body {
 .changePassword {
   display: flex;
   justify-content: end;
-  margin-right: 7.5rem;
+  margin-right: 7rem;
+  padding-bottom: 2rem;
 }
 
 .uploadImage {
   position: relative;
   height: 89%;
   overflow: hidden;
-  margin-top: -2rem;
+  margin-top: -5rem;
 }
 
 .uploadImage .changeImage {

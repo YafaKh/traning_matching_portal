@@ -188,7 +188,7 @@ Route::prefix('/trainer/{user_id}')->group(function(){
         Route::POST('/add',[progressController::class,'add'])->name('fill_traniee_progress.add');
         Route::get('/edit/{progress_id}',[progressController::class,'edit'])->name('fill_traniee_progress.edit');
         Route::PUT('/update/{progress_id}',[progressController::class,'update'])->name('fill_traniee_progress.update');
-        Route::POST('/delete/{progress_id}',[progressController::class,'destroy'])->name('fill_traniee_progress.delete');
+        Route::get('/delete/{progress_id}',[progressController::class,'destroy'])->name('fill_traniee_progress.delete');
         });
         Route::get('/evaluation/{trainee_id}',[EvaluateController::class,'show'])->name('fill_traniee_evaluation');
         Route::post('/evaluation/add/{trainee_id}',[EvaluateController::class,'add'])->name('fill_traniee_evaluation.add');

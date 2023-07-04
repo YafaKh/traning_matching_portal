@@ -26,7 +26,7 @@ class Student_SkillFactory extends Factory
         $skillIds  = Skill::pluck('id')->all();
         $this->instance_counter++;
         return [
-            'level'=>$this->faker->numberBetween(10, 100),
+            'level'=>$this->faker->numberBetween(0, 5),
             'student_id' => $this->faker->randomElement($studentIds),
             'skill_id' => $this->faker->randomElement($skillIds),
             

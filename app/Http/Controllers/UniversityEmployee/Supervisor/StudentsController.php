@@ -17,9 +17,9 @@ class StudentsController extends Controller
      /**
      * list his students with some info
      */
-    public function index($id)
+    public function index($user_id)
     {
-        $supervisor=UniversityEmployee::whereIn('University_employee_role_id', [2, 3])->find($id);//role_id = ??
+        $supervisor=UniversityEmployee::whereIn('University_employee_role_id', [2, 3])->find($user_id);//role_id = ??
         if ($supervisor==null) {
             return "supervisor not found ";
         }
@@ -27,9 +27,9 @@ class StudentsController extends Controller
 
         return view('university_employee.supervisor.students',compact('supervisor','allStudents'));//,['students'=>$studentsData]);
     }
-    public function showProgressPage($id,$student_id)
+    public function showProgressPage($user_id,$student_id)
     {
-        $supervisor=UniversityEmployee::whereIn('University_employee_role_id', [2, 3])->find($id);//role_id = ??
+        $supervisor=UniversityEmployee::whereIn('University_employee_role_id', [2, 3])->find($user_id);//role_id = ??
         if ($supervisor==null) {
             return "supervisor not found ";
         }
@@ -44,9 +44,9 @@ class StudentsController extends Controller
         return view('university_employee.supervisor.progress', compact('supervisor', 'student','studentProgress'));
         
     }
-    public function showEvaluateStudentPage($id,$student_id)
+    public function showEvaluateStudentPage($user_id,$student_id)
     {
-        $supervisor=UniversityEmployee::whereIn('University_employee_role_id', [2, 3])->find($id);//role_id = ??
+        $supervisor=UniversityEmployee::whereIn('University_employee_role_id', [2, 3])->find($user_id);//role_id = ??
         if ($supervisor==null) {
             return "supervisor not found ";
         }

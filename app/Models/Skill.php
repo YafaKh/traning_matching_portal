@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 class Skill extends Model
 {
@@ -18,8 +19,8 @@ class Skill extends Model
     //     return $this->belongsToMany('App\Models\Student','students_skills','skill_id','student_id');
     //     // ->withPivot(['level']);
     // }
-    public function student_skill()
+    public function student_skill():HasManyThrough
     {
-        return $this->hasMany(Student_skill::class);
+        return $this->hasManyThrough(Student::class,Student_skill::class);
     }
 }

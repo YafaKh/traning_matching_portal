@@ -27,9 +27,10 @@ class EvaluateController extends Controller
         // dd($request);
         $request->validate([
             'student_weaknesses' => 'required|string|min:1|max:255',
-            'willing_to_hire' => 'required|boolean', // do i need evaluation???
+            'willing_to_hire' => 'required|boolean', 
             'willing_to_hire_reason' => 'required|string|min:1|max:255',
             'comments' => 'required|string|min:1|max:255',
+            'attendance'=> 'required|integer',
             'fulfilling_required_tasks' => 'required|integer',
             'teamwork_ability' => 'required|integer',
             'punctuality' =>'required|integer',
@@ -41,15 +42,15 @@ class EvaluateController extends Controller
             'enthusiasm' =>'required|integer',
             'communicational_skills' =>'required|integer',
             'english_language_proficiency' =>'required|integer',
-            //do i need to make validation for these columns ???
-            'sum' =>'required|integer',
+            'avg' =>'required|integer',
         ]);
-    
+    dd('ss');
         $evaluate = new EvaluateStudent();
         $evaluate->student_weaknesses = $request->input('student_weaknesses');
         $evaluate->willing_to_hire = $request->input('willing_to_hire');
         $evaluate->willing_to_hire_reason = $request->input('willing_to_hire_reason');
         $evaluate->comments = $request->input('comments');
+        $evaluate->attendance = $request->input('attendance');
         $evaluate->fulfilling_required_tasks = $request->input('fulfilling_required_tasks');
         $evaluate->teamwork_ability = $request->input('teamwork_ability');
         $evaluate->punctuality = $request->input('punctuality');
@@ -61,13 +62,13 @@ class EvaluateController extends Controller
         $evaluate->enthusiasm = $request->input('enthusiasm');
         $evaluate->communicational_skills = $request->input('communicational_skills');
         $evaluate->english_language_proficiency = $request->input('english_language_proficiency');
-        $evaluate->sum = $request->input('sum');
+        $evaluate->avg = $request->input('avg');
 
         $evaluate->save();
 
         $request->session()->flash('success', 'evaluate added successfully.');
 
-        return redirect()->route('fill_traniee_evaluation.add', ['user_id' => $id, 'trainee_id' => $trainee_id]);
+        return redirect()->route('trainer_list_traniees', ['user_id' => $id]);
     }
       
 }

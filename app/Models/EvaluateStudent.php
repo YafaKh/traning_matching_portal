@@ -15,6 +15,7 @@ class EvaluateStudent extends Model
     'willing_to_hire',
     'willing_to_hire_reason',
     'comments',
+    'attendance',
     'fulfilling_required_tasks',
     'teamwork_ability',
     'punctuality',
@@ -26,7 +27,7 @@ class EvaluateStudent extends Model
     'enthusiasm',
     'communicational_skills',
     'english_language_proficiency',
-    'sum'];
+    'avg'];
     public function student()
     {
         return $this->belongsTo(Student::class);
