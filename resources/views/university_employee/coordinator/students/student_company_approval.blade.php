@@ -30,11 +30,19 @@
         @foreach($students as $student)
             <tr>
             <td class="ps-3">{{$student['student_num']}}</td>
-            @if($student['registered'])
-            <td>{{$student['first_name_en']}} {{$student['last_name_en']}}</td>
-            @else 
-            <td class="text-danger">{{$student['first_name_en']}} {{$student['last_name_en']}}</td>
-            @endif            
+            <td>
+                @if($student['registered'])
+                <a class="link-dark link-underline-opacity-0 fw-bold" 
+                href="{{ route('coordinator_student_profile', ['user_id'=>$user->id, 'student_id'=> $student->id ]) }}">
+                {{$student['first_name_en']}} {{$student['last_name_en']}}
+                </a>
+                @else
+                <a class="link-dark link-underline-opacity-0 fw-bold" 
+                href="{{ route('coordinator_student_profile', ['user_id'=>$user->id, 'student_id'=> $student->id ]) }}">
+                <span class="text-danger">{{$student['first_name_en']}} {{$student['last_name_en']}}</span>
+                </a>
+                @endif
+            </td>            
             <td>
                 Training fields:<br>
                 @foreach($student->preferredTrainingFields as $training_field)

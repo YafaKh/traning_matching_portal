@@ -62,8 +62,11 @@
                             <td class="ps-3">
                             <input class="form-check-input" type="checkbox" value="{{ $unengaged_student['id'] }}" name="students[]" id="flexCheckDefault">
                             </td>                
-                            <td>{{$unengaged_student['first_name_en'].' '. $unengaged_student['last_name_en']}}</td>
-                        </tr>
+                            <td>
+                            <a class="link-dark link-underline-opacity-0 fw-bold" 
+                             href="{{ route('hr_student_profile', ['user_id'=>$user->id, 'student_id'=> $unengaged_student->id ]) }}">
+                             {{$unengaged_student['first_name_en'].' '. $unengaged_student['last_name_en']}}
+                            </a></td>  
                     @endforeach
                 
                 </tbody>
@@ -100,7 +103,11 @@
                                 <td class="ps-3">
                                     <input class="form-check-input student-checkbox" type="checkbox" name="student_ids[]" value="{{ $engaged_student['id'] }}">
                                 </td>
-                                <td>{{ $engaged_student['first_name_en'].' '. $engaged_student['last_name_en'] }}</td>
+                                <td>
+                                <a class="link-dark link-underline-opacity-0 fw-bold" 
+                                href="{{ route('hr_student_profile', ['user_id'=>$user->id, 'student_id'=> $engaged_student->id ]) }}">
+                                {{ $engaged_student['first_name_en'].' '. $engaged_student['last_name_en'] }}
+                                </a></td> 
                                 <td>{{ $engaged_student['training_name'] }}</td>
                             </tr>
                         @endforeach

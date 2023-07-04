@@ -1,6 +1,10 @@
-@extends('company_employee.master')
+@extends('all_users.master')
 @section('navbar')
-    @include('company_employee.trainer.navbar')
+    @if($user->company_employee_role_id==2)
+        @include('company_employee.trainer.navbar')
+    @else
+    @include('company_employee.hr.navbar')
+    @endif
 @endsection
 @section('traineess_activity')
     active
@@ -33,19 +37,24 @@
    
         <tr>
 
-            <td class="ps-3" name="">{{$allTrainee->first_name_en}} {{$allTrainee->second_name_en}} {{$allTrainee->third_name_en}} {{$allTrainee->last_name_en}}</td>
+            <td class="ps-3">
+                <a class="link-dark link-underline-opacity-0 fw-bold" 
+                href="{{ route('hr_student_profile', ['user_id'=>$user->id, 'student_id'=> $allTrainee->id ]) }}">
+                {{$allTrainee->first_name_en}} {{$allTrainee->second_name_en}} {{$allTrainee->third_name_en}} {{$allTrainee->last_name_en}}
+                </a>
+            </td>
            @if($allTraining->semester == "1")
-            <td>Fall - {{$allTraining->year}} - {{$trainer->first_name}} {{$trainer->last_name}}</td>
+            <td>Fall - {{$allTraining->year}} - {{$user->first_name}} {{$user->last_name}}</td>
          @elseif($allTraining->semester == '2')
-         <td>Spring - {{$allTraining->year}} - {{$trainer->first_name}} {{$trainer->last_name}}</td>
+         <td>Spring - {{$allTraining->year}} - {{$user->first_name}} {{$user->last_name}}</td>
          @elseif($allTraining->semester == '3')
-         <td>First Summer - {{$allTraining->year}} - {{$trainer->first_name}} {{$trainer->last_name}}</td>
+         <td>First Summer - {{$allTraining->year}} - {{$user->first_name}} {{$user->last_name}}</td>
          @elseif($allTraining->semester == '4')
-         <td>Second Summer - {{$allTraining->year}} - {{$trainer->first_name}} {{$trainer->last_name}}</td>
+         <td>Second Summer - {{$allTraining->year}} - {{$user->first_name}} {{$user->last_name}}</td>
         @endif
-            <td><a type="button" class="btn" href="{{route('fill_traniee_progress', ['user_id' => $trainer->id,'trainee_id' => $allTrainee->id])}}">
+            <td><a type="button" class="btn" href="{{route('fill_traniee_progress', ['user_id' => $user->id,'trainee_id' => $allTrainee->id])}}">
             <i class="bi bi-box-arrow-up-right"></i></a></td>
-            <td><a type="button" class="btn" href="{{route('fill_traniee_evaluation', ['user_id' => $trainer->id,'trainee_id' => $allTrainee->id])}}">
+            <td><a type="button" class="btn" href="{{route('fill_traniee_evaluation', ['user_id' => $user->id,'trainee_id' => $allTrainee->id])}}">
             <i class="bi bi-box-arrow-up-right"></i></a></td>
           
             </tr>

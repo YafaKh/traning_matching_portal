@@ -11,18 +11,18 @@ use App\Models\Student;
 
 class EvaluateController extends Controller
 {
-    public function show($id,$trainee_id){
-        $trainer =CompanyEmployee::find($id);
+    public function show($user_id, $trainee_id){
+        $user =CompanyEmployee::find($user_id);
         $trainee=Student::find($trainee_id);//get this student
         $trainingID =$trainee->training_id;//get student training
-        $allTrainings=$trainer->trainings()->where('id', $trainingID)->get();
+        $allTrainings=$user->trainings()->where('id', $trainingID)->get();
         $evaluation = EvaluateStudent::all();
         foreach ($allTrainings as $training) {
 
-        return view('company_employee.trainer.trainees.evaluation',compact('trainer','trainee','training','evaluation'));
+        return view('company_employee.trainer.trainees.evaluation',compact('user','trainee','training','evaluation'));
         }
     }
-    public function add(Request $request, $id, $trainee_id)
+    public function add(Request $request, $user_id, $trainee_id)
     { 
         // dd($request);
         $request->validate([
@@ -67,7 +67,7 @@ class EvaluateController extends Controller
 
         $request->session()->flash('success', 'evaluate added successfully.');
 
-        return redirect()->route('fill_traniee_evaluation.add', ['user_id' => $id, 'trainee_id' => $trainee_id]);
+        return redirect()->route('fill_traniee_evaluation.add', ['user_id' => $user_id, 'trainee_id' => $trainee_id]);
     }
       
 }

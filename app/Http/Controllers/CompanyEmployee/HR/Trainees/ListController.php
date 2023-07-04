@@ -5,9 +5,13 @@ namespace App\Http\Controllers\CompanyEmployee\HR\Trainees;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Collection;
+use App\Models\Student;
 use App\Models\Company;
 use App\Models\CompanyEmployee;
-
+use App\Models\Student_spoken_language;
+use App\Models\Student_skill;
+use App\Models\Preferred_training_field_student;
+use App\Models\Preferred_cities_student;
 
 class ListController extends Controller
 {
@@ -39,5 +43,30 @@ class ListController extends Controller
           'unengaged_trainees' => $unengaged_trainees,
           'branches' => $branches,
           'trainers' => $trainers,]);
+    }
+    
+    /**
+     * Method show_student_profile
+     *
+     * @param $user_id $user_id [explicite description]
+     * @param $student_id $student_id [explicite description]
+     *
+     * @return void
+     */
+    public function show_student_profile($user_id, $student_id)
+    {
+        $user = CompanyEmployee::where('id', $user_id)->first();
+        $student =Student::find($student_id);
+          // many to many relationship
+        $allLanguages = Student_spoken_language::with('student', 'spokenLanguage')->where('student_id',$student_id)->get();
+        $allSkills = Student_skill::with('student', 'skill')->where('student_id',$student_id)->get();
+        $allPreferredTrainingFields = Preferred_training_field_student::with('student', 'preferredTrainingField')->where('student_id',$student_id)->get();
+        $allPreferredCities = Preferred_cities_student::with('student', 'city')->where('student_id',$student_id)->get();
+
+      //   one to many
+        $specializationName = $student->specialization->name;
+
+      
+        return view('company_employee.hr.student_profile',compact('user', 'student','specializationName','allLanguages','allSkills','allPreferredTrainingFields','allPreferredCities'));  
     }
 }

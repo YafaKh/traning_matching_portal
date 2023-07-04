@@ -61,7 +61,7 @@ class StudentFactory extends Factory
             'gpa' => $this->faker->randomFloat(2, 0, 4),
             'address' => $this->faker->address,
             'email' => $this->faker->unique()->safeEmail,
-            'linkedin' => $this->faker-->url(),
+            'linkedin' => $this->faker->url(),
             'password' => Str::substr(bcrypt('password'),15), 
             'availability_date' => $this->faker->date(),
             'connected_with_a_company' => $this->faker->boolean,

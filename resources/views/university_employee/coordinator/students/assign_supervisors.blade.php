@@ -60,11 +60,19 @@
             <tr>
             <td class="ps-3"><input class="table1-checkbox form-check-input" type="checkbox" value="" id="flexCheckDefault"></td>                
             <td>{{$assigned_student['student_num']}}</td>
-            @if($assigned_student['registered'])
-            <td>{{$assigned_student['first_name_en']}} {{$assigned_student['last_name_en']}}</td>
-            @else 
-            <td class="text-danger">{{$assigned_student['first_name_en']}} {{$assigned_student['last_name_en']}}</td>
-            @endif
+            <td>
+                @if($assigned_student['registered'])
+                <a class="link-dark link-underline-opacity-0 fw-bold" 
+                href="{{ route('coordinator_student_profile', ['user_id'=>$user->id, 'student_id'=> $assigned_student->id ]) }}">
+                {{$assigned_student['first_name_en']}} {{$assigned_student['last_name_en']}}
+                </a>
+                @else
+                <a class="link-dark link-underline-opacity-0 fw-bold" 
+                href="{{ route('coordinator_student_profile', ['user_id'=>$user->id, 'student_id'=> $assigned_student->id ]) }}">
+                <span class="text-danger">{{$assigned_student['first_name_en']}} {{$assigned_student['last_name_en']}}</span>
+                </a>
+                @endif
+            </td> 
             <td>{{$assigned_student->supervisor->first_name}} {{$assigned_student->supervisor->last_name}}</td>
             <td>{{$assigned_student->training->branch->company->name ?? ''}}</td>
             <td>{{$assigned_student->training->branch->address ?? ''}}</td>
@@ -123,11 +131,19 @@
             <tr>
             <td class="ps-3"><input class="table2-checkbox form-check-input" type="checkbox" value="" id="flexCheckDefault"></td>                
             <td>{{$unassigned_student['student_num']}}</td>
-            @if($unassigned_student['registered'])
-            <td>{{$unassigned_student['first_name_en']}} {{$unassigned_student['last_name_en']}}</td>
-            @else 
-            <td class="text-danger">{{$unassigned_student['first_name_en']}} {{$unassigned_student['last_name_en']}}</td>
-            @endif
+            <td>
+                @if($unassigned_student['registered'])
+                <a class="link-dark link-underline-opacity-0 fw-bold" 
+                href="{{ route('coordinator_student_profile', ['user_id'=>$user->id, 'student_id'=> $unassigned_student->id ]) }}">
+                {{$unassigned_student['first_name_en']}} {{$unassigned_student['last_name_en']}}
+                </a>
+                @else
+                <a class="link-dark link-underline-opacity-0 fw-bold" 
+                href="{{ route('coordinator_student_profile', ['user_id'=>$user->id, 'student_id'=> $unassigned_student->id ]) }}">
+                <span class="text-danger">{{$unassigned_student['first_name_en']}} {{$unassigned_student['last_name_en']}}</span>
+                </a>
+                @endif
+            </td> 
             <td>{{$unassigned_student->training->branch->company->name ?? ''}}</td>
             <td>{{$unassigned_student->training->branch->address ?? ''}}</td>
             <td>

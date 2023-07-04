@@ -44,9 +44,10 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
 
-        'hr' => [
-            \App\Http\Middleware\HrAuthenticationMiddleware::class,
-        ],
+        'student' => [\App\Http\Middleware\StudentMiddleware::class],
+        'company_employee' => [\App\Http\Middleware\CompanyEmployeeMiddleware::class],
+        'university_employee' =>[ \App\Http\Middleware\UniversityEmployeeMiddleware::class],
+        'admin' => [\App\Http\Middleware\AdminMiddleware::class],
     ];
 
     /**

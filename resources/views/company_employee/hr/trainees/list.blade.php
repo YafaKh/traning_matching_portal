@@ -47,7 +47,11 @@
                     @foreach ($trainings as $training)
                         @foreach ($training->students as $student)
                         <tr> 
-                        <td class="ps-3"><a>{{$student['first_name_en'].' '. $student['last_name_en']}}</a></td>
+                        <td class="ps-3">
+                            <a class="link-dark link-underline-opacity-0 fw-bold" 
+                             href="{{ route('hr_student_profile', ['user_id'=>$user->id, 'student_id'=> $student->id ]) }}">
+                            {{$student['first_name_en'].' '. $student['last_name_en']}}
+                            </a></td>
                         <td>{{$training['name']}}</td>
                         <td>{{$training->branch->city->name}}-{{$training->branch->address}}</</td>
                         <td>{{$training->employee->first_name}} {{$training->employee->last_name}}<//td>
