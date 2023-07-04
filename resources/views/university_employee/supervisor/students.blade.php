@@ -47,11 +47,10 @@
     </div>
     {{-- students table --}}
     <div class="table-responsive ">
-        <table class="table txt-sm border table-hover">
+        <table class="table txt-sm border table-hover" id="table">
         <thead class="bg-mid-sand">
             <tr >
-            <th scope="col" class="ps-3"><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></th>
-            <th scope="col">ID</th>
+            <th scope="col" class="ps-3">ID</th>
             <th scope="col" >Name</th>
             <th scope="col">Specialization</th>
             <th scope="col">Company</th>
@@ -60,12 +59,11 @@
             <th scope="col">Go to student's</th>
             </tr>
         </thead>
-        <tbody class="bg-light">
+        <tbody class="bg-light" id="table-body">
         @foreach($allStudents as $student)
 
             <tr>
-            <td class="ps-3"><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></td>                
-            <td>{{$student ->student_num}}</td>
+            <td class="ps-3">{{$student ->student_num}}</td>
             <td>{{$student ->first_name_en}} {{$student ->second_name_en}} {{$student ->third_name_en}} {{$student ->last_name_en}}</td>
             <td>{{$student ->specialization->acronyms}}</td>
             <td>{{$student ->training->branch->company->name ?? "__"}}</td>
@@ -82,9 +80,6 @@
             @elseif($student ->training->semester ?? "__" == "__")
             <td>__</td>
             @endif
-           
-
-
             <td>
             <a class="dropdown-toggle text-dark" 
             role="button" data-bs-toggle="dropdown" aria-expanded="false">Go to student's</a>

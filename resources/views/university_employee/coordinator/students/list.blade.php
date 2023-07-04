@@ -80,7 +80,7 @@
         <table class="table txt-sm table-sm border table-hover" id="table">
         <thead class="bg-mid-sand">
             <tr >
-            <th scope="col" class="ps-3"><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></th>
+            <th scope="col" class="ps-3"><input class="form-check-input" type="checkbox" id="check-all1" onClick="check_all_check_boxes('check-all1', 'table')"></th>
             <th scope="col">University ID</th>
             <th scope="col" >Name</th>
             <th scope="col">Specialization</th>
