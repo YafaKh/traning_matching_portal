@@ -1,8 +1,11 @@
-@extends('university_employee.master')
+@extends('all_users.master')
 @section('navbar')
-@include('university_employee.supervisor.navbar')
+    @if($user->company_employee_role_id==2)
+        @include('university_employee.supervisor.navbar')
+    @else
+    @include('university_employee.coordinator.navbar')
+    @endif
 @endsection
-
 @section('content')
 <div class="px-2">
 <section class="">

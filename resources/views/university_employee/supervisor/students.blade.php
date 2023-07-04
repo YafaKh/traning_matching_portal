@@ -1,6 +1,10 @@
-@extends('company_employee.master')
+@extends('all_users.master')
 @section('navbar')
-    @include('university_employee.supervisor.navbar')
+    @if($user->company_employee_role_id==2)
+        @include('university_employee.supervisor.navbar')
+    @else
+    @include('university_employee.coordinator.navbar')
+    @endif
 @endsection
 @section('students_activity')
     active
@@ -43,7 +47,7 @@
     </div>
     {{-- students table --}}
     <div class="table-responsive ">
-        <table class="table txt-sm table-sm border table-hover">
+        <table class="table txt-sm border table-hover">
         <thead class="bg-mid-sand">
             <tr >
             <th scope="col" class="ps-3"><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></th>
@@ -63,7 +67,7 @@
             <td class="ps-3"><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></td>                
             <td>{{$student ->student_num}}</td>
             <td>{{$student ->first_name_en}} {{$student ->second_name_en}} {{$student ->third_name_en}} {{$student ->last_name_en}}</td>
-            <td>{{$student ->specialization->name}}</td>
+            <td>{{$student ->specialization->acronyms}}</td>
             <td>{{$student ->training->branch->company->name ?? "__"}}</td>
             <td>{{$student ->training->branch->address ?? "__"}}</td>
 
@@ -85,9 +89,9 @@
             <a class="dropdown-toggle text-dark" 
             role="button" data-bs-toggle="dropdown" aria-expanded="false">Go to student's</a>
             <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="{{route('student_visit_forms',['user_id' => $supervisor->id])}}">Visit forms</a></li>
-                <li><a class="dropdown-item" href="{{route('show_student_progress',['user_id' => $supervisor->id,'student_id' => $student->id])}}">Progress</a></li>
-                <li><a class="dropdown-item" href="{{route('show_student_Evaluation',['user_id' => $supervisor->id,'student_id' => $student->id])}}">Evaluation</a></li>
+                <li><a class="dropdown-item" href="{{route('student_visit_forms',['user_id' => $user->id])}}">Visit forms</a></li>
+                <li><a class="dropdown-item" href="{{route('show_student_progress',['user_id' => $user->id,'student_id' => $student->id])}}">Progress</a></li>
+                <li><a class="dropdown-item" href="{{route('show_student_Evaluation',['user_id' => $user->id,'student_id' => $student->id])}}">Evaluation</a></li>
                 <li><a class="dropdown-item" href="">Company evaluation</a></li>
                 <li><a class="dropdown-item" href="">Assessment</a></li>
             </ul>

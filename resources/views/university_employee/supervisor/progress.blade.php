@@ -1,6 +1,10 @@
-@extends('company_employee.master')
+@extends('all_users.master')
 @section('navbar')
-    @include('university_employee.supervisor.navbar')
+    @if($user->company_employee_role_id==2)
+        @include('university_employee.supervisor.navbar')
+    @else
+    @include('university_employee.coordinator.navbar')
+    @endif
 @endsection
 @section('students_activity')
     active
@@ -66,7 +70,7 @@
   </div>
 </section>
 <div class="text-center">
-<a class="btn btn-secondary px-5 my-3 mx-auto" type="button" href="{{route('supervisor_list_students',['user_id' => $supervisor->id])}}">Back</a>
+<a class="btn btn-secondary px-5 my-3 mx-auto" type="button" href="{{route('supervisor_list_students',['user_id' => $user->id])}}">Back</a>
 
 </div>
 @endsection
