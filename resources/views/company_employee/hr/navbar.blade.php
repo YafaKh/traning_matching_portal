@@ -21,13 +21,13 @@
             <ul class="dropdown-menu">
                 @if($user->company_employee_role_id==3)
                 <li class="nav-item"><a class="dropdown-item" 
-                href="{{route('home')}}"
+                href="{{route('trainer_list_traniees',['user_id'=>$user->id])}}"
                 >My trainees</a>
                 </li>
                 @endif
                 <li><a class="dropdown-item" 
                 href="{{route('hr_list_trainees', ['user_id'=>$user->id])}}"
-                >List trainees</a></li>
+                >Our trainees</a></li>
                 <li><a class="dropdown-item" 
                 href="{{route('hr_university_students', ['user_id'=>$user->id])}}"
                 >University trainees</a></li>

@@ -1,11 +1,15 @@
-@extends('company_employee.master')
+@extends('all_users.master')
 @section('navbar')
-@include('company_employee.trainer.navbar')
+    @if($user->company_employee_role_id==2)
+        @include('company_employee.trainer.navbar')
+    @else
+    @include('company_employee.hr.navbar')
+    @endif
 @endsection
 
 @section('content')
 <div class="px-2">
-<form action="{{route('fill_traniee_evaluation.add', ['user_id' => $trainer->id,'trainee_id' => $trainee->id])}}" method="POST" enctype="multipart/form-data">
+<form action="{{route('fill_traniee_evaluation.add', ['user_id' => $user->id,'trainee_id' => $trainee->id])}}" method="POST" enctype="multipart/form-data">
 @csrf
 <section>
   <div class="position-relative col-md-9 bg-dark-blue px-5 py-4 mx-auto mt-4 rounded-top-2">
@@ -20,13 +24,13 @@
       <div class="ms-5">
           <p>Training</p>
           @if($training->semester == "1")
-            <p>Fall - {{$training->year}} - {{$trainer->first_name}} {{$trainer->last_name}}</p><hr>
+            <p>Fall - {{$training->year}} - {{$user->first_name}} {{$user->last_name}}</p><hr>
          @elseif($training->semester == '2')
-         <p>Spring - {{$training->year}} - {{$trainer->first_name}} {{$trainer->last_name}}</p><hr>
+         <p>Spring - {{$training->year}} - {{$user->first_name}} {{$user->last_name}}</p><hr>
          @elseif($training->semester == '3')
-         <p>First Summer - {{$training->year}} - {{$trainer->first_name}} {{$trainer->last_name}}</p><hr>
+         <p>First Summer - {{$training->year}} - {{$user->first_name}} {{$user->last_name}}</p><hr>
          @elseif($training->semester == '4')
-         <p>Second Summer - {{$training->year}} - {{$trainer->first_name}} {{$trainer->last_name}}</p><hr>
+         <p>Second Summer - {{$training->year}} - {{$user->first_name}} {{$user->last_name}}</p><hr>
         @endif
           
       </div>
@@ -176,7 +180,7 @@
   </div>
 </section>
 <div class="text-center">
-<a class="btn btn-secondary px-5 my-3 mx-auto" type="button" href="{{route('trainer_list_traniees',['user_id' => $trainer->id])}}">Back</a>
+<a class="btn btn-secondary px-5 my-3 mx-auto" type="button" href="{{route('trainer_list_traniees',['user_id' => $user->id])}}">Back</a>
 
 <button class="btn btn-primary bg-dark-blue px-5 my-3 mx-auto" type="submit">Submit</button>
 

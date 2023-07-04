@@ -97,9 +97,15 @@
             <td>{{$student['student_num']}}</td>
             <td class="registration-state-cell" data-registered="{{$student['registered']}}">
                 @if($student['registered'])
+                <a class="link-dark link-underline-opacity-0 fw-bold" 
+                href="{{ route('coordinator_student_profile', ['user_id'=>$user->id, 'student_id'=> $student->id ]) }}">
                 {{$student['first_name_en']}} {{$student['last_name_en']}}
+                </a>
                 @else
+                <a class="link-dark link-underline-opacity-0 fw-bold" 
+                href="{{ route('coordinator_student_profile', ['user_id'=>$user->id, 'student_id'=> $student->id ]) }}">
                 <span class="text-danger">{{$student['first_name_en']}} {{$student['last_name_en']}}</span>
+                </a>
                 @endif
             </td>
             <td>{{$student->specialization->acronyms}}</td>

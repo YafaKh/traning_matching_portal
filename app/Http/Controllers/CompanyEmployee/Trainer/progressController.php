@@ -11,25 +11,25 @@ use App\Models\Progress;
 
 class progressController extends Controller
 {
-    public function show($id,$trainee_id){//id is trainer id
-        $trainer=CompanyEmployee::find($id);
+    public function show($user_id,$trainee_id){
+        $user=CompanyEmployee::find($user_id);
         $trainee=Student::find($trainee_id);//get this student
         $trainingID =$trainee->training_id;//ex : 8 -get student training
      
         $trainers=CompanyEmployee::all();
         
-        $allTrainings=$trainer->trainings()->where('id', $trainingID)->get();
+        $allTrainings=$user->trainings()->where('id', $trainingID)->get();
         $traineeProgress =Progress::where('student_id',$trainee_id)->get();
 
 
         foreach ($allTrainings as $training) {
         
     
-        return view('company_employee.trainer.trainees.progress',compact('trainer','trainers','trainee','training','traineeProgress'));
+        return view('company_employee.trainer.trainees.progress',compact('user','trainers','trainee','training','traineeProgress'));
         }
     }
 
-    public function add(Request $request, $id, $trainee_id)
+    public function add(Request $request, $user_id, $trainee_id)
     {
         $request->validate([
             'week' => 'required|string',
@@ -50,23 +50,23 @@ class progressController extends Controller
 
         $request->session()->flash('success', 'Progress added successfully.');
 
-        return redirect()->route('fill_traniee_progress', ['user_id' => $id, 'trainee_id' => $trainee_id]);
+        return redirect()->route('fill_traniee_progress', ['user_id' => $user_id, 'trainee_id' => $trainee_id]);
     }
 
-    public function edit($id, $trainee_id, $progress_id)
+    public function edit($user_id, $trainee_id, $progress_id)
     {
-        $trainer = CompanyEmployee::findOrFail($id);
+        $user = CompanyEmployee::findOrFail($user_id);
         $trainee = Student::findOrFail($trainee_id);
         $progress = Progress::findOrFail($progress_id);
         $trainingID =$trainee->training_id;//ex : 8 -get student training
-        $allTrainings=$trainer->trainings()->where('id', $trainingID)->get();
+        $allTrainings=$user->trainings()->where('id', $trainingID)->get();
 
         foreach ($allTrainings as $training) {
         
-        return view('company_employee.trainer.trainees.edit_progress', compact('trainer', 'trainee', 'progress','training'));
+        return view('company_employee.trainer.trainees.edit_progress', compact('user', 'trainee', 'progress','training'));
     }
 }
-    public function update(Request $request, $id, $trainee_id, $progress_id)
+    public function update(Request $request, $user_id, $trainee_id, $progress_id)
 {
     $request->validate([
         'week' => 'required|string',
@@ -86,15 +86,15 @@ class progressController extends Controller
 
     $request->session()->flash('success', 'Progress updated successfully.');
 
-    return redirect()->route('fill_traniee_progress', ['user_id' => $id, 'trainee_id' => $trainee_id]);
+    return redirect()->route('fill_traniee_progress', ['user_id' => $user_id, 'trainee_id' => $trainee_id]);
     }
 
-    public function destroy($id, $trainee_id, $progressId)
+    public function destroy($user_id, $trainee_id, $progressId)
     {
         // dd($progressId,$trainerId, $traineeId);
-        Progress::where('id', $progressId)->delete();
+        Progress::where('user_id', $progressId)->delete();
 
-        return redirect(route('fill_traniee_progress',['user_id'=> $id, 'trainee_id' => $trainee_id]))->with('error', 'Progress not found');
+        return redirect(route('fill_traniee_progress',['user_id'=> $user_id, 'trainee_id' => $trainee_id]))->with('error', 'Progress not found');
     }
     
     

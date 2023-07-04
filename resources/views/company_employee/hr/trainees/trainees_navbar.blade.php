@@ -8,7 +8,7 @@
         @if($user->company_employee_role_id==3)
         <li class="nav-item">
           <a class="nav-link text-light @yield('activity')" aria-current="page" 
-          href="{{route('home')}}"
+          href="{{route('trainer_list_traniees',['user_id'=>$user->id])}}"
           >My trainees</a> 
         </li>
         @endif
