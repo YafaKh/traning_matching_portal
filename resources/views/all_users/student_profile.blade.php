@@ -1,9 +1,9 @@
 @extends('all_users.master')
 
 @section('content')
-<section class="profileSection mt-4">
+<section class="profileSection">
  {{--asset('images/userImg2.png')--}}
-  <div class="studentHeader rounded-top-2">
+  <div class="studentHeader">
       <h1>{{$student->first_name_en}} {{$student->last_name_en}}</h1>
       <img src="{{$student->image}}" alt="student Image">
     </div>
@@ -13,7 +13,7 @@
       <p class="studentInfo"><i class="bi bi-envelope-fill icon"></i>{{$student->email}}</p>
       <p class="studentInfo"><i class="bi bi-telephone-fill icon"></i>{{$student->phone}}</p>
       <p class="studentInfo"><i class="bi bi-linkedin icon"></i>{{$student->address}}Linkedin</p>
-      @yield('edit_profile_btn')
+      <a class="btn editBtn" href="{{route('edit_student_profile',['user_id'=> $student->id])}}" role="button">Edit Profile</a>
     </div>
   </section>
   <section class="profileSection">
@@ -75,7 +75,7 @@
 
     <div class="skill">
       <p>{{ $allSkill->skill->name }}</p>
-      <input type="range" class="form-range w-25" value="{{  $allSkill->level }}" id="disabledRange" disabled>
+      <input type="range" class="form-range w-25"  min="0" max="5" value="{{  $allSkill->level }}" id="disabledRange" disabled>
 
       <!-- <input type="range" min="1" max="100" value="{{ $allSkill->level }}" class="w-25" disabled> -->
     </div>
@@ -91,16 +91,16 @@
     <p class="fs-4 text-dark-blue">{{ $allLanguage->spokenLanguage->name }}</p>
     <div class="skill">
       <p>speaking_level :</p>
-      <input type="range" class="form-range w-25" value="{{ $allLanguage->speaking_level }}" id="disabledRange" disabled>
+      <input type="range" class="form-range w-25"  min="0" max="5" value="{{ $allLanguage->speaking_level }}" id="disabledRange" disabled>
     </div>
     <div class="skill">
     <p>writing_level :</p>
-    <input type="range" class="form-range w-25" value="{{ $allLanguage->writing_level }}" id="disabledRange" disabled>
+    <input type="range" class="form-range w-25"  min="0" max="5" value="{{ $allLanguage->writing_level }}" id="disabledRange" disabled>
 
      </div>
      <div class="skill">
      <p>listening_level :</p>
-    <input type="range" class="form-range w-25" value="{{ $allLanguage->listening_level }}" id="disabledRange" disabled>
+    <input type="range" class="form-range w-25"  min="0" max="5" value="{{ $allLanguage->listening_level }}" id="disabledRange" disabled>
 
      </div>
     @endforeach
