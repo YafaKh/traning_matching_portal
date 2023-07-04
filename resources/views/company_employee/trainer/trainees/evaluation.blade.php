@@ -52,13 +52,13 @@
     <p>Would you be willing to hire this student in your company, why?</p>
     <div class="d-flex flex-row mb-3">
       <div class="form-check me-5">
-        <input class="form-check-input " type="radio" id="yes" name="willing_to_hire" checked>
+        <input class="form-check-input " type="radio" value="1" name="willing_to_hire" checked>
         <label class="form-check-label" for="yes">
           Yes
         </label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="radio" name="willing_to_hire" id="no">
+        <input class="form-check-input" type="radio" name="willing_to_hire" value="0">
         <label class="form-check-label" for="no">
           No
         </label>
@@ -164,7 +164,7 @@
           <tr>
           <td class="fw-bold">
           <button class="btn btn-primary" id="sumBtn">Average</button></td>
-          <td><input type="text" id="avg" name="avg" disabled class="w-25 form-control text-center bg-white">
+          <td><input type="text" id="avg" name="avg" class="w-25 form-control text-center bg-white" disabled>
           <input type="hidden" id="hiddenavg" name="avg" class="w-25 form-control text-center bg-white">
 
           @error('avg')
@@ -187,24 +187,61 @@
   </div>
 </form>
 {{-- Disable the corresponding range slider if the checkbox is checked --}}
- <script>
-  var checkboxes = document.querySelectorAll('input[type="checkbox"]');
-  var sliders = document.querySelectorAll('input[type="range"]');
 
-  checkboxes.forEach(function(checkbox, index) {
-    checkbox.addEventListener('change', function() {
-      if (checkbox.checked) {
-      sliders[index].disabled = true;
-      // give the slider lowest possible value 
-      sliders[index].value = 0;
-    } else {
-      sliders[index].disabled = false;
-    }
-    });
-  }); 
-</script>
 <!-- calculate avg -->
+<script>
+var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+var sliders = document.querySelectorAll('input[type="range"]');
 
+checkboxes.forEach(function(checkbox, index) {
+  checkbox.addEventListener('change', function() {
+    if (checkbox.checked) {
+    sliders[index].disabled = true;
+    // give the slider lowest possible value 
+    sliders[index].value = 0;
+  } else {
+    sliders[index].disabled = false;
+  }
+  });
+}); 
 
+function calculateAvg() {
+    var rangeInputs = document.querySelectorAll('input[type="range"]');
+    var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    var counterCantJudge =0;
+checkboxes.forEach(function(checkbox, index) {
+  if (checkbox.checked) {
+    counterCantJudge++;
+    console.log('checked');
+  }
+});
+    var sum = 0;
+    var avg =0; 
+    
+    rangeInputs.forEach(function(input) {
+      sum += parseInt(input.value);
+      avg=100*sum/(5*(12-counterCantJudge));
+    });
+
+    return avg;
+  }
+ 
+  //when click on button it will be shown in input element
+  var submitButton = document.getElementById('sumBtn');
+  submitButton.addEventListener('click', function(event) {
+    event.preventDefault(); // Prevent form submission for demonstration purposes
+
+    var totalavg = calculateAvg();
+    
+    // Display the sum in the input:text element
+    var resultElement = document.getElementById('avg');
+    var resultElementHidden = document.getElementById('hiddenavg');
+
+    resultElement.value = totalavg;
+    resultElementHidden.value = totalavg;
+
+  });
+
+</script>
 
 @endsection
