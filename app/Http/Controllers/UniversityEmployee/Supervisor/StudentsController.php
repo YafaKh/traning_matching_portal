@@ -71,7 +71,26 @@ class StudentsController extends Controller
         return view('university_employee.supervisor.evaluateStduent',compact('user','student','trainer','training','evaluateStudent'));
         
     }
+    public function showEvaluateCompnyPage($user_id,$student_id)
+    {
+        // $user=UniversityEmployee::whereIn('University_employee_role_id', [2, 3])->find($user_id);//role_id = ??
+        // if ($user==null) {
+        //     return "supervisor not found ";
+        // }
+        // $allStudents=$user->students();
+        // $student = $allStudents->find($student_id);
 
+        // if ($student == null) {
+        //     return "Student not found";
+        // }
+        // // company rmployee should be trainier in training table ?
+        // $trainer = $student->training->employee;
+        // $training = $student->training;
+        // $evaluateStudent =$student->evaluate_student;
+
+        return view('university_employee.supervisor.evaluateComapny');
+        
+    }
 
 
         /**
