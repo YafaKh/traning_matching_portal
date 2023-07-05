@@ -38,15 +38,9 @@
                 <td colspan="6"><label class="form-label mt-2 ms-3 fs-6">
                 Employees</label>
                 </td>
-                <td><button type="button" class="btn bg-mid-sand border mb-2 me-2"
-                data-bs-toggle="modal" data-bs-target="#deleteModal"
-                data-bs-title="delete selected"><i class="bi bi-trash3 py-0 fs-6 text-danger"></i>
-                </button>
-                </td>
             </tr>
             <tr >
-            <th scope="col" class="ps-3"><input class="form-check-input" type="checkbox"  id="check-all1" onClick="check_all_check_boxes('check-all1', 'table1')"></td>
-            <th scope="col" >ID</th>
+            <th scope="col" class="ps-3">ID</th>
             <th scope="col" >Name</th>
             <th scope="col">Role</th>
             <th scope="col">Email</th>
@@ -57,8 +51,7 @@
         <tbody class="bg-light">
             @foreach($university_employees as $employee)
             <tr>
-            <td class="ps-3"><input class="table-checkbox form-check-input" type="checkbox" value="" id="flexCheckDefault"></td>                
-            <td>{{$employee['employee_num']}}</td>
+            <td class="ps-3">{{$employee['employee_num']}}</td>
             <td>{{$employee['first_name']}} {{$employee['last_name']}}</td>
             <td>
             <form action="{{ route('coordinator_update_role', ['employee_id' =>$employee['id'], 'user_id'=>$user->id]) }}" class="d-flex">

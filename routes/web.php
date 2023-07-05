@@ -84,10 +84,11 @@ Route::prefix('/coordinator/{user_id}')
         Route::get('/', [CooListController::class,'index'])->name('coordinator_list_students');
         Route::post('/update_register_list', [CooListController::class,'update_register_list'])->name('update_register_list');
         Route::get('/destroy/{student_id}', [CooListController::class,'destroy'])->name('coordinator_delete_student');
+        Route::get('/delete-selected-students', [CooListController::class, 'deleteSelectedStudents'])->name('delete_selected_students');
         Route::get('/students_companies_approval', [StudentCompanyApprovalController::class, 'index'])->name('coordinator_students_companies_approval');
         Route::get('/student_company_approve/{not_approved_student_company}', [StudentCompanyApprovalController::class, 'approve'])->name('coordinator_student_company_approve');
         Route::get('/assign_supervisors', [AssignSupervisorsController::class, 'index'])->name('coordinator_manage_supervisors');
-        Route::post('/assign_supervisor/{student_id}', [AssignSupervisorsController::class,'add'])->name('coordinator_assign_supervisor');
+        Route::post('/assign_supervisor', [AssignSupervisorsController::class,'add'])->name('coordinator_assign_supervisor');
         Route::get('/unassign_supervisor/{student_id}', [AssignSupervisorsController::class,'delete'])->name('coordinator_unassign_supervisor');
      });
      Route::get('/student{student_id}_profile', [CooListController::class, 'show_student_profile'])->name('coordinator_student_profile');

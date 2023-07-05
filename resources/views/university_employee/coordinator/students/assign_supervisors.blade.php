@@ -13,11 +13,12 @@
 @endsection
 @section('content')
 <div class="px-5 col-lg-11 mx-auto">
+<form method="POST" class="w-auto" action="{{ route('coordinator_assign_supervisor', ['user_id'=>$user->id]) }}" id="assign_trainee_form">
+    @csrf
     {{--filters--}}            
     <div class="d-flex flex-md-row flex-column mt-4 col-md-6">
         <label class="form-label me-3 mt-1 txt-sm text-nowrap">Choose a supervisor to assign students to: </label>
-        <form method="POST" class="w-auto" action="{{ route('coordinator_assign_supervisor', ['student_id' => ':student_id', 'user_id'=>$user->id]) }}" id="assign_trainee_form">
-        @csrf
+        <div class="w-auto">
             <select class="form-select txt-sm " id="supervisor-filter" name="supervisor">
                 <option value=''>Supervisor</option>
                 @foreach($supervisors as $supervisor)
@@ -29,7 +30,7 @@
                     <strong>Error!</strong> {{ $message }}
                 </div>
             @enderror
-        </form>
+        </div>
     </div>        
     {{-- supervisor students table--}}
     <div class="table-responsive mt-2">
@@ -39,15 +40,9 @@
                 <td colspan="6"><label class="form-label mt-2 ms-3 fs-6">
                     Assigned students</label>
                 </td>
-                <td><button type="button" class="btn" 
-                    data-bs-toggle="tooltip" data-bs-placement="top"
-                    data-bs-title="delete selected"><i class="bi bi-trash3 fs-6 text-danger"></i>
-                    </button>
-                </td>
             </tr>
             <tr >
-            <th scope="col" class="ps-3"><input class="form-check-input" type="checkbox" id="check-all1" onClick="check_all_check_boxes('check-all1', 'table1')"></td>
-            <th scope="col" >University ID</th>
+            <th scope="col"  class="ps-3">University ID</th>
             <th scope="col" >Name</th>
             <th scope="col" >Supervisor</th>
             <th scope="col">Company</th>
@@ -58,8 +53,7 @@
         <tbody class="bg-light">
             @foreach($assigned_students as $assigned_student)
             <tr>
-            <td class="ps-3"><input class="table1-checkbox form-check-input" type="checkbox" value="" id="flexCheckDefault"></td>                
-            <td>{{$assigned_student['student_num']}}</td>
+            <td class="ps-3">{{$assigned_student['student_num']}}</td>
             <td>
                 @if($assigned_student['registered'])
                 <a class="link-dark link-underline-opacity-0 fw-bold" 
@@ -110,12 +104,13 @@
         <table class="table txt-sm table-sm border table-hover" id="table2">
         <thead class="bg-mid-sand">
         <tr class="rounded-top">
-                <td colspan="5"><label class="form-label mt-2 ms-3 fs-6">
+                <td colspan="4"><label class="form-label mt-2 ms-3 fs-6">
                     Other Students</label>
                 </td>
-                <td><button type="button" class="btn" 
-                    data-bs-toggle="tooltip" data-bs-placement="top"
-                    data-bs-title="add selected"><i class="bi bi-plus-square fs-6"></i></button></td>
+                <td>
+                <button type="submit" class="btn" id="assign_training">
+                    <i class="bi bi-plus-square fs-5"></i>
+                </button>
             </tr>
             <tr >
             <th scope="col" class="ps-3"><input class="form-check-input" type="checkbox"  id="check-all2" onClick="check_all_check_boxes('check-all2', 'table2')"></th>
@@ -123,13 +118,12 @@
             <th scope="col" >Name</th>
             <th scope="col">Company</th>
             <th scope="col">Branch</th>
-            <th scope="col">Add</th>
             </tr>
         </thead>
         <tbody class="bg-light">
             @foreach($unassigned_students as $unassigned_student)
             <tr>
-            <td class="ps-3"><input class="table2-checkbox form-check-input" type="checkbox" value="" id="flexCheckDefault"></td>                
+            <td class="ps-3"><input class="table2-checkbox form-check-input" type="checkbox" value="{{ $unassigned_student['id'] }}" name="students[]" id="flexCheckDefault"></td>                
             <td>{{$unassigned_student['student_num']}}</td>
             <td>
                 @if($unassigned_student['registered'])
@@ -146,17 +140,12 @@
             </td> 
             <td>{{$unassigned_student->training->branch->company->name ?? ''}}</td>
             <td>{{$unassigned_student->training->branch->address ?? ''}}</td>
-            <td>
-                <button type="button" class="btn" name="assign_training"
-                onclick="assign_supervisor('{{ $unassigned_student->id}}')">
-                <i class="bi bi-plus-square fs-6"></i>
-                </button>
-            </td>
             </tr>
             @endforeach
         </tbody>
         </table>
     </div>
+</form>
 </div>
 
 <script>

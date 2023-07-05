@@ -43,19 +43,23 @@ class AssignSupervisorsController extends Controller
 
     /** Assign this supervisor for this student/s
     */
-    public function add(Request $request, $user_id, $student_id)
+    public function add(Request $request, $user_id)
     {
+        $user = UniversityEmployee::where('id', $user_id)
+            ->select('id', 'first_name', 'last_name')->first();
+    
         $request->validate([
             'supervisor' => 'required|exists:university_employees,id',
+            'students' => 'required|array',
         ]);
-
-        $student = Student::find($student_id);
-        $student->university_employee_id = (int) $request->input('supervisor');
-        $student->save();
-
-        return redirect()->route('coordinator_manage_supervisors', $user_id);
-    }
-
+    
+        $studentIds = $request->input('students');
+        // Update training for selected students
+        Student::whereIn('id', $studentIds)
+            ->update(['university_employee_id' => $request->input('supervisor')]);
+    
+            return redirect()->route('coordinator_manage_supervisors', $user_id);
+    }  
     /** Remove this student/s from this supervisor's supervision
     */
     public function delete(Request $request, $user_id, $student_id)

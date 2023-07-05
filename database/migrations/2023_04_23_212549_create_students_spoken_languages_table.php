@@ -21,9 +21,9 @@ return new class extends Migration
             $table->unsignedBigInteger('student_id');
             $table->unsignedBigInteger('spoken_language_id');
             $table->foreign('student_id')
-            ->references('id')->on('students');
+            ->references('id')->on('students')->onDelete('cascade');
             $table->foreign('spoken_language_id')
-            ->references('id')->on('spoken_languages');
+            ->references('id')->on('spoken_languages')->onDelete('cascade');
         });
     }
 
