@@ -46,10 +46,10 @@
             </option>
             @endforeach
         </select>
-        <button type="button" class="btn bg-mid-sand border mb-2 me-2"
-        data-bs-toggle="modal" data-bs-target="#deleteModal"
-        data-bs-title="delete selected"><i class="bi bi-trash3 py-0 fs-6 text-danger"></i>
-        </button>
+        <a class="btn" id="del-selected-btn" href="javascript:void(0);">
+        <i class="bi bi-trash3 py-0 fs-6 text-danger"></i>
+        </a>
+
         <button type="button" class="btn h-50 btn-primary bg-dark-blue text-light opacity-75 px-3">Report</button>
     </div>
     {{--Upload registered students list--}}
@@ -80,7 +80,9 @@
         <table class="table txt-sm table-sm border table-hover" id="table">
         <thead class="bg-mid-sand">
             <tr >
-            <th scope="col" class="ps-3"><input class="form-check-input" type="checkbox" id="check-all1" onClick="check_all_check_boxes('check-all1', 'table')"></th>
+            <th scope="col" class="ps-3">
+  <input class="form-check-input" type="checkbox" id="check-all1" onClick="check_all_check_boxes('check-all1', 'table')">
+</th>
             <th scope="col">University ID</th>
             <th scope="col" >Name</th>
             <th scope="col">Specialization</th>
@@ -93,7 +95,9 @@
         <tbody class="bg-light" id="table-body">
             @foreach($students as $student)
             <tr>
-            <td class="ps-3"><input class="table-checkbox form-check-input" type="checkbox" id="check-all1" onClick="check_all_check_boxes('check-all1', 'table1')"></td>                
+            <td class="ps-3">
+            <input class="table-checkbox form-check-input" type="checkbox" name="selected_students[]" value="{{ $student->id }}">
+            </td>
             <td>{{$student['student_num']}}</td>
             <td class="registration-state-cell" data-registered="{{$student['registered']}}">
                 @if($student['registered'])
@@ -121,7 +125,7 @@
             </select>
             </td>
             <td>
-                <a type="submit" class="btn"
+                <a class="btn"
                 href="{{ route('coordinator_delete_student', ['student_id' => $student->id, 'user_id'=>$user->id]) }}"
                 onClick="return confirm('Are you sure?')">
                 <i class="bi bi-trash3 fs-6 text-danger"></i>
@@ -134,6 +138,30 @@
     </div>
     {{$students->links()}}
 </div>
+<script>
+    function deleteSelectedStudents() {
+        // Get all the selected checkboxes
+        var checkboxes = document.querySelectorAll('input[name="selected_students[]"]:checked');
+        var studentIds = [];
+
+        // Collect the IDs of the selected students
+        checkboxes.forEach(function(checkbox) {
+            studentIds.push(checkbox.value);
+        });
+
+        // Confirm the action with the user
+        var confirmation = confirm('Are you sure that you want to delete selecteds?');
+        if (confirmation) {
+            // Redirect to the server-side route with the selected student IDs
+            var url = '{{ route('delete_selected_students', ['user_id' => $user->id]) }}';
+            window.location.href = url + '?student_ids=' + studentIds.join(',');
+        }
+    }
+
+    // Attach the click event handler to the "Add Selected" button
+    var delSelectedBtn = document.getElementById('del-selected-btn');
+    delSelectedBtn.addEventListener('click', deleteSelectedStudents);
+</script>
 <script>
     // Get reference to the registration state select dropdown
     const registrationStateSelect = document.querySelector('#registration_state');

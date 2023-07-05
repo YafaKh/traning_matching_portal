@@ -63,6 +63,16 @@ class ListController extends Controller
         return redirect()->route('coordinator_list_students', ['students' => $students, 'user_id'=>$user_id]);
     }
 
+    public function deleteSelectedStudents($user_id)
+    {
+        $user = UniversityEmployee::where('id', $user_id)->first();
+        // Get the selected student IDs from the query string
+        $selectedStudentIds = explode(',', request('student_ids'));
+
+        Student::whereIn('id', $selectedStudentIds)->delete();
+
+        return redirect()->route('coordinator_list_students', ['user_id' => $user_id]);
+    }
     /**
      * Update registration state for the students
      * by uploading a file with updated registration state

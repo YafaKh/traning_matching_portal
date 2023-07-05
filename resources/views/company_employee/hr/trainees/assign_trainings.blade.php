@@ -141,13 +141,6 @@
         }
     });
 
-    function assign_training(student_id) {
-       var form = document.getElementById('assign_trainee_form');
-        form.action = form.action.replace(':student_id', student_id);
-        if (confirm('Are you sure?')) {
-        form.submit();
-        }
-    }
     function checkAllCheckboxes(checkAllId, checkboxesTableId) {
         const checkAll = document.getElementById(checkAllId);
         const checkboxes = document.querySelectorAll(`#${checkboxesTableId} .student-checkbox`);

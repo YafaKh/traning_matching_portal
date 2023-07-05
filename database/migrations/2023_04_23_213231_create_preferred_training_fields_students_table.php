@@ -21,10 +21,10 @@ return new class extends Migration
                 ->references('id')
                 ->on('students')
                 ->onDelete('no action')
-                ->onUpdate('no action');
+                ->onUpdate('no action')->onDelete('cascade');
             $table->foreign('preferred_training_id')
                 ->references('id')
-                ->on('preferred_training_fields');
+                ->on('preferred_training_fields')->onDelete('cascade');
         });
     }
 
