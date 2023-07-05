@@ -1,6 +1,13 @@
-@extends('student.layout.master')
+@extends('all_users.master')
 @section('navbar')
-  @include('student.layout.navbar')
+    @if($user->company_employee_role_id==2)
+        @include('university_employee.supervisor.navbar')
+    @else
+    @include('university_employee.coordinator.navbar')
+    @endif
+@endsection
+@section('students_activity')
+    active
 @endsection
 @section('content')
 <form action="{{route('student_evaluate_company.add',['user_id',$student->id])}}" method="POST" enctype="multipart/form-data">

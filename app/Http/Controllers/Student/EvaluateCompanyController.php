@@ -20,16 +20,7 @@ class EvaluateCompanyController extends Controller
             $students =Student::select('id')->get();
             // $companyName = $student->trainings->branch->company->name;
             $allSkills =Skill::all();
-            // $data = [
-            //     'student' => $student,
-            //     'allSkills' => $allSkills,
-            //     'companyName' => $companyName,
-            // ];
-            // $view1 = View::make('student.evaluate_company', $data);
-            // $view2 = View::make('student.layout.navbar', $data);
-        
-            // return Response::make($view1->render().$view2->render());
-// ,'companyName'
+           
             return view('student.evaluate_company',compact('student','allSkills'));
     }
    
