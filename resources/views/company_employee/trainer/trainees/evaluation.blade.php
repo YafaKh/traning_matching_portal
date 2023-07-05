@@ -164,7 +164,7 @@
           <tr>
           <td class="fw-bold">
           <button class="btn btn-primary" id="sumBtn">Average</button></td>
-          <td><input type="text" id="avg" name="avg" class="w-25 form-control text-center bg-white" disabled>
+          <td><input type="text" id="avg" class="w-25 form-control text-center bg-white" disabled>
           <input type="hidden" id="hiddenavg" name="avg" class="w-25 form-control text-center bg-white">
 
           @error('avg')

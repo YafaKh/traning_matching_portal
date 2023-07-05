@@ -62,7 +62,6 @@ Route::get('/reset_password', function () {
 Route::prefix('/admin')
 //->middleware('web', 'admin')
 ->group(function () {
-    Route::get('/',[HomeController::class,'index'])->name('admin_home');
     Route::get('/companies',[AdminCompaniesController::class,'index'])->name('admin_companies');
     Route::get('/company{company_id}_profile', [AdminCompaniesController::class, 'show_company_profile'])->name('admin_company_profile');
     Route::get('/comapnies_want_to_join',[CompaniesWantJoinController::class,'index'])->name('admin_compnies_want_to_join');
@@ -92,7 +91,11 @@ Route::prefix('/coordinator/{user_id}')
         Route::get('/unassign_supervisor/{student_id}', [AssignSupervisorsController::class,'delete'])->name('coordinator_unassign_supervisor');
      });
      Route::get('/student{student_id}_profile', [CooListController::class, 'show_student_profile'])->name('coordinator_student_profile');
-    
+     Route::get('/progress/{student_id}', [CooListController::class, 'showProgressPage'])->name('coordinator_student_progress');
+     Route::get('/visits/{student_id}', [CooListController::class, 'show_visits'])->name('coordinator_student_visits');
+     Route::get('/student_Evaluation/{student_id}', [CooListController::class, 'show_student_evaluation'])->name('coordinator_student_Evaluation');
+     Route::get('/company_Evaluation/{student_id}', [CooListController::class, 'show_company_evaluation'])->name('coordinator_company_Evaluation');
+   
     Route::prefix('/university_employees')->group(function(){
         Route::get('/', [CooUniversityEmployeeController::class, 'index'])->name('coordinator_list_employees');
         Route::get('/create', [CooUniversityEmployeeController::class,'create'])->name('coordinator_add_employee');
@@ -110,7 +113,7 @@ Route::prefix('/supervisor/{user_id}')
 ->group(function(){
     Route::prefix('/students')->group(function(){
     Route::get('/', [StudentsController::class, 'index'])->name('supervisor_list_students');
-    Route::get('/progress/{student_id}', [StudentsController::class, 'showProgressPage'])->name('show_student_progress');
+    Route::get('/progress/{student_id}', [StudentsController::class, 'showProgressPage'])->name('supervisor_student_progress');
     Route::get('/evaluation/{student_id}', [StudentsController::class, 'showEvaluateStudentPage'])->name('show_student_Evaluation');
     });
     Route::get('/student{student_id}_profile', [StudentsController::class, 'show_student_profile'])->name('supervisor_student_profile');
@@ -149,6 +152,7 @@ Route::prefix('hr/{user_id}')
         Route::post('/unassign_training', [AssignTrainingController::class,'delete'])->name('hr_unassign_training');
     });
     Route::get('/student{student_id}_profile', [HrListController::class, 'show_student_profile'])->name('hr_student_profile');
+    Route::get('/progress/{student_id}', [HrListController::class, 'showProgressPage'])->name('hr_student_progress');
 
     Route::prefix('/company_employees')->group(function(){
         Route::get('/', [HrCompanyEmployeeController::class,'index'])->name('hr_list_employees');
@@ -204,6 +208,7 @@ Route::prefix('/trainer/{user_id}')
         Route::get('/delete/{progress_id}',[progressController::class,'destroy'])->name('fill_traniee_progress.delete');
         });
         Route::get('/student{student_id}_profile', [TrainerController::class, 'show_student_profile'])->name('trainer_student_profile');
+        Route::get('/progress/{student_id}', [TrainerController::class, 'showProgressPage'])->name('trainer_student_progress');
         Route::get('/evaluation/{trainee_id}',[EvaluateController::class,'show'])->name('fill_traniee_evaluation');
         Route::post('/evaluation/add/{trainee_id}',[EvaluateController::class,'add'])->name('fill_traniee_evaluation.add');
 

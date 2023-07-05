@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-md shadow-sm px-sm-5">
-        <a class="navbar-brand w-25" href="{{route('admin_home')}}">
+        <a class="navbar-brand w-25">
             <img src="{{asset('images/logo.png')}}" alt="logo" class="" />Admin Name</a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"

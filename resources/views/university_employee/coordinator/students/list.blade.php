@@ -116,13 +116,14 @@
             <td>{{$student->training->branch->company->name ?? ''}}-{{$student->training->branch->city->name ?? ''}}</td>
             <td>{{$student->supervisor['first_name'] ?? ''}} {{$student->supervisor['last_name'] ?? ''}}</td>
             <td>
-            <select class="form-select txt-sm w-auto" aria-label="Go_to">
-                <option value="Progress" selected>Progress</option>
-                <option value="Visit_forms">Visit forms</option>
-                <option value="Evaluation">Evaluation</option>
-                <option value="Assessment">Company evaluation</option>
-                <option value="Assessment">Assessment</option>
-            </select>
+            <a class="dropdown-toggle text-dark" 
+            role="button" data-bs-toggle="dropdown" aria-expanded="false">Go to student's</a>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="{{route('coordinator_student_progress',['user_id' => $user->id,'student_id' => $student->id])}}">Progress</a></li>
+                <li><a class="dropdown-item" href="{{route('coordinator_student_visits',['user_id' => $user->id,'student_id' => $student->id])}}">Visit forms</a></li>
+                <li><a class="dropdown-item" href="{{route('coordinator_student_Evaluation',['user_id' => $user->id,'student_id' => $student->id])}}">Evaluation</a></li>
+                <li><a class="dropdown-item" href="{{route('coordinator_company_Evaluation',['user_id' => $user->id,'student_id' => $student->id])}}">Company evaluation</a></li>
+             </ul>
             </td>
             <td>
                 <a class="btn"

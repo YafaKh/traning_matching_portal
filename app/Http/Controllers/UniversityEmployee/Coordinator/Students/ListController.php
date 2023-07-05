@@ -10,6 +10,8 @@ use App\Models\Student_spoken_language;
 use App\Models\Student_skill;
 use App\Models\Preferred_training_field_student;
 use App\Models\Preferred_cities_student;
+use App\Models\Progress;
+use App\Models\Visit;
 
 use Illuminate\Http\Request;
 
@@ -126,4 +128,49 @@ class ListController extends Controller
         return view('university_employee.coordinator.student_profile',compact('user', 'student','specializationName','allLanguages','allSkills','allPreferredTrainingFields','allPreferredCities'));  
     }
 
+    public function showProgressPage($user_id,$student_id)
+    {
+        $user = UniversityEmployee::where('id', $user_id)->first();
+        $student = Student::where('id', $student_id)->first();
+
+        if ($student == null) {
+            return "Student not found";
+        }
+        $studentProgress =Progress::where('student_id',$student_id)->get();
+
+        return view('university_employee.coordinator.progress', compact('user', 'student','studentProgress'));
+
+    }
+    public function show_visits($user_id,$student_id)
+    {
+        $user = UniversityEmployee::where('id', $user_id)->first();
+        $student = Student::where('id', $student_id)->first();
+
+        $visits =$student->visits;
+
+        return view('university_employee.coordinator.visits', compact('user', 'student','visits'));
+
+    }
+
+    public function show_student_evaluation($user_id,$student_id)
+    {
+        $user = UniversityEmployee::where('id', $user_id)->first();
+        $student = Student::where('id', $student_id)->first();
+
+        $evalusation_data =$student->evaluate_student;
+
+        return view('university_employee.coordinator.student_evaluation', compact('user', 'student','evalusation_data'));
+
+    }
+
+    public function show_company_evaluation($user_id,$student_id)
+    {
+        $user = UniversityEmployee::where('id', $user_id)->first();
+        $student = Student::where('id', $student_id)->first();
+
+        $evalusation_data =$student->evaluate_company;
+
+        return view('university_employee.coordinator.company_evaluation', compact('user', 'student','evalusation_data'));
+
+    }
 }

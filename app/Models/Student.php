@@ -8,7 +8,7 @@ use App\Models\Training;
 use App\Models\EvaluateStudent;
 use App\Models\EvaluateCompany;
 use App\Models\Progress;
-
+use App\Models\Visit;
 use App\Models\University;
 use App\Models\Specialization;
 use App\Models\City;
@@ -97,6 +97,10 @@ class Student extends Model
     public function progresses()
     {
         return $this->hasMany(Progress::class);
+    }
+    public function visits()
+    {
+        return $this->hasMany(Visit::class);
     }
     public function not_approved_companies()
     {

@@ -34,13 +34,12 @@ class StudentsController extends Controller
     }
     public function showProgressPage($user_id,$student_id)
     {
-        $user=UniversityEmployee::whereIn('University_employee_role_id', [2, 3])->find($user_id);//role_id = ??
+        $user = UniversityEmployee::where('id', $user_id)->first();
         if ($user==null) {
             return "supervisor not found ";
         }
 
-        $allStudents=$user->students()->paginate(10);
-        $student = $allStudents->find($student_id);
+        $student = Student::where('id', $student_id)->first();
 
 
         if ($student == null) {
@@ -48,7 +47,7 @@ class StudentsController extends Controller
         }
         $studentProgress =Progress::where('student_id',$student_id)->get();
 
-        return view('university_employee.supervisor.progress', compact('user', 'student','studentProgress','allStudents'));
+        return view('university_employee.supervisor.progress', compact('user', 'student','studentProgress'));
 
     }
     public function showEvaluateStudentPage($user_id,$student_id)

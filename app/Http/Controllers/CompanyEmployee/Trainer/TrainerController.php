@@ -8,6 +8,7 @@ use App\Models\Student_spoken_language;
 use App\Models\Student_skill;
 use App\Models\Preferred_training_field_student;
 use App\Models\Preferred_cities_student;
+use App\Models\Progress;
 
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
@@ -50,5 +51,19 @@ class TrainerController extends Controller
 
       
         return view('company_employee.hr.student_profile',compact('user', 'student','specializationName','allLanguages','allSkills','allPreferredTrainingFields','allPreferredCities'));  
+    }
+
+    public function showProgressPage($user_id,$student_id)
+    {
+        $user = UniversityEmployee::where('id', $user_id)->first();
+         $student = Student::where('id', $student_id)->first();
+
+        if ($student == null) {
+            return "Student not found";
+        }
+        $studentProgress =Progress::where('student_id',$student_id)->get();
+
+        return view('company_employee.trainer.progress', compact('user', 'student','studentProgress'));
+
     }
 }

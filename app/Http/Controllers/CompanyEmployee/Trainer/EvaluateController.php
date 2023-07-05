@@ -24,7 +24,6 @@ class EvaluateController extends Controller
     }
     public function add(Request $request, $user_id, $trainee_id)
     { 
-        // dd($request);
         $request->validate([
             'student_weaknesses' => 'required|string|min:1|max:255',
             'willing_to_hire' => 'required|boolean', 
@@ -44,7 +43,7 @@ class EvaluateController extends Controller
             'english_language_proficiency' =>'required|integer',
             'avg' =>'required|integer',
         ]);
-    dd('ss');
+    
         $evaluate = new EvaluateStudent();
         $evaluate->student_weaknesses = $request->input('student_weaknesses');
         $evaluate->willing_to_hire = $request->input('willing_to_hire');
@@ -65,8 +64,6 @@ class EvaluateController extends Controller
         $evaluate->avg = $request->input('avg');
 
         $evaluate->save();
-
-        $request->session()->flash('success', 'evaluate added successfully.');
 
         return redirect()->route('trainer_list_traniees', ['user_id' => $user_id, 'trainee_id' => $trainee_id]);
     }

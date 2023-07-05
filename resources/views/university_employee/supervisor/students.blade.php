@@ -86,10 +86,9 @@
             role="button" data-bs-toggle="dropdown" aria-expanded="false">Go to student's</a>
             <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="{{route('student_visit_forms',['user_id' => $user->id])}}">Visit forms</a></li>
-                <li><a class="dropdown-item" href="{{route('show_student_progress',['user_id' => $user->id,'student_id' => $student->id])}}">Progress</a></li>
+                <li><a class="dropdown-item" href="{{route('supervisor_student_progress',['user_id' => $user->id,'student_id' => $student->id])}}">Progress</a></li>
                 <li><a class="dropdown-item" href="{{route('show_student_Evaluation',['user_id' => $user->id,'student_id' => $student->id])}}">Evaluation</a></li>
                 <li><a class="dropdown-item" href="">Company evaluation</a></li>
-                <li><a class="dropdown-item" href="">Assessment</a></li>
             </ul>
             </td>
             </tr>        
