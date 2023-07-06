@@ -31,7 +31,9 @@ class StudentProfileController extends Controller
         //   one to many
           $specializationName = $student->specialization->name;
 
-        
-          return view('student.profile',compact('student','specializationName','allLanguages','allSkills','allPreferredTrainingFields','allPreferredCities'));  
+          $company= $student->training->branch->company;
+          if($company == null) return "not found";
+          else 
+          return view('student.profile',compact('student','specializationName','allLanguages','allSkills','allPreferredTrainingFields','allPreferredCities','company'));  
     }
 }

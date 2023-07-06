@@ -12,30 +12,48 @@
 @section('content')
 <div class="px-5">
     {{--filters--}}
+    
     <div class= "d-flex flex-md-row w-auto flex-column mt-5 pb-3">
         <div class= "d-flex flex-row">
-        <select class="form-select w-auto me-2 mb-2 txt-sm" aria-label="Specialization">
-            <option selected>Specialization</option>
-            <option value="CS">CS</option>
-            <option value="MMT">MMT</option>
-            <option value="GIS">GIS</option>
-            <option value="CSE">CSE</option>
+        <select class="form-select w-auto me-2 mb-2 txt-sm" aria-label="Specialization" id="specialization" name="specialization">
+        <option selected>Specialization</option>
+        @if(count($specializations) > 0)
+        @foreach($specializations as $specialization)
+            <option value="{{$specialization->id}}">{{$specialization->acronyms}}</option>
+            @endforeach
+            @endif
         </select>
 
         <select class="form-select w-auto me-2 mb-2 txt-sm" aria-label="Company">
-            <option selected>Company</option>
-            <option value="CS">CS</option>
+        <option selected>Company</option>
+        @foreach($companies as $company)
+            <option value="{{$company->id}}">{{$company->name}}</option>
+        @endforeach
         </select>
         </div>
         <div class= "d-flex flex-row w-auto">
         <select class="form-select w-auto me-2 mb-2 txt-sm" aria-label="Branch">
-            <option selected>Branch</option>
-            <option value="CS">CS</option>
+        <option selected>Branch</option>
+        @foreach($branches as $branch)
+            <option value="{{$branch->id}}">{{$branch->address}}</option>
+        @endforeach
         </select>
         
         <select class="form-select w-auto me-2 mb-2 txt-sm " aria-label="Supervisor">
+
             <option selected>Training</option>
-            <option value="CS">CS</option>
+            @foreach($trainings as $training)
+
+                @if($training->semester == "1")
+                <option value="{{$training->id}}">Fall - {{$training->year ?? "__"}} - {{$training->employee->first_name ?? "__"}} {{$training->employee->last_name ?? "__"}}</option>
+                @elseif($training->semester == '2')
+                <option value="{{$training->id}}">Spring - {{$training->year ?? "__"}} - {{$training->employee->first_name ?? "__"}} {{$training->employee->last_name ?? "__"}}</option>
+                @elseif($training->semester == '3')
+                <option value="{{$training->id}}">First Summer - {{$training->year ?? "__"}} - {{$training->employee->first_name ?? "__"}} {{$training->employee->last_name ?? "__"}}</option>
+                @elseif($training->semester == '4')
+                <option value="{{$training->id}}">Second Summer - {{$training->year ?? "__"}} - {{$training->employee->first_name ?? "__"}} {{$training->employee->last_name ?? "__"}}</option>
+                @endif
+            @endforeach
         </select>
         </div>
         <form class="input-group h-50 w-auto" role="searprimarych">
@@ -47,7 +65,7 @@
     </div>
     {{-- students table --}}
     <div class="table-responsive ">
-        <table class="table txt-sm border table-hover" id="table">
+        <table class="table txt-sm border table-hover">
         <thead class="bg-mid-sand">
             <tr >
             <th scope="col" class="ps-3">ID</th>
@@ -60,7 +78,7 @@
             </tr>
           
         </thead>
-        <tbody class="bg-light" id="table-body">
+        <tbody class="bg-light" id="studentList">
         @foreach($allStudents as $student)
 
             <tr>
@@ -88,7 +106,7 @@
                 <li><a class="dropdown-item" href="{{route('student_visit_forms',['user_id' => $user->id])}}">Visit forms</a></li>
                 <li><a class="dropdown-item" href="{{route('supervisor_student_progress',['user_id' => $user->id,'student_id' => $student->id])}}">Progress</a></li>
                 <li><a class="dropdown-item" href="{{route('show_student_Evaluation',['user_id' => $user->id,'student_id' => $student->id])}}">Evaluation</a></li>
-                <li><a class="dropdown-item" href="">Company evaluation</a></li>
+                <li><a class="dropdown-item" href="{{route('show_company_Evaluation',['user_id' => $user->id,'student_id' => $student->id])}}">Company evaluation</a></li>
             </ul>
             </td>
             </tr>        
@@ -100,5 +118,42 @@
     {{$allStudents->links()}}
 
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function() {
+    // Add change event listener to the dropdown
+    $('#specialization').on('change', function() {
+      var selectedSpecialization = $(this).val(); // Get the selected value
+      // Send AJAX request to fetch filtered students
+    //   console.log(selectedSpecialization);
+      $.ajax({
+        url: '{{route('filtered_students',['user_id' => $user->id])}}', // Replace with the endpoint URL to fetch filtered students
+        type: 'GET',
+        data: { specialization: selectedSpecialization },
+        success: function(response) {
+          // Update the student list with the filtered results
+          $('#studentList').html(response);
+        //   console.log(data)
+        },
+        error: function(xhr) {
+          // Handle error
+          console.log(xhr.responseText);
+
+        //   console.log('no');
+        }
+      });
+    });
+  });
+</script>
+
+<!-- In the code above, you'll need to replace '/filter-students' with the actual endpoint URL that will handle the AJAX request and return the filtered students based on the selected specialization. -->
+
+<!-- On the server side, you'll need to define the corresponding route and controller method to handle the AJAX request and fetch the filtered students. The implementation will depend on the programming language and framework you're using on the server side. -->
+
+
+
+
+
+
 
 @endsection

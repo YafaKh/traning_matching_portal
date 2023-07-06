@@ -15,18 +15,24 @@ use Illuminate\Routing\Controller;
 
 class EvaluateCompanyController extends Controller
 {
-     public function show($id){
-            $student =Student::find($id);
-            $students =Student::select('id')->get();
-            // $companyName = $student->trainings->branch->company->name;
+     public function show($user_id){
+            $student =Student::find($user_id);
+            $companyName = $student->training->branch->company->name ?? "__";
             $allSkills =Skill::all();
-           
-            return view('student.evaluate_company',compact('student','allSkills'));
+            // $company= $student->training->branch->company;
+       
+            return view('student.evaluate_company',compact('student','allSkills','companyName','company'));
     }
-   
+    public function companyprofile($user_id,$company_id){
+        $student =Student::find($user_id);
+        $company_data= $student->training->branch->company ?? 0;
+        return view('student.company_profile',compact('student','company_data'));
+
+    }
     public function add(Request $request){
-        //  dd('inside add');
-        // dd($request->all());
+         dd('inside add');
+        dd($request->all());
+        // dd($request);
         $request->validate([
         'training_palce_evaluation'=>'required|integer|min:0|max:100',
         'pros'=>'required|max:255|string',
@@ -36,20 +42,20 @@ class EvaluateCompanyController extends Controller
         'skills_wish_were_given_better'=> 'required|max:255|string',
         'recommend_sending_students'=>'required|boolean',
         'recommended_evaluate_sys'=>'required|max:255|string',
-        // 'evaluate_companycol'=> 'required|max:255|string',
         'recommended_evaluate_sys_explanation'=>'required|max:255|string',
         'internship_time_before_senior_year'=> 'required|max:255|string',
         'more_than_one_internship'=> 'required|max:255|string',
         'finding_training_difficulties'=> 'required|max:255|string',
         'recommendations'=> 'required|max:255|string',
         'notes_about_website'=>'required|max:255|string',
-
+// 14col
 
                 ]);
+                
     Skill::create([
         'name'=>$request->name,
-        // 'student_id' =>$request->id,
-        // 'skill_id' => $request->skill_id,
+        'student_id' =>$request->id,
+        'skill_id' => $request->skill_id,
     ]);
     EvaluateCompany::create([
         'training_palce_evaluation'=> $request->training_palce_evaluation,
@@ -73,5 +79,7 @@ class EvaluateCompanyController extends Controller
          return redirect(route('student.evaluate_company'));
   
     
-    }
+        }
+
+        
 }

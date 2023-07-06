@@ -20,7 +20,11 @@ class EditStudentProfileController extends Controller
         $skills = Skill::all();
         $spokenLanguages = Spoken_language::all();
         $trainingFields = Preferred_training_field::all();
-        return view('student.edit_profile',compact('student','cities','skills','spokenLanguages','trainingFields'));
+        $company= $student->training->branch->company;
+        if($company == null) return "not found";
+        else 
+
+        return view('student.edit_profile',compact('student','cities','skills','spokenLanguages','trainingFields','company'));
     }
     // public function update(Request $request)
     // {

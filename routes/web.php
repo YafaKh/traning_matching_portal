@@ -114,8 +114,11 @@ Route::prefix('/supervisor/{user_id}')
     Route::prefix('/students')->group(function(){
     Route::get('/', [StudentsController::class, 'index'])->name('supervisor_list_students');
     Route::get('/progress/{student_id}', [StudentsController::class, 'showProgressPage'])->name('supervisor_student_progress');
-    Route::get('/evaluation/{student_id}', [StudentsController::class, 'showEvaluateStudentPage'])->name('show_student_Evaluation');
-    });
+    Route::get('/student_evaluation/{student_id}', [StudentsController::class, 'showEvaluateStudentPage'])->name('show_student_Evaluation');
+    Route::get('/company_evaluation/{student_id}', [StudentsController::class, 'showEvaluateCompnyPage'])->name('show_company_Evaluation');
+    Route::get('/filter-students', [StudentsController::class, 'filterStudents'])->name('filtered_students');
+
+});
     Route::get('/student{student_id}_profile', [StudentsController::class, 'show_student_profile'])->name('supervisor_student_profile');
 
     // Route::get('/students', function () {
@@ -182,6 +185,7 @@ Route::prefix('/student/{user_id}')
     Route::get('/evaluate_company',[EvaluateCompanyController::class,'show'])->name('student_evaluate_company');
     Route::POST('/evaluate_company/add',[EvaluateCompanyController::class,'add'])->name('student_evaluate_company.add');
     Route::get('/list',[StudentRegisterController::class,'test'])->name('test');
+    Route::get('/company_profile/{company_id}', [EvaluateCompanyController::class, 'companyprofile'])->name('company_profile');
 
 })->name('student');
 

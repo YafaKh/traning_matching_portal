@@ -12,6 +12,9 @@
         <li class="nav-item">
           <a class="nav-link @yield('progress_activity')" href="#">My progress</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link @yield('progress_activity')" href="{{ route('company_profile', ['user_id' => $student->id,'company_id' => $company->id]) }}">My company</a>
+        </li>
       </ul>
       <ul class="navbar-nav ms-auto me-sm-5 mb-2 mb-lg-0">
         <li class="nav-item">
