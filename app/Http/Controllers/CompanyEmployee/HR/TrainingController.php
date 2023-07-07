@@ -84,17 +84,6 @@ class TrainingController extends Controller
                 'required',
                 'string',
                 'max:45',
-                /*the name is unique at company level
-                function ($attribute, $value, $fail) use ($user_id){
-                    $user = CompanyEmployee::where('id', $user_id)->first();
-                    $company_branch = $user->company->branch;
-                    $existingTraining = Training::where('name', $value)
-                    ->where('company_branch_id', $company_branch->id)
-                    ->exists();
-                    if ($existingTraining) {
-                        $fail('The training name already exists for your company.');
-                    }
-                },*/
             ],
         ]);
         //to handle case when the selected option is the last one (Fall-date('Y')+1)

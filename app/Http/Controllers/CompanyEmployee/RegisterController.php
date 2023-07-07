@@ -37,7 +37,7 @@ class RegisterController extends Controller
             'second_name' => 'required|alpha|between:2,20',
             'third_name' => 'required|alpha|between:2,20',
             'last_name' => 'required|alpha|between:2,20',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:10000000',
             'phone' => 'required',
             'email'=> 'required|email|unique:company_employees,email|max:255',
             'password' => 'required|min:8|confirmed:confirm_password',
