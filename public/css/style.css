@@ -308,6 +308,7 @@ body .bigDiv .loginForm .loginCard .creatAccountLink:hover {
   border-radius: 1rem;
   padding: inherit;
 }
+/* company profile inside student */
 .editBtn{
   background-color: #0a66c2;
   color: #fff;
