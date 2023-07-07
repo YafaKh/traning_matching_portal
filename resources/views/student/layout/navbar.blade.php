@@ -13,7 +13,11 @@
           <a class="nav-link @yield('progress_activity')" href="#">My progress</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link @yield('progress_activity')" href="{{ route('company_profile', ['user_id' => $user->id,'company_id' => $company_data->id]) }}">My company</a>
+        @if ($user->training && $user->training->branch && $user->training->branch->company)
+            <a class="nav-link @yield('progress_activity')" href="{{ route('company_profile', ['user_id' => $user->id, 'company_id' => $user->training->branch->company->id]) }}">My company</a>
+        @else
+            <a class="nav-link @yield('progress_activity')" href="{{ route('no_company', ['user_id' => $user->id]) }}">My company</a>
+        @endif
         </li>
       </ul>
       <ul class="navbar-nav ms-auto me-sm-5 mb-2 mb-lg-0">

@@ -205,7 +205,9 @@ Route::prefix('/student/{user_id}')
     Route::POST('/evaluate_company/add',[EvaluateCompanyController::class,'add'])->name('student_evaluate_company.add');
     Route::get('/list',[StudentRegisterController::class,'test'])->name('test');
     Route::get('/company_profile/{company_id}', [EvaluateCompanyController::class, 'companyprofile'])->name('company_profile');
-
+    Route::get('/no-company', function () {
+        return "You do not have a company yet.";
+    })->name('no_company');    
 })->name('student');
 
 
