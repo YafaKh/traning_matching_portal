@@ -12,9 +12,9 @@ use App\Http\Controllers\Student\StudentProfileController;
 use App\Http\Controllers\Student\EditStudentProfileController;
 use App\Http\Controllers\Student\StudentRegisterController;
 use App\Http\Controllers\Student\EvaluateCompanyController;
-use App\Http\Controllers\CompanyEmployee\RegisterController;
-use App\Http\Controllers\CompanyEmployee\HR\Trainees\ListController as HrListController;
 
+use App\Http\Controllers\CompanyEmployee\RegisterController as CompanyRegisterController;
+use App\Http\Controllers\CompanyEmployee\HR\Trainees\ListController as HrListController;
 use App\Http\Controllers\CompanyEmployee\HR\Trainees\UniversityStudentsController;
 use App\Http\Controllers\CompanyEmployee\HR\Trainees\AssignTrainingController;
 use App\Http\Controllers\CompanyEmployee\HR\CompanyEmployeeController as HrCompanyEmployeeController;
@@ -24,6 +24,7 @@ use App\Http\Controllers\CompanyEmployee\Trainer\progressController;
 use App\Http\Controllers\CompanyEmployee\Trainer\EvaluateController;
 use App\Http\Controllers\CompanyEmployee\HR\CompanyProfileController as HrCompanyProfileController;
 
+use App\Http\Controllers\UniversityEmployee\RegisterController as UniversityRegisterController;
 use App\Http\Controllers\UniversityEmployee\Coordinator\Students\ListController as CooListController;
 use App\Http\Controllers\UniversityEmployee\Coordinator\Students\StudentCompanyApprovalController;
 use App\Http\Controllers\UniversityEmployee\Coordinator\Students\AssignSupervisorsController;
@@ -61,7 +62,7 @@ Route::get('/reset_password', function () {
 
 // admin 
 Route::prefix('/admin')
-//->middleware('web', 'admin')
+->middleware('web', 'admin')
 ->group(function () {
     Route::get('/companies',[AdminCompaniesController::class,'index'])->name('admin_companies');
     Route::get('/company{company_id}_profile', [AdminCompaniesController::class, 'show_company_profile'])->name('admin_company_profile');
@@ -74,11 +75,12 @@ Route::prefix('/admin')
 });
 
 // university employees' routes
-Route::get('university_employee/register', function () {
-    return view('/university_employee/register'); })->name('university_employee_register');
+
+Route::get('university_employee/register',[UniversityRegisterController::class,'create'])->name('university_employee_registeration');
+Route::post('university_employee/register/store',[UniversityRegisterController::class,'store'])->name('university_employee_store');    
 
 Route::prefix('/coordinator/{user_id}')
-//->middleware('web', 'university_employee')
+->middleware('web', 'university_employee')
 ->group(function(){
     Route::prefix('/students')->group(function(){
         Route::get('/', [CooListController::class,'index'])->name('coordinator_list_students');
@@ -109,7 +111,7 @@ Route::prefix('/coordinator/{user_id}')
 });
 
 Route::prefix('/supervisor/{user_id}')
-//->middleware('web', 'university_employee')
+->middleware('web', 'university_employee')
 ->group(function(){
     Route::prefix('/students')->group(function(){
     Route::get('/', [StudentsController::class, 'index'])->name('supervisor_list_students');
@@ -131,11 +133,11 @@ Route::prefix('/supervisor/{user_id}')
 });   
 
 // company employees' routes
-Route::get('company_employee/register',[RegisterController::class,'create'])->name('company_employee_registeration');
-Route::post('company_employee/register/store',[RegisterController::class,'store'])->name('company_employee_store');
+Route::get('company_employee/register',[CompanyRegisterController::class,'create'])->name('company_employee_registeration');
+Route::post('company_employee/register/store',[CompanyRegisterController::class,'store'])->name('company_employee_store');
 
 Route::prefix('hr/{user_id}')
-//->middleware('web', 'company_employee')
+->middleware('web', 'company_employee')
 ->group(function () {
     Route::get('/company_profile', [HrCompanyProfileController::class, 'index'])->name('hr_company_profile');
     Route::get('/edit_company_profile', [HrCompanyProfileController::class, 'edit'])->name('hr_edit_company_profile');
@@ -172,7 +174,7 @@ Route::prefix('hr/{user_id}')
 
 // trainer
 Route::prefix('/trainer/{user_id}')
-//->middleware('web', 'company_employee')
+->middleware('web', 'company_employee')
 ->group(function(){
     Route::prefix('/trainees')->group(function(){
         Route::get('/',[TrainerController::class,'show'])->name('trainer_list_traniees');
@@ -197,7 +199,7 @@ Route::get('student/register',[StudentRegisterController::class,'create'])->name
 Route::post('student/register/store',[StudentRegisterController::class,'store'])->name('student_registeration.store');
 
 Route::prefix('/student/{user_id}')
-//->middleware('web', 'student')
+->middleware('web', 'student')
 ->group(function () {
     Route::get('/profile',[StudentProfileController::class,'show'])->name('student_profile');
     Route::get('/edit_profile',[EditStudentProfileController::class,'show'])->name('edit_student_profile');
