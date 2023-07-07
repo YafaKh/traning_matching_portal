@@ -68,7 +68,7 @@ class Student extends Authenticatable
     }
     public function student_skill()
     {
-        return $this->hasMany(Student_skill::class);
+        return $this->belongsTo(Student_skill::class);
     }
     // public function skills()
     // {

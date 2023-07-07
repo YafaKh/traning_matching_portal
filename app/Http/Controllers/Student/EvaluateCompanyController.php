@@ -15,28 +15,30 @@ use Illuminate\Routing\Controller;
 
 class EvaluateCompanyController extends Controller
 {
-     public function show($id){
-            $student =Student::find($id);
-            $students =Student::select('id')->get();
-            // $companyName = $student->trainings->branch->company->name;
+     public function show($user_id){
+            $user =Student::find($user_id);
+            $companyName = $user->training->branch->company->name ?? "__";
             $allSkills =Skill::all();
-            // $data = [
-            //     'student' => $student,
-            //     'allSkills' => $allSkills,
-            //     'companyName' => $companyName,
-            // ];
-            // $view1 = View::make('student.evaluate_company', $data);
-            // $view2 = View::make('student.layout.navbar', $data);
-        
-            // return Response::make($view1->render().$view2->render());
-// ,'companyName'
-            return view('student.evaluate_company',compact('student','allSkills'));
+            $company_data= $user->training->branch->company ?? 0;
+
+            // $company= $student->training->branch->company;
+       
+            return view('student.evaluate_company',compact('user','allSkills','companyName','company_data'));
     }
-   
-    public function add(Request $request){
+    public function companyprofile($user_id,$company_id){
+        $user =Student::find($user_id);
+        $company_data= $user->training->branch->company ?? 0;
+        $contactable_employees = $company_data->employees()->where('contactable', 1)->get();
+
+        return view('student.company_profile',compact('user','company_data','contactable_employees'));
+
+    }
+    public function add(Request $request,$user_id){
         //  dd('inside add');
-        // dd($request->all());
+        // dd($user_id);
+        // dd($request);
         $request->validate([
+        'skills_you_trained' =>'required|string|max:255',
         'training_palce_evaluation'=>'required|integer|min:0|max:100',
         'pros'=>'required|max:255|string',
         'cons'=>'required|max:255|string',
@@ -45,22 +47,19 @@ class EvaluateCompanyController extends Controller
         'skills_wish_were_given_better'=> 'required|max:255|string',
         'recommend_sending_students'=>'required|boolean',
         'recommended_evaluate_sys'=>'required|max:255|string',
-        // 'evaluate_companycol'=> 'required|max:255|string',
         'recommended_evaluate_sys_explanation'=>'required|max:255|string',
         'internship_time_before_senior_year'=> 'required|max:255|string',
         'more_than_one_internship'=> 'required|max:255|string',
         'finding_training_difficulties'=> 'required|max:255|string',
         'recommendations'=> 'required|max:255|string',
         'notes_about_website'=>'required|max:255|string',
-
+// 15col
 
                 ]);
-    Skill::create([
-        'name'=>$request->name,
-        // 'student_id' =>$request->id,
-        // 'skill_id' => $request->skill_id,
-    ]);
+                
+                
     EvaluateCompany::create([
+        'skills_you_trained'=> $request->skills_you_trained,
         'training_palce_evaluation'=> $request->training_palce_evaluation,
         'pros'=> $request->pros,
         'cons'=> $request->cons,
@@ -69,7 +68,7 @@ class EvaluateCompanyController extends Controller
         'skills_wish_were_given_better'=> $request-> skills_wish_were_given_better,
         'recommend_sending_students'=> $request-> recommend_sending_students === 'on',
         'recommended_evaluate_sys'=> $request-> recommended_evaluate_sys,
-        // 'evaluate_companycol'=> $request-> evaluate_companycol,
+        'skills_you_trained'=> $request-> skills_you_trained,
         'recommended_evaluate_sys_explanation'=> $request-> recommended_evaluate_sys_explanation,
         'internship_time_before_senior_year'=> $request-> internship_time_before_senior_year,
         'more_than_one_internship'=> $request-> more_than_one_internship,
@@ -79,8 +78,10 @@ class EvaluateCompanyController extends Controller
 
         ]);
        
-         return redirect(route('student.evaluate_company'));
-  
+         return redirect()->route('student_evaluate_company', ['user_id' => $user_id]);
+
     
-    }
+        }
+
+        
 }

@@ -11,6 +11,11 @@ use App\Models\Student_spoken_language;
 use App\Models\Student_skill;
 use App\Models\Preferred_training_field_student;
 use App\Models\Preferred_cities_student;
+use App\Models\Specialization;
+use App\Models\Company;
+use App\Models\CompanyBranch;
+use App\Models\Training;
+
 
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
@@ -30,8 +35,37 @@ class StudentsController extends Controller
         }
         $allStudents=$user->students()->paginate(10);
 
-        return view('university_employee.supervisor.students',compact('user','allStudents'));//,['students'=>$studentsData]);
+        $specializations =Specialization::all();
+        $companies =Company::all();
+        $branches =CompanyBranch::all();
+        $trainings =Training::all();
+        
+        return view('university_employee.supervisor.listStudents',compact('user','allStudents','specializations','companies','branches','trainings'));
     }
+    // public function filterStudents(Request $request)
+    // {
+    //     dd($specializationId = $request->input('specialization')); // Retrieve the selected specialization from the request
+    
+    //     // Perform the filtering based on the selected specialization
+    //     $filteredStudents = Student::where('specialization_id', $specializationId)->get();
+    // dd($filteredStudents);
+    //     // Return the filtered students (e.g., as a view or JSON response)
+    //     return view('university_employee.supervisor.listStudents', compact('filteredStudents'));
+    // }
+    public function filterStudents(Request $request)
+    {
+        $query =Student::query();
+        $specializations =Specialization::all();
+
+        if($request->ajax()){
+        $students = $query->where(['specialization_id'=>$request->specialization])->get();
+        return response()->json(['students'=>$students]);
+        }
+        $students = $query->get();
+    
+        return view('university_employee.supervisor.filtered-student', compact('specializations','students'));
+    }
+    
     public function showProgressPage($user_id,$student_id)
     {
         $user = UniversityEmployee::where('id', $user_id)->first();
@@ -61,7 +95,27 @@ class StudentsController extends Controller
         'student'=> $student,
         'evaluation_data'=>$evaluation_data]);        
     }
+    public function showEvaluateCompnyPage($user_id,$student_id)
+    {
+        $user=UniversityEmployee::whereIn('University_employee_role_id', [2, 3])->find($user_id);//role_id = ??
+        if ($user==null) {
+            return "supervisor not found ";
+        }
+        $allStudents=$user->students();
+        $student = $allStudents->find($student_id);
 
+        if ($student == null) {
+            return "Student not found";
+        }
+        $companyName = $student->training->branch->company->name;
+        $evaluateCompany = $student->evaluate_company;
+        // $trainer = $student->training->employee;
+        // $training = $student->training;
+        // $evaluateStudent =$student->evaluate_student;
+
+        return view('university_employee.supervisor.evaluateCompay',compact('user','student','companyName','evaluateCompany'));
+        
+    }
 
 
         /**

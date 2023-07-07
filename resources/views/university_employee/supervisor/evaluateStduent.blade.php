@@ -275,7 +275,7 @@
 </section>
 <section>
 <div class="text-center">
-<a class="btn btn-secondary px-5 my-3 mx-auto w-25" type="button" href="{{route('supervisor_list_students',['user_id' => $supervisor->id])}}">Back</a>
+<a class="btn btn-secondary px-5 my-3 mx-auto w-25" type="button" href="{{route('supervisor_list_students',['user_id' => $user->id])}}">Back</a>
   </div>
 </section>
 @endsection
