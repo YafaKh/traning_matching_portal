@@ -7,13 +7,13 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link @yield('profile_activity')" href="{{ route('student_profile', ['user_id' => $student->id]) }}">Profile</a>
+          <a class="nav-link @yield('profile_activity')" href="{{ route('student_profile', ['user_id' => $user->id]) }}">Profile</a>
         </li>
         <li class="nav-item">
           <a class="nav-link @yield('progress_activity')" href="#">My progress</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link @yield('progress_activity')" href="{{ route('company_profile', ['user_id' => $student->id,'company_id' => $company->id]) }}">My company</a>
+          <a class="nav-link @yield('progress_activity')" href="{{ route('company_profile', ['user_id' => $user->id,'company_id' => $company_data->id]) }}">My company</a>
         </li>
       </ul>
       <ul class="navbar-nav ms-auto me-sm-5 mb-2 mb-lg-0">

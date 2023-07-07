@@ -34,8 +34,8 @@
           <!-- training filed or skills ?? -->
 
         <div class="col mt-5">
-            <textarea name="pros" id="pros" cols="67" rows="7" 
-            class="overflow-auto" disabled>{{$evaluateCompany->pros}}</textarea>   
+            <textarea name="skills_you_trained" id="skills_you_trained" cols="67" rows="7" 
+            class="overflow-auto" disabled>{{$evaluateCompany->skills_you_trained}}</textarea>   
         </div>
       
        

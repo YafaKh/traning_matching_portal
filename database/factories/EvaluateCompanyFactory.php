@@ -17,6 +17,7 @@ class EvaluateCompanyFactory extends Factory
     public function definition()
     {
         return[
+        'skills_you_trained'=> $this->faker->paragraph,
         'training_palce_evaluation' => $this->faker->numberBetween(1, 10),
         'pros' => $this->faker->paragraph,
         'cons' => $this->faker->paragraph,
@@ -24,9 +25,7 @@ class EvaluateCompanyFactory extends Factory
         'skills_wish_they_included' => $this->faker->paragraph,
         'skills_wish_were_given_better' => $this->faker->paragraph,
         'recommend_sending_students' => $this->faker->boolean,
-        // 'recommended_evaluate_sys' => $this->faker->word,
         'recommended_evaluate_sys' => $this->faker->randomElement(['numbers', 'letters']),
-        'evaluate_companycol' => $this->faker->word,
         'recommended_evaluate_sys_explanation' => $this->faker->paragraph,
         'internship_time_before_senior_year' => $this->faker->boolean,
         'more_than_one_internship' => $this->faker->boolean,
