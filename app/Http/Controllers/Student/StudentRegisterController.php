@@ -20,77 +20,58 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class StudentRegisterController extends Controller
 {
     public $selectedCompany="null";
-    public function create($id){
-        // $data=Student::get();
-        // return view('student.register',['Studentkey'=>$data]);
-        $student =Student::find($id);
-
-        // $spoken_languages = $student ->spoken_languages;
-        // $students =Student::select('id')->get();
-        // $allLanguages = Spoken_language::select('id','name')->get();
-        // $allLanguages = Student_spoken_language::with('student', 'spokenLanguage')->where('student_id',$id)->get();
+    public function create(){
         $allLevels = Student_spoken_language::all();
-                // $allLanguages = Student_spoken_language::with('student', 'spokenLanguage')->where('student_id',$id)->get();
         $allLanguages = Spoken_language::all();
         $specializations = Specialization::all();
         $skills = Skill::all();
-       $companies = Company::all();
+        $companies = Company::all();
         $branches=CompanyBranch::all();
-        // dd($companyid = $student->training->branch->);
-        // $companiesBranches = Company::with('student', 'companies')->where('student_id',$id)->get();
         $cities=City::all();
-        // dd($branches->$cities->name);
-        // $branchesCity = CompanyBranch::with('city', 'city')->where('student_id',$id)->get();
 
         $trainingFields=Preferred_training_field::all();
-       return view('student.register',compact('student','allLanguages','allLevels','specializations','skills','companies','cities','trainingFields','branches'));
+       return view('student.register',compact('allLanguages','allLevels','specializations','skills','companies','cities','trainingFields','branches'));
 
     }
-    
-    // public class updateSelectedbranch(){
-
-    // }
     public function store(Request $request){ 
         dd($request->all());
         // vlidation
         $validated = $request->validate([            
-            'student_num' => 'required|string',
-            'first_name_ar'=>'required|string|max:15',
-            'first_name_en'=>'required|string|max:15',
-            'second_name_ar'=>'required|string|max:15',
-            'second_name_en'=>'required|string|max:15',
-            'third_name_ar'=>'required|string|max:15',
-            'third_name_en'=>'required|string|max:15',
-            'last_name_ar'=>'required|string|max:15',
-            'last_name_en'=>'required|string|max:15',
-            'gender' =>'required|boolean',
-            'passed_hours' =>'required|integer',//min ??
-            'load' =>'required|integer|min:0|max:18',
-            'gpa' =>'required|max:4|between:2.00,4.00|regex:/^[0-4]\.\d\d$/',//lowest gpa ??
-            'address'=>'required|string',
-            'email'=>'required|email|unique:students',
-            'linkedin' =>'required|url',
-            'password'=>'required|string|min:8|regex:/^[0-9a-zA-Z][@$!%*#?&]$/|confirmed',//must have a character or number && special character
-            'availability_date'=>'required|date',
-            'connected_with_a_company'=>'required|boolean',
-            // 'connected_company_info'=>'required|string|max:512',//name + branch
-            'phone'=>'required|string|regex:/^+[0-9]{13}$/',
-            // 'registered'=>'required|boolean',// must i write a default value here ?
-            'image'=>'required|image',
-// 'avatar' => 'dimensions:min_width=100,min_height=200' for img
-// 'image' => 'file|size:512';
-            'work_experience'=>'required|string|max:512',
+            // 'student_num' => 'required|string',
+            // 'first_name_ar'=>'required|string|max:15',
+            // 'first_name_en'=>'required|string|max:15',
+            // 'second_name_ar'=>'required|string|max:15',
+            // 'second_name_en'=>'required|string|max:15',
+            // 'third_name_ar'=>'required|string|max:15',
+            // 'third_name_en'=>'required|string|max:15',
+            // 'last_name_ar'=>'required|string|max:15',
+            // 'last_name_en'=>'required|string|max:15',
+            // 'gender' =>'required|boolean',
+            // 'passed_hours' =>'required|integer',
+            // 'load' =>'required|integer|min:0|max:18',
+            // 'gpa' =>'required|max:4|between:2.00,4.00|regex:/^[0-4]\.\d\d$/',
+            // 'email'=>'required|email|unique:students',
+            // 'linkedin' =>'required|url',
+            // 'password'=>'required|string|min:8|regex:/^[0-9a-zA-Z][@$!%*#?&]$/|confirmed',//must have a character or number && special character
+            // 'availability_date'=>'required|date',
+            // 'connected_with_a_company'=>'required|boolean',
+            // 'phone'=>'required|string|regex:/^+[0-9]{13}$/',
+            // 'active'=>'required|boolean',// must i write a default value here ?
+            // 'image'=>'required|image',
+            // 'work_experience'=>'required|string|max:512',
 
           ]);
-        //  $input = $request -> all();
-        //  $cities =$input['cities'];
-        //  $input['cities'] = implode(' , ',$cities);
-        //  Preferred_cities_student::create([
-        //     // student-id 
-        //     //city-id
-        //  ]);
-         
-        // insert
+
+        //   $skills = $request->input('skills');
+        //   if (!empty($skills)) {
+        //       foreach ($skills as $skillName) {
+        //           Skill::create([
+        //               'name' => $skillName,
+        //               'user_id' => $yourModel->id, // Assuming the user model has an "id" attribute
+        //           ]);
+        //       }
+        //   }
+        
         $student = Student::create([
             'student_num' => $request->input('student_num'),
             'first_name_ar'=> $request->input('first_name_ar'),
@@ -105,28 +86,57 @@ class StudentRegisterController extends Controller
             'passed_hours' => $request->input('passed_hours'),
             'load' => $request->input('load'),
             'gpa' => $request->input('gpa'),
-            'address' => $request->input('address'),
             'email' => $request->input('email'),
             'linkedin' => $request->input('linkedin'),
             'password' => $request->input('password'),
             'availability_date' => $request->input('availability_date'),
             'connected_with_a_company' => $request->input('connected_with_a_company'),
-            'connected_company_info' => $request->input('connected_company_info'),
             'phone' => $request->input('phone'),
-            'registered' => $request->input('registered'),
+            'active' => $request->input('active'),
             'image' => $this->storeImage($request),
             'work_experience' => $request->input('work_experience'),
+            'trainingField' =>$request->trainingField,
+            // $user->preferredTrainingFields()->attach($request->trainingField),
+            // $user->preferredCitiesStudent()->attach($request->preferrdCity),
+            // $user->preferredCompanies()->attach($request->preferrdCompany),
+
             // 'university_id'=>$request ->input('university_id'),
             // 'university_employee_id'=>$request ->input('university_employee_id'),
-            'specialization_id'=>$request ->input('specialization_id'),
+            // 'specialization_id'=>$request ->input('specialization_id'),
             // 'training_id'=>$request ->input('training_id'),
             // 'evaluate_student_id'=>$request ->input('evaluate_student_id'),
             // 'evaluate_company_id'=>$request ->input('evaluate_company_id'),
 
          ]);
-       
 
-        return redirect(route('student_registeration_1'));
+         $skill =Skill::create([
+            'name' =>$request->input('skills'),
+        ]);
+        $student_skill = Student_skill::create([
+            'student_id' =>$student->id,
+            'skill_id' =>$skill->id,
+            'level' =>  $request->input('active'),
+        ]);
+        // $spokenLanguage =Spoken_language::create([
+        //     'name' =>$request->input('skills'),
+        // ]);
+        // $student_skill = Student_skill::create([
+        //     'student_id' =>$student->id,
+        //     'skill_id' =>$skill->id,
+        //     'level' =>  $request->input('active'),
+        // ]);
+        dd($student_skill);
+        //  insert training fields
+        // $trainingFields = [];
+        // $trainingFields = $request->input('trainingFields');
+        // foreach($trainingFields as $trainingField){
+        //     $student[] = [
+        //         'trainingField' => $trainingField
+
+        //     ];
+        // }
+
+        return redirect(route('student_registeration'));
     }
 
 

@@ -58,7 +58,6 @@ class StudentFactory extends Factory
             'passed_hours' => $this->faker->numberBetween(0, 200),
             'load' => $this->faker->numberBetween(0, 18),//number of hours for this semester without training
             'gpa' => $this->faker->randomFloat(2, 0, 4),
-            'address' => $this->faker->address,
             'email' => $this->faker->unique()->safeEmail,
             'linkedin' => $this->faker->url(),
             'password' => Str::substr(bcrypt('password'),15), 
