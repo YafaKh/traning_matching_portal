@@ -65,7 +65,10 @@
 
             <tr>
             <td class="ps-3">{{$student ->student_num}}</td>
-            <td>{{$student ->first_name_en}} {{$student ->second_name_en}} {{$student ->third_name_en}} {{$student ->last_name_en}}</td>
+            <td><a class="link-dark link-underline-opacity-0 fw-bold" 
+                href="{{ route('supervisor_student_profile', ['user_id'=>$user->id, 'student_id'=> $student->id ]) }}">
+                {{$student ->first_name_en}} {{$student ->second_name_en}} {{$student ->third_name_en}} {{$student ->last_name_en}}</a>
+            </td>
             <td>{{$student ->specialization->acronyms}}</td>
             <td>{{$student ->training->branch->company->name ?? "__"}}</td>
             <td>{{$student ->training->branch->address ?? "__"}}</td>
@@ -85,7 +88,7 @@
             <a class="dropdown-toggle text-dark" 
             role="button" data-bs-toggle="dropdown" aria-expanded="false">Go to student's</a>
             <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="{{route('student_visit_forms',['user_id' => $user->id])}}">Visit forms</a></li>
+                <li><a class="dropdown-item" href="{{route('student_visits',['user_id' => $user->id, 'student_id' => $student->id])}}">Visit forms</a></li>
                 <li><a class="dropdown-item" href="{{route('supervisor_student_progress',['user_id' => $user->id,'student_id' => $student->id])}}">Progress</a></li>
                 <li><a class="dropdown-item" href="{{route('show_student_Evaluation',['user_id' => $user->id,'student_id' => $student->id])}}">Evaluation</a></li>
                 <li><a class="dropdown-item" href="">Company evaluation</a></li>

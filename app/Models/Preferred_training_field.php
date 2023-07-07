@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Student;
+use App\Models\Preferred_training_field_student;
+
 
 class Preferred_training_field extends Model
 {
@@ -20,5 +23,9 @@ class Preferred_training_field extends Model
     {
         return $this->hasManyThrough(Preferred_training_field_student::class,Student::class);
     }
-    
+    public function students()
+    {
+        return $this->belongsToMany(Student::class, 'preferred_training_fields_students', 'preferred_training_id', 'student_id');
+    }
+
 }

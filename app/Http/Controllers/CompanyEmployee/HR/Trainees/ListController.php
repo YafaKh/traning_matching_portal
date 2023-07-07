@@ -71,10 +71,18 @@ class ListController extends Controller
         return view('company_employee.hr.student_profile',compact('user', 'student','specializationName','allLanguages','allSkills','allPreferredTrainingFields','allPreferredCities'));  
     }
 
-    
+        
+    /**
+     * Method showProgressPage
+     *
+     * @param $user_id $user_id [explicite description]
+     * @param $student_id $student_id [explicite description]
+     *
+     * @return void
+     */
     public function showProgressPage($user_id,$student_id)
     {
-        $user = UniversityEmployee::where('id', $user_id)->first();
+        $user = CompanyEmployee::where('id', $user_id)->first();
         $student = Student::where('id', $student_id)->first();
 
         if ($student == null) {
@@ -83,6 +91,26 @@ class ListController extends Controller
         $studentProgress =Progress::where('student_id',$student_id)->get();
 
         return view('company_employee.hr.progress', compact('user', 'student','studentProgress'));
+
+    }
+        /**
+     * Method show_student_profile
+     *
+     * @param $user_id $user_id [explicite description]
+     * @param $student_id $student_id [explicite description]
+     *
+     * @return void
+     */
+    public function show_student_evaluation($user_id,$student_id)
+    {
+        $user = CompanyEmployee::where('id', $user_id)->first();
+        $student = Student::where('id', $student_id)->first();
+
+        $evaluation_data =$student->evaluate_student;
+        return view('company_employee.hr.student_evaluation', 
+        ['user'=>$user, 
+        'student'=> $student,
+        'evaluation_data'=>$evaluation_data]);
 
     }
 }

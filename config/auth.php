@@ -52,6 +52,10 @@ return [
             'driver' => 'session',
             'provider' => 'company_employees',
         ],
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+        ],
     ],
 
     /*
@@ -87,6 +91,10 @@ return [
         'company_employees' => [
             'driver' => 'eloquent',
             'model' => App\Models\CompanyEmployee::class,
+        ],
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin::class,
         ],
         // 'users' => [
         //     'driver' => 'database',

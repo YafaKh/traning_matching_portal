@@ -52,23 +52,14 @@ class StudentsController extends Controller
     }
     public function showEvaluateStudentPage($user_id,$student_id)
     {
-        $user=UniversityEmployee::whereIn('University_employee_role_id', [2, 3])->find($user_id);//role_id = ??
-        if ($user==null) {
-            return "supervisor not found ";
-        }
-        $allStudents=$user->students();
-        $student = $allStudents->find($student_id);
+        $user = UniversityEmployee::where('id', $user_id)->first();
+        $student = Student::where('id', $student_id)->first();
 
-        if ($student == null) {
-            return "Student not found";
-        }
-        // company rmployee should be trainier in training table ?
-        $trainer = $student->training->employee;
-        $training = $student->training;
-        $evaluateStudent =$student->evaluate_student;
-
-        return view('university_employee.supervisor.evaluateStduent',compact('user','student','trainer','training','evaluateStudent'));
-        
+        $evaluation_data =$student->evaluate_student;
+        return view('university_employee.supervisor.student_evaluation', 
+        ['user'=>$user, 
+        'student'=> $student,
+        'evaluation_data'=>$evaluation_data]);        
     }
 
 

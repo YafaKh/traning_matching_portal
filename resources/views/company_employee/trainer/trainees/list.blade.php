@@ -31,7 +31,7 @@
         </thead>
         @foreach($allTrainings as $allTraining )
 
-        @foreach($allTrainees as $allTrainee)
+        @foreach($allTrainees as $trainee)
 
         <tbody class="bg-light">
    
@@ -39,8 +39,8 @@
 
             <td class="ps-3">
                 <a class="link-dark link-underline-opacity-0 fw-bold" 
-                href="{{ route('hr_student_profile', ['user_id'=>$user->id, 'student_id'=> $allTrainee->id ]) }}">
-                {{$allTrainee->first_name_en}} {{$allTrainee->second_name_en}} {{$allTrainee->third_name_en}} {{$allTrainee->last_name_en}}
+                href="{{ route('hr_student_profile', ['user_id'=>$user->id, 'student_id'=> $trainee->id ]) }}">
+                {{$trainee->first_name_en}} {{$trainee->second_name_en}} {{$trainee->third_name_en}} {{$trainee->last_name_en}}
                 </a>
             </td>
            @if($allTraining->semester == "1")
@@ -52,15 +52,12 @@
          @elseif($allTraining->semester == '4')
          <td>Second Summer - {{$allTraining->year}} - {{$user->first_name}} {{$user->last_name}}</td>
         @endif
-            <td><a type="button" class="btn" href="{{route('fill_traniee_progress', ['user_id' => $user->id,'trainee_id' => $allTrainee->id])}}">
+            <td><a type="button" class="btn" href="{{route('fill_traniee_progress', ['user_id' => $user->id,'trainee_id' => $trainee->id])}}">
             <i class="bi bi-box-arrow-up-right"></i></a></td>
-            <td><a type="button" class="btn" href="{{route('fill_traniee_evaluation', ['user_id' => $user->id,'trainee_id' => $allTrainee->id])}}">
+            <td><a type="button" class="btn" href="{{ $trainee->evaluate_student_id ? route('show_traniee_evaluation',
+                 ['user_id' => $user->id, 'trainee_id' => $trainee->id]) : route('fill_traniee_evaluation', ['user_id' => $user->id, 'trainee_id' => $trainee->id]) }}">
             <i class="bi bi-box-arrow-up-right"></i></a></td>
-          
-            </tr>
-            
-            
-           
+            </tr>           
         </tbody>
         @endforeach
         @endforeach

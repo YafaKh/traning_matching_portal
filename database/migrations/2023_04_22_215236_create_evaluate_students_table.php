@@ -30,7 +30,7 @@ return new class extends Migration
             $table->tinyInteger('enthusiasm');
             $table->tinyInteger('communicational_skills');
             $table->tinyInteger('english_language_proficiency');
-            $table->Integer('avg')->default(0);
+            $table->double('avg')->default(0);
         });
     }
 

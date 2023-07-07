@@ -44,12 +44,19 @@
                 @endif
             </td>            
             <td>
-                Training fields:<br>
+                <strong>Training fields:</strong><br>
                 @foreach($student->preferredTrainingFields as $training_field)
-                {{training_field->name ??''}}, 
-                @endforeach 
-                Cities:<br>
-                Companies:<br>
+                {{$training_field->name}}, 
+                @endforeach <br>
+                <strong>Cities:</strong><br>
+                @foreach($student->preferredCitiesStudent as $city)
+                {{$city->name}}, 
+                @endforeach <br>
+                <strong>Companies:</strong><br>
+
+                @foreach($student->preferredCompanies as $company)
+                {{$company->name}}, 
+                @endforeach <br>
             </td>
             <td>
                 <ul>

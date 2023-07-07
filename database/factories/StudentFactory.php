@@ -44,10 +44,6 @@ class StudentFactory extends Factory
         $training_ids = Training::pluck('id')->all();
         $this->instance_counter++;
 
-        
-        EvaluateStudent::factory()->create();
-        EvaluateCompany::factory()->create();
-
         return [
             'student_num' => $this->faker->unique()->randomNumber(8),
             'first_name_ar' => $this->faker->firstName,
@@ -76,10 +72,6 @@ class StudentFactory extends Factory
             'university_employee_id' => $this->faker->randomElement($supervisors),
             'specialization_id' => $this->faker->randomElement($specialization_ids),
             'city_id' => $this->faker->randomElement($city_ids),
-
-            //'training_id' => $this->faker->randomElement($training_ids),
-            'evaluate_student_id' => $this->instance_counter,
-            'evaluate_company_id' => $this->instance_counter,
             'work_experience' => $this->faker->paragraph(),
 
         ];

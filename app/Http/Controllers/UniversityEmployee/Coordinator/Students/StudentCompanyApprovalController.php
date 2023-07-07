@@ -20,7 +20,6 @@ class StudentCompanyApprovalController extends Controller
         ->select('id', 'first_name', 'last_name', 'university_employee_role_id')->first();
 
         $students = Student::whereHas('not_approved_companies')
-        ->with('preferredTrainingFields.preferredTrainingField')
         ->select(['id', 'student_num', 'first_name_en', 'last_name_en', 'registered'])
         ->defaultOrder()
         ->get();

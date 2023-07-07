@@ -46,11 +46,9 @@
             </option>
             @endforeach
         </select>
-        <a class="btn" id="del-selected-btn" href="javascript:void(0);">
-        <i class="bi bi-trash3 py-0 fs-6 text-danger"></i>
+        <a class="btn btn-light h-75 py-0 px-1" id="del-selected-btn" href="javascript:void(0);">
+        <i class="bi bi-trash3 fs-5 text-danger"></i>
         </a>
-
-        <button type="button" class="btn h-50 btn-primary bg-dark-blue text-light opacity-75 px-3">Report</button>
     </div>
     {{--Upload registered students list--}}
     <div class="d-flex flex-sm-row flex-column justify-content-between mb-2">
@@ -120,7 +118,7 @@
             role="button" data-bs-toggle="dropdown" aria-expanded="false">Go to student's</a>
             <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="{{route('coordinator_student_progress',['user_id' => $user->id,'student_id' => $student->id])}}">Progress</a></li>
-                <li><a class="dropdown-item" href="{{route('coordinator_student_visits',['user_id' => $user->id,'student_id' => $student->id])}}">Visit forms</a></li>
+                <li><a class="dropdown-item" href="{{route('student_visits',['user_id' => $user->id, 'student_id' => $student->id])}}">Visit forms</a></li>
                 <li><a class="dropdown-item" href="{{route('coordinator_student_Evaluation',['user_id' => $user->id,'student_id' => $student->id])}}">Evaluation</a></li>
                 <li><a class="dropdown-item" href="{{route('coordinator_company_Evaluation',['user_id' => $user->id,'student_id' => $student->id])}}">Company evaluation</a></li>
              </ul>

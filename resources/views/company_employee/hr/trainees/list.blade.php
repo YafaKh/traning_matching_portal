@@ -55,10 +55,10 @@
                         <td>{{$training['name']}}</td>
                         <td>{{$training->branch->city->name}}-{{$training->branch->address}}</</td>
                         <td>{{$training->employee->first_name}} {{$training->employee->last_name}}<//td>
-                        <td><a type="button" class="btn" href="">
+                        <td><a type="button" class="btn" href="{{ route('hr_student_progress', ['user_id'=>$user->id, 'student_id'=> $student->id ]) }}">
                             <i class="bi bi-box-arrow-up-right"></i></a>
                         </td>
-                        <td><a type="button" class="btn">
+                        <td><a type="button" class="btn" href="{{ route('hr_student_evaluation', ['user_id'=>$user->id, 'student_id'=> $student->id ]) }}">
                             <i class="bi bi-box-arrow-up-right"></i></a>
                         </td>
                         </tr>

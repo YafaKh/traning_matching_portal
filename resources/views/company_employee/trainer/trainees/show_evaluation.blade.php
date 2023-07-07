@@ -1,4 +1,4 @@
-@extends('all_users.visits')
+@extends('all_users.student_evaluation')
 @section('navbar')
     @if($user->company_employee_role_id==2)
         @include('company_employee.trainer.navbar')

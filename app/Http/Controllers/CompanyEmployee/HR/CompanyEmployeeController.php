@@ -101,10 +101,9 @@ class CompanyEmployeeController extends Controller
      */
     public function destroy( $user_id, $employee_id)
     {
-        $companyEmployee=  CompanyEmployee::select(
-            'id', 'email', 'first_name', 'last_name')->get();
-        $companyEmployee->active = 0; // Set the "active" column to 0
-        $companyEmployee->save();
+        CompanyEmployee::where('id', $employee_id)
+        ->update(['active' => 0]);
+
         return redirect()->route('hr_list_employees', ['user_id' => $user_id]);
     }
 }

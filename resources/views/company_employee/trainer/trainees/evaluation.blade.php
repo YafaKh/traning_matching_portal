@@ -9,7 +9,7 @@
 
 @section('content')
 <div class="px-2">
-<form action="{{route('fill_traniee_evaluation.add', ['user_id' => $user->id,'trainee_id' => $trainee->id])}}" method="POST" enctype="multipart/form-data">
+<form action="{{route('store_traniee_evaluation', ['user_id' => $user->id,'trainee_id' => $trainee->id])}}" method="POST" enctype="multipart/form-data">
 @csrf
 <section>
   <div class="position-relative col-md-9 bg-dark-blue px-5 py-4 mx-auto mt-4 rounded-top-2">
@@ -23,18 +23,19 @@
       </div>
       <div class="ms-5">
           <p>Training</p>
-          @if($training->semester == "1")
-            <p>Fall - {{$training->year}} - {{$user->first_name}} {{$user->last_name}}</p><hr>
-         @elseif($training->semester == '2')
-         <p>Spring - {{$training->year}} - {{$user->first_name}} {{$user->last_name}}</p><hr>
-         @elseif($training->semester == '3')
-         <p>First Summer - {{$training->year}} - {{$user->first_name}} {{$user->last_name}}</p><hr>
-         @elseif($training->semester == '4')
-         <p>Second Summer - {{$training->year}} - {{$user->first_name}} {{$user->last_name}}</p><hr>
+          @if($trainee->training->semester == "1")
+            <p>Fall - {{$trainee->training->year}} - {{$user->first_name}} {{$user->last_name}}</p><hr>
+         @elseif($trainee->training->semester == '2')
+         <p>Spring - {{$trainee->training->year}} - {{$user->first_name}} {{$user->last_name}}</p><hr>
+         @elseif($trainee->training->semester == '3')
+         <p>First Summer - {{$trainee->training->year}} - {{$user->first_name}} {{$user->last_name}}</p><hr>
+         @elseif($trainee->training->semester == '4')
+         <p>Second Summer - {{$trainee->training->year}} - {{$user->first_name}} {{$user->last_name}}</p><hr>
         @endif
           
       </div>
    </div>
+   <p class="text-danger">* Note that you can't edit this form once you submit it.</p>
    </div>
 </section>
 
@@ -101,71 +102,97 @@
       <tbody class="bg-sand">
       <tr>
           <td>Attendance</td>
-          <td><input type="range" class="form-range" min="0" max="5" id="mark1" style="width: 400px;" name="attendance"></td>
+          <td>
+          <input type="hidden" name="attendance" value=-1>
+          <input type="range" class="form-range" min="0" max="5" id="mark1" style="width: 400px;" name="attendance">
+          </td>
           <td class="d-flex justify-content-center">
-            <input  class="form-check-input shadow" type="checkbox" value="" id="checkbox1" name="attendance"></td>
+            <input  class="form-check-input shadow" type="checkbox"  id="checkbox1"></td>
           </tr>
           <tr>
           <td>Fulfilling required tasks</td>
-          <td><input type="range" class="form-range" min="0" max="5" id="mark1" style="width: 400px;" name="fulfilling_required_tasks"></td>
+          <td>
+          <input type="hidden" name="fulfilling_required_tasks" value=-1>
+          <input type="range" class="form-range" min="0" max="5" id="mark1" style="width: 400px;" name="fulfilling_required_tasks">
+          </td>
           <td class="d-flex justify-content-center">
-            <input  class="form-check-input shadow" type="checkbox" value="" id="checkbox1" name="fulfilling_required_tasks"></td>
+            <input  class="form-check-input shadow" type="checkbox" value="" id="checkbox1"></td>
           </tr>
           <tr>
           <td>Cooperation with colleagues and Teamwork ability</td>
-          <td><input type="range" class="form-range" min="0" max="5" id="mark2" style="width: 400px;" name="teamwork_ability"></td>
-          <td class="d-flex justify-content-center"><input class="form-check-input shadow" type="checkbox" value="" id="checkbox2" name="teamwork_ability"></td>
+          <td>          
+          <input type="hidden" name="teamwork_ability" value=-1>
+          <input type="range" class="form-range" min="0" max="5" id="mark2" style="width: 400px;" name="teamwork_ability"></td>
+          <td class="d-flex justify-content-center"><input class="form-check-input shadow" type="checkbox" value="" id="checkbox2" ></td>
           </tr>
           <tr>
           <td>Punctuality</td>
-          <td><input type="range" class="form-range" min="0" max="5" id="mark3" style="width: 400px;" name="punctuality"></td>
-          <td class="d-flex justify-content-center"><input class="form-check-input shadow" type="checkbox" id="checkbox3" name="punctuality"></td>
+          <td>
+          <input type="hidden" name="punctuality" value=-1>
+          <input type="range" class="form-range" min="0" max="5" id="mark3" style="width: 400px;" name="punctuality"></td>
+          <td class="d-flex justify-content-center"><input class="form-check-input shadow" type="checkbox" id="checkbox3" ></td>
           </tr>
           <tr>
           <td>Quality of work</td>
-          <td><input type="range" class="form-range" min="0" max="5" id="mark4" style="width: 400px;" name="quality_of_work"></td>
-          <td class="d-flex justify-content-center"><input class="form-check-input shadow" type="checkbox" id="checkbox4" name="quality_of_work"></td>
+          <td>
+          <input type="hidden" name="quality_of_work" value=-1>
+          <input type="range" class="form-range" min="0" max="5" id="mark4" style="width: 400px;" name="quality_of_work"></td>
+          <td class="d-flex justify-content-center"><input class="form-check-input shadow" type="checkbox" id="checkbox4"></td>
           </tr>
           <tr>
           <td>Dependability</td>
-          <td><input type="range" class="form-range" min="0" max="5" id="mark5" style="width: 400px;" name="dependability"></td>
-          <td class="d-flex justify-content-center"><input class="form-check-input shadow" type="checkbox" value="" id="checkbox5" name="dependability"></td>
+          <td>
+          <input type="hidden" name="dependability" value=-1>
+          <input type="range" class="form-range" min="0" max="5" id="mark5" style="width: 400px;" name="dependability"></td>
+          <td class="d-flex justify-content-center"><input class="form-check-input shadow" type="checkbox" value="" id="checkbox5"></td>
           </tr>
           <tr>
           <td>Initiative</td>
-          <td><input type="range" class="form-range" min="0" max="5" id="mark6" style="width: 400px;" name="initiative"></td>
-          <td class="d-flex justify-content-center"><input class="form-check-input shadow" type="checkbox" value="" id="checkbox6" name="initiative"></td>
+          <td>
+          <input type="hidden" name="initiative" value=-1>
+          <input type="range" class="form-range" min="0" max="5" id="mark6" style="width: 400px;" name="initiative"></td>
+          <td class="d-flex justify-content-center"><input class="form-check-input shadow" type="checkbox" value="" id="checkbox6"></td>
           </tr>
           <tr>
           <td>General appearance</td>
-          <td><input type="range" class="form-range" min="0" max="5" id="mark7" style="width: 400px;" name="general_appearance"></td>
-          <td class="d-flex justify-content-center"><input class="form-check-input shadow" type="checkbox" value="" id="checkbox7" name="general_appearance"></td>
+          <td>
+          <input type="hidden" name="general_appearance" value=-1>
+          <input type="range" class="form-range" min="0" max="5" id="mark7" style="width: 400px;" name="general_appearance"></td>
+          <td class="d-flex justify-content-center"><input class="form-check-input shadow" type="checkbox" value="" id="checkbox7"></td>
           </tr>
           <tr>
           <td>Ability to judge</td>
-          <td><input type="range" class="form-range" min="0" max="5" id="mark8" style="width: 400px;"  name="ability_to_judge"></td>
-          <td class="d-flex justify-content-center"><input class="form-check-input shadow" type="checkbox" value="" id="checkbox8" name="ability_to_judge"></td>
+          <td>
+          <input type="hidden" name="ability_to_judge" value=-1>
+          <input type="range" class="form-range" min="0" max="5" id="mark8" style="width: 400px;"  name="ability_to_judge"></td>
+          <td class="d-flex justify-content-center"><input class="form-check-input shadow" type="checkbox" value="" id="checkbox8" ></td>
           </tr>
           <tr>
           <td>Enthusiasm</td>
-          <td><input type="range" class="form-range" min="0" max="5" id="mark9" style="width: 400px;" name="enthusiasm"></td>
-          <td class="d-flex justify-content-center"><input class="form-check-input shadow" type="checkbox" value="" id="checkbox9" name="enthusiasm"></td>
+          <td>
+          <input type="hidden" name="enthusiasm" value=-1>
+          <input type="range" class="form-range" min="0" max="5" id="mark9" style="width: 400px;" name="enthusiasm"></td>
+          <td class="d-flex justify-content-center"><input class="form-check-input shadow" type="checkbox" value="" id="checkbox9" ></td>
           </tr>
           <tr>
           <td>Communicational Skills</td>
-          <td><input type="range" class="form-range" min="0" max="5" id="mark10" style="width: 400px;" name="communicational_skills"></td>
-          <td class="d-flex justify-content-center"><input class="form-check-input shadow" type="checkbox" value="" id="checkbox10" name="communicational_skills"></td>
+          <td>
+          <input type="hidden" name="communicational_skills" value=-1>
+          <input type="range" class="form-range" min="0" max="5" id="mark10" style="width: 400px;" name="communicational_skills"></td>
+          <td class="d-flex justify-content-center"><input class="form-check-input shadow" type="checkbox" value="" id="checkbox10"></td>
           </tr>
           <tr>
           <td>English Language proficiency</td>
-          <td><input type="range" class="form-range" min="0" max="5" id="mark11" style="width: 400px;" name="english_language_proficiency"></td>
-          <td class="d-flex justify-content-center"><input class="form-check-input shadow" type="checkbox" value="" id="checkbox11" name="english_language_proficiency"></td>
+          <td>
+          <input type="hidden" name="english_language_proficiency" value=-1>
+          <input type="range" class="form-range" min="0" max="5" id="mark11" style="width: 400px;" name="english_language_proficiency"></td>
+          <td class="d-flex justify-content-center"><input class="form-check-input shadow" type="checkbox" value="" id="checkbox11" ></td>
           </tr>
           <tr>
           <td class="fw-bold">
           <button class="btn btn-primary" id="sumBtn">Average</button></td>
           <td><input type="text" id="avg" class="w-25 form-control text-center bg-white" disabled>
-          <input type="hidden" id="hiddenavg" name="avg" class="w-25 form-control text-center bg-white">
+          <input type="hidden" id="hiddenavg" name="avg" class="w-50 form-control text-center bg-white">
 
           @error('avg')
             <span class="text-danger">{{ $message }}</span>
@@ -222,7 +249,7 @@ checkboxes.forEach(function(checkbox, index) {
       sum += parseInt(input.value);
       avg=100*sum/(5*(12-counterCantJudge));
     });
-
+    avg = avg.toFixed(2);
     return avg;
   }
  

@@ -13,7 +13,7 @@
         <a class="nav-link @yield('students_activity')" href="{{route('supervisor_list_students',['user_id',$user->id])}}">My Students</a>
         </li>
         <li class="nav-item">
-        <a class="nav-link @yield('visits_activity')" href="{{route('list_visit_forms',['user_id',$user->id])}}">Visit Forms</a>
+        <a class="nav-link @yield('visits_activity')" href="{{route('student_visits',['user_id',$user->id])}}">Visit Forms</a>
         </li>
         <li class="nav-item">
         <a class="nav-link" href="#">Logout</a>

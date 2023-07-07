@@ -157,9 +157,11 @@ class ListController extends Controller
         $user = UniversityEmployee::where('id', $user_id)->first();
         $student = Student::where('id', $student_id)->first();
 
-        $evalusation_data =$student->evaluate_student;
-
-        return view('university_employee.coordinator.student_evaluation', compact('user', 'student','evalusation_data'));
+        $evaluation_data =$student->evaluate_student;
+        return view('university_employee.coordinator.student_evaluation', 
+        ['user'=>$user, 
+        'student'=> $student,
+        'evaluation_data'=>$evaluation_data]);
 
     }
 

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->timestamps();
             $table->string('name',45);
             $table->integer('semester')->length(1);
+            //Note: Fall=1, Spring=2, First Summer=3, Second Summer=4
             $table->year('year')->default(2023);
             $table->string('details')->nullable()->nullable();
             $table->boolean('active')->default(1);

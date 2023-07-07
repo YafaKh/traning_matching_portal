@@ -1,6 +1,6 @@
-@extends('all_users.student_profile')
+@extends('all_users.student_evaluation')
 @section('navbar')
-@if($user->university_employee_role_id==2)
+    @if($user->university_employee_role_id==2)
         @include('university_employee.supervisor.navbar')
     @else
     @include('university_employee.coordinator.navbar')

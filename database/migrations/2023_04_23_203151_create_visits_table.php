@@ -17,14 +17,12 @@ return new class extends Migration
             $table->date('visit_date') ;
             $table->time('visit_time') ;
             $table->text('report')->nullable();
-            $table->string('contact_way', 45)->nullable();
+            $table->boolean('contact_way')->defualt(1);// 0 is online and 1 is on-site
             $table->unsignedBigInteger('student_id');
-          //  $table->unsignedBigInteger('university_employee_id');
 
             $table->foreign('student_id')
                 ->references('id')
                 ->on('students');
-           // $table->foreign('university_employee_id')->references('id')->on('university_employees');
         });
     }
 

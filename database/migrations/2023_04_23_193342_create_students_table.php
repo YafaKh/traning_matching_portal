@@ -44,8 +44,8 @@ return new class extends Migration
             $table->unsignedBigInteger('university_employee_id')->nullable();
             $table->unsignedBigInteger('specialization_id');
             $table->unsignedBigInteger('training_id')->nullable();
-            $table->unsignedBigInteger('evaluate_student_id');
-            $table->unsignedBigInteger('evaluate_company_id');
+            $table->unsignedBigInteger('evaluate_student_id')->nullable();
+            $table->unsignedBigInteger('evaluate_company_id')->nullable();
             $table->unsignedBigInteger('city_id');
 
             $table->foreign('university_id')

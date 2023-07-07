@@ -59,7 +59,7 @@ class CompanyProfileController extends Controller
     public function update(Request $request,  $user_id)
     {  
         $user = CompanyEmployee::where('id', $user_id)
-       ->select('id', 'first_name', 'last_name')->first();
+       ->select('id', 'first_name', 'last_name', 'company_id')->first();
 
          $request->validate([
             'name' => 'required|max:45',

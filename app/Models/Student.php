@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 use App\Models\Training;
 use App\Models\EvaluateStudent;
 use App\Models\EvaluateCompany;
@@ -14,8 +17,10 @@ use App\Models\Specialization;
 use App\Models\City;
 use App\Models\StudentCompanyApproval;
 use App\Models\UniversityEmployee;
+use App\Models\Preferred_training_field;
+use App\Models\PreferredCompany;
 
-class Student extends Model
+class Student extends Authenticatable
 {
     use HasFactory;
     protected $table ="students";
@@ -80,6 +85,10 @@ class Student extends Model
     public function preferredCitiesStudent()
     {
         return $this->hasMany(Preferred_cities_student::class);
+    }
+    public function preferredCompanies()
+    {
+        return $this->belongsToMany(PreferredCompany::class, 'preferred_companies_students', 'student_id', 'preferred_company_id');
     }
     //one to many
     public function specialization()

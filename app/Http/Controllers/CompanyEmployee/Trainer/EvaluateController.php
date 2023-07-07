@@ -11,19 +11,15 @@ use App\Models\Student;
 
 class EvaluateController extends Controller
 {
-    public function show($user_id, $trainee_id){
+    public function create($user_id, $trainee_id){
         $user =CompanyEmployee::find($user_id);
-        $trainee=Student::find($trainee_id);//get this student
-        $trainingID =$trainee->training_id;//get student training
-        $allTrainings=$user->trainings()->where('id', $trainingID)->get();
-        $evaluation = EvaluateStudent::all();
-        foreach ($allTrainings as $training) {
+        $trainee=Student::find($trainee_id);
 
-        return view('company_employee.trainer.trainees.evaluation',compact('user','trainee','training','evaluation'));
-        }
+        return view('company_employee.trainer.trainees.evaluation',compact('user','trainee'));
+        
     }
-    public function add(Request $request, $user_id, $trainee_id)
-    { 
+    public function store(Request $request, $user_id, $trainee_id)
+    { //dd( $request->input('attendance'));
         $request->validate([
             'student_weaknesses' => 'required|string|min:1|max:255',
             'willing_to_hire' => 'required|boolean', 
@@ -41,7 +37,7 @@ class EvaluateController extends Controller
             'enthusiasm' =>'required|integer',
             'communicational_skills' =>'required|integer',
             'english_language_proficiency' =>'required|integer',
-            'avg' =>'required|integer',
+            'avg' =>'required',
         ]);
     
         $evaluate = new EvaluateStudent();
@@ -64,8 +60,27 @@ class EvaluateController extends Controller
         $evaluate->avg = $request->input('avg');
 
         $evaluate->save();
-
+        Student::where('id', $trainee_id)
+        ->update(['evaluate_student_id' => $evaluate->id]);
         return redirect()->route('trainer_list_traniees', ['user_id' => $user_id, 'trainee_id' => $trainee_id]);
-    }
-      
+    }    
+    /**
+     * Method show
+     *
+     * @param $user_id $user_id [explicite description]
+     * @param $student_id $student_id [explicite description]
+     *
+     * @return void
+     */
+    public function show($user_id,$student_id)
+    {
+        $user = CompanyEmployee::where('id', $user_id)->first();
+        $student = Student::where('id', $student_id)->first();
+
+        $evaluation_data =$student->evaluate_student;
+        return view('company_employee.trainer.trainees.show_evaluation', 
+        ['user'=>$user, 
+        'student'=> $student,
+        'evaluation_data'=>$evaluation_data]);
+    }      
 }
