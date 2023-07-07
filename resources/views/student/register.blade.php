@@ -4,12 +4,13 @@
   <div class="d-flex justify-content-center mt-5">
     <img src="{{asset('images/logo_title.png')}}" alt="logo" class="w-25" />
   </div>
-  <form action="{{route('student_registeration_1.store')}}" method="POST" enctype="multipart/form-data">
+  <form action="{{route('student_registeration.store')}}" method="POST" enctype="multipart/form-data">
       @csrf
   <section class="registerSection d-block " id="shown-section">
     <div class="d-flex justify-content-center">
       <h1 class="mt-5">Sign up</h1>
     </div>
+   
     <div class="m-5">
       <label for="first_name_ar" class="mt-3 mb-3"> Name (Arabic)</label>
       <div class="row g-2">
@@ -27,7 +28,7 @@
           <input type="text" class="form-control" id="second_name_ar" name="second_name_ar" placeholder="Second" />
           <label for="second_name_ar">Second</label>
           <div class="row">
-        @error('first_name_ar')
+        @error('second_name_ar')
             <span class="text-danger">{{ $message }}</span>
         @enderror
       </div>
@@ -38,7 +39,7 @@
           <input type="text" class="form-control" id="third_name_ar" name="third_name_ar" placeholder="Third" />
           <label for="third_name_ar">Third</label>
           <div class="row">
-        @error('first_name_ar')
+        @error('third_name_ar')
             <span class="text-danger">{{ $message }}</span>
         @enderror
       </div>
@@ -47,7 +48,7 @@
           <input type="text" class="form-control" id="last_name_ar" name="last_name_ar" placeholder="Last" />
           <label for="last_name_ar">Last</label>
           <div class="row">
-        @error('first_name_ar')
+        @error('last_name_ar')
             <span class="text-danger">{{ $message }}</span>
         @enderror
       </div>
@@ -61,7 +62,7 @@
           <input type="text" class="form-control" id="first_name_en" name="first_name_en" placeholder="First" />
           <label for="first_name_en">First</label>
           <div class="row">
-        @error('first_name_ar')
+        @error('first_name_en')
             <span class="text-danger">{{ $message }}</span>
         @enderror
       </div>
@@ -70,7 +71,7 @@
           <input type="text" class="form-control" id="second_name_en" name="second_name_en" placeholder="Second" />
           <label for="second_name_en">Second</label>
           <div class="row">
-        @error('first_name_ar')
+        @error('second_name_en')
             <span class="text-danger">{{ $message }}</span>
         @enderror
       </div>
@@ -81,7 +82,7 @@
           <input type="text" class="form-control" id="third_name_en" name="third_name_en" placeholder="Third" />
           <label for="third_name_en">Third</label>
           <div class="row">
-        @error('first_name_ar')
+        @error('third_name_en')
             <span class="text-danger">{{ $message }}</span>
         @enderror
       </div>
@@ -90,7 +91,7 @@
           <input type="text" class="form-control" id="last_name_en" name="last_name_en" placeholder="Last" />
           <label for="last_name_en">Last</label>
           <div class="row">
-        @error('first_name_ar')
+        @error('last_name_en')
             <span class="text-danger">{{ $message }}</span>
         @enderror
       </div>
@@ -98,35 +99,36 @@
       </div>
     </div>
       <div class="m-5">
-      <div class="form-floating ">
+      <div class="form-floating mb-4">
         <input type="text" class="form-control" id="student_num" name="student_num" placeholder="StudentID" />
         <label for="student_num">StudentID</label>
         <div class="row">
-        @error('first_name_ar')
+        @error('student_num')
             <span class="text-danger">{{ $message }}</span>
         @enderror
       </div>
       </div>
-      <div class="form-floating">
+      <div class="form-floating mb-4">
         <input type="text" class="form-control" id="Studentphone" name="phone" placeholder="Phone number" />
         <label for="Studentphone">Phone number</label>
         <div class="row">
-        @error('first_name_ar')
+        @error('phone')
             <span class="text-danger">{{ $message }}</span>
         @enderror
       </div>
       </div>
-      <div class="form-floating">
+      <div class="form-floating mb-4">
         <input type="text" class="form-control" id="StudentEmail" name="email" placeholder="University email" />
         <label for="StudentEmail">University email</label>
         <div class="row">
-        @error('first_name_ar')
+        @error('email')
             <span class="text-danger">{{ $message }}</span>
         @enderror
       </div>
       </div>
-      <div class="form-floating">
-        <select class="form-select col mb-4" name="address" id="studentAddress">
+      <div class="form-floating mb-4">
+        <select class="form-select col mb-4" name="city" id="studentAddress">
+          <!--  select name =city?? -->
         <option value="--" >Permanent residence address</option>
         @foreach($cities as $city)
         <option value="{{$city->id}}">{{$city->name}}</option>
@@ -136,12 +138,14 @@
       </div>
        <div class="form-floating">
 
-      <div class="form-check">
        
-      <div class="row g-2 mb-2">
+      <div class="row g-2  my-5">
+      <label for="languageName" class="fs-4 mb-2">Languages : </label>
+
       @foreach($allLanguages as $allLanguage)
 
-        <div class="form-check">
+        <div class="form-check ms-2 ">
+          
           <div>
             <input class="form-check-input mt-2 languageName" type="checkbox" value="{{ $allLanguage->id }}" name="language[ $allLanguage->id ]" id="languageName"  />
             <label class="form-check-label fs-5" for="languageName">
@@ -151,19 +155,19 @@
         <div class="levels d-none">
             <div class="skill d-flex flex-row">
             <p class="col-4 mt-4">speaking_level :</p>
-            <input type="range" min="1" max="100" value="" name="speaking_level" class="w-50 col-8">
+            <input type="range" min="1" max="5" name="speaking_level" class="w-50 col-8">
             </div>
             <div class="skill d-flex flex-row">
             <p class="col-4 ">writing_level :</p>
-            <input type="range" min="1" max="100" value="" name="writing_level" class="w-50 col-8">
+            <input type="range" min="1" max="5" name="writing_level" class="w-50 col-8">
             </div>
             <div class="skill d-flex flex-row">
             <p class="col-4 mb-4">listening_level :</p>
-            <input type="range" min="1" max="100" value="" name="listening_level" class="w-50 col-8">
+            <input type="range" min="1" max="5" name="listening_level" class="w-50 col-8">
             </div>
         </div>
-</div>
-@endforeach
+       </div>
+      @endforeach
 
 <div class="row">
         @error('first_name_ar')
@@ -172,7 +176,7 @@
       </div>
       
       </div>
-    <div class="form-floating ms-4 mb-4 d-flex flex-row gx-5">
+    <div class="form-floating ms-2 mb-4 d-flex flex-row gx-5">
       <div class="col"><label for="">Gender</label></div>
       <div class="form-check col">
         <input class="form-check-input" type="radio" name="gender" id="StudentGender1" value="1" checked/>
@@ -193,7 +197,7 @@
     <div class="form-floating mb-4">
       <select class="form-select" id="specialization" name="specialization">
         <!--here the user can choose multi value-->
-        <option value="--" selected>Specialization</option>
+        <option selected>Specialization</option>
         @foreach($specializations as $specialization)
 
         <option value="$specialization->id">{{$specialization->name}}</option>
@@ -201,7 +205,7 @@
 
       </select>
       <div class="row">
-        @error('first_name_ar')
+        @error('specialization')
             <span class="text-danger">{{ $message }}</span>
         @enderror
       </div>
@@ -210,7 +214,7 @@
       <input type="text" class="form-control" id="gpa" name="gpa" placeholder="GPA" />
       <label for="gpa">GPA</label>
       <div class="row">
-        @error('first_name_ar')
+        @error('gpa')
             <span class="text-danger">{{ $message }}</span>
         @enderror
       </div>
@@ -219,7 +223,7 @@
       <input type="Number" class="form-control" id="passed_hours" name="passed_hours" placeholder="Number of passed hour" />
       <label for="passed_hours">Number of passed hour</label>
       <div class="row">
-        @error('first_name_ar')
+        @error('passed_hours')
             <span class="text-danger">{{ $message }}</span>
         @enderror
       </div>
@@ -228,7 +232,7 @@
       <input type="password" class="form-control" id="password" name="password" placeholder="Password" />
       <label for="password">Password</label>
       <div class="row">
-        @error('first_name_ar')
+        @error('password')
             <span class="text-danger">{{ $message }}</span>
         @enderror
       </div>
@@ -237,7 +241,7 @@
       <input type="password" class="form-control" id="cofirmPassword" name="cofirmPassword" placeholder="Confirm password" />
       <label for="cofirmPassword">Confirm password</label>
       <div class="row">
-        @error('first_name_ar')
+        @error('cofirmPassword')
             <span class="text-danger">{{ $message }}</span>
         @enderror
       </div>
@@ -249,7 +253,7 @@
           <input type="text" class="form-control" id="floatingInput" placeholder="         Personal image" />
           <i class="bi bi-link-45deg imgicon "></i>
           <div class="row">
-        @error('first_name_ar')
+        @error('image')
             <span class="text-danger">{{ $message }}</span>
         @enderror
       </div>
@@ -271,30 +275,30 @@
   @foreach($skills as $skill)
   <div class="row g-2 ms-3 mb-2">
     <div class="form-check col">
-      <input class="form-check-input" type="checkbox" value="{{$skill->name}}" name="skill" id="skillcheckbox{{$loop->index}}" />
+      <input class="form-check-input" type="checkbox" value="{{$skill->name}}" name="skills[]" id="skillcheckbox{{$loop->index}}" />
       <label class="form-check-label" for="skillcheckbox{{$loop->index}}">
         {{$skill->name}}
       </label>
     </div>
     <div class="col d-flex justify-content-center mt-0">
-      <input type="range" min="1" max="100" value="30" name="skillLevel{{$loop->index}}" class="w-75 d-none skillLevel" id="skillLevel{{$loop->index}}" />
+      <input type="range" min="1" max="5" name="skillLevel{{$loop->index}}" class="w-75 d-none skillLevel" id="skillLevel{{$loop->index}}" />
     </div>
   </div>
   @endforeach
-  <div class="form-floating my-5">
+  <!-- <div class="form-floating my-5">
     <input type="text" class="form-control" name="skill" id="floatingInput" placeholder="else" />
     <label for="floatingInput">else</label>
-  </div>
+  </div> -->
 </div>
     <div class="registerField pt-4">
       <div class="form-floating mb-4 uploadImage">
         <input type="link" class="form-control" id="linkedin" name="linkedin" placeholder="Linkedin" />
         <label for="linkedin" class="ms-5">Linkedin</label>
-        <i class="bi bi-link-45deg imgicon"></i>
+        <i class="bi bi-link-45deg linkedinIcon"></i>
        
       </div>
       <div class="row">
-        @error('first_name_ar')
+        @error('linkedin')
             <span class="text-danger">{{ $message }}</span>
         @enderror
       </div>
@@ -303,7 +307,7 @@
         <label for="load">Number of semester hours (without internship)</label>
       </div>
       <div class="row">
-        @error('first_name_ar')
+        @error('load')
             <span class="text-danger">{{ $message }}</span>
         @enderror
       </div>
@@ -312,17 +316,17 @@
           class="overflow-auto"></textarea>
       </div>
       <div class="row">
-        @error('first_name_ar')
+        @error('work_experience')
             <span class="text-danger">{{ $message }}</span>
         @enderror
       </div>
 
-      <div class="form-floating ms-4 mb-4 gx-5">
+      <div class="form-floating mb-4 gx-5">
         <div class="me-4">
           <label for="">Are you in contact with a specific company?</label>
         </div>
         <div class="d-flex flex-row">
-        <div class="form-check ms-2 my-3">
+        <div class="form-check my-3">
           <label class="form-check-label" for="connected_with_a_company">
           <input class="form-check-input connection-radio" type="radio" value="1" name="connected_with_a_company" id="connected_with_a_company" />
           Yes
@@ -336,74 +340,102 @@
         </div>
       </div>
       <!-- if Yes the user can choose from these dropdowns:  -->
-      <div class="form-floating mb-4 row conectedCompany d-none ">
-        <select class="form-select col mx-2" id="companiesName" name="companyName" wire:model="selectedCompany">
+      <div class="form-floating mb-4 conectedCompany d-none ">
+        <select class="form-select mb-2" id="companiesName" name="company" wire:model="selectedCompany">
           <!--here the user can choose multi value-->
-          <option value="--">Company name</option>
+          <option>Company name</option>
           @foreach($companies as $company)
           <option value="{{$company->id}}">{{$company->name}}</option>
           @endforeach
         </select>
         <div class="row">
-        @error('first_name_ar')
+        @error('company')
             <span class="text-danger">{{ $message }}</span>
         @enderror
       </div>
-        <select class="form-select col mx-3 disabled" id="companyBranch" name="companyBranch">
+        <select class="form-select mb-3 disabled" id="Branch" name="Branch">
           <!--here the user can choose multi value-->
-          <option value="--" selected>Company branch</option>
+          <option selected>Company branch</option>
           @foreach($branches as $branch)
           <option value="{{$branch->id}}">{{$branch->address}}</option>
           @endforeach
         </select>
       </div>
       <div class="row">
-        @error('first_name_ar')
+        @error('Branch')
             <span class="text-danger">{{ $message }}</span>
         @enderror
       </div>
-      <div class="form-floating mb-4 row">
-        <select class="form-select col mx-2" id="inputGroupSelect01">
-          <!--here the user can choose multi value-->
-          <option value="--" selected>Preferred company/s</option>
-          <option value="yes">Asal</option>
-          <option value="yes">exalt</option>
-          <option value="yes">nothing</option>
-        </select>
-        <div class="row">
-        @error('first_name_ar')
+    
+      <div class="dropdown mb-4">
+          <button class="form-select border py-3 text-start">Preferred company/ies :</button>
+          <div class="dropdown-content col mx-2" id="preferrdCompny" >
+                <!--here the user can choose multi value-->
+            <label class="checkbox-label">
+            @foreach($companies as $company)
+            <div class="d-flex flex-row">
+            <input type="checkbox" value="{{$company->id}}" name="preferrdCompany[]" class="form-check-input"/>
+            <p >{{$company->name}}</p></div>
+            @endforeach
+
+            </label>
+          </div>
+          <div class="row">
+        @error('preferrdCompny')
             <span class="text-danger">{{ $message }}</span>
         @enderror
+        </div>
+      
+       
       </div>
-        <div class="row">
+        <!-- <div class="row">
           <div class="selected-box">Asal</div>
           <div class="selected-box">exalt</div>
-        </div>
-      </div>
-      <div class="form-floating mb-4 row">
-        
-      <select class="form-select col mx-2" name="cities[]" multiple="multiple" id="inputGroupSelect01">
-
-          <!--here the user can choose multi value-->
-          <option value="--" selected>Preferred city/ies</option>
-          @foreach($cities as $city)
-          <option value="{{$city->id}}">{{$city->name}}</option>
-          @endforeach
-
-        </select>
-        <div class="row">
-        @error('first_name_ar')
+        </div> -->
+        <div class="dropdown mb-4">
+          <button class="form-select border py-3 text-start">Preferred city/ies :</button>
+          <div class="dropdown-content col mx-2" id="preferrdCity" name="preferrdCities[]">
+                <!--here the user can choose multi value-->
+            <label class="checkbox-label">
+            @foreach($cities as $city)
+            <div class="d-flex flex-row">
+            <input type="checkbox" name="option1" value="{{$city->id}}" class="form-check-input"/>
+            <p >{{$city->name}}</p></div>
+            @endforeach
+            </label>
+          </div>
+          <div class="row">
+          @error('cities[]')
             <span class="text-danger">{{ $message }}</span>
         @enderror
+        </div>
+
+        <!-- <div class="row">
+          <div class="selected-box">Jenin</div>
+        </div> -->
       </div>
-        <div class="form-floating mt-5">
-        <input type="text" class="form-control mb-5" id="floatingInput" placeholder="else" />
+      <div class="dropdown">
+          <button class="form-select border py-3 text-start">Preferred training field :</button>
+          <div class="dropdown-content col mx-2" id="trainingFields" name="trainingFields[]">
+                <!--here the user can choose multi value-->
+            <label class="checkbox-label">
+            @foreach($trainingFields as $trainingField)
+            <div class="d-flex flex-row">
+            <input type="checkbox" name="option1" value="{{$trainingField->id}}" class="form-check-input"/>
+            <p >{{$trainingField->name}}</p></div>
+            @endforeach
+            </label>
+          </div>
+          <div class="form-floating">
+        <input type="text" class="form-control mb-4" id="floatingInput" name="trainingFields" placeholder="else" />
         <label for="floatingInput">else</label>
       </div>
-        <div class="row">
-          <div class="selected-box">Jenin</div>
+          <div class="row">
+          @error('trainingFields')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
         </div>
-      </div>
+</div>
       <div class="mb-4">
         <label>when available:</label>
         <div class="input-group form-floating" id="availability_date">
@@ -411,36 +443,13 @@
         </div>
       </div>
       <div class="row">
-        @error('first_name_ar')
+        @error('availability_date')
             <span class="text-danger">{{ $message }}</span>
         @enderror
       </div>
     </div>
-    <div class="registerField">
-      <label for="" class="mt-3 mb-3"> Preferred training field :</label>
-      @foreach($trainingFields as $trainingField)
-
-      <div class="row g-2 ms-3 mb-2">
-        <div class="form-check col">
-          <input class="form-check-input" type="checkbox" value="" id="trainingFields" name="trainingFields" />
-          <label class="form-check-label" for="flexCheckDefault">
-            {{$trainingField->name}}
-          </label>
-        </div>
-
-      </div>
-      @endforeach
-      <div class="row">
-        @error('first_name_ar')
-            <span class="text-danger">{{ $message }}</span>
-        @enderror
-      </div>      
-      <div class="form-floating my-5">
-        <input type="text" class="form-control mb-5" id="floatingInput" placeholder="else" />
-        <label for="floatingInput">else</label>
-      </div>
-      
-    </div>
+   
+   
     <div class="text-center d-flex col-md-5 mx-auto my-4 row g-2 w-50">
     <button class="toggle-section-button btn btn-primary bg-dark-blue text-light px-5 my-3 flex-grow-1 col-md" type="submit">
       Submit
@@ -534,6 +543,13 @@ radioButtons.forEach(radioButton => {
     }
   });
 });
-
+// dropdownlist contains checkobxes
+var checkList = document.getElementById('list1');
+checkList.getElementsByClassName('anchor')[0].onclick = function(evt) {
+  if (checkList.classList.contains('visible'))
+    checkList.classList.remove('visible');
+  else
+    checkList.classList.add('visible');
+}
 </script>
 @endsection

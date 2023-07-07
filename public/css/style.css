@@ -351,15 +351,6 @@ body .bigDiv .loginForm .loginCard .creatAccountLink:hover {
   border-radius: 2rem;
   margin: -2rem 3.5rem;
 }
-
-.profileSection .anWorkExperience .blueDiv {
-  background-color: #0a66c2;
-  width: 9%;
-  height: 8vh;
-  border-radius: 2rem;
-  margin: -2rem 3.5rem;
-}
-
 .profileSection .anWorkExperience .anWorkExperienceInfo .expName {
   font-size: 1.5rem;
 }
@@ -759,25 +750,17 @@ textarea{
 
 .uploadImage input[type="text"] {
   height: 9vh;
-  margin: 2rem 0rem 3rem
+  margin: 5rem 0rem 3rem
 }
 
 .uploadImage .imgicon {
   position: absolute;
   font-size: 1.5rem;
   left: 3%;
-  top: 23%;
+  top: 45%;
   background: transparent;
   color: gray;
 
-}
-
-.uploadImage .SetImage {
-  position: absolute;
-  right: 0%;
-  height: 9vh;
-  top: 26%;
-  opacity: 0;
 }
 
 /* ----second part of student registration ---- */
@@ -792,7 +775,49 @@ textarea{
 .registerField{
   margin: 3rem 5rem;
 }
+.registerField .uploadImage{
+  height: 9vh;
+  margin: -3rem 0rem 3rem;
+}
+.uploadImage .linkedinIcon{
+  position: absolute;
+  font-size: 1.5rem;
+  left: 3%;
+  top: 35%;
+  background: transparent;
+  color: gray;
+}
 
+.uploadImage .SetImage {
+  position: absolute;
+  right: 0%;
+  height: 9vh;
+  top: 26%;
+  opacity: 0;
+}
+
+.dropdown-content {
+  display: none; 
+  background-color: #f9f9f9;
+
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 12px 16px;
+  max-height: 20%;
+
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.checkbox-label {
+  display: flex;
+  margin-bottom: 9px;
+  width: fit-content;
+  align-items: flex-start;
+  flex-direction: column;
+}
+/*  */
 @media screen and (max-width: 992px) {
   .registerSection {
     width:80%;

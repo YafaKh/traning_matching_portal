@@ -194,7 +194,7 @@ Route::prefix('/trainer/{user_id}')
 
 //students' routes
 Route::get('student/register',[StudentRegisterController::class,'create'])->name('student_registeration');
-Route::post('student/register/store',[StudentRegisterController::class,'store'])->name('student_registeration_1.store');
+Route::post('student/register/store',[StudentRegisterController::class,'store'])->name('student_registeration.store');
 
 Route::prefix('/student/{user_id}')
 //->middleware('web', 'student')

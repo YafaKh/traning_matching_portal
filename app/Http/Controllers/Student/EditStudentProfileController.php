@@ -32,7 +32,6 @@ class EditStudentProfileController extends Controller
     //     // Update the student data based on the form inputs
     //     $student->name = $request->input('name');
     //     $student->specialization = $request->input('specialization');
-    //     $student->address = $request->input('address');
     //     $student->email = $request->input('email');
     //     $student->phone = $request->input('phone');
     //     $student->linkedin = $request->input('linkedin');

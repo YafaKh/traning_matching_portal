@@ -27,7 +27,6 @@ return new class extends Migration
             $table->integer('passed_hours') ;
             $table->integer('load') ;
             $table->float('gpa') ;
-            $table->string('address')->nullable();
             $table->string('email')->unique();
             $table->string('linkedin')->nullable();
             $table->string('password', 45) ;
