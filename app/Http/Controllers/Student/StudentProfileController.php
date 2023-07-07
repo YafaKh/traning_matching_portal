@@ -21,19 +21,15 @@ class StudentProfileController extends Controller
    
     public function show($user_id){
           $user =Student::find($user_id);
-          $users =Student::select('id')->get();//?
-            // many to many relationship
-          $allLanguages = Student_spoken_language::with('student', 'spokenLanguage')->where('student_id',$user_id)->get();
-          $allSkills = Student_skill::with('student', 'skill')->where('student_id',$user_id)->get();
-          $allPreferredTrainingFields = Preferred_training_field_student::with('student', 'preferredTrainingField')->where('student_id',$user_id)->get();
-          $allPreferredCities = Preferred_cities_student::with('student', 'city')->where('student_id',$user_id)->get();
-
-        //   one to many
-          $specializationName = $user->specialization->name;
-
-          $company_data= $user->training->branch->company;
-          if($company_data == null) return "not found";
-          else 
-          return view('student.profile',compact('user','specializationName','allLanguages','allSkills','allPreferredTrainingFields','allPreferredCities','company_data'));  
+          $student= $user;
+           // many to many relationship
+            $allLanguages = Student_spoken_language::with('student', 'spokenLanguage')->where('student_id',$student->id)->get();
+            $allSkills = Student_skill::with('student', 'skill')->where('student_id',$student->id)->get();
+            $allPreferredTrainingFields = Preferred_training_field_student::with('student', 'preferredTrainingField')->where('student_id',$student->id)->get();
+            $allPreferredCities = Preferred_cities_student::with('student', 'city')->where('student_id',$student->id)->get();
+          //   one to many
+            $specializationName = $student->specialization->name;
+            
+          return view('student.profile',compact('user', 'student','specializationName','allLanguages','allSkills','allPreferredTrainingFields','allPreferredCities'));  
     }
 }

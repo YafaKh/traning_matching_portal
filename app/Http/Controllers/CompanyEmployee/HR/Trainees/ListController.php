@@ -57,7 +57,7 @@ class ListController extends Controller
     public function show_student_profile($user_id, $student_id)
     {
         $user = CompanyEmployee::where('id', $user_id)->first();
-        $student =Student::find($student_id);
+        $student = $user;
           // many to many relationship
         $allLanguages = Student_spoken_language::with('student', 'spokenLanguage')->where('student_id',$student_id)->get();
         $allSkills = Student_skill::with('student', 'skill')->where('student_id',$student_id)->get();
