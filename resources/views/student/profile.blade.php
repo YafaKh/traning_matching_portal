@@ -4,5 +4,5 @@
 @endsection
 
 @section('edit_profile_btn')
-<a class="btn editBtn" href="{{route('edit_student_profile',['user_id'=> $student->id])}}" role="button">Edit Profile</a>
+<a class="btn editBtn" href="{{route('edit_student_profile',['user_id'=> $user->id])}}" role="button">Edit Profile</a>
 @endsection

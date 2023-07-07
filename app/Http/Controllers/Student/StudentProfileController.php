@@ -20,7 +20,7 @@ class StudentProfileController extends Controller
 {
    
     public function show($user_id){
-          $user =Student::find($id);
+          $user =Student::find($user_id);
           $users =Student::select('id')->get();//?
             // many to many relationship
           $allLanguages = Student_spoken_language::with('student', 'spokenLanguage')->where('student_id',$user_id)->get();
