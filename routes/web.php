@@ -54,15 +54,15 @@ Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 
 Route::get('/forgot-password', function () {
     return view('auth.forgot-password');
-})->middleware('guest')->name('password.request');
-
+})//->middleware('guest')->name('password.request');
+;
 Route::get('/reset_password', function () {
     return view('/all_users/reset_password');
 })->name('reset_password'); 
 
 // admin 
 Route::prefix('/admin')
-->middleware('web', 'admin')
+//->middleware('web', 'admin')
 ->group(function () {
     Route::get('/companies',[AdminCompaniesController::class,'index'])->name('admin_companies');
     Route::get('/company{company_id}_profile', [AdminCompaniesController::class, 'show_company_profile'])->name('admin_company_profile');
@@ -80,7 +80,7 @@ Route::get('university_employee/register',[UniversityRegisterController::class,'
 Route::post('university_employee/register/store',[UniversityRegisterController::class,'store'])->name('university_employee_store');    
 
 Route::prefix('/coordinator/{user_id}')
-->middleware('web', 'university_employee')
+//->middleware('web', 'university_employee')
 ->group(function(){
     Route::prefix('/students')->group(function(){
         Route::get('/', [CooListController::class,'index'])->name('coordinator_list_students');
@@ -111,7 +111,7 @@ Route::prefix('/coordinator/{user_id}')
 });
 
 Route::prefix('/supervisor/{user_id}')
-->middleware('web', 'university_employee')
+//->middleware('web', 'university_employee')
 ->group(function(){
     Route::prefix('/students')->group(function(){
     Route::get('/', [StudentsController::class, 'index'])->name('supervisor_list_students');
@@ -137,7 +137,7 @@ Route::get('company_employee/register',[CompanyRegisterController::class,'create
 Route::post('company_employee/register/store',[CompanyRegisterController::class,'store'])->name('company_employee_store');
 
 Route::prefix('hr/{user_id}')
-->middleware('web', 'company_employee')
+//->middleware('web', 'company_employee')
 ->group(function () {
     Route::get('/company_profile', [HrCompanyProfileController::class, 'index'])->name('hr_company_profile');
     Route::get('/edit_company_profile', [HrCompanyProfileController::class, 'edit'])->name('hr_edit_company_profile');
@@ -174,7 +174,7 @@ Route::prefix('hr/{user_id}')
 
 // trainer
 Route::prefix('/trainer/{user_id}')
-->middleware('web', 'company_employee')
+//->middleware('web', 'company_employee')
 ->group(function(){
     Route::prefix('/trainees')->group(function(){
         Route::get('/',[TrainerController::class,'show'])->name('trainer_list_traniees');
@@ -199,7 +199,7 @@ Route::get('student/register',[StudentRegisterController::class,'create'])->name
 Route::post('student/register/store',[StudentRegisterController::class,'store'])->name('student_registeration.store');
 
 Route::prefix('/student/{user_id}')
-->middleware('web', 'student')
+//->middleware('web', 'student')
 ->group(function () {
     Route::get('/profile',[StudentProfileController::class,'show'])->name('student_profile');
     Route::get('/edit_profile',[EditStudentProfileController::class,'show'])->name('edit_student_profile');

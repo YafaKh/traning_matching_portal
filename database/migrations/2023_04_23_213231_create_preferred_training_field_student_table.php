@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('preferred_training_fields_students', function (Blueprint $table) {
+        Schema::create('preferred_training_field_student', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
 
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('preferred_training_fields_students');
+        Schema::dropIfExists('preferred_training_field_student');
     }
 };

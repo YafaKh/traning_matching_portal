@@ -61,6 +61,7 @@ class StudentFactory extends Factory
             'email' => $this->faker->unique()->safeEmail,
             'linkedin' => $this->faker->url(),
             'password' => Str::substr(bcrypt('password'),15), 
+            'english_level' =>$this->faker->numberBetween(1, 5),
             'availability_date' => $this->faker->date(),
             'connected_with_a_company' => $this->faker->boolean,
             'connected_company_info' => $this->faker->text(100),

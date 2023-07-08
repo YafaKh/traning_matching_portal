@@ -12,6 +12,7 @@ use App\Models\EvaluateStudent;
 use App\Models\EvaluateCompany;
 use App\Models\Progress;
 use App\Models\Visit;
+use App\Models\Skill;
 use App\Models\University;
 use App\Models\Specialization;
 use App\Models\City;
@@ -19,6 +20,7 @@ use App\Models\StudentCompanyApproval;
 use App\Models\UniversityEmployee;
 use App\Models\Preferred_training_field;
 use App\Models\PreferredCompany;
+use App\Models\PreferredCity;
 
 class Student extends Authenticatable
 {
@@ -40,6 +42,7 @@ class Student extends Authenticatable
     'email',
     'linkedin',
     'password',
+    'english_level',
     'availability_date',
     'connected_with_a_company',
     'phone',
@@ -56,39 +59,24 @@ class Student extends Authenticatable
         return $query->orderBy('first_name_en');
     }
 
-    //many to many
-    //  public function spoken_languages()
-    // {
-    //     return $this->belongsToMany('App\Models\Spoken_language','students_spoken_languages','student_id','spoken_language_id'); //'pivot','fk:for this table','fk:for other table'
-    // }
-    public function student_spoken_languages()
+    public function skills()
     {
-        return $this->hasMany(Student_spoken_language::class);
+        return $this->belongsToMany(Skill::class);
     }
-    public function student_skill()
-    {
-        return $this->belongsTo(Student_skill::class);
-    }
-    // public function skills()
-    // {
-    //     return $this->belongsToMany('App\Models\Skill','students_skills','student_id','skill_id');
-    // }
-    // public function preferredTrainingFields()
-    // {
-    //     return $this->belongsToMany('App\Models\Preferred_training_field','preferred_training_fields_students','student_id','preferred_training_id');
-    // }
     public function preferredTrainingFields()
     {
-        return $this->belongsToMany(Preferred_training_field::class, 'preferred_training_fields_students', 'student_id', 'preferred_training_id');
+        return $this->belongsToMany(PreferredTrainingField::class);
     }
-    public function preferredCitiesStudent()
+
+    public function preferredCities()
     {
-        return $this->hasMany(Preferred_cities_student::class);
+        return $this->belongsToMany(PreferredCity::class);
     }
     public function preferredCompanies()
     {
-        return $this->belongsToMany(PreferredCompany::class, 'preferred_companies_students', 'student_id', 'preferred_company_id');
+        return $this->belongsToMany(PreferredCompany::class);
     }
+
     //one to many
     public function specialization()
     {

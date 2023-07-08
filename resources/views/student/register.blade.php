@@ -10,8 +10,13 @@
     <div class="d-flex justify-content-center">
       <h1 class="mt-5">Sign up</h1>
     </div>
-   
-    <div class="m-5">
+    <div class="row">
+    @foreach ($errors->all() as $error)
+        <span class="text-danger">{{ $error }}</span><br>
+    @endforeach
+</div>
+
+    <div class="mx-5">
       <label for="first_name_ar" class="mt-3 mb-3"> Name (Arabic)</label>
       <div class="row g-2">
         <div class="form-floating col-md mb-3">
@@ -138,44 +143,6 @@
       </div>
        <div class="form-floating">
 
-       
-      <div class="row g-2  my-5">
-      <label for="languageName" class="fs-4 mb-2">Languages : </label>
-
-      @foreach($allLanguages as $allLanguage)
-
-        <div class="form-check ms-2 ">
-          
-          <div>
-            <input class="form-check-input mt-2 languageName" type="checkbox" value="{{ $allLanguage->id }}" name="language[ $allLanguage->id ]" id="languageName"  />
-            <label class="form-check-label fs-5" for="languageName">
-            {{ $allLanguage->name }}
-            </label>
-            </div>
-        <div class="levels d-none">
-            <div class="skill d-flex flex-row">
-            <p class="col-4 mt-4">speaking_level :</p>
-            <input type="range" min="1" max="5" name="speaking_level" class="w-50 col-8">
-            </div>
-            <div class="skill d-flex flex-row">
-            <p class="col-4 ">writing_level :</p>
-            <input type="range" min="1" max="5" name="writing_level" class="w-50 col-8">
-            </div>
-            <div class="skill d-flex flex-row">
-            <p class="col-4 mb-4">listening_level :</p>
-            <input type="range" min="1" max="5" name="listening_level" class="w-50 col-8">
-            </div>
-        </div>
-       </div>
-      @endforeach
-
-<div class="row">
-        @error('first_name_ar')
-            <span class="text-danger">{{ $message }}</span>
-        @enderror
-      </div>
-      
-      </div>
     <div class="form-floating ms-2 mb-4 d-flex flex-row gx-5">
       <div class="col"><label for="">Gender</label></div>
       <div class="form-check col">
@@ -200,7 +167,7 @@
         <option selected>Specialization</option>
         @foreach($specializations as $specialization)
 
-        <option value="$specialization->id">{{$specialization->name}}</option>
+        <option value="{{$specialization->id}}">{{$specialization->name}}</option>
         @endforeach
 
       </select>
@@ -228,50 +195,34 @@
         @enderror
       </div>
     </div>
-    <div class="form-floating mb-4">
-      <input type="password" class="form-control" id="password" name="password" placeholder="Password" />
-      <label for="password">Password</label>
-      <div class="row">
-        @error('password')
-            <span class="text-danger">{{ $message }}</span>
-        @enderror
-      </div>
-    </div>
-    <div class="form-floating mb-4">
-      <input type="password" class="form-control" id="cofirmPassword" name="cofirmPassword" placeholder="Confirm password" />
-      <label for="cofirmPassword">Confirm password</label>
-      <div class="row">
-        @error('cofirmPassword')
-            <span class="text-danger">{{ $message }}</span>
-        @enderror
-      </div>
+    <div class="d-flex flex-sm-row flex-column" >
+          <input type="password" class="form-control me-3 mb-4 ps-4" id="password" placeholder="Password" name="password">
+          <input type="password" class="form-control mb-4 ps-4" id="password_confirmation" placeholder="Confirm Password" name="password_confirmation">
     </div>
     
-      <div class="uploadImage">
-        <input type="file" class="form-control SetImage " name="image" id="studentImage" />
-
-          <input type="text" class="form-control" id="floatingInput" placeholder="         Personal image" />
-          <i class="bi bi-link-45deg imgicon "></i>
-          <div class="row">
-        @error('image')
-            <span class="text-danger">{{ $message }}</span>
+    <div class="form-group row mb-4 px-2">
+        Profile Image:
+        <input class="form-control ps-4  opacity-75" type="file" name="image"  id="formFile">
+        @error('image') 
+        <div class="alert alert-danger">
+            <strong>Error!</strong> {{ $message }}
+        </div> 
         @enderror
-      </div>
-      </div>
+    </div>
 </div>
 </div>
 <div class="text-center d-flex col-md-5 mx-auto my-4 row g-2 w-50">
-    <button id="next" class="btn btn-primary bg-dark-blue text-light px-5 my-3 flex-grow-1 col-md" type="button">
-      Next
-    </button>
-    <button class="btn btn-secondary text-light px-5 my-3 ms-1 flex-grow-1 col-md" type="button">
+    <button class="btn btn-secondary text-light px-5 my-3  flex-grow-1 col-md" type="button">
       Back
+    </button>
+    <button id="next" class="btn btn-primary bg-dark-blue text-light px-5 my-3 ms-1 flex-grow-1 col-md" type="button">
+      Next
     </button>
   </div>
 </section>
 <section class="registerSection d-none " id="hidden-section">
 <div class="registerField">
-  <label for="" class="mt-3 mb-3">Skills</label>
+  <label for="" class="my-3 ms-3">Skills</label>
   @foreach($skills as $skill)
   <div class="row g-2 ms-3 mb-2">
     <div class="form-check col">
@@ -280,22 +231,31 @@
         {{$skill->name}}
       </label>
     </div>
-    <div class="col d-flex justify-content-center mt-0">
-      <input type="range" min="1" max="5" name="skillLevel{{$loop->index}}" class="w-75 d-none skillLevel" id="skillLevel{{$loop->index}}" />
-    </div>
   </div>
   @endforeach
-  <!-- <div class="form-floating my-5">
-    <input type="text" class="form-control" name="skill" id="floatingInput" placeholder="else" />
-    <label for="floatingInput">else</label>
-  </div> -->
+  <div class="my-3">
+        <label for="other_skills">Add any other skills. Please provide them separated by commas</label>
+        <input type="text" class="form-control" id="other_skills" name="other_skills" placeholder="Other Skills" />
+        <div class="row">
+        @error('other_skills')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
+      </div>
+  </div>
 </div>
-    <div class="registerField pt-4">
-      <div class="form-floating mb-4 uploadImage">
-        <input type="link" class="form-control" id="linkedin" name="linkedin" placeholder="Linkedin" />
-        <label for="linkedin" class="ms-5">Linkedin</label>
-        <i class="bi bi-link-45deg linkedinIcon"></i>
-       
+<div class="my-3 ms-5 ps-4">
+        <label for="english_level">English Level</label>
+        <input type="range" min="1" max="5" name="english_level">
+        <div class="row">
+        @error('other_skills')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
+      </div>
+  </div>
+    <div class="registerField">
+     <div class="form-floating mb-4">
+        <input type="text" class="form-control" id="linkedin" name="linkedin" placeholder="Linkedin" />
+        <label for="linkedin">Linkedin</label>
       </div>
       <div class="row">
         @error('linkedin')
@@ -368,7 +328,7 @@
       </div>
     
       <div class="dropdown mb-4">
-          <button class="form-select border py-3 text-start">Preferred company/ies :</button>
+          <button class="form-select border py-3 text-start" type="button">Preferred company/ies :</button>
           <div class="dropdown-content col mx-2" id="preferrdCompny" >
                 <!--here the user can choose multi value-->
             <label class="checkbox-label">
@@ -393,7 +353,7 @@
           <div class="selected-box">exalt</div>
         </div> -->
         <div class="dropdown mb-4">
-          <button class="form-select border py-3 text-start">Preferred city/ies :</button>
+          <button class="form-select border py-3 text-start"  type="button">Preferred city/ies :</button>
           <div class="dropdown-content col mx-2" id="preferrdCity" name="preferrdCities[]">
                 <!--here the user can choose multi value-->
             <label class="checkbox-label">
@@ -415,7 +375,7 @@
         </div> -->
       </div>
       <div class="dropdown">
-          <button class="form-select border py-3 text-start">Preferred training field :</button>
+          <button class="form-select border py-3 text-start" type="button">Preferred training field :</button>
           <div class="dropdown-content col mx-2" id="trainingFields" name="trainingFields[]">
                 <!--here the user can choose multi value-->
             <label class="checkbox-label">
@@ -426,17 +386,22 @@
             @endforeach
             </label>
           </div>
-          <div class="form-floating">
-        <input type="text" class="form-control mb-4" id="floatingInput" name="trainingFields" placeholder="else" />
-        <label for="floatingInput">else</label>
-      </div>
           <div class="row">
           @error('trainingFields')
             <span class="text-danger">{{ $message }}</span>
         @enderror
         </div>
-</div>
-      <div class="mb-4">
+      </div>
+      <div class="mt-3">
+        <label for="other_fields">Add any other fields. Please provide them separated by commas</label>
+        <input type="text" class="form-control" id="other_fields" name="other_fields" placeholder="Other Fields" />
+        <div class="row">
+        @error('other_fields')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
+      </div>
+      </div>
+      <div class="my-3">
         <label>when available:</label>
         <div class="input-group form-floating" id="availability_date">
           <input type="date" class="form-control" name="availability_date" placeholder="Date" />
@@ -451,11 +416,11 @@
    
    
     <div class="text-center d-flex col-md-5 mx-auto my-4 row g-2 w-50">
-    <button class="toggle-section-button btn btn-primary bg-dark-blue text-light px-5 my-3 flex-grow-1 col-md" type="submit">
-      Submit
-    </button>
-    <button id="back" class="btn btn-secondary text-light px-5 my-3 ms-1 flex-grow-1 col-md" type="button">
+    <button id="back" class="btn btn-secondary text-light px-5 my-3 flex-grow-1 col-md" type="button">
       Back
+    </button>
+    <button class="toggle-section-button btn btn-primary bg-dark-blue text-light px-5 my-3 ms-1 flex-grow-1 col-md" type="submit">
+      Submit
     </button>
   </div>
 </section>

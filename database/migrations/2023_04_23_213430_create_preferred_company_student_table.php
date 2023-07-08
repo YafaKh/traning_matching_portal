@@ -11,20 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('preferred_cities_students', function (Blueprint $table) {
+        Schema::create('preferred_company_student', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->unsignedBigInteger('student_id');
-            $table->unsignedBigInteger('city_id');
+            $table->unsignedBigInteger('preferred_company_id');
+            $table->foreign('preferred_company_id')
+                ->references('id')
+                ->on('preferred_companies')
+                ->onDelete('no action')
+                ->onUpdate('no action');
+
             $table->foreign('student_id')
                 ->references('id')
-                ->on('students')
-                ->onDelete('no action')
-                ->onUpdate('no action')->onDelete('cascade');
-
-            $table->foreign('city_id')
-                ->references('id')
-                ->on('cities')->onDelete('cascade');
+                ->on('students')->onDelete('cascade');
         });
     }
 
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('preferred_cities_students');
+        Schema::dropIfExists('preferred_company_student');
     }
 };
