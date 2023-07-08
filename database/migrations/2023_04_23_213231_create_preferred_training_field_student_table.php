@@ -16,13 +16,13 @@ return new class extends Migration
             $table->timestamps();
 
             $table->unsignedBigInteger('student_id');
-            $table->unsignedBigInteger('preferred_training_id');
+            $table->unsignedBigInteger('preferred_field_id');
             $table->foreign('student_id')
                 ->references('id')
                 ->on('students')
                 ->onDelete('no action')
                 ->onUpdate('no action')->onDelete('cascade');
-            $table->foreign('preferred_training_id')
+            $table->foreign('preferred_field_id')
                 ->references('id')
                 ->on('preferred_training_fields')->onDelete('cascade');
         });
@@ -36,3 +36,4 @@ return new class extends Migration
         Schema::dropIfExists('preferred_training_field_student');
     }
 };
+

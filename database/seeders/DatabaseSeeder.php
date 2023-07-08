@@ -18,9 +18,7 @@ use App\Models\UnaddedUniversityEmployee;
 use App\Models\UnaddedCompany;
 use App\Models\Skill;
 use App\Models\City;
-use App\Models\Preferred_cities_student;
-use App\Models\Preferred_training_field_student;
-use App\Models\Preferred_training_field;
+use App\Models\PreferredTrainingField;
 use App\Models\Visit;
 
 use Database\Seeders\CitySeeder;
@@ -87,9 +85,8 @@ class DatabaseSeeder extends Seeder
         UnaddedCompanyEmployee::factory()->count(10)->create();
         UnaddedUniversityEmployee::factory()->count(10)->create();
         Skill::factory()->count(5)->create();
-        Preferred_cities_student::factory()->count(2)->create();
-        Preferred_training_field::factory()->count(5)->create();
-        Preferred_training_field_student::factory()->count(10)->create();
+        PreferredTrainingField::factory()->count(5)->create();
+        PreferredTrainingField::factory()->count(10)->create();
         Visit::factory()->count(60)->create();
 
         for($i = 0; $i < 4 ; $i++){

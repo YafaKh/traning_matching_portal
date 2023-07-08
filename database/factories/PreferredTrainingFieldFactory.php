@@ -1,16 +1,15 @@
 <?php
 
 namespace Database\Factories;
-use App\Models\Preferred_training_field;
+use App\Models\PreferredTrainingField;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Preferred_training_field>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\PreferredTrainingField>
  */
-class Preferred_training_fieldFactory extends Factory
+class PreferredTrainingFieldFactory extends Factory
 {
-    protected $model = Preferred_training_field::class;
     /**
      * Define the model's default state.
      *

@@ -13,7 +13,7 @@ class PreferredCity extends Model
    
     public function students()
     {
-        return $this->belongsToMany(Student::class);
+        return $this->belongsToMany(Student::class, 'preferred_city_student');
     }
 
 }

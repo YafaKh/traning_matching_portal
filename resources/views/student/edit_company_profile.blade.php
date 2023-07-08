@@ -1,37 +1,31 @@
-
-@extends('all_users.master')
+@extends('student.layout.master')
 @section('navbar')
   @include('student.layout.navbar')
 @endsection
 @section('content')
-<form class="px-5" method="POST" action="{{ route('edit_student_profile', [ 'user_id'=>$user->id]) }}"  enctype="multipart/form-data">
-@csrf
-<section>
-<div class="position-relative col-md-9 col-11 bg-dark-blue p-5 mx-auto mt-4 rounded-top-2">
-  <label class="text-light">Name: </label>
-  <input type="text" class="form-control ps-4 opacity-75" name="name" value="{{ old('name', $user['first_name_en'].' '.$user['second_name_en'].' '.$user['third_name_en'].' '.$user['last_name_en']) }}">
-  @error('name') 
-  <div class="alert alert-danger">
-      <strong>Error!</strong> {{ $message }}
-  </div> 
-  @enderror
-  <div class="form-group row">
-    <label class="text-light mt-3" for="prev_img">Your Profile Image</label>
-    <div class="d-flex flex-row">
-        <img src="{{ asset('assets/img/' . $user['image']) }}" class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32">
-        <input id="prev_img" type="text" name="prev_img" class="form-control ps-4 opacity-75" value = "{{$user['image']}}" disabled>
+
+
+  <section class="profileSection">
+    <div class="studentHeader">
+      <div class="row">
+        <h1>
+      <input class="form-control form-control w-25 opacity-75 mb-2" type="text" name="first_name_en" placeholder="{{$user->first_name_en}}"
+          aria-label=".form-control-lg example">
+
+      <input class="form-control form-control w-25 opacity-75" type="text" name="last_name_en" placeholder="{{$user->last_name_en}}"
+          aria-label=".form-control-lg example">
+
+          </h1>
+      </div>
+      <img src="{{asset('images/userImg2.png')}}" alt="student Image">
+
+      <div class="uploadImage">
+        <input type="file" name="image" id="" class="changeImage">
+        <i class="bi bi-camera-fill fs-3"></i>
+
+      </div>
     </div>
-  </div>
-  <label class="text-light mt-3" >If you want to the profile, choose a new one.</label>
-  <input class="form-control ps-4  opacity-75" type="file" name="image"  id="formFile">
-  @error('image') 
-  <div class="alert alert-danger">
-    <strong>Error!</strong> {{ $message }}
-  </div>
-  @enderror
-</div>
-<section class="profileSection py-3">
-<div class="studentInfos">
+    <div class="studentInfos">
     <div class="form-floating col-md w-50 studentInfo">
           <input type="text" class="form-control fs-6 " id="Specialization" name="Specialization" value="{{$user->specialization->name}}" />
           <label for="Specialization">Specialization</label>
@@ -77,7 +71,7 @@
       </div>
 
   </section>
-  <section class="profileSection studentGeneralInfo overflow-auto">
+  <section class="profileSection studentGeneralInfo">
     <h2 class="GeneralInfoHeader">General information</h2>
     <div>
     <div class="form-floating col-md ms-5 w-50 studentInfo">
@@ -108,6 +102,9 @@
       <a class="ms-5" href="#" role="button"><i class="fa-solid fa-trash-can text-danger"></i>
       </a>
       <p class="ps-2 w-25">{{$skill->name}}</p>
+      
+      <input type="range" class="form-range w-25"  min="0" max="5" value="{{ $skill->level }}" id="disabledRange">
+
     </div>
 @endforeach
     
@@ -116,7 +113,11 @@
       <div class="d-flex flex-row mb-3">
 
         <input type="text" class="form-control ms-5 w-25" id="new_skill" name="skill_name" placeholder="New skill">
-          </div>
+        <div class="ms-2 w-50">
+          <input type="range" min="1" max="100" name="level" class="form-range w-50">
+        </div>
+
+      </div>
 
     </div>
 
@@ -127,7 +128,7 @@
     <h2 class="GeneralInfoHeader">Additional information</h2>
     <div class="info">
       <h3>Preferred city for training:</h3>
-      <div class="input-group w-50  h-75 studentInfo">
+      <div class="input-group w-50 studentInfo">
         <select class="form-select  text-secondary" id="multiselect" multiple="multiple">
         @foreach($cities as $city)
           <option value="{{$city->id}}">{{$city->name}}</option>
@@ -182,4 +183,9 @@
     <button class="btn btn-primary bg-dark-blue text-light px-5 my-3 me-2 flex-grow-1" type="button">Save</button>
     <button class="btn btn-secondary text-light px-5 my-3 flex-grow-1" type="button">cancel</button>
   </div>
+  <!-- <script>
+  $(document).ready(function(){
+
+  });
+  </script> -->
 @endsection

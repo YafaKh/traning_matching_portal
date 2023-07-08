@@ -3,9 +3,7 @@
 namespace App\Http\Controllers\Student;
 
 use App\Models\Student;
-use App\Models\Spoken_language;
 use App\Models\Specialization;
-use App\Models\Student_spoken_language;
 use App\Models\Skill;
 use App\Models\Company;
 use App\Models\City;
@@ -28,8 +26,8 @@ class StudentRegisterController extends Controller
         $companies = Company::all();
         $branches=CompanyBranch::all();
         $cities=City::all();
-
-        $trainingFields=Preferred_training_field::all();
+        $trainingFields=PreferredTrainingField::all();
+        
        return view('student.register',compact('specializations','skills','companies','cities','trainingFields','branches'));
 
     }
@@ -139,7 +137,7 @@ class StudentRegisterController extends Controller
                 $fieldName = trim($fieldName);
     
                 if (!empty($fieldName)) {
-                    $field = Preferred_training_field::firstOrCreate(['name' => $fieldName]);
+                    $field = PreferredTrainingField::firstOrCreate(['name' => $fieldName]);
                     $selectedTrainingFields[] = $field->id;
                     $newTrainingFields[] = $field;
                 }

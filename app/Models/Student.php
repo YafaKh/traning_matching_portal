@@ -18,9 +18,8 @@ use App\Models\Specialization;
 use App\Models\City;
 use App\Models\StudentCompanyApproval;
 use App\Models\UniversityEmployee;
-use App\Models\Preferred_training_field;
+use App\Models\PreferredTrainingField;
 use App\Models\PreferredCompany;
-use App\Models\PreferredCity;
 
 class Student extends Authenticatable
 {
@@ -65,12 +64,11 @@ class Student extends Authenticatable
     }
     public function preferredTrainingFields()
     {
-        return $this->belongsToMany(PreferredTrainingField::class);
+        return $this->belongsToMany(PreferredTrainingField::class, 'preferred_training_field_student', 'student_id', 'preferred_field_id');
     }
-
-    public function preferredCities()
+    public function cities()
     {
-        return $this->belongsToMany(PreferredCity::class);
+        return $this->belongsToMany(City::class, 'preferred_city_student');
     }
     public function preferredCompanies()
     {

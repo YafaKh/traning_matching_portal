@@ -8,8 +8,8 @@ use App\Models\Company;
 use App\Models\UniversityEmployee;
 use App\Models\Student_spoken_language;
 use App\Models\Student_skill;
-use App\Models\Preferred_training_field_student;
-use App\Models\Preferred_cities_student;
+use App\Models\PreferredTrainingField;
+use App\Models\PreferredCity;
 use App\Models\Progress;
 use App\Models\Visit;
 
@@ -118,8 +118,8 @@ class ListController extends Controller
           // many to many relationship
         $allLanguages = Student_spoken_language::with('student', 'spokenLanguage')->where('student_id',$student_id)->get();
         $allSkills = Student_skill::with('student', 'skill')->where('student_id',$student_id)->get();
-        $allPreferredTrainingFields = Preferred_training_field_student::with('student', 'preferredTrainingField')->where('student_id',$student_id)->get();
-        $allPreferredCities = Preferred_cities_student::with('student', 'city')->where('student_id',$student_id)->get();
+        $allPreferredTrainingFields = PreferredTrainingField::with('student', 'preferredTrainingField')->where('student_id',$student_id)->get();
+        $allPreferredCities = PreferredCity::with('student', 'city')->where('student_id',$student_id)->get();
 
       //   one to many
         $specializationName = $student->specialization->name;
