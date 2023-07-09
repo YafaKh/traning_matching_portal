@@ -15,7 +15,7 @@
     
     <div class= "d-flex flex-md-row w-auto flex-column mt-5 pb-3">
         <div class= "d-flex flex-row">
-        <select class="form-select w-auto me-2 mb-2 txt-sm" aria-label="Specialization" id="specialization" name="specialization">
+        <select class="form-select w-auto me-2 mb-2 txt-sm" id="specialization" name="specialization">
         <option selected>Specialization</option>
         @if(count($specializations) > 0)
         @foreach($specializations as $specialization)
@@ -79,6 +79,8 @@
           
         </thead>
         <tbody class="bg-light" id="studentList">
+        @if(count($allStudents) > 0)
+
         @foreach($allStudents as $student)
 
             <tr>
@@ -114,49 +116,68 @@
             </td>
             </tr>        
             @endforeach
-
+        @endif
         </tbody>
         </table>
     </div>
     {{$allStudents->links()}}
 
 </div>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
 <script>
   $(document).ready(function() {
     // Add change event listener to the dropdown
     $('#specialization').on('change', function() {
       var selectedSpecialization = $(this).val(); // Get the selected value
       // Send AJAX request to fetch filtered students
-    //   console.log(selectedSpecialization);
+    //   console.log(specialization);
       $.ajax({
         url: '{{route('filtered_students',['user_id' => $user->id])}}', // Replace with the endpoint URL to fetch filtered students
         type: 'GET',
         data: { specialization: selectedSpecialization },
-        success: function(response) {
+        success: function(data) {
           // Update the student list with the filtered results
-          $('#studentList').html(response);
-        //   console.log(data)
-        },
-        error: function(xhr) {
-          // Handle error
-          console.log(xhr.responseText);
+        //   $('#studentList').html(response);
+        var students = data.students;
+        console.log(students);
 
-        //   console.log('no');
+        var html ='';
+        if(students.length > 0){
+            for(let i=0;i<students.length;i++){
+                html +='<tr>\
+                        <td>'+students[i]['student_num']+'</td>\
+                        <td>'+students[i]['first_name_en']+'</td>\
+                        <td>' + students[i]['specialization_acronyms'] + '</td>\
+                        <td>' + students[i]['company_name'] + '</td>\
+                        <td>' + students[i]['branch_name'] + '</td>\
+                        <td>' + students[i]['training_semester'] +'-'+ students[i]['training_year'] +'-'+ students[i]['trainer_first_name'] +'-'+ students[i]['trainer_last_name'] + '</td>\
+                        <td>\
+                          <div class="dropdown">\
+                            <a class="dropdown-toggle text-dark" role="button" data-bs-toggle="dropdown" aria-expanded="false">Go to student\'s</a>\
+                            <ul class="dropdown-menu">\
+                              <li><a class="dropdown-item" href="{{ route('student_visits', ['user_id' => $user->id, 'student_id' => "' + students[i]['id'] + '" ]) }}">Visit forms</a></li>\
+                              <li><a class="dropdown-item" href="{{ route('supervisor_student_progress', ['user_id' => $user->id, 'student_id' => "' + students[i]['id'] + '" ]) }}">Progress</a></li>\
+                              <li><a class="dropdown-item" href="{{ route('show_student_Evaluation', ['user_id' => $user->id, 'student_id' => "' + students[i]['id'] + '" ]) }}">Evaluation</a></li>\
+                              <li><a class="dropdown-item" href="{{ route('show_company_Evaluation', ['user_id' => $user->id, 'student_id' => "' + students[i]['id'] + '" ]) }}">Company evaluation</a></li>\
+                            </ul>\
+                          </div>\
+                        </td>\
+                      </tr>';
+            }
         }
+        else{
+            html +='<tr>\
+                    <td>No Data Found</td>\
+                    </tr>';
+        }//else
+        $("#studentList").html(html);
+    },
+       
       });
     });
   });
 </script>
-
-<!-- In the code above, you'll need to replace '/filter-students' with the actual endpoint URL that will handle the AJAX request and return the filtered students based on the selected specialization. -->
-
-<!-- On the server side, you'll need to define the corresponding route and controller method to handle the AJAX request and fetch the filtered students. The implementation will depend on the programming language and framework you're using on the server side. -->
-
-
-
-
-
-
 
 @endsection

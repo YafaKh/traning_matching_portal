@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+use KyslikColumnSortableSortable;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -48,11 +49,25 @@ class Student extends Authenticatable
     'image',
     'work_experience',
     'university_id',
+    'university_employee_id',
     'specialization_id',
     'training_id', 
+    'evaluate_student_id',
+    'evaluate_company_id',
     'city_id', 
     'active'];
     protected $hidden = ['created_at','updated_at'];
+    public $sortable = ['student_num',
+    'first_name_ar',
+    'first_name_en',
+    'second_name_ar',
+    'second_name_en',
+    'third_name_ar',
+    'third_name_en',
+    'last_name_ar',
+    'last_name_en',
+    'student_num',
+   ];
     public function scopeDefaultOrder($query)
     {
         return $query->orderBy('first_name_en');

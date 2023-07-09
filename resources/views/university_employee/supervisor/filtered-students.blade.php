@@ -7,7 +7,7 @@
     @endif
 @endsection
 @section('students_activity')
-    active
+    
 @endsection
 @section('content')
 
