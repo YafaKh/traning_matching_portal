@@ -70,7 +70,11 @@ Route::prefix('/admin')
     Route::get('/accept_company{company_id}',[CompaniesWantJoinController::class,'accept'])->name('admin_accept_company');
     Route::get('/reject_company{company_id}',[CompaniesWantJoinController::class,'reject'])->name('admin_reject_company');
     Route::get('/companies_employees',[AdCompanyEmployeeController::class,'index'])->name('admin_companies_employees');
-    Route::get('/university_employees',[AdUniversityEmployeeController::class,'index'])->name('admin_university_employees');
+    Route::prefix('/university_employees')->group(function(){
+        Route::get('/',[AdUniversityEmployeeController::class,'index'])->name('admin_university_employees');
+        Route::get('/add', [AdUniversityEmployeeController::class,'add'])->name('admin_add_university_employee');
+        Route::post('/store', [AdUniversityEmployeeController::class,'store'])->name('admin_store_university_employee');
+    });
     Route::get('/students',[StudentController::class,'index'])->name('admin_students');
 });
 

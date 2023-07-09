@@ -4,11 +4,6 @@ namespace App\Http\Controllers\CompanyEmployee\Trainer;
 
 use App\Models\CompanyEmployee;
 use App\Models\Student;
-use App\Models\Student_spoken_language;
-use App\Models\Student_skill;
-use App\Models\PreferredTrainingField;
-use App\Models\PreferredCity;
-use App\Models\Progress;
 
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
@@ -39,17 +34,7 @@ class TrainerController extends Controller
     public function show_student_profile($user_id, $student_id)
     {
         $user = CompanyEmployee::where('id', $user_id)->first();
-        $student =Student::find($student_id);
-          // many to many relationship
-        $allLanguages = Student_spoken_language::with('student', 'spokenLanguage')->where('student_id',$student_id)->get();
-        $allSkills = Student_skill::with('student', 'skill')->where('student_id',$student_id)->get();
-        $allPreferredTrainingFields = PreferredTrainingField::with('student', 'preferredTrainingField')->where('student_id',$student_id)->get();
-        $allPreferredCities = PreferredCity::with('student', 'city')->where('student_id',$student_id)->get();
-
-      //   one to many
-        $specializationName = $student->specialization->name;
-
-      
-        return view('company_employee.hr.student_profile',compact('user', 'student','specializationName','allLanguages','allSkills','allPreferredTrainingFields','allPreferredCities'));  
+        $student = Student::where('id', $student_id)->first();;
+        return view('company_employee.trainer.student_profile',compact('user','student'));  
     }
 }

@@ -4,8 +4,6 @@ namespace App\Http\Controllers\CompanyEmployee\HR\Trainees;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Collection;
-use App\Models\Company;
 use App\Models\Student;
 use App\Models\CompanyEmployee;
 
