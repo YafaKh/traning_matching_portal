@@ -50,11 +50,11 @@ Route::get('/', function () {
 
 Route::get('/{user_type}', [UserTypeController::class, 'login'])->name('login');
 Route::post('/authenticate_{user_type}', [LoginController::class, 'authenticate'])->name('authenticate');
-Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
+Route::get('/logout/{user_type}', [LogoutController::class, 'logout'])->name('logout');
 
 Route::get('/forgot-password', function () {
     return view('auth.forgot-password');
-})//->middleware('guest')->name('password.request');
+})->middleware('guest')->name('password.request');
 ;
 Route::get('/reset_password', function () {
     return view('/all_users/reset_password');

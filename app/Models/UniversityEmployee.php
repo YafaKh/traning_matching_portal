@@ -13,7 +13,7 @@ use App\Models\UniversityEmployeeRole;
 
 class UniversityEmployee extends Authenticatable
 {
-    use HasFactory;
+    use HasApiTokens, HasFactory, Notifiable;
     protected $fillable = [
         'employee_num',
         'email',

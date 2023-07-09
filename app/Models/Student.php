@@ -23,7 +23,7 @@ use App\Models\PreferredCompany;
 
 class Student extends Authenticatable
 {
-    use HasFactory;
+    use HasApiTokens, HasFactory, Notifiable;
     protected $table ="students";
     protected $fillable = ['student_num',
     'first_name_ar',

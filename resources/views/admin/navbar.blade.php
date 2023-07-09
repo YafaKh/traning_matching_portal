@@ -21,7 +21,7 @@
                     <a class="nav-link" href="{{route('admin_students')}}">Students</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link">Logout</a>
+                    <a class="nav-link" href="{{route('logout',['user_type' => 'admin'])}}">Logout</a>
                 </li>
             </ul>
         </div>

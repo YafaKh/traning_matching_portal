@@ -47,7 +47,7 @@
             >Trainings</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" href="{{route('logout')}}">Logout</a>
+            <a class="nav-link" href="{{route('logout',['user_type' => 'company_employee'])}}">Logout</a>
             </li>
         </ul>
         </div>

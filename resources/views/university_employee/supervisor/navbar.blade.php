@@ -16,7 +16,7 @@
         <a class="nav-link @yield('visits_activity')" href="{{route('student_visits',['user_id',$user->id])}}">Visit Forms</a>
         </li>
         <li class="nav-item">
-        <a class="nav-link" href="#">Logout</a>
+        <a class="nav-link" href="{{route('logout',['user_type' => 'university_employee'])}}">Logout</a>
         </li>
     </ul>
     </div>

@@ -29,7 +29,7 @@
             <a class="nav-link @yield('companies_activity')" href="{{route('coordinator_list_companies', ['user_id'=>$user->id])}}">Companies</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" href="#">Logout</a>
+            <a class="nav-link"  href="{{route('logout',['user_type' => 'university_employee'])}}">Logout</a>
             </li>
         </ul>
         </div>

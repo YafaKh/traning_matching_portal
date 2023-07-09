@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class LogoutController extends Controller
 {
-    public function logout(Request $request): RedirectResponse
+    public function logout(Request $request, $user_type): RedirectResponse
     {
         Auth::logout();
     
@@ -17,6 +17,6 @@ class LogoutController extends Controller
     
         $request->session()->regenerateToken();
     
-        return redirect()->route('user_type');
+        return redirect()->route('login', ['user_type' => $user_type]);
     }   
 }

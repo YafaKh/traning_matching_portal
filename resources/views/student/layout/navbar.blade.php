@@ -22,7 +22,7 @@
       </ul>
       <ul class="navbar-nav ms-auto me-sm-5 mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" href="#">Logout</a>
+          <a class="nav-link"  href="{{route('logout',['user_type' => 'student'])}}">Logout</a>
         </li>
       </ul>
     </div>

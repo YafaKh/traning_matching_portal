@@ -13,7 +13,7 @@
         <a class="nav-link" href="{{route('trainer_list_traniees', ['user_id' => $user->id])}}">My Traniees</a>
         </li>
         <li class="nav-item">
-        <a class="nav-link" href="#">Logout</a>
+        <a class="nav-link" href="{{route('logout',['user_type' => 'company_employee'])}}">Logout</a>
         </li>
     </ul>
     </div>
