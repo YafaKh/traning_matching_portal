@@ -42,29 +42,60 @@ class StudentsController extends Controller
         
         return view('university_employee.supervisor.listStudents',compact('user','allStudents','specializations','companies','branches','trainings'));
     }
-    // public function filterStudents(Request $request)
-    // {
-    //     dd($specializationId = $request->input('specialization')); // Retrieve the selected specialization from the request
-    
-    //     // Perform the filtering based on the selected specialization
-    //     $filteredStudents = Student::where('specialization_id', $specializationId)->get();
-    // dd($filteredStudents);
-    //     // Return the filtered students (e.g., as a view or JSON response)
-    //     return view('university_employee.supervisor.listStudents', compact('filteredStudents'));
-    // }
-    public function filterStudents(Request $request)
+    public function filterStudents(Request $request, $user_id)
     {
-        $query =Student::query();
-        $specializations =Specialization::all();
+        $query = Student::query();
+        $specializations = Specialization::all();
+        // $company = Company::all();
 
-        if($request->ajax()){
-        $students = $query->where(['specialization_id'=>$request->specialization])->get();
-        return response()->json(['students'=>$students]);
-        }
-        $students = $query->get();
+        if ($request->ajax()) {
+            if (empty($request->specialization)) {//this part of code not working , it must return the previous data when i don't choose a sepcefication 
+                $students = $query->where('university_employee_id', $user_id)->with('specialization')->get();
+            } else {
+                $students = $query->where([
+                    'specialization_id' => $request->specialization,
+                    'university_employee_id' => $user_id
+                ])->with('specialization')->get();
+            }
     
-        return view('university_employee.supervisor.filtered-student', compact('specializations','students'));
+            // Prepare the response data
+            $responseStudents = $students->map(function ($student) {
+                $semester = $student->training ? $student->training->semester : '';
+                if ($semester == 1) {
+                    $semester = 'Fall';
+                }
+                elseif($semester == 2){
+                    $semester = 'Spring';
+                }
+                elseif($semester == 3){
+                    $semester = 'First Summer';
+                } 
+                elseif($semester == 4){
+                    $semester = 'Second Summer';
+                } 
+            
+                return [
+                    'student_num' => $student->student_num,
+                    'first_name_en' => $student->first_name_en,
+                    'specialization_acronyms' => $student->specialization ? $student->specialization->acronyms : '',
+                    'company_name' => $student->training->branch->company ? $student->training->branch->company->name : '',
+                    'branch_name' => $student->training->branch ? $student->training->branch->address : '',
+                    'training_semester' => $semester,
+                    'training_year' => $student->training ? $student->training->year : '',
+                    'trainer_first_name' => $student->training->employee ? $student->training->employee->first_name : '',
+                    'trainer_last_name'  => $student->training->employee ? $student->training->employee->last_name : '',
+                ];
+            });
+    
+            return response()->json(['students' => $responseStudents]);
+        }
+    
+        $students = $query->where('user_id', $user_id)->with('specialization')->get();
+    
+        return view('university_employee.supervisor.listStudents', compact('specializations', 'students','user_id'));
     }
+    
+
     
     public function showProgressPage($user_id,$student_id)
     {
@@ -90,6 +121,7 @@ class StudentsController extends Controller
         $student = Student::where('id', $student_id)->first();
 
         $evaluation_data =$student->evaluate_student;
+        
         return view('university_employee.supervisor.student_evaluation', 
         ['user'=>$user, 
         'student'=> $student,
