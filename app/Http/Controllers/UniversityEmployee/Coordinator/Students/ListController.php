@@ -6,21 +6,9 @@ use App\Models\Student;
 use App\Models\Specialization;
 use App\Models\Company;
 use App\Models\UniversityEmployee;
-use App\Models\Student_spoken_language;
-use App\Models\Student_skill;
-use App\Models\PreferredTrainingField;
-use App\Models\PreferredCity;
 use App\Models\Progress;
-use App\Models\Visit;
 
 use Illuminate\Http\Request;
-
-use Illuminate\Support\Facades;
-use Illuminate\Validation\Rules\File;
-use Illuminate\Support\Str;
-use Illuminate\Validation\Rule;
-use Illuminate\Support\Arr;
-
 
 class ListController extends Controller
 {
@@ -160,7 +148,10 @@ class ListController extends Controller
         $user = UniversityEmployee::where('id', $user_id)->first();
         $student = Student::where('id', $student_id)->first();
 
-        $evalusation_data =$student->evaluate_company;
+        $evaluation_data =$student->evaluate_company;
+        if ($evaluation_data==null) {
+            return "No evaluation yet ";
+        }
 
         return view('university_employee.coordinator.company_evaluation', compact('user', 'student','evalusation_data'));
 

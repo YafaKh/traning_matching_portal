@@ -1,6 +1,6 @@
 @extends('all_users.master')
 @section('navbar')
-    @if($user->company_employee_role_id==2)
+    @if($user->university_employee_role_id==2)
         @include('university_employee.supervisor.navbar')
     @else
     @include('university_employee.coordinator.navbar')
@@ -12,7 +12,6 @@
 @section('content')
 <div class="px-5">
     {{--filters--}}
-    
     <div class= "d-flex flex-md-row w-auto flex-column mt-5 pb-3">
         <div class= "d-flex flex-row">
         <select class="form-select w-auto me-2 mb-2 txt-sm" id="specialization" name="specialization">

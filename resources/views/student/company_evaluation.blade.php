@@ -22,6 +22,7 @@
             </div>
           </div>
         </div>
+        <p class="text-danger ms-4">* Note that you can't edit this form once you submit it.</p>
         </section>     
       
         <section class="profileSection mb-3">
@@ -272,10 +273,7 @@
 <div class="text-center d-flex col-md-5 mx-auto my-4 row g-2 w-25">
     <button class="btn btn-primary bg-dark-blue text-light px-5 my-3 flex-grow-1 col-md" type="submit">
       Submit
-    </button>
-    <button class="btn btn-secondary text-light px-5 my-3 ms-1 flex-grow-1 col-md" type="button">
-      Back
-    </button>
+    </button>]
   </div>
 </form>
 @endsection

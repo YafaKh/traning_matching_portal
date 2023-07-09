@@ -4,9 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Student;
-use App\Models\University;
-use App\Models\UniversityEmployeeRole;
 
 class UnaddedUniversityEmployee extends Model
 {

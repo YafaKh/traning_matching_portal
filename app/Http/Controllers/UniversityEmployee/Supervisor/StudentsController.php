@@ -4,13 +4,7 @@ namespace App\Http\Controllers\UniversityEmployee\Supervisor;
 
 use App\Models\UniversityEmployee;
 use App\Models\Progress;
-use App\Models\EvaluateCompany;
-use App\Models\EvaluateStudent;
 use App\Models\Student;
-use App\Models\Student_spoken_language;
-use App\Models\Student_skill;
-use App\Models\PreferredTrainingField;
-use App\Models\PreferredCity;
 use App\Models\Specialization;
 use App\Models\Company;
 use App\Models\CompanyBranch;
@@ -129,24 +123,17 @@ class StudentsController extends Controller
     }
     public function showEvaluateCompnyPage($user_id,$student_id)
     {
-        $user=UniversityEmployee::whereIn('University_employee_role_id', [2, 3])->find($user_id);//role_id = ??
-        if ($user==null) {
-            return "supervisor not found ";
-        }
-        $allStudents=$user->students();
-        $student = $allStudents->find($student_id);
+        $user = UniversityEmployee::where('id', $user_id)->first();
+        $student = Student::where('id', $student_id)->first();
 
-        if ($student == null) {
-            return "Student not found";
+        $evaluation_data =$student->evaluate_company;
+        if ($evaluation_data==null) {
+            return "No evaluation yet ";
         }
-        $companyName = $student->training->branch->company->name;
-        $evaluateCompany = $student->evaluate_company;
-        // $trainer = $student->training->employee;
-        // $training = $student->training;
-        // $evaluateStudent =$student->evaluate_student;
-
-        return view('university_employee.supervisor.evaluateCompay',compact('user','student','companyName','evaluateCompany'));
-        
+        return view('university_employee.supervisor.company_evaluation', 
+        ['user'=>$user, 
+        'student'=> $student,
+        'evaluation_data'=>$evaluation_data]);      
     }
 
 

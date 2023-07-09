@@ -3,10 +3,6 @@
 namespace App\Http\Controllers\Student;
 
 use App\Models\Student;
-use App\Models\Specialization;
-use App\Models\Skill;
-use App\Models\PreferredTrainingField;
-use App\Models\PreferredCities;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

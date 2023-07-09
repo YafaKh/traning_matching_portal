@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Controller;
 
-use App\Http\Controllers\AllUsers\AllUsersController;
 use App\Http\Controllers\AllUsers\UserTypeController;
 use App\Http\Controllers\AllUsers\LoginController;
 use App\Http\Controllers\AllUsers\LogoutController;
@@ -12,6 +11,7 @@ use App\Http\Controllers\Student\StudentProfileController;
 use App\Http\Controllers\Student\EditStudentProfileController;
 use App\Http\Controllers\Student\StudentRegisterController;
 use App\Http\Controllers\Student\EvaluateCompanyController;
+use App\Http\Controllers\Student\ProgressController as StuProgressController;
 
 use App\Http\Controllers\CompanyEmployee\RegisterController as CompanyRegisterController;
 use App\Http\Controllers\CompanyEmployee\HR\Trainees\ListController as HrListController;
@@ -20,7 +20,7 @@ use App\Http\Controllers\CompanyEmployee\HR\Trainees\AssignTrainingController;
 use App\Http\Controllers\CompanyEmployee\HR\CompanyEmployeeController as HrCompanyEmployeeController;
 use App\Http\Controllers\CompanyEmployee\HR\TrainingController;
 use App\Http\Controllers\CompanyEmployee\Trainer\TrainerController;
-use App\Http\Controllers\CompanyEmployee\Trainer\progressController;
+use App\Http\Controllers\CompanyEmployee\Trainer\ProgressController;
 use App\Http\Controllers\CompanyEmployee\Trainer\EvaluateController;
 use App\Http\Controllers\CompanyEmployee\HR\CompanyProfileController as HrCompanyProfileController;
 
@@ -32,7 +32,6 @@ use App\Http\Controllers\UniversityEmployee\Coordinator\UniversityEmployeeContro
 use App\Http\Controllers\UniversityEmployee\Coordinator\CompaniesController as CooCompaniesController;
 use App\Http\Controllers\UniversityEmployee\Supervisor\StudentsController;
 use App\Http\Controllers\UniversityEmployee\Supervisor\VisitsController;
-use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\CompaniesController as AdminCompaniesController;
 use App\Http\Controllers\Admin\CompaniesWantJoinController;
 use App\Http\Controllers\Admin\CompanyEmployeeController as AdCompanyEmployeeController;
@@ -101,7 +100,7 @@ Route::prefix('/coordinator/{user_id}')
      Route::get('/progress/{student_id}', [CooListController::class, 'showProgressPage'])->name('coordinator_student_progress');
      Route::get('/student_Evaluation/{student_id}', [CooListController::class, 'show_student_evaluation'])->name('coordinator_student_Evaluation');
      Route::get('/company_Evaluation/{student_id}', [CooListController::class, 'show_company_evaluation'])->name('coordinator_company_Evaluation');
-   
+
     Route::prefix('/university_employees')->group(function(){
         Route::get('/', [CooUniversityEmployeeController::class, 'index'])->name('coordinator_list_employees');
         Route::get('/create', [CooUniversityEmployeeController::class,'create'])->name('coordinator_add_employee');
@@ -183,11 +182,11 @@ Route::prefix('/trainer/{user_id}')
     Route::prefix('/trainees')->group(function(){
         Route::get('/',[TrainerController::class,'show'])->name('trainer_list_traniees');
         Route::prefix('/progress/{trainee_id}')->group(function(){
-        Route::get('/',[progressController::class,'show'])->name('fill_traniee_progress');
-        Route::POST('/add',[progressController::class,'add'])->name('fill_traniee_progress.add');
-        Route::get('/edit/{progress_id}',[progressController::class,'edit'])->name('fill_traniee_progress.edit');
-        Route::PUT('/update/{progress_id}',[progressController::class,'update'])->name('fill_traniee_progress.update');
-        Route::get('/delete/{progress_id}',[progressController::class,'destroy'])->name('fill_traniee_progress.delete');
+        Route::get('/',[ProgressController::class,'show'])->name('fill_traniee_progress');
+        Route::POST('/add',[ProgressController::class,'add'])->name('fill_traniee_progress.add');
+        Route::get('/edit/{progress_id}',[ProgressController::class,'edit'])->name('fill_traniee_progress.edit');
+        Route::PUT('/update/{progress_id}',[ProgressController::class,'update'])->name('fill_traniee_progress.update');
+        Route::get('/delete/{progress_id}',[ProgressController::class,'destroy'])->name('fill_traniee_progress.delete');
         });
         Route::get('/student{student_id}_profile', [TrainerController::class, 'show_student_profile'])->name('trainer_student_profile');
         Route::get('/evaluation/{trainee_id}',[EvaluateController::class,'create'])->name('fill_traniee_evaluation');
@@ -207,8 +206,10 @@ Route::prefix('/student/{user_id}')
 ->group(function () {
     Route::get('/profile',[StudentProfileController::class,'show'])->name('student_profile');
     Route::get('/edit_profile',[EditStudentProfileController::class,'show'])->name('edit_student_profile');
+    Route::get('/progress', [StuProgressController::class, 'showProgressPage'])->name('student_show_progress');
     Route::get('/evaluate_company',[EvaluateCompanyController::class,'show'])->name('student_evaluate_company');
     Route::POST('/evaluate_company/add',[EvaluateCompanyController::class,'add'])->name('student_evaluate_company.add');
+    Route::get('/show_company_evaluation', [EvaluateCompanyController::class, 'show_company_evaluation'])->name('student_show_evaluate_company');
     Route::get('/list',[StudentRegisterController::class,'test'])->name('test');
     Route::get('/company_profile/{company_id}', [EvaluateCompanyController::class, 'companyprofile'])->name('company_profile');
     Route::get('/no-company', function () {

@@ -4,12 +4,10 @@ namespace App\Http\Controllers\CompanyEmployee\HR;
 use App\Http\Controllers\Controller;
 use App\Models\Company; 
 use App\Models\City; 
-use App\Models\CompanyBranch; 
 use App\Models\CompanyEmployee;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades;
-use Illuminate\Validation\Rules\File;
 use Illuminate\Support\Str;
 
 class CompanyProfileController extends Controller
@@ -77,7 +75,7 @@ class CompanyProfileController extends Controller
         if(($request->hasFile('image')))
         {
             Facades\File::delete('assets/img/'.$company->image);
-            $image=Str::after($this->storeImg($request, $company->id ),'img\\');
+            $image=Str::after($this->storeImg($request, $company->id,  $user->id),'img\\');
             $company->update(['image' => $image]);
         }
 

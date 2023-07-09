@@ -2,13 +2,8 @@
 
 namespace App\Http\Controllers\Student;
 use App\Models\Student;
-// use App\Models\CompanyBranch;
-use App\Models\Student_skill;
 use App\Models\Skill;
 use App\Models\EvaluateCompany;
-// use App\Models\Company_branch;
-use Illuminate\Support\Facades\View;
-use Illuminate\Support\Facades\Response;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -23,7 +18,7 @@ class EvaluateCompanyController extends Controller
 
             // $company= $student->training->branch->company;
        
-            return view('student.evaluate_company',compact('user','allSkills','companyName','company_data'));
+            return view('student.company_evaluation',compact('user','allSkills','companyName','company_data'));
     }
     public function companyprofile($user_id,$company_id){
         $user =Student::find($user_id);
@@ -83,5 +78,14 @@ class EvaluateCompanyController extends Controller
     
         }
 
-        
+        public function show_company_evaluation($user_id)
+    {
+        $user = Student::where('id', $user_id)->first();
+        $student = $user;
+
+        $evaluation_data =$student->evaluate_company;
+
+        return view('student.show_company_evaluation', compact('user', 'student','evalusation_data'));
+
+    }
 }

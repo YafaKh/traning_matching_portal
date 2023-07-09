@@ -10,12 +10,9 @@ use App\Models\City;
 use App\Models\PreferredTrainingField;
 use App\Models\CompanyBranch;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Validation\Rule;
-
 
 class StudentRegisterController extends Controller
 {

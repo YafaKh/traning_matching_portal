@@ -15,7 +15,6 @@ use App\Models\Progress;
 use App\Models\Visit;
 use App\Models\Skill;
 use App\Models\University;
-use App\Models\Specialization;
 use App\Models\City;
 use App\Models\StudentCompanyApproval;
 use App\Models\UniversityEmployee;

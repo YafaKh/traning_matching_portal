@@ -5,11 +5,9 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use App\Models\Training;
-use App\Models\Company;
 use App\Models\CompanyBranch;
 use App\Models\CompanyEmployee;
 use App\Models\TrainingField;
-use App\Models\Student;
 
 class TrainingController extends Controller
 {

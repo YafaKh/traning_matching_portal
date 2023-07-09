@@ -10,7 +10,7 @@
           <a class="nav-link @yield('profile_activity')" href="{{ route('student_profile', ['user_id' => $user->id]) }}">Profile</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link @yield('progress_activity')" href="#">My progress</a>
+          <a class="nav-link @yield('progress_activity')" href="{{route('student_show_progress',['user_id' => $user->id])}}">My progress</a>
         </li>
         <li class="nav-item">
         @if ($user->training && $user->training->branch && $user->training->branch->company)

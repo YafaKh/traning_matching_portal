@@ -6,10 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use App\Models\CompanyEmployee;
 use App\Models\Student;
-use App\Models\Training;
 use App\Models\Progress;
 
-class progressController extends Controller
+class ProgressController extends Controller
 {
     public function show($user_id,$trainee_id){
         $user=CompanyEmployee::find($user_id);
@@ -48,8 +47,6 @@ class progressController extends Controller
         $progress->student_id = $trainee_id;
         $progress->save();
 
-        $request->session()->flash('success', 'Progress added successfully.');
-
         return redirect()->route('fill_traniee_progress', ['user_id' => $user_id, 'trainee_id' => $trainee_id]);
     }
 
@@ -83,8 +80,6 @@ class progressController extends Controller
         'absences_days' =>$request->absences_days,
         'note' =>$request->note,
     ]);
-
-    $request->session()->flash('success', 'Progress updated successfully.');
 
     return redirect()->route('fill_traniee_progress', ['user_id' => $user_id, 'trainee_id' => $trainee_id]);
     }

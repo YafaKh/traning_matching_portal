@@ -4,7 +4,6 @@ namespace App\Http\Controllers\CompanyEmployee\HR;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\CompanyEmployee;
-use App\Models\Company;
 use App\Models\UnaddedCompanyEmployee;
 
 class CompanyEmployeeController extends Controller
