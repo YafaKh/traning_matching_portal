@@ -26,7 +26,6 @@
             @endif
               <input type="email" class="form-control loginInput" placeholder="Email" name="email">
               <input type="password" class="form-control loginInput" placeholder="Password" name="password">
-              <a href="" class="forgotPassLink">forgot password</a>
               <input class="btn loginBtn" type="submit" value="log in ">
               @if($user_type != 'admin')
               <a href="{{route($user_type.'_registeration')}}" class="creatAccountLink">Creat an account</a>

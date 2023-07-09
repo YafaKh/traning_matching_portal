@@ -1,19 +1,19 @@
 @extends('all_users.master')
 
 @section('content')
-<section class="profileSection">
+<section class="profileSection mt-4">
  {{--asset('images/userImg2.png')--}}
   <div class="studentHeader">
       <h1>{{$student->first_name_en}} {{$student->last_name_en}}</h1>
       <img src="{{$student->image}}" alt="student Image">
     </div>
     <div class="studentInfos">
-      <p class="studentInfo"><i class="bi bi-laptop-fill icon"></i>{{$specializationName}}</p>
+      <p class="studentInfo"><i class="bi bi-laptop-fill icon"></i>{{$student->specialization->name}}</p>
       <p class="studentInfo"><i class="bi bi-geo-alt-fill icon"></i>{{$student->address}}</p>
       <p class="studentInfo"><i class="bi bi-envelope-fill icon"></i>{{$student->email}}</p>
       <p class="studentInfo"><i class="bi bi-telephone-fill icon"></i>{{$student->phone}}</p>
       <p class="studentInfo"><i class="bi bi-linkedin icon"></i>{{$student->address}}Linkedin</p>
-      <a class="btn editBtn" href="{{route('edit_student_profile',['user_id'=> $user->id])}}" role="button">Edit Profile</a>
+      @yield('edit_profile_btn');
     </div>
   </section>
   <section class="profileSection">
@@ -49,10 +49,10 @@
   </section>
   <section class="profileSection studentSkills overflow-auto">
     <h2 class="GeneralInfoHeader">Skills</h2>
-    @foreach($allSkills as $allSkill)
+    @foreach($student->skills as $skill)
 
     <div class="skill">
-      <p>{{ $allSkill->skill->name }}</p>
+      <p>{{ $skill->name }}</p>
     </div>
     @endforeach
     <br>
@@ -65,16 +65,16 @@
     <div class="info">
 
       <h3>Preferred city for training:</h3>
-     @foreach($allPreferredCities as $allPreferredCitie)
-      <p>{{ $allPreferredCitie->city->name }}</p>
+     @foreach($student->cities as $city)
+      <p>{{ $city->name }}</p>
       @endforeach
     </div>
 
     <div class="info">
       <h3>preferred training field:</h3>
       <!-- there is an error here about the name  -->
-     @foreach($allPreferredTrainingFields as $allPreferredTrainingField)
-      <p>{{ $allPreferredTrainingField->preferredTrainingField->name }}</p>
+     @foreach($student->preferredTrainingFields as $field)
+      <p>{{ $field->name }}</p>
       @endforeach
     </div>
     <div class="info">

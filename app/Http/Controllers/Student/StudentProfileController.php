@@ -18,13 +18,7 @@ class StudentProfileController extends Controller
     public function show($user_id){
           $user =Student::find($user_id);
           $student= $user;
-           // many to many relationship
-            $allSkills = $student->skills;
-            $allPreferredTrainingFields = $student->preferredTrainingFields;
-            $allPreferredCities = $student->cities;
-          //   one to many
-            $specializationName = $student->specialization->name;
             
-          return view('student.profile',compact('user', 'student','specializationName','allSkills','allPreferredTrainingFields','allPreferredCities'));  
+          return view('student.profile',compact('user', 'student'));  
     }
 }

@@ -8,6 +8,7 @@
 @section('content')
 <div class="container p-4">
     <strong class="fs-5 ms-1 txt-dark-sand">Arab American University Employees:</strong>
+    <a href="{{route('admin_add_university_employee')}}" class="btn ms-3 btn-primary bg-dark-blue text-light mb-3">Accept University Admin</a>      
     <div class="row">
         @foreach($employees as $employee)
         <div class="col-lg-4 col-md-6 mb-3">

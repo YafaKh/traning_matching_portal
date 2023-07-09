@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Student;
 use App\Models\StudentCompanyApproval;
 use App\Models\Specialization;
-use App\Models\Company;
 use App\Models\CompanyEmployee;
 
 class UniversityStudentsController extends Controller
