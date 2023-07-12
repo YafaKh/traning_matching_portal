@@ -75,8 +75,13 @@ class StudentsController extends Controller
                 } 
             
                 return [
+                    'id'=> $student->id,
                     'student_num' => $student->student_num,
                     'first_name_en' => $student->first_name_en,
+                    'second_name_en'=> $student->second_name_en,
+                    'third_name_en'=> $student->third_name_en,
+                    'last_name_en'=> $student->last_name_en,
+                    'user_id' => $student->supervisor ? $student->supervisor->id : '',
                     'specialization_acronyms' => $student->specialization ? $student->specialization->acronyms : '',
                     'company_name' => $student->training->branch->company ? $student->training->branch->company->name : '',
                     'branch_name' => $student->training->branch ? $student->training->branch->address : '',
@@ -163,7 +168,6 @@ class StudentsController extends Controller
         $user = UniversityEmployee::where('id', $user_id)->first();
         $student =Student::find($student_id);
           // many to many relationship
-        $allLanguages = Student_spoken_language::with('student', 'spokenLanguage')->where('student_id',$student_id)->get();
         $allSkills = Student_skill::with('student', 'skill')->where('student_id',$student_id)->get();
         $allPreferredTrainingFields = PreferredTrainingField::with('student', 'preferredTrainingField')->where('student_id',$student_id)->get();
         $allPreferredCities = PreferredCity::with('student', 'city')->where('student_id',$student_id)->get();
@@ -172,6 +176,6 @@ class StudentsController extends Controller
         $specializationName = $student->specialization->name;
 
       
-        return view('university_employee.supervisor.student_profile',compact('user', 'student','specializationName','allLanguages','allSkills','allPreferredTrainingFields','allPreferredCities'));  
+        return view('university_employee.supervisor.student_profile',compact('user', 'student','specializationName','allSkills','allPreferredTrainingFields','allPreferredCities'));  
     }
 }

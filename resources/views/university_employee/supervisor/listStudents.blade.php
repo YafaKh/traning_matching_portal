@@ -148,7 +148,7 @@
             for(let i=0;i<students.length;i++){
                 html +='<tr>\
                         <td>'+students[i]['student_num']+'</td>\
-                        <td>'+students[i]['first_name_en']+'</td>\
+                        <td><a class="link-dark link-underline-opacity-0 fw-bold" href="{{ route('supervisor_student_profile', ['user_id'=>"students[i]['user_id']", 'student_id'=> "students[i]['id']" ]) }}">'+students[i]['first_name_en']+' '+ students[i]['second_name_en']+' '+ students[i]['third_name_en']+' '+ students[i]['last_name_en']+'</td>\
                         <td>' + students[i]['specialization_acronyms'] + '</td>\
                         <td>' + students[i]['company_name'] + '</td>\
                         <td>' + students[i]['branch_name'] + '</td>\

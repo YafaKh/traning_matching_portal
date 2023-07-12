@@ -9,10 +9,10 @@
     </div>
     <div class="studentInfos">
       <p class="studentInfo"><i class="bi bi-laptop-fill icon"></i>{{$specializationName}}</p>
-      <p class="studentInfo"><i class="bi bi-geo-alt-fill icon"></i>{{$student->address}}</p>
+      <p class="studentInfo"><i class="bi bi-geo-alt-fill icon"></i>{{$student->city->name}}</p>
       <p class="studentInfo"><i class="bi bi-envelope-fill icon"></i>{{$student->email}}</p>
       <p class="studentInfo"><i class="bi bi-telephone-fill icon"></i>{{$student->phone}}</p>
-      <p class="studentInfo"><i class="bi bi-linkedin icon"></i>{{$student->address}}Linkedin</p>
+      <p class="studentInfo"><i class="bi bi-linkedin icon"></i>{{$student->linkedin}}</p>
       <a class="btn editBtn" href="{{route('edit_student_profile',['user_id'=> $user->id])}}" role="button">Edit Profile</a>
     </div>
   </section>
@@ -49,10 +49,10 @@
   </section>
   <section class="profileSection studentSkills overflow-auto">
     <h2 class="GeneralInfoHeader">Skills</h2>
-    @foreach($allSkills as $allSkill)
+    @foreach($allSkills as $skill)
 
     <div class="skill">
-      <p>{{ $allSkill->skill->name }}</p>
+      <p>{{ $skill->skill->name }}</p>
     </div>
     @endforeach
     <br>
