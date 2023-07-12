@@ -1,7 +1,6 @@
-
 @extends('all_users.master')
 @section('navbar')
-  @include('student.layout.navbar')
+  @include('student.navbar')
 @endsection
 @section('content')
 <form class="px-5" method="POST" action="{{ route('edit_student_profile', [ 'user_id'=>$user->id]) }}"  enctype="multipart/form-data">

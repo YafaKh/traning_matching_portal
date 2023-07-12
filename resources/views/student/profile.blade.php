@@ -1,6 +1,6 @@
 @extends('all_users.student_profile')
 @section('navbar')
-  @include('student.layout.navbar')
+  @include('student.navbar')
 @endsection
 
 @section('edit_profile_btn')

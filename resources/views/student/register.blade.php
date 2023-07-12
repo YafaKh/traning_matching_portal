@@ -1,4 +1,4 @@
-@extends('student.layout.master')
+@extends('all_users.master')
 @section('content')
 
   <div class="d-flex justify-content-center mt-5">

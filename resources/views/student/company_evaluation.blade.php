@@ -1,12 +1,12 @@
-@extends('student.layout.master')
+@extends('all_users.master')
 @section('navbar')
-  @include('student.layout.navbar')
+  @include('student.navbar')
 @endsection
 @section('content')
 <form action="{{route('student_evaluate_company.add',['user_id'=>$user->id])}}" method="POST" enctype="multipart/form-data">
 @csrf
 
-      <section class="profileSection mb-3">
+      <section class="profileSection my-4">
         <div class="position-relative col-md-9 bg-dark-blue p-5 w-auto h-25 mt-1 rounded-top-2 ">
         </div>
         <div class=" col-md-9 bg-white mb-3 p-md-5 px-3 mx-auto rounded-bottom-2 d-flex">

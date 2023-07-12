@@ -1,6 +1,6 @@
 @extends('all_users.master')
 @section('content')
-<section class="profileSection mb-3">
+<section class="profileSection my-4">
   <div class="position-relative col-md-9 bg-dark-blue p-5 w-auto h-25 mt-1 rounded-top-2 ">
   </div>
   <div class=" col-md-9 bg-white mb-3 p-md-5 px-3 mx-auto rounded-bottom-2 d-flex">

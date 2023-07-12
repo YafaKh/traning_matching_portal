@@ -1,4 +1,4 @@
 @extends('all_users.progress')
 @section('navbar')
-    @include('student.layout.navbar')
+    @include('student.navbar')
 @endsection
