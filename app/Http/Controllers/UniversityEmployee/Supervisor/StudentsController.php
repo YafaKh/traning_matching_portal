@@ -69,8 +69,13 @@ class StudentsController extends Controller
                 } 
             
                 return [
+                    'id'=> $student->id,
                     'student_num' => $student->student_num,
                     'first_name_en' => $student->first_name_en,
+                    'second_name_en'=> $student->second_name_en,
+                    'third_name_en'=> $student->third_name_en,
+                    'last_name_en'=> $student->last_name_en,
+                    'user_id' => $student->supervisor ? $student->supervisor->id : '',
                     'specialization_acronyms' => $student->specialization ? $student->specialization->acronyms : '',
                     'company_name' => $student->training->branch->company ? $student->training->branch->company->name : '',
                     'branch_name' => $student->training->branch ? $student->training->branch->address : '',
@@ -151,4 +156,5 @@ class StudentsController extends Controller
         $student = Student::where('id', $student_id)->first();;
         return view('university_employee.supervisor.student_profile',compact('user','student'));  
      }
+
 }

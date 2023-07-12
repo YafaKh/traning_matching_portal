@@ -26,7 +26,7 @@ class EditStudentProfileController extends Controller
 
         return view('student.edit_profile',compact('user','specializations','skills','companies','cities','trainingFields','branches'));
     }
-    public function update(Request $request)
+    public function edit(Request $request)
     {
         $student = Student::find($id);
         // Update the student data based on the form inputs
@@ -35,6 +35,8 @@ class EditStudentProfileController extends Controller
         $student->email = $request->input('email');
         $student->phone = $request->input('phone');
         $student->linkedin = $request->input('linkedin');
+        $student->image = $request->input('image');
+
         // Save the updated data
         $student->save();
 
