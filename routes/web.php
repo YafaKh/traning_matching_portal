@@ -123,9 +123,9 @@ Route::prefix('/supervisor/{user_id}')
     Route::get('/company_evaluation/{student_id}', [StudentsController::class, 'showEvaluateCompnyPage'])->name('show_company_Evaluation');
     Route::get('/filter-students', [StudentsController::class, 'filterStudents'])->name('filtered_students');
 
-});
-    Route::get('/student{student_id}_profile', [StudentsController::class, 'show_student_profile'])->name('supervisor_student_profile');
-    
+
+    Route::get('/student_profile/{student_id}', [StudentsController::class, 'show_student_profile'])->name('supervisor_student_profile');
+}); 
     Route::prefix('/visits')->group(function(){
         Route::get('/student{student_id}', [VisitsController::class, 'index'])->name('student_visits');
         Route::get('/create{student_id}', [VisitsController::class, 'create'])->name('fill_visit_form');

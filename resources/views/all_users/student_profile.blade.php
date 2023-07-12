@@ -9,12 +9,11 @@
     </div>
     <div class="studentInfos">
 
-      <p class="studentInfo"><i class="bi bi-laptop-fill icon"></i>{{$specializationName}}</p>
+      <p class="studentInfo"><i class="bi bi-laptop-fill icon"></i>{{$student->specialization->name}}</p>
       <p class="studentInfo"><i class="bi bi-geo-alt-fill icon"></i>{{$student->city->name}}</p>
       <p class="studentInfo"><i class="bi bi-envelope-fill icon"></i>{{$student->email}}</p>
       <p class="studentInfo"><i class="bi bi-telephone-fill icon"></i>{{$student->phone}}</p>
       <p class="studentInfo"><i class="bi bi-linkedin icon"></i>{{$student->linkedin}}</p>
-      <a class="btn editBtn" href="{{route('edit_student_profile',['user_id'=> $user->id])}}" role="button">Edit Profile</a>
       @yield('edit_profile_btn');
 
     </div>

@@ -122,7 +122,7 @@ class Student extends Authenticatable
     {
         return $this->belongsTo(Training::class, 'training_id');
     }
-    public function supervisor()
+    public function employee()
     {
         return $this->belongsTo(UniversityEmployee::class, 'university_employee_id');
     }

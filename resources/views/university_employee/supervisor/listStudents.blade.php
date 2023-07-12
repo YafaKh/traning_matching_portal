@@ -130,6 +130,7 @@
     // Add change event listener to the dropdown
     $('#specialization').on('change', function() {
       var selectedSpecialization = $(this).val(); // Get the selected value
+      // var user_id = {{ $user->id }};
       // Send AJAX request to fetch filtered students
     //   console.log(specialization);
       $.ajax({
@@ -140,14 +141,14 @@
           // Update the student list with the filtered results
         //   $('#studentList').html(response);
         var students = data.students;
-        console.log(students);
+        console.log(data.students);
 
         var html ='';
         if(students.length > 0){
             for(let i=0;i<students.length;i++){
                 html +='<tr>\
                         <td>'+students[i]['student_num']+'</td>\
-                        <td><a class="link-dark link-underline-opacity-0 fw-bold" href="{{ route('supervisor_student_profile', ['user_id'=>"students[i]['user_id']", 'student_id'=> "students[i]['id']" ]) }}">'+students[i]['first_name_en']+' '+ students[i]['second_name_en']+' '+ students[i]['third_name_en']+' '+ students[i]['last_name_en']+'</td>\
+                        <td><a class="link-dark link-underline-opacity-0 fw-bold" href="{{ route('supervisor_student_profile', ['user_id' => $user->id,'student_id' =>$student->id ] ) }}">' + students[i]['first_name_en'] + ' ' + students[i]['second_name_en'] + ' ' + students[i]['third_name_en'] + ' ' + students[i]['last_name_en'] + '</a></td>\
                         <td>' + students[i]['specialization_acronyms'] + '</td>\
                         <td>' + students[i]['company_name'] + '</td>\
                         <td>' + students[i]['branch_name'] + '</td>\

@@ -22,11 +22,12 @@ class StudentsController extends Controller
      * list his students with some info
      */
     public function index($user_id)
-    {
+    {    
         $user=UniversityEmployee::whereIn('University_employee_role_id', [2, 3])->find($user_id);//role_id = ??
         if ($user==null) {
             return "supervisor not found ";
         }
+
         $allStudents=$user->students()->paginate(10);
 
         $specializations =Specialization::all();
@@ -38,8 +39,11 @@ class StudentsController extends Controller
     }
     public function filterStudents(Request $request, $user_id)
     {
+        // dd($student->university_employee_id);
+
         $query = Student::query();
         $specializations = Specialization::all();
+
         // $company = Company::all();
 
         if ($request->ajax()) {
@@ -51,7 +55,7 @@ class StudentsController extends Controller
                     'university_employee_id' => $user_id
                 ])->with('specialization')->get();
             }
-    
+          
             // Prepare the response data
             $responseStudents = $students->map(function ($student) {
                 $semester = $student->training ? $student->training->semester : '';
@@ -67,7 +71,7 @@ class StudentsController extends Controller
                 elseif($semester == 4){
                     $semester = 'Second Summer';
                 } 
-            
+
                 return [
                     'id'=> $student->id,
                     'student_num' => $student->student_num,
@@ -75,7 +79,7 @@ class StudentsController extends Controller
                     'second_name_en'=> $student->second_name_en,
                     'third_name_en'=> $student->third_name_en,
                     'last_name_en'=> $student->last_name_en,
-                    'user_id' => $student->supervisor ? $student->supervisor->id : '',
+                    // 'university_employee_id' => $student->university_employee_id, 
                     'specialization_acronyms' => $student->specialization ? $student->specialization->acronyms : '',
                     'company_name' => $student->training->branch->company ? $student->training->branch->company->name : '',
                     'branch_name' => $student->training->branch ? $student->training->branch->address : '',
@@ -89,7 +93,7 @@ class StudentsController extends Controller
             return response()->json(['students' => $responseStudents]);
         }
     
-        $students = $query->where('user_id', $user_id)->with('specialization')->get();
+        $students = $query->where('university_employee_id', $user_id)->with('specialization')->get();
     
         return view('university_employee.supervisor.listStudents', compact('specializations', 'students','user_id'));
     }
