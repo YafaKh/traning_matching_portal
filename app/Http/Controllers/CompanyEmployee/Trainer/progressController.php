@@ -55,7 +55,7 @@ class ProgressController extends Controller
         $user = CompanyEmployee::findOrFail($user_id);
         $trainee = Student::findOrFail($trainee_id);
         $progress = Progress::findOrFail($progress_id);
-        $trainingID =$trainee->training_id;//ex : 8 -get student training
+        $trainingID =$trainee->training_id;
         $allTrainings=$user->trainings()->where('id', $trainingID)->get();
 
         foreach ($allTrainings as $training) {

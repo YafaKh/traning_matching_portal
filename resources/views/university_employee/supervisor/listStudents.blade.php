@@ -148,7 +148,7 @@
             for(let i=0;i<students.length;i++){
                 html +='<tr>\
                         <td>'+students[i]['student_num']+'</td>\
-                        <td><a class="link-dark link-underline-opacity-0 fw-bold" href="{{ route('supervisor_student_profile', ['user_id' => $user->id,'student_id' =>$student->id ] ) }}">' + students[i]['first_name_en'] + ' ' + students[i]['second_name_en'] + ' ' + students[i]['third_name_en'] + ' ' + students[i]['last_name_en'] + '</a></td>\
+                        <td><a class="link-dark link-underline-opacity-0 fw-bold" href="{{ route('supervisor_student_profile', ['user_id' => $user->id,'student_id' => $student->id ] ) }}">' + students[i]['first_name_en'] + ' ' + students[i]['second_name_en'] + ' ' + students[i]['third_name_en'] + ' ' + students[i]['last_name_en'] + '</a></td>\
                         <td>' + students[i]['specialization_acronyms'] + '</td>\
                         <td>' + students[i]['company_name'] + '</td>\
                         <td>' + students[i]['branch_name'] + '</td>\
@@ -157,10 +157,10 @@
                           <div class="dropdown">\
                             <a class="dropdown-toggle text-dark" role="button" data-bs-toggle="dropdown" aria-expanded="false">Go to student\'s</a>\
                             <ul class="dropdown-menu">\
-                              <li><a class="dropdown-item" href="{{ route('student_visits', ['user_id' => $user->id, 'student_id' => "' + students[i]['id'] + '" ]) }}">Visit forms</a></li>\
-                              <li><a class="dropdown-item" href="{{ route('supervisor_student_progress', ['user_id' => $user->id, 'student_id' => "' + students[i]['id'] + '" ]) }}">Progress</a></li>\
-                              <li><a class="dropdown-item" href="{{ route('show_student_Evaluation', ['user_id' => $user->id, 'student_id' => "' + students[i]['id'] + '" ]) }}">Evaluation</a></li>\
-                              <li><a class="dropdown-item" href="{{ route('show_company_Evaluation', ['user_id' => $user->id, 'student_id' => "' + students[i]['id'] + '" ]) }}">Company evaluation</a></li>\
+                              <li><a class="dropdown-item" href="{{ route('student_visits', ['user_id' => $user->id, 'student_id'=> $student->id ] ) }}">Visit forms</a></li>\
+                              <li><a class="dropdown-item" href="{{ route('supervisor_student_progress', ['user_id' => $user->id, 'student_id' => $student->id ]) }}">Progress</a></li>\
+                              <li><a class="dropdown-item" href="{{ route('show_student_Evaluation', ['user_id' => $user->id, 'student_id' => $student->id ]) }}">Evaluation</a></li>\
+                              <li><a class="dropdown-item" href="{{ route('show_company_Evaluation', ['user_id' => $user->id, 'student_id' => $student->id ]) }}">Company evaluation</a></li>\
                             </ul>\
                           </div>\
                         </td>\

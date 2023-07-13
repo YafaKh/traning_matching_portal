@@ -73,7 +73,6 @@ class StudentsController extends Controller
                 } 
 
                 return [
-                    'id'=> $student->id,
                     'student_num' => $student->student_num,
                     'first_name_en' => $student->first_name_en,
                     'second_name_en'=> $student->second_name_en,
@@ -87,6 +86,7 @@ class StudentsController extends Controller
                     'training_year' => $student->training ? $student->training->year : '',
                     'trainer_first_name' => $student->training->employee ? $student->training->employee->first_name : '',
                     'trainer_last_name'  => $student->training->employee ? $student->training->employee->last_name : '',
+                     
                 ];
             });
     
@@ -97,7 +97,6 @@ class StudentsController extends Controller
     
         return view('university_employee.supervisor.listStudents', compact('specializations', 'students','user_id'));
     }
-    
 
     
     public function showProgressPage($user_id,$student_id)
@@ -157,7 +156,8 @@ class StudentsController extends Controller
     public function show_student_profile($user_id, $student_id)
     {
         $user = UniversityEmployee::where('id', $user_id)->first();
-        $student = Student::where('id', $student_id)->first();;
+        $student = Student::where('id', $student_id)->first();
+        // dd($student->skills);
         return view('university_employee.supervisor.student_profile',compact('user','student'));  
      }
 

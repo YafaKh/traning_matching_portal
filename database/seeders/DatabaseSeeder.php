@@ -17,6 +17,7 @@ use App\Models\UnaddedCompanyEmployee;
 use App\Models\UnaddedUniversityEmployee;
 use App\Models\UnaddedCompany;
 use App\Models\Skill;
+use App\Models\StudentSkill;
 use App\Models\City;
 use App\Models\PreferredTrainingField;
 use App\Models\Visit;
@@ -85,6 +86,8 @@ class DatabaseSeeder extends Seeder
         UnaddedCompanyEmployee::factory()->count(10)->create();
         UnaddedUniversityEmployee::factory()->count(10)->create();
         Skill::factory()->count(5)->create();
+        StudentSkill::factory()->count(10)->create();
+
         PreferredTrainingField::factory()->count(5)->create();
         PreferredTrainingField::factory()->count(10)->create();
         Visit::factory()->count(60)->create();

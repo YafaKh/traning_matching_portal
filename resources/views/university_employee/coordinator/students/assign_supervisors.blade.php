@@ -67,7 +67,7 @@
                 </a>
                 @endif
             </td> 
-            <td>{{$assigned_student->supervisor->first_name}} {{$assigned_student->supervisor->last_name}}</td>
+            <td>{{$assigned_student->supervisor->first_name ?? ''}} {{$assigned_student->supervisor->last_name ?? ''}}</td>
             <td>{{$assigned_student->training->branch->company->name ?? ''}}</td>
             <td>{{$assigned_student->training->branch->address ?? ''}}</td>
             <td>
