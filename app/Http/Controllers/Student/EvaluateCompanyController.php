@@ -28,64 +28,56 @@ class EvaluateCompanyController extends Controller
         return view('student.company_profile',compact('user','company_data','contactable_employees'));
 
     }
-    public function add(Request $request,$user_id){
-        //  dd('inside add');
-        // dd($user_id);
-        // dd($request);
+    public function add(Request $request,$user_id)
+    {
+        $user =Student::find($user_id);
         $request->validate([
-        'skills_you_trained' =>'required|string|max:255',
-        'training_palce_evaluation'=>'required|integer|min:0|max:100',
-        'pros'=>'required|max:255|string',
-        'cons'=>'required|max:255|string',
-        'new_skills_gained'=>'required|max:255|string',
-        'skills_wish_they_included'=> 'required|max:255|string',
-        'skills_wish_were_given_better'=> 'required|max:255|string',
-        'recommend_sending_students'=>'required|boolean',
-        'recommended_evaluate_sys'=>'required|max:255|string',
-        'recommended_evaluate_sys_explanation'=>'required|max:255|string',
-        'internship_time_before_senior_year'=> 'required|max:255|string',
-        'more_than_one_internship'=> 'required|max:255|string',
-        'finding_training_difficulties'=> 'required|max:255|string',
-        'recommendations'=> 'required|max:255|string',
-        'notes_about_website'=>'required|max:255|string',
-// 15col
-
-                ]);
-                
-                
-    EvaluateCompany::create([
-        'skills_you_trained'=> $request->skills_you_trained,
-        'training_palce_evaluation'=> $request->training_palce_evaluation,
-        'pros'=> $request->pros,
-        'cons'=> $request->cons,
-        'new_skills_gained'=> $request->new_skills_gained ,
-        'skills_wish_they_included'=> $request-> skills_wish_they_included,
-        'skills_wish_were_given_better'=> $request-> skills_wish_were_given_better,
-        'recommend_sending_students'=> $request-> recommend_sending_students === 'on',
-        'recommended_evaluate_sys'=> $request-> recommended_evaluate_sys,
-        'skills_you_trained'=> $request-> skills_you_trained,
-        'recommended_evaluate_sys_explanation'=> $request-> recommended_evaluate_sys_explanation,
-        'internship_time_before_senior_year'=> $request-> internship_time_before_senior_year,
-        'more_than_one_internship'=> $request-> more_than_one_internship,
-        'finding_training_difficulties'=> $request-> finding_training_difficulties,
-        'recommendations'=> $request-> recommendations,
-        'notes_about_website'=> $request-> notes_about_website,
-
+            'skills_you_trained' => 'required|string|max:255',
+            'training_palce_evaluation' => 'required|integer|min:0|max:100',
+            'pros' => 'required|max:255|string',
+            'cons' => 'required|max:255|string',
+            'new_skills_gained' => 'required|max:255|string',
+            'skills_wish_they_included' => 'required|max:255|string',
+            'skills_wish_were_given_better' => 'required|max:255|string',
+            'recommend_sending_students' => 'required|boolean',
+            'recommended_evaluate_sys' => 'required|max:255|string',
+            'recommended_evaluate_sys_explanation' => 'required|max:255|string',
+            'internship_time_before_senior_year' => 'required|max:255|string',
+            'more_than_one_internship' => 'required|max:255|string',
+            'finding_training_difficulties' => 'required|max:255|string',
+            'recommendations' => 'required|max:255|string',
+            'notes_about_website' => 'required|max:255|string',
         ]);
-       
-         return redirect()->route('student_evaluate_company', ['user_id' => $user_id]);
-
     
-        }
+        $evaluate= EvaluateCompany::create([
+            'skills_you_trained' => $request->skills_you_trained,
+            'training_palce_evaluation' => $request->training_palce_evaluation,
+            'pros' => $request->pros,
+            'cons' => $request->cons,
+            'new_skills_gained' => $request->new_skills_gained,
+            'skills_wish_they_included' => $request->skills_wish_they_included,
+            'skills_wish_were_given_better' => $request->skills_wish_were_given_better,
+            'recommend_sending_students' => $request->recommend_sending_students === 'on',
+            'recommended_evaluate_sys' => $request->recommended_evaluate_sys,
+            'recommended_evaluate_sys_explanation' => $request->recommended_evaluate_sys_explanation,
+            'internship_time_before_senior_year' => $request->internship_time_before_senior_year,
+            'more_than_one_internship' => $request->more_than_one_internship,
+            'finding_training_difficulties' => $request->finding_training_difficulties,
+            'recommendations' => $request->recommendations,
+            'notes_about_website' => $request->notes_about_website,
+        ]);
+        $user->update(['evaluate_company_id' => $evaluate->id]);
+        return redirect()->route('company_profile', ['user_id' => $user_id, 'company_id' => $user->training->branch->company->id]);
+    }
 
-        public function show_company_evaluation($user_id)
+    public function show_company_evaluation($user_id)
     {
         $user = Student::where('id', $user_id)->first();
         $student = $user;
 
         $evaluation_data =$student->evaluate_company;
 
-        return view('student.show_company_evaluation', compact('user', 'student','evalusation_data'));
+        return view('student.show_company_evaluation', compact('user', 'student','evaluation_data'));
 
     }
 }
