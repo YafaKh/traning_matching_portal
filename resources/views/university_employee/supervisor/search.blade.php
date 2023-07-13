@@ -20,12 +20,10 @@
             <option value="{{$specialization->id}}">{{$specialization->acronyms}}</option>
             @endforeach
         </select>
-
-        
+     
         </div>
         <form class="input-group h-50 w-auto" role="searprimarych" type="get" action="{{route('search',['user_id' => $user->id])}}">
-            <input class="form-control txt-sm h-50 border border-secondary"  data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip"
-        data-bs-title="Search by the student's number or name" name="search" type="search" placeholder="Search" aria-label="Search">
+            <input class="form-control txt-sm h-50 border border-secondary" name="search" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-sm bg-sand btn-outline-secondary py-0" type="submit">
             <i class="bi bi-search txt-xsm"></i>
             </button>
@@ -88,17 +86,12 @@
         </tbody>
         </table>
     </div>
-    {{$allStudents->links()}}
-
+<a class="btn btn-secondary" href="{{route('supervisor_list_students',['user_id' => $user->id])}}">Back</a>
 </div>
 <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
 <script>
-  // to enable tooltip
-  const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-  const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
-// filtering 
   $(document).ready(function() {
     // Add change event listener to the dropdown
     $('#specialization').on('change', function() {
@@ -174,6 +167,6 @@
     });
   });
   
-
 </script>
+
 @endsection

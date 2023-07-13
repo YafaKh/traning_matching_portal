@@ -17,10 +17,13 @@ use App\Models\UnaddedCompanyEmployee;
 use App\Models\UnaddedUniversityEmployee;
 use App\Models\UnaddedCompany;
 use App\Models\Skill;
-use App\Models\StudentSkill;
+use App\Models\SkillStudent;
 use App\Models\City;
 use App\Models\PreferredTrainingField;
 use App\Models\Visit;
+use App\Models\EvaluateCompany;
+use App\Models\EvaluateStudent;
+
 
 use Database\Seeders\CitySeeder;
 use Database\Seeders\UniversitySeeder;
@@ -83,10 +86,13 @@ class DatabaseSeeder extends Seeder
         }
         $this->call(TrainingSeeder::class);
         Progress::factory()->count(25)->create();
+        EvaluateCompany::factory()->count(25)->create();
+        EvaluateStudent::factory()->count(25)->create();
+
         UnaddedCompanyEmployee::factory()->count(10)->create();
         UnaddedUniversityEmployee::factory()->count(10)->create();
         Skill::factory()->count(5)->create();
-        StudentSkill::factory()->count(10)->create();
+        SkillStudent::factory()->count(10)->create();
 
         PreferredTrainingField::factory()->count(5)->create();
         PreferredTrainingField::factory()->count(10)->create();

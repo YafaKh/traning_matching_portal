@@ -3,16 +3,16 @@
 namespace Database\Factories;
 use App\Models\Student;
 use App\Models\Skill;
-use App\Models\StudentSkill;
+use App\Models\SkillStudent;
 
 
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\StudentSkill>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\SkillStudent>
  */
-class StudentSkillFactory extends Factory
+class SkillStudentFactory extends Factory
 {
 
     /**
@@ -20,7 +20,7 @@ class StudentSkillFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    protected $model = StudentSkill::class;
+    protected $model = SkillStudent::class;
 
 
     public function definition()

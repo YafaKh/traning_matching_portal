@@ -1,7 +1,7 @@
 <?php
 
 namespace Database\Factories;
-
+use App\Models\EvaluateStudent;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -14,6 +14,8 @@ class EvaluateStudentFactory extends Factory
      *
      * @return array<string, mixed>
      */
+    protected $model = EvaluateStudent::class;
+
     public function definition()
     {
         return [

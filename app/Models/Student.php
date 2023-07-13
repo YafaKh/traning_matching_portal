@@ -130,8 +130,5 @@ class Student extends Authenticatable
     {
         return $this->belongsTo(City::class, 'city_id');
     }
-    // public function studentSkills(): HasManyThrough
-    // {
-    //     return $this->hasManyThrough(Student::class, Skill::class); 
-    // }
+   
 }

@@ -29,7 +29,6 @@ class StudentFactory extends Factory
     public $instance_counter=0;
     public function definition()
     {
-        $university_ids = University::pluck('id')->all();
         $supervisors = UniversityEmployee::where(function ($query) {
             $query->where('university_employee_role_id', 2)
                 ->orWhere('university_employee_role_id', 3);
@@ -37,11 +36,13 @@ class StudentFactory extends Factory
         //to create some students without assigned supervisors
         $supervisors[count($supervisors)]=NULL;
         $supervisors[count($supervisors)]=NULL;
-
+        $training_ids = Training::pluck('id')->all();
+        $evaluate_student_ids = EvaluateStudent::pluck('id')->all();
+        $evaluate_company_ids = EvaluateCompany::pluck('id')->all();
         $specialization_ids = Specialization::pluck('id')->all();
         $city_ids = City::pluck('id')->all();
 
-        $training_ids = Training::pluck('id')->all();
+       
         $this->instance_counter++;
 
         return [
@@ -68,10 +69,13 @@ class StudentFactory extends Factory
             'phone' => Str::substr($this->faker->phoneNumber, 0, 15),
             'registered' => $this->faker->boolean,
             'image' => $this->faker->imageUrl(),
-            'university_id' => $this->faker->randomElement($university_ids),
+            'university_id' => 1,
             'university_employee_id' => $this->faker->randomElement($supervisors),
             'specialization_id' => $this->faker->randomElement($specialization_ids),
             'city_id' => $this->faker->randomElement($city_ids),
+            'training_id' => $this->faker->randomElement($training_ids),
+            'evaluate_student_id' => $this->faker->randomElement($evaluate_student_ids),
+            'evaluate_company_id' => $this->faker->randomElement($evaluate_company_ids),
             'work_experience' => $this->faker->paragraph(),
 
         ];

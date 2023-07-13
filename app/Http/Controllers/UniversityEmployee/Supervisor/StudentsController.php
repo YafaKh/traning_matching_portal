@@ -39,23 +39,21 @@ class StudentsController extends Controller
     }
     public function filterStudents(Request $request, $user_id)
     {
-        // dd($student->university_employee_id);
 
         $query = Student::query();
         $specializations = Specialization::all();
 
-        // $company = Company::all();
 
         if ($request->ajax()) {
-            if (empty($request->specialization)) {//this part of code not working , it must return the previous data when i don't choose a sepcefication 
-                $students = $query->where('university_employee_id', $user_id)->with('specialization')->get();
+            if (empty($request->specialization)) {
+                $students = $query->where('university_employee_id', $user_id)->with('specialization');
             } else {
                 $students = $query->where([
                     'specialization_id' => $request->specialization,
-                    'university_employee_id' => $user_id
-                ])->with('specialization')->get();
+                    'university_employee_id' => $user_id,
+                ])->with('specialization',)->get();
             }
-          
+
             // Prepare the response data
             $responseStudents = $students->map(function ($student) {
                 $semester = $student->training ? $student->training->semester : '';
@@ -73,16 +71,17 @@ class StudentsController extends Controller
                 } 
 
                 return [
+                    'id' => $student->id,
                     'student_num' => $student->student_num,
                     'first_name_en' => $student->first_name_en,
                     'second_name_en'=> $student->second_name_en,
                     'third_name_en'=> $student->third_name_en,
                     'last_name_en'=> $student->last_name_en,
-                    // 'university_employee_id' => $student->university_employee_id, 
+                    'university_employee_id' => $student->university_employee_id, 
                     'specialization_acronyms' => $student->specialization ? $student->specialization->acronyms : '',
                     'company_name' => $student->training->branch->company ? $student->training->branch->company->name : '',
                     'branch_name' => $student->training->branch ? $student->training->branch->address : '',
-                    'training_semester' => $semester,
+                    'training_semester' => $semester ?? '',
                     'training_year' => $student->training ? $student->training->year : '',
                     'trainer_first_name' => $student->training->employee ? $student->training->employee->first_name : '',
                     'trainer_last_name'  => $student->training->employee ? $student->training->employee->last_name : '',
@@ -95,10 +94,28 @@ class StudentsController extends Controller
     
         $students = $query->where('university_employee_id', $user_id)->with('specialization')->get();
     
-        return view('university_employee.supervisor.listStudents', compact('specializations', 'students','user_id'));
+        return view('university_employee.supervisor.filtered-students', compact('specializations', 'students','user_id'));
     }
+    public function search($user_id){
+        $search_text = $_GET['search']; // name of the search input
 
-    
+        $user = UniversityEmployee::whereIn('University_employee_role_id', [2, 3])->find($user_id); // Assuming role_id is an attribute on the UniversityEmployee model
+        
+        $allStudents = $user->students()->where(function ($query) use ($search_text) {
+            $query->where('first_name_en', 'LIKE', '%' . $search_text . '%')
+                ->orWhere('second_name_en', 'LIKE', '%' . $search_text . '%')
+                ->orWhere('third_name_en', 'LIKE', '%' . $search_text . '%')
+                ->orWhere('last_name_en', 'LIKE', '%' . $search_text . '%')
+                ->orWhere('student_num', 'LIKE', '%' . $search_text . '%');
+        })->get();
+        $specializations =Specialization::all();
+        $companies =Company::all();
+        $branches =CompanyBranch::all();
+        $trainings =Training::all();
+        return view('university_employee.supervisor.search', compact('allStudents','user','specializations','companies','branches','trainings'));
+
+        
+    }
     public function showProgressPage($user_id,$student_id)
     {
         $user = UniversityEmployee::where('id', $user_id)->first();

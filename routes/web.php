@@ -122,6 +122,7 @@ Route::prefix('/supervisor/{user_id}')
     Route::get('/student_evaluation/{student_id}', [StudentsController::class, 'showEvaluateStudentPage'])->name('show_student_Evaluation');
     Route::get('/company_evaluation/{student_id}', [StudentsController::class, 'showEvaluateCompnyPage'])->name('show_company_Evaluation');
     Route::get('/filter-students', [StudentsController::class, 'filterStudents'])->name('filtered_students');
+    Route::get('/search', [StudentsController::class, 'search'])->name('search');
 
 
     Route::get('/student_profile/{student_id}', [StudentsController::class, 'show_student_profile'])->name('supervisor_student_profile');

@@ -1,6 +1,7 @@
 <?php
 
 namespace Database\Factories;
+use App\Models\EvaluateCompany;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -14,6 +15,8 @@ class EvaluateCompanyFactory extends Factory
      *
      * @return array<string, mixed>
      */
+    protected $model = EvaluateCompany::class;
+
     public function definition()
     {
         return[
