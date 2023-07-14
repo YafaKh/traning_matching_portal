@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Student;
+use Illuminate\Support\Str;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -8,7 +9,6 @@ use App\Models\Student;
 use App\Models\City;
 use App\Models\Skill;
 use App\Models\Company;
-use App\Models\CompanyBranch;
 use App\Models\PreferredTrainingField;
 use App\Models\Specialization;
 
@@ -30,76 +30,91 @@ class EditStudentProfileController extends Controller
     public function update(Request $request,$user_id)
     {
         $student = Student::find($user_id);
-        $validated = $request->validate([
-            'first_name_en' => 'required|string',
-            'second_name_en' => 'required|string',
-            'third_name_en' =>'required|string',
-            'last_name_en' => 'required|string',
+        $request->validate([
             'gender' => 'required|boolean',
             'passed_hours' => 'required|integer',
             'gpa' => 'required',
-            'email' => 'required|email|unique:students',
+            'email' => 'required|email',
             'linkedin' => 'required|url',
             'english_level' => 'required|min:1|max:5',
-            'skills' => 'array',
-            'skills.*' => 'string',
-            'other_skills' => 'nullable|string',
+            'new_skills' => 'nullable|string',
             'availability_date' => 'required|date',
-            'phone' => 'required|string|regex:/^+[0-9]{13}$/',
+            'phone' => 'required|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg|max:10000000',
             'work_experience' => 'nullable|string|max:65535',
             'city' => 'required',
             'specialization' => 'required',
-            'preferrdCities' => 'nullable|array',
-            'preferrdCities.*' => 'nullable',
-            'preferrdTrainingFiled' => 'nullable|array',
-            'preferrdTrainingFiled.*' => 'nullable',
         ]);
+        
      // Create the student record
-     $student = Student::create([
-        'first_name_en' => $validated['first_name_en'],
-        'second_name_en' => $validated['second_name_en'],
-        'third_name_en' => $validated['third_name_en'],
-        'last_name_en' => $validated['last_name_en'],
-        'gender' => $validated['gender'],
-        'passed_hours' => $validated['passed_hours'],
-        'gpa' => $validated['gpa'],
-        'email' => $validated['email'],
-        'linkedin' => $validated['linkedin'],
-        'english_level' => $validated['english_level'],
-        'availability_date' => $validated['availability_date'],
-        'phone' => $validated['phone'],
-        'work_experience' => $validated['work_experience'],
-        'city_id' => $validated['city'],
-        'specialization_id' => $validated['specialization'],
+     $student->update([
+        'gender' => $request->input('gender'),
+        'passed_hours' => $request->input('passed_hours'),
+        'gpa' => $request->input('gpa'),
+        'email' => $request->input('email'),
+        'linkedin' => $request->input('linkedin'),
+        'english_level' => $request->input('english_level'),
+        'availability_date' => $request->input('availability_date'),
+        'phone' => $request->input('phone'),
+        'work_experience' => $request->input('work_experience'),
+        'city_id' => $request->input('city'),
+        'specialization_id' => $request->input('specialization'),
         
     ]);
         // Store the profile image if provided
         if ($request->hasFile('image')) {
-            $imagePath = $this->storeImage($request->file('image'), $student->id);
-            $student->image = $imagePath;
+            $image=Str::after($this->storeImg($request, $student->id ),'img\\');
+            $student->image = $image;
             $student->save();
         }
+        // Handle skills
+        $newSkills = [];
 
-        // // Handle skills
-        // $selectedSkills = $request->input('skills', []);
-        // $newSkills = [];
-    
-        // if ($request->filled('other_skills')) {
-        //     $otherSkills = explode(',', $request->input('other_skills'));
-    
-        //     foreach ($otherSkills as $skillName) {
-        //         $skillName = trim($skillName);
-    
-        //         if (!empty($skillName)) {
-        //             $skill = Skill::firstOrCreate(['name' => $skillName]);
-        //             $selectedSkills[] = $skill->id;
-        //             $newSkills[] = $skill;
-        //         }
-        //     }
-        // }
-        $student->skills()->attach($selectedSkills);
+        if ($request->filled('new_skills')) {
+            $new_skills = explode(',', $request->input('new_skills'));
 
+            foreach ($new_skills as $skillName) {
+                $skillName = trim($skillName);
+
+                if (!empty($skillName)) {
+                    $skill = Skill::firstOrCreate(['name' => $skillName]);
+                    $newSkills[] = $skill;
+                }
+            }
+        }
+
+        $student->skills()->attach($newSkills);
+         // Handle preferred companies
+        $selectedPreferredCompanies = $request->input('preferredCompany', []);
+        $student->preferredCompanies()->attach($selectedPreferredCompanies);
+
+        // Handle preferred cities
+        $selectedPreferredCities = $request->input('preferredCity', []);
+        $student->cities()->attach($selectedPreferredCities);
+
+        // Handle training fields
+        $selectedTrainingFields = $request->input('trainingFields', []);
+        $newTrainingFields = [];
+
+        if ($request->filled('other_fields')) {
+            $otherFields = explode(',', $request->input('other_fields'));
+
+            foreach ($otherFields as $fieldName) {
+                $fieldName = trim($fieldName);
+
+                if (!empty($fieldName)) {
+                    $field = PreferredTrainingField::firstOrCreate(['name' => $fieldName]);
+                    $selectedTrainingFields[] = $field->id;
+                    $newTrainingFields[] = $field;
+                }
+            }
+        }
+
+
+        // Update other fields
+        $student->preferredTrainingFields()->attach($selectedTrainingFields);
+
+        $student->availability_date = $request->input('availability_date');
       
         // Save the updated data
         $student->save();

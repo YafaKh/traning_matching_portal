@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Student;
+use Illuminate\Support\Str;
 
 use App\Models\Student;
 use App\Models\Specialization;
@@ -98,8 +99,8 @@ class StudentRegisterController extends Controller
     
         // Store the profile image if provided
         if ($request->hasFile('image')) {
-            $imagePath = $this->storeImage($request->file('image'), $student->id);
-            $student->image = $imagePath;
+            $image=Str::after($this->storeImg($request, $student->id ),'img\\');
+            $student->image = $image;
             $student->save();
         }
     

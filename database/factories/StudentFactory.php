@@ -41,6 +41,7 @@ class StudentFactory extends Factory
         $evaluate_company_ids = EvaluateCompany::pluck('id')->all();
         $specialization_ids = Specialization::pluck('id')->all();
         $city_ids = City::pluck('id')->all();
+        $imgs = ['userImg.png','userImg2.png','userImg3.png','userImg4.png','userImg5.png'];
 
        
         $this->instance_counter++;
@@ -68,7 +69,7 @@ class StudentFactory extends Factory
             'connected_company_info' => $this->faker->text(100),
             'phone' => Str::substr($this->faker->phoneNumber, 0, 15),
             'registered' => $this->faker->boolean,
-            'image' => $this->faker->imageUrl(),
+            'image' => $this->faker->randomElement($imgs),
             'university_id' => 1,
             'university_employee_id' => $this->faker->randomElement($supervisors),
             'specialization_id' => $this->faker->randomElement($specialization_ids),

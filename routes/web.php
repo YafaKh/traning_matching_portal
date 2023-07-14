@@ -209,7 +209,7 @@ Route::prefix('/student/{user_id}')
 ->group(function () {
     Route::get('/profile',[StudentProfileController::class,'show'])->name('student_profile');
     Route::get('/edit_profile',[EditStudentProfileController::class,'show'])->name('edit_student_profile');
-    Route::get('/edit_profile/update',[EditStudentProfileController::class,'update'])->name('edit_student_profile.update');
+    Route::post('/edit_profile/update', [EditStudentProfileController::class, 'update'])->name('update_student_profile');
 
     Route::get('/progress', [StuProgressController::class, 'showProgressPage'])->name('student_show_progress');
     Route::get('/evaluate_company',[EvaluateCompanyController::class,'show'])->name('student_evaluate_company');

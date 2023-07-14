@@ -5,7 +5,7 @@
  {{--asset('images/userImg2.png')--}}
   <div class="studentHeader">
       <h1>{{$student->first_name_en}} {{$student->last_name_en}}</h1>
-      <img src="{{$student->image}}" alt="student Image">
+      <img src="{{ asset('assets/img/' . $student['image']) }}" alt="student Image">
     </div>
     <div class="studentInfos">
 
