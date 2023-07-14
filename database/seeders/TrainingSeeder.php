@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\Training;
 use App\Models\CompanyBranch;
-use App\Models\CompanyEmployee;
 use App\Models\Student;
 
 class TrainingSeeder extends Seeder

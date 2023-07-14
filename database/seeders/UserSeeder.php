@@ -82,7 +82,7 @@ class UserSeeder extends Seeder
             'description' => 'Leading Company providing IT Services and solutions that provide a range of customer-centric services working best for your online business.',
             'website' => 'https://www.google.com/',
             'linkedin' => 'https://www.google.com/',
-            'image' => 'comp_8',
+            'image' => 'comp_8.png',
         ]);
         CompanyEmployee::create([
             'email' => 'ahmad@aaup.edu',

@@ -3,12 +3,22 @@
   @include('student.navbar')
 @endsection
 @section('content')
-<form class="px-5" method="POST" action="{{ route('edit_student_profile', [ 'user_id'=>$user->id]) }}"  enctype="multipart/form-data">
+@if ($errors->any())
+  <div class="alert alert-danger">
+    <ul>
+      @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+      @endforeach
+    </ul>
+  </div>
+@endif
+
+<form class="px-5" method="POST" action="{{ route('update_student_profile', [ 'user_id'=>$user->id]) }}"  enctype="multipart/form-data">
 @csrf
 <section class="w-100">
 <div class="position-relative col-md-9 bg-dark-blue p-5 mx-auto mt-4 rounded-top-2 w-75">
   <label class="text-light">Name: </label>
-  <input type="text" class="form-control ps-4 opacity-75" name="name" value="{{ old('name', $user['first_name_en'].' '.$user['second_name_en'].' '.$user['third_name_en'].' '.$user['last_name_en']) }}">
+  <input type="text" class="form-control ps-4 opacity-75" disabled name="name" value="{{ old('name', $user['first_name_en'].' '.$user['second_name_en'].' '.$user['third_name_en'].' '.$user['last_name_en']) }}">
   @error('name') 
   <div class="alert alert-danger">
       <strong>Error!</strong> {{ $message }}
@@ -17,7 +27,7 @@
   <div class="form-group row">
     <label class="text-light mt-3" for="prev_img">Your Profile Image</label>
     <div class="d-flex flex-row">
-        <img src="{{ asset('assets/img/'. $user['image']) }}" class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32">
+        <img src="{{ asset('assets/img/' . $user['image']) }}" class="bd-placeholder-img me-2 rounded" width="32" height="32">
         <input id="prev_img" type="text" name="prev_img" class="form-control ps-4 opacity-75" value = "{{$user['image']}}" disabled>
     </div>
   </div>
@@ -33,12 +43,12 @@
 <section class="profileSection py-3 w-75 mx-auto">
 <div class="studentInfos">
 <div class="mt-4 ms-5 ">
+  Specialization:
       <select class="form-select ms-4 w-50" id="specialization" name="specialization">
-        <!--here the user can choose multi value-->
-        <option selected>Specialization</option>
+        
         @foreach($specializations as $specialization)
-
-        <option value="{{$specialization->id}}">{{$specialization->name}}</option>
+        <option value="{{$specialization->id}}" {{ $user->specialization->id == $specialization->id ? 'selected' : '' }}>
+          {{$specialization->name}}</option>
         @endforeach
 
       </select>
@@ -48,11 +58,13 @@
         @enderror
       </div>
     </div>
-      <div class="input-group w-50 studentInfo mt-3 ms-5">
-        <select class="form-select  text-secondary w-50 ms-4" id="inputGroupSelect01">
-          <option selected>address</option>
+    
+    <div class="mt-4 ms-5 ">
+      Address:
+        <select class="form-select  text-secondary w-50 ms-4" id="inputGroupSelect01" name="city">
           @foreach($cities as $city)
-          <option value="{{$city->id}}">{{$city->name}}</option>
+          <option value="{{$city->id}}" {{ $user->city->id == $city->id ? 'selected' : '' }}>
+            {{$city->name}}</option>
           @endforeach
         </select>
       </div>
@@ -102,7 +114,7 @@
           <label for="passed_hours">Number of passed hour</label>
     </div>
       <div class="input-group ms-5 w-50 my-4">
-        <select class="form-select  text-secondary" id="inputGroupSelect01">
+        <select class="form-select  text-secondary" id="inputGroupSelect01" name="gender">
           <option value="{{$user->gender}}" selected>Female</option>
           <option value="{{$user->gender}}">Male</option>
 
@@ -112,9 +124,24 @@
           <input type="text" class="form-control" id="gpa" name="gpa" value="{{$user->gpa}}" />
           <label for="gpa">GPA</label>
     </div>
+    <div class="my-3 ms-5 ">
+    <label for="english_level">English Level</label>
+    <input type="range" min="1" max="5" name="english_level" value="{{ old('english_level', $user->english_level) }}">
+    <div class="row">
+        @error('english_level')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
+    </div>
+    <div class="my-3">
+  <label>When available:</label>
+  <div class="input-group form-floating" id="availability_date">
+    <input type="date" class="form-control w-auto" name="availability_date" placeholder="Date" value="{{$user->availability_date}}" />
+  </div>
+</div>
+</div>
     </div>
   </section>
-  <section class="profileSection studentSkills overflow-auto w-75 mx-auto">
+  <!-- <section class="profileSection studentSkills overflow-auto w-75 mx-auto">
     <h2 class="GeneralInfoHeader">Skills <i class="fa-solid fa-plus text-primary"></i>
     </h2>
     @foreach($skills as $skill)
@@ -125,76 +152,89 @@
       <p class="ps-2 w-25">{{$skill->name}}</p>
     </div>
 @endforeach
-    
-    <div class="skill d-inline">
-      <div class="input-group d-flex flex-row mb-3 w-50 h-75 skills">
-        <input type="text" class="form-control ms-5 w-25" name="other_skills" placeholder=" New skill" aria-label="Recipient's username" aria-describedby="button-addon2">
-        <button class="btn btn-outline-secondary" type="button" id="btnSkills"><i class="bi bi-plus-square fs-6" > </i></button>
+ <div class="my-3 ms-5">
+        <label for="new_skills">Add New skills. Please provide them separated by commas</label>
+        <input type="text" class="form-control" id="new_skills" name="new_skills" placeholder="new skills" />
+        <div class="row">
+        @error('new_skills')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
       </div>
+  </div>
 
-    </div>
-
-  </section>
-  <section class="profileSection studentSkills overflow-auto w-75 mx-auto ">
+  </section> -->
+  <!-- <section class="profileSection studentSkills overflow-auto w-75 mx-auto px-5">
     <h2 class="GeneralInfoHeader">Additional information</h2>
-    <div class="info">
-      <h3 class="fs-6 fw-bold">Preferred city for training:</h3>
-      <div class="input-group w-50  h-75 studentInfo">
-        <select class="form-select  text-secondary" id="multiselect" multiple="multiple">
-        @foreach($cities as $city)
-          <option value="{{$city->id}}">{{$city->name}}</option>
-        @endforeach
-        </select>
-       
+
+    <div class="dropdown mb-4">
+  <button class="form-select border py-3 text-start" type="button">Preferred company/ies :</button>
+  <div class="dropdown-content col mx-2" id="preferredCompany">
+    <label class="checkbox-label">
+      @foreach($companies as $company)
+      <div class="d-flex flex-row">
+      <input type="checkbox" value="{{$company->id}}" name="preferredCompany[]" class="form-check-input" @if($user->preferredCompanies->contains($company->id)) checked @endif/>
+        <p>{{$company->name}}</p>
       </div>
-      <!-- <div class="row">
-        <div class="selected-box">Jenin </div>
-        <div class="selected-box">Nablus </div>
-      </div> -->
-    </div>
-
-    <div class="info">
-      <h3 class="fs-6 fw-bold">preferred training field:</h3>
-
-      <div class="input-group w-50 studentInfo">
-      <select class="form-select  text-secondary" id="multiselect" multiple="multiple">
-        @foreach($trainingFields as $field)
-          <option value="{{$field->id}}">{{$field->name}}</option>
-        @endforeach
-        </select>
-       
+      @endforeach
+    </label>
+  </div>
+  <div class="row">
+    @error('preferredCompany')
+      <span class="text-danger">{{ $message }}</span>
+    @enderror
+  </div>
+</div>
+<div class="dropdown mb-4">
+  <button class="form-select border py-3 text-start" type="button">Preferred city/ies :</button>
+  <div class="dropdown-content col mx-2" id="preferredCity">
+    <label class="checkbox-label">
+      @foreach($cities as $city)
+      <div class="d-flex flex-row">
+        <input type="checkbox" value="{{$city->id}}" name="preferredCity[]" class="form-check-input" @if($user->cities->contains($city->id)) checked @endif/>
+        <p>{{$city->name}}</p>
       </div>
-      <!-- <div class="row">
-        <div class="selected-box">Web -front end </div>
-
-
-      </div> -->
-    </div>
-    <div class="info">
-      <h3 class="fs-6 fw-bold">when available:</h3>
-      <div class="input-group date w-50 mb-2" id="datepicker">
-        <input type="date" class="form-control " placeholder="Date">
+      @endforeach
+    </label>
+  </div>
+  <div class="row">
+    @error('preferredCity')
+      <span class="text-danger">{{ $message }}</span>
+    @enderror
+  </div>
+</div>
+<div class="dropdown">
+  <button class="form-select border py-3 text-start" type="button">Preferred training field :</button>
+  <div class="dropdown-content col mx-2" id="trainingFields">
+    <label class="checkbox-label">
+      @foreach($trainingFields as $trainingField)
+      <div class="d-flex flex-row">
+        <input type="checkbox" value="{{$trainingField->id}}" name="trainingFields[]" class="form-check-input" @if($user->preferredTrainingFields->contains($trainingField->id)) checked @endif/>
+        <p>{{$trainingField->name}}</p>
       </div>
-  </section>
+      @endforeach
+    </label>
+  </div>
+  <div class="row">
+    @error('trainingFields')
+      <span class="text-danger">{{ $message }}</span>
+    @enderror
+  </div>
+</div>
+<div class="mt-3">
+  <label for="other_fields">Add any other fields. Please provide them separated by commas</label>
+  <input type="text" class="form-control" id="other_fields" name="other_fields" placeholder="Other Fields" value="{{ old('other_fields') }}" />
+  <div class="row">
+    @error('other_fields')
+      <span class="text-danger">{{ $message }}</span>
+    @enderror
+  </div>
+</div>
+
+  </section> -->
   </div>
 
   <div class="text-center d-flex col-md-5 mx-auto ">
-    <a class="btn btn-primary bg-dark-blue text-light px-5 my-3 me-2 flex-grow-1" href="{{route('edit_student_profile',['user_id'=> $user->id])}}">Save</a>
+    <button class="btn btn-primary bg-dark-blue text-light px-5 my-3 me-2 flex-grow-1" type="submit">Save</button>
     <button class="btn btn-secondary text-light px-5 my-3 flex-grow-1" type="button">cancel</button>
   </div>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-
-<script>
-  // when click on button new input filed will appear (new skill)
-  $(document).ready(function() {
-    // Click event handler for the add-input button
-    $('.btnSkills').click(function() {
-      console.log('ss');
-      var skills = $(this).closest('.skills');
-      var newInput = '<input type="text" class="form-control ms-5 w-25" name="other_skills" placeholder=" New skill" aria-label="Recipient\'s username" aria-describedby="button-addon2">';
-      skills.after(newInput);
-    });
-  });
-</script>
-
 @endsection
