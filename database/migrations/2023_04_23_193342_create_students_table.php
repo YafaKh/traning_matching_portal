@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('third_name_en', 45) ;
             $table->string('last_name_ar', 45) ;
             $table->string('last_name_en', 45) ;
-            $table->boolean('gender')->nullable();
+            $table->boolean('gender')->nullable();//male:0, female:1
             $table->integer('passed_hours') ;
             $table->integer('load') ;
             $table->float('gpa') ;

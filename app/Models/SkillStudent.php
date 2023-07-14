@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
-class StudentSkill extends Model
+class SkillStudent extends Model
 {
     use HasFactory;
     protected $table ="skill_student";

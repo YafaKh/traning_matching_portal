@@ -22,7 +22,6 @@ return new class extends Migration
             $table->string('second_name', 45);
             $table->string('third_name', 45);
             $table->string('last_name', 45);
-            $table->string('image')->nullable();
             $table->boolean('active')->default(1);
 
             $table->unsignedBigInteger('university_id')->default(1);

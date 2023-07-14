@@ -28,7 +28,6 @@ class UniversityEmployeeFactory extends Factory
             'second_name' => $this->faker->lastName,
             'third_name' => $this->faker->lastName,
             'last_name' => $this->faker->lastName,
-            'image' => null,
             'university_employee_role_id'=> $this->faker->randomElement($university_role_ids)
         ];
     }

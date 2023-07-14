@@ -41,15 +41,6 @@
                 <strong>Error!</strong> {{ $message }}
             </div> 
         @enderror
-        <div class="form-group row mb-4 px-2">
-            Profile Image:
-            <input class="form-control ps-4  opacity-75" type="file" name="image"  id="formFile">
-            @error('image') 
-            <div class="alert alert-danger">
-                <strong>Error!</strong> {{ $message }}
-            </div> 
-            @enderror
-        </div>
         <input type="text" class="form-control mb-4 ps-4" id="phone" placeholder="Phone Number" name="phone" value="{{ old('phone')}}">
         @error('phone') 
             <div class="alert alert-danger">
