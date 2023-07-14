@@ -31,7 +31,6 @@ class SkillStudentFactory extends Factory
         return [
             'skill_id' => $this->faker->randomElement($skill_ids),
             'student_id' => $this->faker->randomElement($student_ids),
-
         ];
     }
 }

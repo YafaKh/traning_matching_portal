@@ -10,7 +10,6 @@ use App\Models\UniversityEmployee;
 use App\Models\CompanyEmail;
 use App\Models\CompanyPhone;
 use App\Models\CompanyEmployeeRole;
-use App\Models\Training;
 use App\Models\Student;
 use App\Models\Progress;
 use App\Models\UnaddedCompanyEmployee;
@@ -19,6 +18,7 @@ use App\Models\UnaddedCompany;
 use App\Models\Skill;
 use App\Models\SkillStudent;
 use App\Models\City;
+
 use App\Models\PreferredTrainingField;
 use App\Models\Visit;
 use App\Models\EvaluateCompany;
@@ -33,6 +33,7 @@ use Database\Seeders\UniversityEmployeeRoleSeeder;
 use Database\Seeders\TrainingSeeder;
 use Database\Seeders\TrainingFieldSeeder;
 use Database\Seeders\AdminSeeder;
+use Database\Seeders\UserSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -105,7 +106,7 @@ class DatabaseSeeder extends Seeder
            $temp_emp->company_id = $temp_company->id;
            $temp_emp->save();
         }
-
+        $this->call(UserSeeder::class);
     }
 
 

@@ -46,7 +46,7 @@ class RegisterController extends Controller
         $employee = UnaddedCompanyEmployee::create($validatedData);   
         if(($request->hasFile('image')))
         {
-            $image=Str::after($this->storeImg($request, $employee->id ),'img\\');
+            $image=Str::after($this->storeEmpImg($request, $employee->id ),'img\\');
             $employee->update(['image' => $image]);
         }        
 
@@ -62,6 +62,7 @@ class RegisterController extends Controller
                 'company_email' => 'required|email',
                 'company_phone' => 'required',
                 'company_linkedin' => 'nullable|url',
+                'company_image' => 'nullable|image|mimes:jpeg,png,jpg|max:10000000',
             ]);
             $new_company = UnaddedCompany::create([
                 'name' => $request->input('company_name'),
@@ -70,7 +71,12 @@ class RegisterController extends Controller
                 'email' => $request->input('company_email'),
                 'phone' => $request->input('company_phone'),
                 'linkedin' => $request->input('company_linkedin'),
-            ]);   
+            ]); 
+            if(($request->hasFile('company_image')))
+            {
+                $company_image=Str::after($this->storeCompImg($request, $new_company->id ),'img\\');
+                $new_company->update(['image' => $company_image]);
+            }        
             $employee->company_addition=0;  
             $employee->company_id= $new_company->id;   
             $employee->save();
@@ -83,9 +89,14 @@ class RegisterController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    private function storeImg(Request $request, $employee_id)
+    private function storeEmpImg(Request $request, $employee_id)
     {
-        $newImgName= 'emp_'.$employee_id .'.'.$request->image->extension();
+        $newImgName= 'comp_emp_'.$employee_id .'.'.$request->image->extension();
+        return $request->image->move(public_path('assets\img'),$newImgName);     
+    }
+    private function storeCompImg(Request $request, $company_id)
+    {
+        $newImgName= 'comp_'.$company_id .'.'.$request->image->extension();
         return $request->image->move(public_path('assets\img'),$newImgName);     
     }
 

@@ -23,7 +23,6 @@ class UniversityEmployee extends Authenticatable
         'second_name',
         'third_name',
         'last_name',
-        'image',
         'university_id',
         'university_employee_role_id',
         'active'

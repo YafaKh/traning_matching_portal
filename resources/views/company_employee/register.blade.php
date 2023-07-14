@@ -110,6 +110,13 @@
         <strong>Error!</strong> {{ $message }}
     </div> 
     @enderror
+    Profile image:
+    <input class="form-control ps-4  opacity-75" type="file" name="company_image"  id="formFile"  placeholder="Company Profile Image">
+    @error('company_image') 
+    <div class="alert alert-danger">
+        <strong>Error!</strong> {{ $message }}
+    </div> 
+    @enderror
     </div>
   </div>
   
