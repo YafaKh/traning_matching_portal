@@ -124,9 +124,24 @@
           <input type="text" class="form-control" id="gpa" name="gpa" value="{{$user->gpa}}" />
           <label for="gpa">GPA</label>
     </div>
+    <div class="my-3 ms-5 ">
+    <label for="english_level">English Level</label>
+    <input type="range" min="1" max="5" name="english_level" value="{{ old('english_level', $user->english_level) }}">
+    <div class="row">
+        @error('english_level')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
+    </div>
+    <div class="my-3">
+  <label>When available:</label>
+  <div class="input-group form-floating" id="availability_date">
+    <input type="date" class="form-control w-auto" name="availability_date" placeholder="Date" value="{{$user->availability_date}}" />
+  </div>
+</div>
+</div>
     </div>
   </section>
-  <section class="profileSection studentSkills overflow-auto w-75 mx-auto">
+  <!-- <section class="profileSection studentSkills overflow-auto w-75 mx-auto">
     <h2 class="GeneralInfoHeader">Skills <i class="fa-solid fa-plus text-primary"></i>
     </h2>
     @foreach($skills as $skill)
@@ -146,17 +161,9 @@
         @enderror
       </div>
   </div>
-  <div class="my-3 ms-5 ">
-    <label for="english_level">English Level</label>
-    <input type="range" min="1" max="5" name="english_level" value="{{ old('english_level', $user->english_level) }}">
-    <div class="row">
-        @error('english_level')
-            <span class="text-danger">{{ $message }}</span>
-        @enderror
-    </div>
-</div>
-  </section>
-  <section class="profileSection studentSkills overflow-auto w-75 mx-auto px-5">
+
+  </section> -->
+  <!-- <section class="profileSection studentSkills overflow-auto w-75 mx-auto px-5">
     <h2 class="GeneralInfoHeader">Additional information</h2>
 
     <div class="dropdown mb-4">
@@ -222,13 +229,8 @@
     @enderror
   </div>
 </div>
-<div class="my-3">
-  <label>When available:</label>
-  <div class="input-group form-floating" id="availability_date">
-    <input type="date" class="form-control" name="availability_date" placeholder="Date" value="{{$user->availability_date}}" />
-  </div>
-</div>
-  </section>
+
+  </section> -->
   </div>
 
   <div class="text-center d-flex col-md-5 mx-auto ">

@@ -66,65 +66,65 @@ class EditStudentProfileController extends Controller
             $image=Str::after($this->storeImg($request, $student->id ),'img\\');
             $student->image = $image;
             $student->save();
-        }
-        // Handle skills
-        $newSkills = [];
+         }
+        // // Handle skills
+        // $newSkills = [];
 
-        if ($request->filled('new_skills')) {
-            $new_skills = explode(',', $request->input('new_skills'));
+        // if ($request->filled('new_skills')) {
+        //     $new_skills = explode(',', $request->input('new_skills'));
 
-            foreach ($new_skills as $skillName) {
-                $skillName = trim($skillName);
+        //     foreach ($new_skills as $skillName) {
+        //         $skillName = trim($skillName);
 
-                if (!empty($skillName)) {
-                    $skill = Skill::firstOrCreate(['name' => $skillName]);
-                    $newSkills[] = $skill;
-                }
-            }
-        }
+        //         if (!empty($skillName)) {
+        //             $skill = Skill::firstOrCreate(['name' => $skillName]);
+        //             $newSkills[] = $skill;
+        //         }
+        //     }
+        // }
 
-        $student->skills()->attach($newSkills);
-         // Handle preferred companies
-        $selectedPreferredCompanies = $request->input('preferredCompany', []);
-        $student->preferredCompanies()->attach($selectedPreferredCompanies);
+        // $student->skills()->attach($newSkills);
+        //  // Handle preferred companies
+        // $selectedPreferredCompanies = $request->input('preferredCompany', []);
+        // $student->preferredCompanies()->attach($selectedPreferredCompanies);
 
-        // Handle preferred cities
-        $selectedPreferredCities = $request->input('preferredCity', []);
-        $student->cities()->attach($selectedPreferredCities);
+        // // Handle preferred cities
+        // $selectedPreferredCities = $request->input('preferredCity', []);
+        // $student->cities()->attach($selectedPreferredCities);
 
-        // Handle training fields
-        $selectedTrainingFields = $request->input('trainingFields', []);
-        $newTrainingFields = [];
+        // // Handle training fields
+        // $selectedTrainingFields = $request->input('trainingFields', []);
+        // $newTrainingFields = [];
 
-        if ($request->filled('other_fields')) {
-            $otherFields = explode(',', $request->input('other_fields'));
+        // if ($request->filled('other_fields')) {
+        //     $otherFields = explode(',', $request->input('other_fields'));
 
-            foreach ($otherFields as $fieldName) {
-                $fieldName = trim($fieldName);
+        //     foreach ($otherFields as $fieldName) {
+        //         $fieldName = trim($fieldName);
 
-                if (!empty($fieldName)) {
-                    $field = PreferredTrainingField::firstOrCreate(['name' => $fieldName]);
-                    $selectedTrainingFields[] = $field->id;
-                    $newTrainingFields[] = $field;
-                }
-            }
-        }
+        //         if (!empty($fieldName)) {
+        //             $field = PreferredTrainingField::firstOrCreate(['name' => $fieldName]);
+        //             $selectedTrainingFields[] = $field->id;
+        //             $newTrainingFields[] = $field;
+        //         }
+        //     }
+        // }
 
 
-        // Update other fields
-        $student->preferredTrainingFields()->attach($selectedTrainingFields);
+        // // Update other fields
+        // $student->preferredTrainingFields()->attach($selectedTrainingFields);
 
-        $student->availability_date = $request->input('availability_date');
+        // $student->availability_date = $request->input('availability_date');
       
-        // Save the updated data
-        $student->save();
+        // // Save the updated data
+      //  $student->save();
 
         return redirect()->route('student_profile', ['user_id' => $user_id]);
     } 
     private function storeImg(Request $request, $student_id)
-        {
-            $newImgName= 'stu_'.$student_id .'.'.$request->image->extension();
-            return $request->image->move(public_path('assets\img'),$newImgName);     
-        } 
+    {
+        $newImgName= 'stu_'.$student_id .'.'.$request->image->extension();
+        return $request->image->move(public_path('assets\img'),$newImgName);     
+    } 
 }
    
