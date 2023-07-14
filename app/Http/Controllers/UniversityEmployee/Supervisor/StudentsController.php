@@ -99,7 +99,7 @@ class StudentsController extends Controller
     public function search($user_id){
         $search_text = $_GET['search']; // name of the search input
 
-        $user = UniversityEmployee::whereIn('University_employee_role_id', [2, 3])->find($user_id); // Assuming role_id is an attribute on the UniversityEmployee model
+        $user = UniversityEmployee::whereIn('University_employee_role_id', [2, 3])->find($user_id); 
         
         $allStudents = $user->students()->where(function ($query) use ($search_text) {
             $query->where('first_name_en', 'LIKE', '%' . $search_text . '%')

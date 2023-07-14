@@ -7,7 +7,7 @@ use App\Models\Specialization;
 use App\Models\Company;
 use App\Models\UniversityEmployee;
 use App\Models\Progress;
-
+use App\Models\CompanyBranch;
 use Illuminate\Http\Request;
 
 class ListController extends Controller
@@ -39,7 +39,69 @@ class ListController extends Controller
         'companies'=>$companies,
         'supervisors'=>$supervisors,]);
     }
-
+    // filtering list of student
+    public function filterStudents(Request $request, $user_id)
+    {
+        $query = Student::query();
+    
+        if ($request->ajax()) {
+            $registrationState = $request->registration_state == 'true'; // Convert the string value to a boolean
+    
+            $students = $query
+                ->where('university_employee_id', $user_id)
+                ->where('registration_state', $registrationState) // Filter by registration state
+                ->get();
+    
+            // Prepare the response data
+            $responseStudents = $students->map(function ($student) {
+                return [
+                    'id' => $student->id,
+                    'student_num' => $student->student_num,
+                    'first_name_en' => $student->first_name_en,
+                    'second_name_en' => $student->second_name_en,
+                    'third_name_en' => $student->third_name_en,
+                    'last_name_en' => $student->last_name_en,
+                    'university_employee_id' => $student->university_employee_id,
+                    'company_name' => $student->training->branch->company ? $student->training->branch->company->name : '',
+                    'branch_name' => $student->training->branch ? $student->training->branch->address : '',
+                    'university_employee_name' => $student->employee ? $student->employee->name : '',
+                ];
+            });
+    
+            return response()->json(['students' => $responseStudents]);
+        }
+    
+        $students = $query
+            ->where('university_employee_id', $user_id)
+            ->get();
+    
+        return view('university_employee.coordinator.students.filtered-students', compact('students', 'user_id'));
+    }
+    
+    // searching
+    public function search($user_id)
+    {
+        $search_text = $_GET['search']; // name of the search input
+    
+        $user = UniversityEmployee::whereIn('University_employee_role_id', [2, 3])->find($user_id);
+        $students = $user->students()->where('first_name_en', 'LIKE', '%' . $search_text . '%');
+    
+        // $students = $user->students()->where(function ($query) use ($search_text) {
+        //     $query->where('first_name_en', 'LIKE', '%' . $search_text . '%')
+        //         ->orWhere('last_name_en', 'LIKE', '%' . $search_text . '%')
+        //         ->orWhere('student_num', 'LIKE', '%' . $search_text . '%');
+        // })->get();
+    
+        $specializations = Specialization::all();
+        $companies = Company::all();
+        $branches = CompanyBranch::all();
+        $supervisors = UniversityEmployee::whereIn('University_employee_role_id', [2, 3])->get();
+    
+        return view('university_employee.coordinator.students.search', compact('students', 'user', 'specializations', 'companies', 'branches', 'supervisors'));
+    }
+    
+    
+    
      /**
      * Remove the specified student from storage.
      */

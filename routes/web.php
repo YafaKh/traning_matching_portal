@@ -87,6 +87,8 @@ Route::prefix('/coordinator/{user_id}')
 ->group(function(){
     Route::prefix('/students')->group(function(){
         Route::get('/', [CooListController::class,'index'])->name('coordinator_list_students');
+        Route::get('/filter-students', [CooListController::class, 'filterStudents'])->name('filtered_students.coordinator');
+        Route::get('/search', [CooListController::class, 'search'])->name('search.coordinator');
         Route::post('/update_register_list', [CooListController::class,'update_register_list'])->name('update_register_list');
         Route::get('/destroy/{student_id}', [CooListController::class,'destroy'])->name('coordinator_delete_student');
         Route::get('/delete-selected-students', [CooListController::class, 'deleteSelectedStudents'])->name('delete_selected_students');

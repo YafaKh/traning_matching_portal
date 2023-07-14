@@ -54,7 +54,8 @@ class Student extends Authenticatable
     'evaluate_student_id',
     'evaluate_company_id',
     'city_id', 
-    'active'];
+    'active',
+    'registered'];
     protected $hidden = ['created_at','updated_at'];
 //     public $sortable = ['student_num',
 //     'first_name_ar',

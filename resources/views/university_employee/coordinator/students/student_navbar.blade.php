@@ -21,8 +21,9 @@
         </li>
       </ul>
 
-      <form class="input-group w-auto h-50" role="searprimarych">
-        <input class="form-control txt-sm h-50 border border-secondary" type="search" placeholder="Search" aria-label="Search">
+      <form class="input-group w-auto h-50" role="searprimarych" type="get" action="{{route('search.coordinator',['user_id' => $user->id])}}">
+        <input class="form-control txt-sm h-50 border border-secondary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip"
+        data-bs-title="Search by the student's number or name" name="search" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-sm bg-sand btn-outline-secondary py-0" type="submit">
         <i class="bi bi-search txt-xsm"></i>
         </button>
@@ -30,3 +31,83 @@
     </div>
   </div>
 </nav>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+<script>
+// to enable tooltip
+  const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+  const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+
+  function search(user_id) {
+    var search_text = document.getElementById('search_input').value;
+    window.location.href = '{{ route('search.coordinator', ['user_id' => ':user_id']) }}'.replace(':user_id', user_id) + '?search=' + search_text;
+  }
+
+  // get students according to their registration state
+  $(document).ready(function() {
+    // Add change event listener to the dropdown
+    $('#registration_state').on('change', function() {
+      var selectedRegistration_state = $(this).val(); // Get the selected value
+      // Send AJAX request to fetch filtered students
+    //   console.log(registration_state);
+      $.ajax({
+        url: '{{ route('filtered_students.coordinator', ['user_id' => $user->id]) }}',
+        type: 'GET',
+        data: { registration_state: selectedRegistration_state },
+        success: function(data) {
+          // Update the student list with the filtered results
+          var students = data.students;
+          console.log(students);
+          var html = '';
+          if (students.length > 0) {
+            for (let i = 0; i < students.length; i++) {
+                var profileUrl = "{{ route('student_visits', ['user_id' => ':user_id', 'student_id' => ':student_id']) }}";
+              ProfileUrl = ProfileUrl.replace(':user_id', students[i]['university_employee_id'])
+                .replace(':student_id', students[i]['id']);
+              var visitsUrl = "{{ route('student_visits', ['user_id' => ':user_id', 'student_id' => ':student_id']) }}";
+              visitsUrl = visitsUrl.replace(':user_id', students[i]['university_employee_id'])
+                .replace(':student_id', students[i]['id']);
+              var progressUrl = "{{ route('coordinator_student_progress', ['user_id' => ':user_id', 'student_id' => ':student_id']) }}";
+              progressUrl = progressUrl.replace(':user_id', students[i]['university_employee_id'])
+                .replace(':student_id', students[i]['id']);
+              var studentEvaluationUrl = "{{ route('coordinator_student_Evaluation', ['user_id' => ':user_id', 'student_id' => ':student_id']) }}";
+              studentEvaluationUrl = studentEvaluationUrl.replace(':user_id', students[i]['university_employee_id'])
+                .replace(':student_id', students[i]['id']);
+              var companyEvaluationUrl = "{{ route('coordinator_company_Evaluation', ['user_id' => ':user_id', 'student_id' => ':student_id']) }}";
+              companyEvaluationUrl = companyEvaluationUrl.replace(':user_id', students[i]['university_employee_id'])
+                .replace(':student_id', students[i]['id']);
+              html += '<tr>\
+                        <td>' + students[i]['student_num'] + '</td>\
+                        <td><a class="dropdown-item" href="' + profileUrl + '">' + students[i]['first_name_en'] + ' ' + students[i]['last_name_en'] + '</a></td>\
+                        <td>' + students[i]['company_name'] + '-' + students[i]['branch_name'] + '</td>\
+                        <td>' + students[i]['university_employee_name'] + '</td>\
+                        <td>\
+                          <div class="dropdown">\
+                            <a class="dropdown-toggle text-dark" role="button" data-bs-toggle="dropdown" aria-expanded="false">Go to student\'s</a>\
+                            <ul class="dropdown-menu">\
+                              <li><a class="dropdown-item" href="' + visitsUrl + '">Visit forms</a></li>\
+                              <li><a class="dropdown-item" href="' + progressUrl + '">Progress</a></li>\
+                              <li><a class="dropdown-item" href="' + studentEvaluationUrl + '">Evaluation</a></li>\
+                              <li><a class="dropdown-item" href="' + companyEvaluationUrl + '">Company evaluation</a></li>\
+                            </ul>\
+                          </div>\
+                        </td>\
+                      </tr>';
+            }
+          } else {
+            html += '<tr>\
+                    <td>No Data Found</td>\
+                    <td></td>\
+                    <td></td>\
+                    <td></td>\
+                    <td></td>\
+                    <td></td>\
+                    <td></td>\
+                  </tr>';
+          }
+          $("#studentList").html(html);
+        },
+      });
+    });
+  });
+</script>

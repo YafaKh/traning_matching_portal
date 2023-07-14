@@ -17,4 +17,5 @@ class StudentProfileController extends Controller
             
           return view('student.profile',compact('user', 'student'));  
     }
+  
 }

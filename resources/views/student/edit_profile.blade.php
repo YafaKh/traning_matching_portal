@@ -17,7 +17,7 @@
   <div class="form-group row">
     <label class="text-light mt-3" for="prev_img">Your Profile Image</label>
     <div class="d-flex flex-row">
-        <img src="{{ asset('assets/img/' . $user['image']) }}" class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32">
+        <img src="{{ asset('assets/img/'. $user['image']) }}" class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32">
         <input id="prev_img" type="text" name="prev_img" class="form-control ps-4 opacity-75" value = "{{$user['image']}}" disabled>
     </div>
   </div>
@@ -120,16 +120,16 @@
     @foreach($skills as $skill)
 
     <div class="skill">
-      <a class="ms-5" href="#" role="button"><i class="fa-solid fa-trash-can text-danger"></i>
+      <a class="ms-5" href="#" role="button" id="addSkill"><i class="fa-solid fa-trash-can text-danger"></i>
       </a>
       <p class="ps-2 w-25">{{$skill->name}}</p>
     </div>
 @endforeach
     
     <div class="skill d-inline">
-      <div class="input-group d-flex flex-row mb-3 w-50 h-75">
-        <input type="text" class="form-control ms-5 w-25" placeholder=" New skill" aria-label="Recipient's username" aria-describedby="button-addon2">
-        <a class="btn btn-outline-secondary" type="button" id="button-addon2"><i class="bi bi-plus-square fs-6" > </i></a>
+      <div class="input-group d-flex flex-row mb-3 w-50 h-75 skills">
+        <input type="text" class="form-control ms-5 w-25" name="other_skills" placeholder=" New skill" aria-label="Recipient's username" aria-describedby="button-addon2">
+        <button class="btn btn-outline-secondary" type="button" id="btnSkills"><i class="bi bi-plus-square fs-6" > </i></button>
       </div>
 
     </div>
@@ -182,4 +182,19 @@
     <a class="btn btn-primary bg-dark-blue text-light px-5 my-3 me-2 flex-grow-1" href="{{route('edit_student_profile',['user_id'=> $user->id])}}">Save</a>
     <button class="btn btn-secondary text-light px-5 my-3 flex-grow-1" type="button">cancel</button>
   </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+<script>
+  // when click on button new input filed will appear (new skill)
+  $(document).ready(function() {
+    // Click event handler for the add-input button
+    $('.btnSkills').click(function() {
+      console.log('ss');
+      var skills = $(this).closest('.skills');
+      var newInput = '<input type="text" class="form-control ms-5 w-25" name="other_skills" placeholder=" New skill" aria-label="Recipient\'s username" aria-describedby="button-addon2">';
+      skills.after(newInput);
+    });
+  });
+</script>
+
 @endsection

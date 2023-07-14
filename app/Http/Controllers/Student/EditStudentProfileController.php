@@ -30,80 +30,86 @@ class EditStudentProfileController extends Controller
     public function update(Request $request,$user_id)
     {
         $student = Student::find($user_id);
-        $request->validate([
-            'name' => 'required|max:45',
+        $validated = $request->validate([
+            'first_name_en' => 'required|string',
+            'second_name_en' => 'required|string',
+            'third_name_en' =>'required|string',
+            'last_name_en' => 'required|string',
             'gender' => 'required|boolean',
-            'passed_hours' => 'nullable|integer',
-            'gpa' => 'nullable',
-            'load' => 'required|integer|min:0|max:18',
+            'passed_hours' => 'required|integer',
+            'gpa' => 'required',
             'email' => 'required|email|unique:students',
             'linkedin' => 'required|url',
             'english_level' => 'required|min:1|max:5',
             'skills' => 'array',
+            'skills.*' => 'string',
+            'other_skills' => 'nullable|string',
             'availability_date' => 'required|date',
-            'connected_with_a_company' => 'required|boolean',
-            'phone' => 'required|string|regex:/^+[0-9]{13}$/',//+972 123 456 789
-            'work_experience' => 'nullable|string|max:65535',
+            'phone' => 'required|string|regex:/^+[0-9]{13}$/',
             'image' => 'nullable|image|mimes:jpeg,png,jpg|max:10000000',
-
+            'work_experience' => 'nullable|string|max:65535',
+            'city' => 'required',
+            'specialization' => 'required',
+            'preferrdCities' => 'nullable|array',
+            'preferrdCities.*' => 'nullable',
+            'preferrdTrainingFiled' => 'nullable|array',
+            'preferrdTrainingFiled.*' => 'nullable',
         ]);
-        // Update the student data based on the form inputs
-        // $student->first_name_en = $request->input('first_name_en');
-        // $student->second_name_en = $request->input('second_name_en');
-        // $student->third_name_en = $request->input('third_name_en');
-        // $student->last_name_en = $request->input('last_name_en');
-        $student->name = $request->input('name');
-        $student->gender = $request->input('gender');
-        $student->passed_hours = $request->input('passed_hours');
-        $student->gpa = $request->input('gpa');
-        $student->load = $request->input('load');
-        $student->email = $request->input('email');
-        $student->linkedin = $request->input('linkedin');
-        $student->english_level = $request->input('english_level');
-        $student->availability_date = $request->input('availability_date');
-        $student->connected_with_a_company = $request->input('connected_with_a_company');
-        $student->phone = $request->input('phone');
-        $student->image = $request->input('image');
-        $student->work_experience = $request->input('work_experience');
+     // Create the student record
+     $student = Student::create([
+        'first_name_en' => $validated['first_name_en'],
+        'second_name_en' => $validated['second_name_en'],
+        'third_name_en' => $validated['third_name_en'],
+        'last_name_en' => $validated['last_name_en'],
+        'gender' => $validated['gender'],
+        'passed_hours' => $validated['passed_hours'],
+        'gpa' => $validated['gpa'],
+        'email' => $validated['email'],
+        'linkedin' => $validated['linkedin'],
+        'english_level' => $validated['english_level'],
+        'availability_date' => $validated['availability_date'],
+        'phone' => $validated['phone'],
+        'work_experience' => $validated['work_experience'],
+        'city_id' => $validated['city'],
+        'specialization_id' => $validated['specialization'],
+        
+    ]);
+        // Store the profile image if provided
+        if ($request->hasFile('image')) {
+            $imagePath = $this->storeImage($request->file('image'), $student->id);
+            $student->image = $imagePath;
+            $student->save();
+        }
 
-        // $student->specialization = $request->input('specialization');
+        // // Handle skills
+        // $selectedSkills = $request->input('skills', []);
+        // $newSkills = [];
+    
+        // if ($request->filled('other_skills')) {
+        //     $otherSkills = explode(',', $request->input('other_skills'));
+    
+        //     foreach ($otherSkills as $skillName) {
+        //         $skillName = trim($skillName);
+    
+        //         if (!empty($skillName)) {
+        //             $skill = Skill::firstOrCreate(['name' => $skillName]);
+        //             $selectedSkills[] = $skill->id;
+        //             $newSkills[] = $skill;
+        //         }
+        //     }
+        // }
+        $student->skills()->attach($selectedSkills);
+
+      
         // Save the updated data
         $student->save();
 
         return redirect()->route('student_profile', ['user_id' => $user_id]);
-    }
-    // .............
+    } 
+    private function storeImg(Request $request, $student_id)
+        {
+            $newImgName= 'stu_'.$student_id .'.'.$request->image->extension();
+            return $request->image->move(public_path('assets\img'),$newImgName);     
+        } 
 }
-    // public function edit($user_id, $trainee_id, $progress_id)
-//     {
-//         $user = CompanyEmployee::findOrFail($user_id);
-//         $trainee = Student::findOrFail($trainee_id);
-//         $progress = Progress::findOrFail($progress_id);
-//         $trainingID =$trainee->training_id;//ex : 8 -get student training
-//         $allTrainings=$user->trainings()->where('id', $trainingID)->get();
-
-//         foreach ($allTrainings as $training) {
-        
-//         return view('company_employee.trainer.trainees.edit_progress', compact('user', 'trainee', 'progress','training'));
-//     }
-// }
-//     public function update(Request $request, $user_id, $trainee_id, $progress_id)
-// {
-//     $request->validate([
-//         'week' => 'required|string',
-//         'end_date' => 'required|date',
-//         'passed_hours' => 'required|integer',
-//         'absences_days' => 'required|integer',
-//         'note' => 'nullable|max:155|string',
-//     ]);
-
-//     Progress::where('id',$progress_id)->update([
-//         'week' =>$request->week,
-//         'end_date' =>$request->end_date,
-//         'passed_hours' =>$request->passed_hours,
-//         'absences_days' =>$request->absences_days,
-//         'note' =>$request->note,
-//     ]);
-
-//     return redirect()->route('fill_traniee_progress', ['user_id' => $user_id, 'trainee_id' => $trainee_id]);
-//     }
+   
