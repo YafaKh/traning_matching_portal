@@ -67,6 +67,8 @@
                     @endforeach
                 </tbody>
                 </table>
+                <a class="btn btn-secondary" href="{{route('hr_list_trainees',['user_id' => $user->id])}}">Back</a>
+
             </div>
         </div>
     </div>
@@ -89,6 +91,7 @@
                 @endforeach
             </tbody>
             </table>
+
         </div>
         <lable class="form-label ms-3 text-secondary fs-6">waiting for approval :</lable>
         <div class="table-responsive ps-2" style="max-height: 300px;">
@@ -108,7 +111,10 @@
             </tbody>
             </table>
         </div>
+
     </div>
+
+
 </div>
 <script>
     // to enable tooltip

@@ -21,7 +21,6 @@
             <button class="btn btn-sm bg-sand btn-outline-secondary py-0" type="submit">
             <i class="bi bi-search txt-xsm"></i>
             </button>
-</form>
     </div>
     <div class="table-responsive mt-4">
         <table class="table table-hover" >
@@ -72,10 +71,13 @@
             </tbody>
         </table>
     </div>
+    <a class="btn btn-secondary" href="{{route('coordinator_list_companies',['user_id' => $user->id])}}">Back</a>
+
 </div>
-<script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
 <script>
-    // to enable tooltip
+  // to enable tooltip
   const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
   const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 

@@ -40,7 +40,8 @@ class AssignSupervisorsController extends Controller
             'unassigned_students' => $unassigned_students,
         ]);
     }
-
+    
+   
     /** Assign this supervisor for this student/s
     */
     public function add(Request $request, $user_id)

@@ -26,7 +26,20 @@ class UniversityEmployeeController extends Controller
         ['user' => $user,
         'university_employees'=>$university_employees]);
     }
+    public function search($user_id)
+    {
+        $search_text = $_GET['search']; // name of the search input
     
+        $user = UniversityEmployee::whereIn('University_employee_role_id', [1, 3])->find($user_id);
+    
+        $university_employees = UniversityEmployee::where(function ($query) use ($search_text) {
+            $query->where('employee_num', 'LIKE', '%' . $search_text . '%')
+                ->orWhere('first_name', 'LIKE', '%' . $search_text . '%')
+                ->orWhere('last_name', 'LIKE', '%' . $search_text . '%');
+        })->paginate(15);
+        
+        return view('university_employee.coordinator.university_employees.searchForEmployee', compact('university_employees', 'user'));
+    }
     /**
      * Show the form for adding a new employee.
      *

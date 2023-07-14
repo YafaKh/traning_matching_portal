@@ -88,13 +88,14 @@ Route::prefix('/coordinator/{user_id}')
     Route::prefix('/students')->group(function(){
         Route::get('/', [CooListController::class,'index'])->name('coordinator_list_students');
         Route::get('/filter-students', [CooListController::class, 'filterStudents'])->name('filtered_students.coordinator');
-        Route::get('/search', [CooListController::class, 'search'])->name('search.coordinator');
+        Route::get('/search', [CooListController::class, 'search'])->name('search.coordinator.students');
         Route::post('/update_register_list', [CooListController::class,'update_register_list'])->name('update_register_list');
         Route::get('/destroy/{student_id}', [CooListController::class,'destroy'])->name('coordinator_delete_student');
         Route::get('/delete-selected-students', [CooListController::class, 'deleteSelectedStudents'])->name('delete_selected_students');
         Route::get('/students_companies_approval', [StudentCompanyApprovalController::class, 'index'])->name('coordinator_students_companies_approval');
         Route::get('/student_company_approve/{not_approved_student_company}', [StudentCompanyApprovalController::class, 'approve'])->name('coordinator_student_company_approve');
         Route::get('/assign_supervisors', [AssignSupervisorsController::class, 'index'])->name('coordinator_manage_supervisors');
+        Route::get('/assign_supervisors/search', [AssignSupervisorsController::class, 'search'])->name('search.coordinator.assign_Supervisors');
         Route::post('/assign_supervisor', [AssignSupervisorsController::class,'add'])->name('coordinator_assign_supervisor');
         Route::get('/unassign_supervisor/{student_id}', [AssignSupervisorsController::class,'delete'])->name('coordinator_unassign_supervisor');
      });
@@ -105,6 +106,7 @@ Route::prefix('/coordinator/{user_id}')
 
     Route::prefix('/university_employees')->group(function(){
         Route::get('/', [CooUniversityEmployeeController::class, 'index'])->name('coordinator_list_employees');
+        Route::get('/search', [CooUniversityEmployeeController::class, 'search'])->name('search.coordinator.universityEmployee');
         Route::get('/create', [CooUniversityEmployeeController::class,'create'])->name('coordinator_add_employee');
         Route::post('/store', [CooUniversityEmployeeController::class,'store'])->name('coordinator_stroe_employee');
         Route::get('/delete/{employee_id}', [CooUniversityEmployeeController::class, 'destroy'])->name('coordinator_delete_employee');
@@ -112,6 +114,7 @@ Route::prefix('/coordinator/{user_id}')
     });
     
     Route::get('/companies',  [CooCompaniesController::class, 'index'])->name('coordinator_list_companies');   
+    Route::get('/companies/search',  [CooCompaniesController::class, 'search'])->name('search.coordinator.company');   
     Route::get('/company{company_id}_profile', [CooCompaniesController::class, 'show_company_profile'])->name('coordinator_company_profile');
 });
 
@@ -151,6 +154,8 @@ Route::prefix('hr/{user_id}')
 
     Route::prefix('/trainees')->group(function(){
         Route::get('/', [HrListController::class, 'index'])->name('hr_list_trainees');
+        Route::get('/search', [HrListController::class, 'search'])->name('search.hr_list_trainees');
+
         Route::get('/university_students',[UniversityStudentsController::class,'index'])->name('hr_university_students');
         Route::get('/add_trainee/{student_id}', [UniversityStudentsController::class, 'add'])->name('hr_add_trainee');
         Route::get('/add-selected-trainees}', [UniversityStudentsController::class, 'addSelectedTrainees'])->name('hr_add_selected_trainees');

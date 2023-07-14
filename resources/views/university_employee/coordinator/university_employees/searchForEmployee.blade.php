@@ -86,12 +86,14 @@
         </tbody>
         </table>
     </div>
+    <a class="btn btn-secondary" href="{{route('coordinator_list_employees',['user_id' => $user->id])}}">Back</a>
+
 </div>
 <script>
     // to enable tooltip
   const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
   const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
-// 
+
     function enableDropdown(employeeId) {
         document.getElementById("roleDropdown_" + employeeId).disabled = false;
     }

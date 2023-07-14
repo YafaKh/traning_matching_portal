@@ -25,7 +25,20 @@ class CompaniesController extends Controller
         'companies'=>$companies,
         'cities' => $cities]);
     }
+    public function search($user_id)
+    {
+        $search_text = $_GET['search']; // name of the search input
+    
+        $user = UniversityEmployee::whereIn('University_employee_role_id', [1, 3])->find($user_id);
+    
+        $companies = Company::where(function ($query) use ($search_text) {
+            $query->where('name', 'LIKE', '%' . $search_text . '%');
+        })->paginate(15);
         
+        $cities = City::all();
+
+        return view('university_employee.coordinator.searchForCompany', compact('companies', 'user','cities'));
+    }
     /**
      * Method show_company_profile
      *

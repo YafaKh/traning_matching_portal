@@ -83,21 +83,20 @@ class ListController extends Controller
     {
         $search_text = $_GET['search']; // name of the search input
     
-        $user = UniversityEmployee::whereIn('University_employee_role_id', [2, 3])->find($user_id);
-        $students = $user->students()->where('first_name_en', 'LIKE', '%' . $search_text . '%');
+        $user = UniversityEmployee::whereIn('University_employee_role_id', [1, 3])->find($user_id);
     
-        // $students = $user->students()->where(function ($query) use ($search_text) {
-        //     $query->where('first_name_en', 'LIKE', '%' . $search_text . '%')
-        //         ->orWhere('last_name_en', 'LIKE', '%' . $search_text . '%')
-        //         ->orWhere('student_num', 'LIKE', '%' . $search_text . '%');
-        // })->get();
+        $students = Student::where(function ($query) use ($search_text) {
+            $query->where('first_name_en', 'LIKE', '%' . $search_text . '%')
+                ->orWhere('last_name_en', 'LIKE', '%' . $search_text . '%')
+                ->orWhere('student_num', 'LIKE', '%' . $search_text . '%');
+        })->paginate(15);
     
         $specializations = Specialization::all();
         $companies = Company::all();
         $branches = CompanyBranch::all();
         $supervisors = UniversityEmployee::whereIn('University_employee_role_id', [2, 3])->get();
     
-        return view('university_employee.coordinator.students.search', compact('students', 'user', 'specializations', 'companies', 'branches', 'supervisors'));
+        return view('university_employee.coordinator.students.searchForStudent', compact('students', 'user', 'specializations', 'companies', 'branches', 'supervisors'));
     }
     
     

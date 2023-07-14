@@ -16,9 +16,9 @@
 <form method="POST" class="w-auto" action="{{ route('coordinator_assign_supervisor', ['user_id'=>$user->id]) }}" id="assign_trainee_form">
     @csrf
     {{--filters--}}            
-    <div class="d-flex flex-md-row flex-column mt-4 col-md-6">
-        <label class="form-label me-3 mt-1 txt-sm text-nowrap">Choose a supervisor to assign students to: </label>
-        <div class="w-auto">
+    <div class="d-flex flex-md-row flex-column mt-4 col-md-12">
+        <label class="form-label me-3 mt-1 txt-sm text-nowrap col-md-3">Choose a supervisor to assign students to: </label>
+        <div class="w-auto col-md-4 me-5">
             <select class="form-select txt-sm " id="supervisor-filter" name="supervisor">
                 <option value=''>Supervisor</option>
                 @foreach($supervisors as $supervisor)
@@ -31,7 +31,14 @@
                 </div>
             @enderror
         </div>
-    </div>        
+        <form class="input-group mb-2 h-50 flex-grow-1 " role="searprimarych">
+            <input class="form-control txt-sm border border-secondary" id="search" type="search" placeholder="Search" id="search">
+            <button class="btn btn-sm bg-sand btn-outline-secondary py-0" type="submit">
+            <i class="bi bi-search txt-xsm"></i>
+            </button>
+            </form> 
+    </div>   
+         
     {{-- supervisor students table--}}
     <div class="table-responsive mt-2">
         <table class="table txt-sm border table-hover" id="table1">
@@ -156,5 +163,31 @@
         form.submit();
         }
     }
+</script>
+<script>
+$(document).ready(function(){  
+        $('#search').keyup(function(){  
+          tableSearch($(this).val());  
+        });  
+        function tableSearch(value){  
+            $('#table1 tbody tr').each(function(){  
+                  var found = 'false';  
+                  $(this).each(function(){  
+                      if($(this).text().toLowerCase().indexOf(value.toLowerCase()) >= 0)  
+                      {  
+                            found = 'true';  
+                      }  
+                  });  
+                  if(found == 'true')  
+                  {  
+                      $(this).show();  
+                  }  
+                  else  
+                  {  
+                      $(this).hide();  
+                  }  
+            });  
+        }  
+  });  
 </script>
 @endsection

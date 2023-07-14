@@ -10,12 +10,7 @@
     {{--filters--}}
     <div class="d-flex justify-content-between flex-sm-row flex-column mt-5">
         <div class="d-flex flex-row col-sm-7">
-            <form class="input-group mb-2 h-50 w-50" role="searprimarych">
-            <input class="form-control txt-sm border border-secondary" type="search" placeholder="Search" id="search">
-            <button class="btn btn-sm bg-sand btn-outline-secondary py-0" type="submit">
-            <i class="bi bi-search txt-xsm"></i>
-            </button>
-            </form> 
+           
         </div>
         <a href="{{route('hr_add_employee', ['user_id'=>$user->id])}}"
         class="btn btn-sm btn-primary bg-dark-blue text-light opacity-75 px-3 w-auto h-50">

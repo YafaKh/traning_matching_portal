@@ -41,7 +41,27 @@ class TrainingController extends Controller
             'request' => $request,
         ]);
     }
+    public function search($user_id)
+    {
+        $search_text = $_GET['search']; // name of the search input
+    
+        $user = CompanyEmployee::find($user_id);
+        $company = $user->company;
+    
+        // $trainings = $company->trainings->skip(1);
+        //  dd($user->students());
+       $trainings = $company->trainings()->where(function ($query) use ($search_text) {
+            $query->where('name', 'LIKE', '%' . $search_text . '%');
+        })->paginate(15);
 
+        $not_aaproved_students= $company->not_approved_students;
+        $unengaged_trainees= ($company->trainings[0])->students;
+        $branches= $company->branches;
+        $trainers= $company->employees->whereIn('company_employee_role_id', [2, 3]);
+        
+    
+        return view('company_employee.hr.trainees.searchForTrainee', compact('user','company', 'trainings', 'not_aaproved_students', 'unengaged_trainees', 'branches', 'trainers'));
+    }
     /**
      * Show the form for creating a new resource.
      *

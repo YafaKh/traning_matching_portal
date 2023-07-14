@@ -28,7 +28,7 @@ class StudentsController extends Controller
             return "supervisor not found ";
         }
 
-        $allStudents=$user->students()->paginate(10);
+        $allStudents=$user->students()->paginate(15);
 
         $specializations =Specialization::all();
         $companies =Company::all();
@@ -107,7 +107,7 @@ class StudentsController extends Controller
                 ->orWhere('third_name_en', 'LIKE', '%' . $search_text . '%')
                 ->orWhere('last_name_en', 'LIKE', '%' . $search_text . '%')
                 ->orWhere('student_num', 'LIKE', '%' . $search_text . '%');
-        })->get();
+        })->paginate(15);
         $specializations =Specialization::all();
         $companies =Company::all();
         $branches =CompanyBranch::all();

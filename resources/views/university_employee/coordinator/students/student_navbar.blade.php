@@ -21,13 +21,8 @@
         </li>
       </ul>
 
-      <form class="input-group w-auto h-50" role="searprimarych" type="get" action="{{route('search.coordinator',['user_id' => $user->id])}}">
-        <input class="form-control txt-sm h-50 border border-secondary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip"
-        data-bs-title="Search by the student's number or name" name="search" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-sm bg-sand btn-outline-secondary py-0" type="submit">
-        <i class="bi bi-search txt-xsm"></i>
-        </button>
-      </form>
+      
+
     </div>
   </div>
 </nav>
@@ -38,10 +33,10 @@
   const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
   const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 
-  function search(user_id) {
-    var search_text = document.getElementById('search_input').value;
-    window.location.href = '{{ route('search.coordinator', ['user_id' => ':user_id']) }}'.replace(':user_id', user_id) + '?search=' + search_text;
-  }
+  // function search(user_id) {
+  //   var search_text = document.getElementById('search_input').value;
+  //   window.location.href = '{{ route('search.coordinator.students', ['user_id' => ':user_id']) }}'.replace(':user_id', user_id) + '?search=' + search_text;
+  // }
 
   // get students according to their registration state
   $(document).ready(function() {

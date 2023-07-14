@@ -21,14 +21,14 @@
             <option value="0">not-registered</option>
         </select>
 
-        <select class="filter-dropdown form-select flex-grow-1 me-2 mb-2 txt-sm" data-column="3">
+        <!-- <select class="filter-dropdown form-select flex-grow-1 me-2 mb-2 txt-sm" data-column="3">
             <option value="All">Specialization</option>
             @foreach($specializations as $specialization)
             <option value="{{$specialization['acronyms']}}">{{$specialization['acronyms']}}</option>
             @endforeach
-        </select>
+        </select> -->
 
-        <select class="filter-dropdown form-select flex-grow-1 me-2 mb-2 txt-sm" data-column="4">
+        <!-- <select class="filter-dropdown form-select flex-grow-1 me-2 mb-2 txt-sm" data-column="4">
             <option value="All">Company</option>
             <option value="-">Unengaged Sudents</option>
             @foreach($companies as $company)
@@ -36,16 +36,16 @@
                 <option value="{{$company['name']}}-{{$branch->city->name}}">{{$company['name']}}-{{$branch->city->name}}</option>
                 @endforeach
             @endforeach
-        </select>
+        </select> -->
         
-        <select class="filter-dropdown form-select flex-grow-1 me-2 mb-2 txt-sm " data-column="5">
+        <!-- <select class="filter-dropdown form-select flex-grow-1 me-2 mb-2 txt-sm " data-column="5">
             <option value="All">Supervisor</option>
             @foreach($supervisors as $supervisor)
             <option value="{{ $supervisor['first_name']}} {{ $supervisor['last_name']}}">
             {{ $supervisor['first_name']}} {{ $supervisor['last_name']}}
             </option>
             @endforeach
-        </select>
+        </select> -->
         <a class="btn btn-light h-75 py-0 px-1" id="del-selected-btn" href="javascript:void(0);">
         <i class="bi bi-trash3 fs-5 text-danger"></i>
         </a>
