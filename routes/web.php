@@ -101,6 +101,7 @@ Route::prefix('/coordinator/{user_id}')
      });
      Route::get('/student{student_id}_profile', [CooListController::class, 'show_student_profile'])->name('coordinator_student_profile');
      Route::get('/progress/{student_id}', [CooListController::class, 'showProgressPage'])->name('coordinator_student_progress');
+     Route::get('/visit/{student_id}', [VisitsController::class, 'index'])->name('coordinator_student_visit_form');
      Route::get('/student_Evaluation/{student_id}', [CooListController::class, 'show_student_evaluation'])->name('coordinator_student_Evaluation');
      Route::get('/company_Evaluation/{student_id}', [CooListController::class, 'show_company_evaluation'])->name('coordinator_company_Evaluation');
 
@@ -133,11 +134,11 @@ Route::prefix('/supervisor/{user_id}')
     Route::get('/student_profile/{student_id}', [StudentsController::class, 'show_student_profile'])->name('supervisor_student_profile');
 }); 
     Route::prefix('/visits')->group(function(){
-        Route::get('/student{student_id}', [VisitsController::class, 'index'])->name('student_visits');
-        Route::get('/create{student_id}', [VisitsController::class, 'create'])->name('fill_visit_form');
-        Route::post('/store{student_id}', [VisitsController::class, 'store'])->name('store_visit');
-        Route::get('/edit{student_id}/{visit_id}',[VisitsController::class,'edit'])->name('edit_visit');
-        Route::PUT('/update{student_id}/{visit_id}',[VisitsController::class,'update'])->name('update_visit');
+        Route::get('/student/{student_id}', [VisitsController::class, 'index'])->name('student_visits');
+        Route::get('/create/{student_id}', [VisitsController::class, 'create'])->name('fill_visit_form');
+        Route::post('/store/{student_id}', [VisitsController::class, 'store'])->name('store_visit');
+        Route::get('/edit/{student_id}/{visit_id}',[VisitsController::class,'edit'])->name('edit_visit');
+        Route::PUT('/update/{student_id}/{visit_id}',[VisitsController::class,'update'])->name('update_visit');
     });
 });   
 

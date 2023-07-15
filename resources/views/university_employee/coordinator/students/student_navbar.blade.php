@@ -20,11 +20,17 @@
           <a class="nav-link text-light @yield('activity3')" aria-current="page" href="{{route('coordinator_manage_supervisors', ['user_id'=>$user->id])}}"">Assign supervisors</a>
         </li>
       </ul>
-
-      
+  
 
     </div>
   </div>
+  <form class="input-group mb-2 w-25 flex-grow-1 me-2" role="searprimarych">
+            <input class="form-control txt-sm border border-secondary" id="search" type="search" placeholder="Search" id="search">
+            <button class="btn btn-sm bg-sand btn-outline-secondary py-0" type="submit">
+            <i class="bi bi-search txt-xsm"></i>
+            </button>
+            </form> 
+      
 </nav>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
