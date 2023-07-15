@@ -14,7 +14,8 @@
 @section('content')
 <div class="px-5">
     {{--filters--}}
-    <div class= "d-flex flex-sm-row flex-column mt-5 pb-3 justify-content-end">
+   
+    <div class= "d-flex flex-sm-row flex-column mt-5 justify-content-end mb-4">
         <!-- <select class="form-select flex-grow-1 me-2 mb-2 txt-sm" id="registration_state" name="registration_state" aria-label="Registration_state">
             <option selected>Registration state</option>
             <option value=1>registered</option>
@@ -54,17 +55,18 @@
         <i class="bi bi-search txt-xsm"></i>
         </button>
       </form> -->
-      <a href="{{route('delete-Un-registered-student',['user_id'=>$user->id])}}" class="btn btn-danger">Delete unRegistered students</a>
-
-        <a class="btn btn-light h-75 py-0 px-1" id="del-selected-btn" href="javascript:void(0);">
+ 
+        <!-- <a class="btn btn-light h-75 py-0 px-1" id="del-selected-btn" href="javascript:void(0);">
         <i class="bi bi-trash3 fs-5 text-danger"></i>
-        </a>
-        
+        </a> -->
+        <a href="{{route('delete-Un-registered-student',['user_id'=>$user->id])}}" class="btn btn-danger pt-2">Delete unRegistered students</a>
+
+       
+ 
     </div>
-    
     {{--Upload registered students list--}}
     <div class="d-flex flex-sm-row flex-column justify-content-between mb-2">
-        <label class="txt-xsm pb-1 h-50 mt-auto">Note: students whose names are highlighted in red are not registered for the internship on the portal.</label>
+        <label class="txt-xsm pb-1 mt-auto">Note: students whose names are highlighted in red are not registered for the internship on the portal.</label>
         <form action="{{route('update_register_list', ['user_id'=>$user->id])}}"  method="POST" enctype="multipart/form-data">
         @csrf
             <div class="mb-1">
@@ -75,6 +77,9 @@
                         data-bs-toggle="tooltip" data-bs-placement="top"
                         data-bs-title="Update registration state">Update
                     </button>
+                    <a class="btn btn-light h-75 py-0 px-1 ms-2" id="del-selected-btn" href="javascript:void(0);">
+                        <i class="bi bi-trash3 fs-5 text-danger"></i>
+                    </a>
                 </div>
             </div>
             @error('register_list') 
