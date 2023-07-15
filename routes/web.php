@@ -97,6 +97,7 @@ Route::prefix('/coordinator/{user_id}')
         Route::get('/assign_supervisors', [AssignSupervisorsController::class, 'index'])->name('coordinator_manage_supervisors');
         Route::get('/assign_supervisors/search', [AssignSupervisorsController::class, 'search'])->name('search.coordinator.assign_Supervisors');
         Route::post('/assign_supervisor', [AssignSupervisorsController::class,'add'])->name('coordinator_assign_supervisor');
+        Route::get('/assign_supervisor/delete',[AssignSupervisorsController::class,'deleteUnregisteredStudent'])->name('delete-Un-registered-student');
         Route::get('/unassign_supervisor/{student_id}', [AssignSupervisorsController::class,'delete'])->name('coordinator_unassign_supervisor');
      });
      Route::get('/student{student_id}_profile', [CooListController::class, 'show_student_profile'])->name('coordinator_student_profile');

@@ -14,14 +14,13 @@
 @section('content')
 <div class="px-5">
     {{--filters--}}
-    <div class= "d-flex flex-sm-row flex-column mt-5 pb-3">
-        <select class="form-select flex-grow-1 me-2 mb-2 txt-sm" id="registration_state" name="registration_state" aria-label="Registration_state">
+    <div class= "d-flex flex-sm-row flex-column mt-5 pb-3 justify-content-end">
+        <!-- <select class="form-select flex-grow-1 me-2 mb-2 txt-sm" id="registration_state" name="registration_state" aria-label="Registration_state">
             <option selected>Registration state</option>
             <option value=1>registered</option>
             <option value=0>not-registered</option>
-        </select>
+        </select> -->
 
-       <a href="" class="btn btn-danger">Delete unregistered </a>
 
         <!-- <select class="filter-dropdown form-select flex-grow-1 me-2 mb-2 txt-sm" data-column="3">
             <option value="All">Specialization</option>
@@ -55,9 +54,12 @@
         <i class="bi bi-search txt-xsm"></i>
         </button>
       </form> -->
+      <a href="{{route('delete-Un-registered-student',['user_id'=>$user->id])}}" class="btn btn-danger">Delete unRegistered students</a>
+
         <a class="btn btn-light h-75 py-0 px-1" id="del-selected-btn" href="javascript:void(0);">
         <i class="bi bi-trash3 fs-5 text-danger"></i>
         </a>
+        
     </div>
     
     {{--Upload registered students list--}}
