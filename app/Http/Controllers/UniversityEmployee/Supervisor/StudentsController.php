@@ -45,14 +45,12 @@ class StudentsController extends Controller
 
 
         if ($request->ajax()) {
-            if (empty($request->specialization)) {
-                $students = $query->where('university_employee_id', $user_id)->with('specialization');
-            } else {
+           
                 $students = $query->where([
                     'specialization_id' => $request->specialization,
                     'university_employee_id' => $user_id,
-                ])->with('specialization',)->get();
-            }
+                ])->with('specialization')->get();
+            
 
             // Prepare the response data
             $responseStudents = $students->map(function ($student) {

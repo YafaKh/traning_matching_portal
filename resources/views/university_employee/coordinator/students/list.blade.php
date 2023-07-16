@@ -14,14 +14,14 @@
 @section('content')
 <div class="px-5">
     {{--filters--}}
-    <div class= "d-flex flex-sm-row flex-column mt-5 pb-3">
-        <select class="form-select flex-grow-1 me-2 mb-2 txt-sm" id="registration_state" aria-label="Registration_state">
+   
+    <div class= "d-flex flex-sm-row flex-column mt-5 justify-content-end mb-4">
+        <!-- <select class="form-select flex-grow-1 me-2 mb-2 txt-sm" id="registration_state" name="registration_state" aria-label="Registration_state">
             <option selected>Registration state</option>
-            <option value="1">registered</option>
-            <option value="0">not-registered</option>
-        </select>
+            <option value=1>registered</option>
+            <option value=0>not-registered</option>
+        </select> -->
 
-       
 
         <!-- <select class="filter-dropdown form-select flex-grow-1 me-2 mb-2 txt-sm" data-column="3">
             <option value="All">Specialization</option>
@@ -48,21 +48,25 @@
             </option>
             @endforeach
         </select> -->
-        <form class="input-group w-auto h-50" role="searprimarych" type="get" action="{{route('search.coordinator.students',['user_id' => $user->id])}}">
+        <!-- <form class="input-group w-auto h-50" role="searprimarych" type="get" action="{{route('search.coordinator.students',['user_id' => $user->id])}}">
         <input class="form-control txt-sm h-50 border border-secondary" data-bs-toggle="tooltip" data-bs-placement="top"
         data-bs-title="Search by the student's number or name" name="search" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-sm bg-sand btn-outline-secondary py-0" type="submit">
         <i class="bi bi-search txt-xsm"></i>
         </button>
-      </form>
-        <a class="btn btn-light h-75 py-0 px-1" id="del-selected-btn" href="javascript:void(0);">
+      </form> -->
+ 
+        <!-- <a class="btn btn-light h-75 py-0 px-1" id="del-selected-btn" href="javascript:void(0);">
         <i class="bi bi-trash3 fs-5 text-danger"></i>
-        </a>
+        </a> -->
+        <a href="{{route('delete-Un-registered-student',['user_id'=>$user->id])}}" class="btn btn-danger pt-2">Delete unRegistered students</a>
+
+       
+ 
     </div>
-    
     {{--Upload registered students list--}}
     <div class="d-flex flex-sm-row flex-column justify-content-between mb-2">
-        <label class="txt-xsm pb-1 h-50 mt-auto">Note: students whose names are highlighted in red are not registered for the internship on the portal.</label>
+        <label class="txt-xsm pb-1 mt-auto">Note: students whose names are highlighted in red are not registered for the internship on the portal.</label>
         <form action="{{route('update_register_list', ['user_id'=>$user->id])}}"  method="POST" enctype="multipart/form-data">
         @csrf
             <div class="mb-1">
@@ -73,6 +77,9 @@
                         data-bs-toggle="tooltip" data-bs-placement="top"
                         data-bs-title="Update registration state">Update
                     </button>
+                    <a class="btn btn-light h-75 py-0 px-1 ms-2" id="del-selected-btn" href="javascript:void(0);">
+                        <i class="bi bi-trash3 fs-5 text-danger"></i>
+                    </a>
                 </div>
             </div>
             @error('register_list') 
@@ -85,7 +92,7 @@
         
     {{-- students table --}}
     <div class="table-responsive ">
-        <table class="table txt-sm table-sm border table-hover" id="table">
+        <table class="table txt-sm table-sm border table-hover" id="table1">
         <thead class="bg-mid-sand">
             <tr >
             <th scope="col" class="ps-3">
@@ -128,7 +135,7 @@
             role="button" data-bs-toggle="dropdown" aria-expanded="false">Go to student's</a>
             <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="{{route('coordinator_student_progress',['user_id' => $user->id,'student_id' => $student->id])}}">Progress</a></li>
-                <li><a class="dropdown-item" href="{{route('student_visits',['user_id' => $user->id, 'student_id' => $student->id])}}">Visit forms</a></li>
+                <li><a class="dropdown-item" href="{{route('coordinator_student_visit_form',['user_id' => $user->id, 'student_id' => $student->id])}}">Visit forms</a></li>
                 <li><a class="dropdown-item" href="{{route('coordinator_student_Evaluation',['user_id' => $user->id,'student_id' => $student->id])}}">Evaluation</a></li>
                 <li><a class="dropdown-item" href="{{route('coordinator_company_Evaluation',['user_id' => $user->id,'student_id' => $student->id])}}">Company evaluation</a></li>
              </ul>
@@ -147,12 +154,9 @@
     </div>
     {{$students->links()}}
 </div>
-<script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script> -->
 
 <script>
-    // to enable tooltip
-  const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-  const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 
     function deleteSelectedStudents() {
         // Get all the selected checkboxes
@@ -177,7 +181,30 @@
     var delSelectedBtn = document.getElementById('del-selected-btn');
     delSelectedBtn.addEventListener('click', deleteSelectedStudents);
 </script>
-
-
-
+<script>
+$(document).ready(function(){  
+        $('#search').keyup(function(){  
+          tableSearch($(this).val());  
+        });  
+        function tableSearch(value){  
+            $('#table1 tbody tr').each(function(){  
+                  var found = 'false';  
+                  $(this).each(function(){  
+                      if($(this).text().toLowerCase().indexOf(value.toLowerCase()) >= 0)  
+                      {  
+                            found = 'true';  
+                      }  
+                  });  
+                  if(found == 'true')  
+                  {  
+                      $(this).show();  
+                  }  
+                  else  
+                  {  
+                      $(this).hide();  
+                  }  
+            });  
+        }  
+  });  
+</script>
 @endsection

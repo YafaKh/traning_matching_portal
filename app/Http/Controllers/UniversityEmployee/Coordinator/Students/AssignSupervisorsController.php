@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Student;
 use App\Models\UniversityEmployee;
 use App\Models\Company;
+use App\Models\Visit;
 
 use Illuminate\Http\Request;
 
@@ -70,5 +71,16 @@ class AssignSupervisorsController extends Controller
         $student->save();
 
         return redirect()->route('coordinator_manage_supervisors', $user_id);
+    }
+    public function deleteUnregisteredStudent(Request $request, $user_id){
+
+        $unRegisteredStudents = Student::where('registered', 0)->get();
+        $unRegisteredStudents->each(function ($student) {
+            Visit::where('student_id', $student->id)->delete();
+
+            $student->delete();
+        });
+
+        return redirect()->route('coordinator_list_students', $user_id);
     }
 }

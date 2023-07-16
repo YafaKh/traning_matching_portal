@@ -40,43 +40,54 @@ class ListController extends Controller
         'supervisors'=>$supervisors,]);
     }
     // filtering list of student
-    public function filterStudents(Request $request, $user_id)
-    {
-        $query = Student::query();
+    // public function filterStudents(Request $request, $user_id)
+    // {
+    //     $query = Student::query();
+    //     $userQuery = UniversityEmployee::where('id', $user_id)->get();
+    //     if ($request->ajax()) {
+           
+    //         // $registrationState = $request->registration_state == 1; // Convert the string value to a boolean
     
-        if ($request->ajax()) {
-            $registrationState = $request->registration_state == 'true'; // Convert the string value to a boolean
+    //         $students = $query->where([
+    //             'registered'=> $request->registration_state,
+    //         ])->get();
+    //         $users = $userQuery->where([
+    //             'id'=>$user_id,
+    //         ])->get();
+    //         // Prepare the response data
+    //         $responseStudents = $students->map(function ($student) {
+                
+    //             return [
+    //                 'id' => $student->id,
+    //                 'student_num' => $student->student_num,
+    //                 'first_name_en' => $student->first_name_en,
+    //                 'third_name_en' => $student->third_name_en,
+    //                 'last_name_en' => $student->last_name_en,
+    //                 // 'university_employee_id' => $student->university_employee_id,
+    //                 'company_name' => $student->training->branch->company ? $student->training->branch->company->name : '',
+    //                 'branch_name' => $student->training->branch ? $student->training->branch->address : '',
+    //                 'university_employee_name' => $student->employee ? $student->employee->name : '',
+    //             ];
+    //         });
+    //         $responseUsers = $users->map(function ($user) {
+                
+    //             return [
+    //                 'id' => $user_id,
+    //               ];
+    //         });
+    //         return response()->json([
+    //             'students' => $responseStudents,
+    //             'users' => $responseUsers,
+    //         ]);
+    //         // return response()->json(['students' => $responseStudents,]);
+    //     }
     
-            $students = $query
-                ->where('university_employee_id', $user_id)
-                ->where('registration_state', $registrationState) // Filter by registration state
-                ->get();
+    //     $students = $query->get();
+    //         // ->where('university_employee_id', $user_id)
+            
     
-            // Prepare the response data
-            $responseStudents = $students->map(function ($student) {
-                return [
-                    'id' => $student->id,
-                    'student_num' => $student->student_num,
-                    'first_name_en' => $student->first_name_en,
-                    'second_name_en' => $student->second_name_en,
-                    'third_name_en' => $student->third_name_en,
-                    'last_name_en' => $student->last_name_en,
-                    'university_employee_id' => $student->university_employee_id,
-                    'company_name' => $student->training->branch->company ? $student->training->branch->company->name : '',
-                    'branch_name' => $student->training->branch ? $student->training->branch->address : '',
-                    'university_employee_name' => $student->employee ? $student->employee->name : '',
-                ];
-            });
-    
-            return response()->json(['students' => $responseStudents]);
-        }
-    
-        $students = $query
-            ->where('university_employee_id', $user_id)
-            ->get();
-    
-        return view('university_employee.coordinator.students.filtered-students', compact('students', 'user_id'));
-    }
+    //     return view('university_employee.coordinator.students.filtered-students', compact('students', 'user_id'));
+    // }
     
     // searching
     public function search($user_id)

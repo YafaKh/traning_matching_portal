@@ -31,12 +31,7 @@
                 </div>
             @enderror
         </div>
-        <form class="input-group mb-2 h-50 flex-grow-1 " role="searprimarych">
-            <input class="form-control txt-sm border border-secondary" id="search" type="search" placeholder="Search" id="search">
-            <button class="btn btn-sm bg-sand btn-outline-secondary py-0" type="submit">
-            <i class="bi bi-search txt-xsm"></i>
-            </button>
-            </form> 
+       
     </div>   
          
     {{-- supervisor students table--}}
