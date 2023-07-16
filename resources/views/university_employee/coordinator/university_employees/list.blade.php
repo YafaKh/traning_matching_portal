@@ -10,14 +10,6 @@
     {{--filters--}}
     <div class="d-flex justify-content-between flex-sm-row flex-column mt-5">
         <div class="d-flex flex-row col-sm-6">
-            <select class="form-select border-gray me-2 mb-2 txt-sm w-25" aria-label="Supervisor">
-                <option selected>Role*</option>
-                <option value="1">*****</option>
-            </select>
-            <select class="form-select border-gray me-2 mb-2 txt-sm w-25" aria-label="Company">
-                <option selected>Department*</option>
-                <option value="CS">CS</option>
-            </select>
             <form class="input-group mb-2 h-50 w-50" role="searprimarych" type="get" action="{{route('search.coordinator.universityEmployee',['user_id' => $user->id])}}">
             <input class="form-control txt-sm border border-secondary" data-bs-toggle="tooltip" data-bs-placement="top"
             data-bs-title="Search by the employee's number or name" name="search"  type="search" placeholder="Search" aria-label="Search">
