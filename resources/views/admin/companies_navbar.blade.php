@@ -12,13 +12,6 @@
           <a class="nav-link text-light @yield('activity2')" aria-current="page" href="{{route('admin_compnies_want_to_join')}}">Companies want to join</a>
         </li>
       </ul>
-
-      <form class="input-group w-auto h-50" role="searprimarych">
-        <input class="form-control txt-sm h-50 border border-secondary" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-sm bg-sand btn-outline-secondary py-0" type="submit">
-        <i class="bi bi-search txt-xsm"></i>
-        </button>
-      </form>
     </div>
   </div>
 </nav>
