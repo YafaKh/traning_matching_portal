@@ -87,7 +87,7 @@
     </div>
     {{--other students table--}}
     <div class="d-flex mt-2 flex-md-row col-md-6">
-        <select class="form-select me-2 mb-2 txt-sm" aria-label="Company">
+        <select class="filter-dropdown form-select me-2 mb-2 txt-sm" aria-label="Company" data-column="3">
             <option value="All">Company</option>
             <option value="-">Unengaged Sudents</option>
             @foreach($companies as $company)
@@ -96,17 +96,12 @@
                 @endforeach
             @endforeach
         </select>
-
-        <select class="form-select me-2 mb-2 txt-sm" aria-label="Branch">
-            <option selected>Branch*</option>
-            <option value="CS">CS</option>
-        </select>  
     </div>
     <div class="table-responsive">
         <table class="table txt-sm table-sm border table-hover" id="table2">
         <thead class="bg-mid-sand">
         <tr class="rounded-top">
-                <td colspan="4"><label class="form-label mt-2 ms-3 fs-6">
+                <td colspan="3"><label class="form-label mt-2 ms-3 fs-6">
                     Other Students</label>
                 </td>
                 <td>
@@ -119,10 +114,9 @@
             <th scope="col" >University ID</th>
             <th scope="col" >Name</th>
             <th scope="col">Company</th>
-            <th scope="col">Branch</th>
             </tr>
         </thead>
-        <tbody class="bg-light">
+        <tbody class="bg-light" id="table-body">
             @foreach($unassigned_students as $unassigned_student)
             <tr>
             <td class="ps-3"><input class="table2-checkbox form-check-input" type="checkbox" value="{{ $unassigned_student['id'] }}" name="students[]" id="flexCheckDefault"></td>                
@@ -140,8 +134,7 @@
                 </a>
                 @endif
             </td> 
-            <td>{{$unassigned_student->training->branch->company->name ?? ''}}</td>
-            <td>{{$unassigned_student->training->branch->address ?? ''}}</td>
+            <td>{{$unassigned_student->training->branch->company->name??''}}-{{$unassigned_student->training->branch->city->name??''}}</td>
             </tr>
             @endforeach
         </tbody>

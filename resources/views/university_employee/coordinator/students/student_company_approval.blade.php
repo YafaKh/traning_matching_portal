@@ -49,7 +49,7 @@
                 {{$training_field->name}}, 
                 @endforeach <br>
                 <strong>Cities:</strong><br>
-                @foreach($student->preferredCitiesStudent as $city)
+                @foreach($student->cities as $city)
                 {{$city->name}}, 
                 @endforeach <br>
                 <strong>Companies:</strong><br>

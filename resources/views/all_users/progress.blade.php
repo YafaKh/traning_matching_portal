@@ -12,17 +12,7 @@
         </div>
         <div class="ms-5">
             <p>Training</p>
-            @if($Student ->training->semester ?? "__" == "1")
-            <td>Fall - {{$Student ->training->year}} - {{$Student ->training->employee->first_name ?? "__"}} {{$Student ->training->employee->last_name ?? "__"}}</td>
-            @elseif($Student ->training->semester ?? "__" == '2')
-            <td>Spring - {{$Student ->training->year}} - {{$Student ->training->employee->first_name ?? "__"}} {{$Student ->training->employee->last_name ?? "__"}}</td>
-            @elseif($Student ->training->semester ?? "__" == '3')
-            <td>First Summer - {{$Student ->training->year}} - {{$Student ->training->employee->first_name ?? "__"}} {{$Student ->training->employee->last_name ?? "__"}}</td>
-            @elseif($Student ->training->semester ?? "__" == '4')
-            <td>Second Summer - {{$Student ->training->year}} - {{$Student ->training->employee->first_name ?? "__"}} {{$Student ->training->employee->last_name ?? "__"}}</td>
-            @elseif($Student ->training->semester ?? "__" == "__")
-            <td>__</td>
-            @endif
+            {{$student->training->name}}
         </div>
     </div>
    </div>

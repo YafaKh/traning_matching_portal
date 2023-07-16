@@ -68,7 +68,7 @@ class UserSeeder extends Seeder
         UniversityEmployee::create([
             'employee_num' => '200110997',
             'email' => 'Emad@aaup.edu',
-            'password' => $coo_pass,
+            'password' => $sup_pass,
             'phone' => '0568880965',
             'first_name' => 'Emad',
             'second_name' => 'yousef',
@@ -86,7 +86,7 @@ class UserSeeder extends Seeder
         ]);
         CompanyEmployee::create([
             'email' => 'ahmad@aaup.edu',
-            'password' => $coo_pass,
+            'password' => $hr_pass,
             'phone' => '0568880965',
             'first_name' => 'Ahmad',
             'second_name' => 'yousef',
