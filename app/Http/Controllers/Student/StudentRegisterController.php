@@ -120,8 +120,9 @@ class StudentRegisterController extends Controller
                 }
             }
         }
-    
-        $student->skills()->attach($selectedSkills);
+        $student->skills()->sync($selectedSkills);
+
+        // $student->skills()->attach($selectedSkills);
     
         // Handle training fields
         $selectedTrainingFields = $request->input('trainingFields', []);
@@ -140,16 +141,20 @@ class StudentRegisterController extends Controller
                 }
             }
         }
+        // $student->preferredTrainingFields()->attach($selectedTrainingFields);
     
-        $student->preferredTrainingFields()->attach($selectedTrainingFields);
+        $student->preferredTrainingFields()->sync($selectedTrainingFields);
     
         // Handle preferred companies
         $selectedPreferredCompanies = $request->input('preferrdCompany', []);
+        // $student->preferredCompanies()->sync($selectedPreferredCompanies);
         $student->preferredCompanies()->attach($selectedPreferredCompanies);
     
         // Handle preferred cities
         $selectedPreferredCities = $request->input('preferrdCities', []);
+        // $student->cities()->sync($selectedPreferredCities);
         $student->cities()->attach($selectedPreferredCities);
+
     
         return redirect()->route('user_type');
     }    

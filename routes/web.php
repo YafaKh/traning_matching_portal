@@ -191,6 +191,8 @@ Route::prefix('/trainer/{user_id}')
 ->group(function(){
     Route::prefix('/trainees')->group(function(){
         Route::get('/',[TrainerController::class,'show'])->name('trainer_list_traniees');
+        Route::get('/search',[TrainerController::class,'search'])->name('trainer_list_traniees.search');
+
         Route::prefix('/progress/{trainee_id}')->group(function(){
         Route::get('/',[ProgressController::class,'show'])->name('fill_traniee_progress');
         Route::POST('/add',[ProgressController::class,'add'])->name('fill_traniee_progress.add');
