@@ -14,7 +14,7 @@
 @section('content')
 <div class="px-5">
         
-    {{-- students table --}}
+    {{-- students tablee --}}
     <div class="table-responsive mt-5 d-flex justify-content-center ">
         <table class="table border" id="table1">
         <thead class="bg-mid-sand">
