@@ -4,7 +4,8 @@
 <section class="profileSection mt-4">
  {{--asset('images/userImg2.png')--}}
   <div class="studentHeader">
-      <h1>{{$student->first_name_en}} {{$student->last_name_en}}</h1>
+  <h1>{{$student->first_name_en}} {{$student->second_name_en}} {{$student->third_name_en}} {{$student->last_name_en}}
+  <br>{{$student->first_name_ar}} {{$student->second_name_ar}} {{$student->third_name_ar}} {{$student->last_name_ar}}</h1>
       <img src="{{ asset('assets/img/' . $student['image']) }}" alt="student Image">
     </div>
     <div class="studentInfos">
@@ -14,7 +15,7 @@
       <p class="studentInfo"><i class="bi bi-envelope-fill icon"></i>{{$student->email}}</p>
       <p class="studentInfo"><i class="bi bi-telephone-fill icon"></i>{{$student->phone}}</p>
       <p class="studentInfo"><i class="bi bi-linkedin icon"></i>{{$student->linkedin}}</p>
-      @yield('edit_profile_btn');
+      @yield('edit_profile_btn')
 
     </div>
   </section>

@@ -58,7 +58,7 @@
 <script>
     function recommend_name() {
         var name = document.getElementById("name");
-        var field = document.getElementById("training_field").value;
+        var field = document.getElementById("training_field").options[document.getElementById("trainer").selectedIndex].text;
         var trainer = document.getElementById("trainer").options[document.getElementById("trainer").selectedIndex].text;
         var semester = document.getElementById("semester").options[document.getElementById("semester").selectedIndex].text;
         name.value = field + "-" + trainer + "/" + semester;

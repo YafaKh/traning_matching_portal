@@ -17,7 +17,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class StudentRegisterController extends Controller
 {
-    public $selectedCompany="null";
     public function create(){
         $specializations = Specialization::all();
         $skills = Skill::all();
@@ -33,7 +32,7 @@ class StudentRegisterController extends Controller
     {
         // Validation
         $validated = $request->validate([
-            'student_num' => 'required|string',
+            'student_num' => 'required|string||unique:students,student_num',
             'first_name_ar' => 'required|string|max:15',
             'first_name_en' => 'required|string|max:15',
             'second_name_ar' => 'required|string|max:15',
@@ -45,7 +44,7 @@ class StudentRegisterController extends Controller
             'gender' => 'required|boolean',
             'passed_hours' => 'required|integer',
             'load' => 'required|integer|min:0|max:18',
-            'gpa' => 'required',
+            'gpa' => 'required|numeric',
             'email' => 'required|email|unique:students',
             'linkedin' => 'required|url',
             'password' => 'required|string|min:8|confirmed',
@@ -150,7 +149,7 @@ class StudentRegisterController extends Controller
     
         // Handle preferred cities
         $selectedPreferredCities = $request->input('preferrdCities', []);
-        $student->preferredCities()->attach($selectedPreferredCities);
+        $student->cities()->attach($selectedPreferredCities);
     
         return redirect()->route('user_type');
     }    
